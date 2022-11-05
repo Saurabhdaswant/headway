@@ -20,19 +20,21 @@ export default function Signin() {
 						<h1 className="text-3xl font-medium my-4  ">Sign in </h1>
 						<h1 className=" text-zinc-400 " >Please enter you details below to sign in </h1>
 					</div>
-					<form action="" className="space-y-6">
-						<div className="flex flex-col " >
-							<label htmlFor="email" className="font-semibold"  >Your email address</label>
-							<input type="email" name="email" id="email" className="font-bold border-2 border-zinc-200  px-4 py-2 rounded " />
-						</div>
-						<div className="flex flex-col " >
-							<div className="flex justify-between font-semibold " >
-								<label htmlFor="password" className="" >Your password</label>
-								<p className=" text-gray-400" >Forgot password?</p>
+					<form action="" >
+						<div className="space-y-6">
+							<div className="flex flex-col " >
+								<label htmlFor="email" className="font-semibold"  >Your email address</label>
+								<input type="email" name="email" id="email" className="font-bold border-2 border-zinc-200  px-4 py-2 rounded " />
 							</div>
-							<input type="password" name="password" id="password" className="font-bold border-2 border-zinc-200  px-4 py-2 rounded " />
+							<div className="flex flex-col " >
+								<div className="flex justify-between font-semibold " >
+									<label htmlFor="password" className="" >Your password</label>
+									<p className=" text-gray-400" >Forgot password?</p>
+								</div>
+								<input type="password" name="password" id="password" className="font-bold border-2 border-zinc-200  px-4 py-2 rounded " />
+							</div>
 						</div>
-						<button type="submit" className=" w-full  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 ">Sign in</button>
+						<button type="submit" className=" w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 ">Sign in</button>
 						<div className="flex items-center gap-1  justify-center " >
 							<p className=" text-zinc-400" > Dont have account? </p>
 							<span className="  text-blue-500 underline" >Sign up for free </span>
