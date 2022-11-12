@@ -7,3 +7,29 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.color1 {
+    color: #f38ba0;
+    border-left: 4px #f38ba0 solid;
+}
+.color2 {
+    color: #998bf3;
+    border-left: 4px #998bf3 solid;
+}
+.color3 {
+    color: #8bf3bc;
+    border-left: 4px #8bf3bc solid;
+}
+.color4 {
+    color: #f3de8b;
+    border-left: 4px #f3de8b solid;
+}
+.color5 {
+    color: #8bd4f3;
+    border-left: 4px #8bd4f3 solid;
+}
+
+.color6 {
+    color: #0fc9f2;
+    border-left: 4px #0fc9f2 solid;
+}
