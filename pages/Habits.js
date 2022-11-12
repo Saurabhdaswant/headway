@@ -30,13 +30,13 @@ function Habits() {
 		},
 		{
 			name: "Eat Muramba",
-			isCompleted: false,
+			isCompleted: true,
 			date: "12-11-2022",
 			color: "color5",
 		},
 		{
 			name: "Drink Ashwaghandha Milk",
-			isCompleted: false,
+			isCompleted: true,
 			date: "12-11-2022",
 			color: "color6",
 		},
@@ -80,9 +80,12 @@ function Habits() {
 					{currDayHabits.map((habit, idx) => {
 						return (
 							<div key={idx} className="flex items-center justify-between">
-								<div className="border-4 grid place-items-center bg-white border-green-500  text-green-500 w-14 h-14 rounded-full " >
-									<Check className="  w-8 h-8  stroke-3" />
-								</div>
+								{
+									habit.isCompleted ? <div className="border-4 grid place-items-center bg-white border-green-500  text-green-500 w-14 h-14 rounded-full shadow-lg " >
+										<Check className="  w-8 h-8  stroke-3" />
+									</div> : <div className=" grid place-items-center bg-white w-14 h-14 rounded-full shadow-lg " >
+									</div>
+								}
 								<div
 									className={`p-2 h-14 w-[85%] flex items-center  font-bold my-6  bg-white ${habit.color} `}
 								>
