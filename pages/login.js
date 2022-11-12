@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 export default function Signin() {
 	return (
@@ -34,7 +35,9 @@ export default function Signin() {
 								<input type="password" name="password" id="password" className="font-bold border-2 border-zinc-200  px-4 py-2 rounded " />
 							</div>
 						</div>
-						<button type="submit" className=" w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 ">Sign in</button>
+						{/* <button type="submit" className=" w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 ">Sign in</button> */}
+						<Link href="/Habits" className="block text-center  w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 "> Signin</Link>
+
 						<div className="flex items-center gap-1  justify-center " >
 							<p className=" text-zinc-400" > Dont have account? </p>
 							<span className="  text-blue-500 underline" >Sign up for free </span>
