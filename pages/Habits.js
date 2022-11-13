@@ -62,16 +62,16 @@ function Habits() {
 				</div>
 				<ul className="h-[80%] max-h-[80%]  px-4 ">
 					<li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-						<Calendar /> Rituals
+						<Calendar className=" w-5 h-5 " /> Rituals
 					</li>
-					<li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium bg-gray-900 text-white my-4">
-						<Wind /> Meditations
-					</li>
-					<li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-						<Zap /> Workout
+					<li className="py-3 px-4 flex items-center gap-2  rounded-md font-medium bg-gray-900 text-white my-4">
+						<Wind className=" w-5 h-5 " /> Meditations
 					</li>
 					<li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-						<BookOpen /> Jounal
+						<Zap className=" w-5 h-5 " /> Workout
+					</li>
+					<li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
+						<BookOpen className=" w-5 h-5 " /> Jounal
 					</li>
 				</ul>
 				<div className="h-[10%] flex items-center justify-center gap-2 border-t border-gray-200  ">
