@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { BookOpen, Calendar, Check, Wind, Zap } from "react-feather";
+import { BookOpen, Calendar, Check, Plus, PlusSquare, Wind, Zap } from "react-feather";
 
 function Habits() {
 	const currDayHabits = [
@@ -10,18 +10,7 @@ function Habits() {
 			date: "12-11-2022",
 			color: "color1",
 		},
-		{
-			name: "Meditation",
-			isCompleted: false,
-			date: "12-11-2022",
-			color: "color2",
-		},
-		{
-			name: "Journal",
-			isCompleted: false,
-			date: "12-11-2022",
-			color: "color3",
-		},
+
 		{
 			name: "Reading",
 			isCompleted: false,
@@ -34,13 +23,25 @@ function Habits() {
 			date: "12-11-2022",
 			color: "color5",
 		},
-		{
-			name: "Drink Ashwaghandha Milk",
-			isCompleted: true,
-			date: "12-11-2022",
-			color: "color6",
-		},
+		// {
+		// 	name: "Drink Ashwaghandha Milk",
+		// 	isCompleted: true,
+		// 	date: "12-11-2022",
+		// 	color: "color6",
+		// },
 	];
+
+	const weekDays = [
+		{ date: 12, day: "sunday" },
+		{ date: 13, day: "monday" },
+		{ date: 14, day: "tuesday" },
+		{ date: 14, day: "wednesday" },
+		{ date: 15, day: "thursday" },
+		{ date: 16, day: "friday" },
+		{ date: 17, day: "saturday" },
+	];
+
+	const periods = ["all", "evening", "morning", "afernoon", "night"]
 
 	return (
 		<div className="flex h-screen border">
@@ -75,17 +76,57 @@ function Habits() {
 					<p className=" font-medium ">Saurabh</p>{" "}
 				</div>
 			</div>
-			<div className=" w-full bg-gray-50 ">
-				<div className="w-[40%] m-auto">
+			<div className=" w-full grid grid-cols-2 bg-gray-50 p-8 gap-8  ">
+				<div className="">
+					<div className="flex justify-between items-end" >
+						<div className=" space-y-2 " >
+							<p className="text-5xl font-bold" >Today</p>
+							<p className="text-gray-400 text-xl"  >October 18</p>
+						</div>
+						<button className=" flex justify-between items-center gap-2 font-medium  bg-blue-400 px-5 py-2 rounded text-lg text-white" >
+							<PlusSquare />
+							<p>
+								Add Habit
+							</p>
+						</button>
+					</div>
+
+					<div className="bg-white flex items-center justify-evenly h-20 rounded-md   my-8 ">
+						{
+							weekDays.map((Day, idx) => {
+								const { day, date } = Day
+								return <div key={idx} className="text-center">
+									<p className=" text-xs capitalize text-gray-400 " >{day}</p>
+									<p className={`font-bold text-lg ${12 === date && "text-blue-500"} `} >{date}</p>
+								</div>
+							})
+						}
+					</div>
+
+					<div className=" flex items-center gap-4 my-8   ">
+						{
+							periods.map((period, idx) => {
+								return <div key={idx} className={`font-bold capitalize px-4 py-2  rounded-md bg-gray-100 
+								  text-gray-400`} >
+									{period}
+								</div>
+							})
+						}
+					</div>
+
 					{currDayHabits.map((habit, idx) => {
 						return (
-							<div key={idx} className="flex items-center justify-between">
-								{
-									habit.isCompleted ? <div className="border-4 grid place-items-center bg-white border-green-500  text-green-500 w-14 h-14 rounded-full shadow-lg " >
+							<div
+								key={idx}
+								className="flex items-center justify-between"
+							>
+								{habit.isCompleted ? (
+									<div className="border-4 grid place-items-center bg-white border-green-500  text-green-500 w-14 h-14 rounded-full shadow-lg ">
 										<Check className="  w-8 h-8  stroke-3" />
-									</div> : <div className=" grid place-items-center bg-white w-14 h-14 rounded-full shadow-lg " >
 									</div>
-								}
+								) : (
+									<div className=" grid place-items-center bg-white w-14 h-14 rounded-full shadow-lg "></div>
+								)}
 								<div
 									className={`p-2 h-14 w-[85%] flex items-center  font-bold my-6  bg-white ${habit.color} `}
 								>
@@ -95,6 +136,7 @@ function Habits() {
 						);
 					})}
 				</div>
+				<div className="bg-white"></div>
 			</div>
 		</div>
 	);
