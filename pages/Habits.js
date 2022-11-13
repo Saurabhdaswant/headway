@@ -17,12 +17,12 @@ function Habits() {
 			date: "12-11-2022",
 			color: "color4",
 		},
-		{
-			name: "meditate",
-			isCompleted: false,
-			date: "12-11-2022",
-			color: "color5",
-		},
+		// {
+		// 	name: "meditate",
+		// 	isCompleted: false,
+		// 	date: "12-11-2022",
+		// 	color: "color5",
+		// },
 		{
 			name: "code",
 			isCompleted: true,
@@ -47,8 +47,8 @@ function Habits() {
 	// html, csss, react, redux, stylecompoent, routing, charting, typscript
 
 	return (
-		<div className="flex h-screen border">
-			<div className=" w-2/12  ">
+		<div className="flex h-screen bg-[#F5F5F5]">
+			<div className=" w-[15%] bg-white ">
 				<div className="h-[10%] flex items-center gap-2  justify-center  ">
 					<Image
 						src="/headway.svg"
@@ -79,8 +79,8 @@ function Habits() {
 					<p className=" font-medium ">Saurabh</p>{" "}
 				</div>
 			</div>
-			<div className=" w-full grid grid-cols-2 bg-[#F5F5F5] p-8 gap-8  ">
-				<div className="  ">
+			<div className=" mx-auto w-[70%] flex py-8    gap-8  ">
+				<div className=" w-[60%]  ">
 					<div className="flex justify-between items-end" >
 						<div className=" space-y-2 " >
 							<p className="text-5xl font-bold" >Today</p>
@@ -139,7 +139,7 @@ function Habits() {
 						);
 					})}
 				</div>
-				<div className=" w-4/6">
+				<div >
 					<div className="grid grid-cols-2 gap-6 p-6 bg-white rounded-md mt-10" >
 						<div className="flex items-center gap-2 ">
 							<div className=" grid place-items-center bg-[#D6FCD8]  text-[#242424] w-10 h-10 rounded-lg ">
