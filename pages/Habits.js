@@ -98,7 +98,7 @@ function Habits() {
 						{
 							weekDays.map((Day, idx) => {
 								const { day, date } = Day
-								return <div key={idx} className="text-center">
+								return <div key={idx} className="text-center space-y-2 ">
 									<p className=" text-xs capitalize text-gray-400 " >{day}</p>
 									<p className={`font-bold text-lg ${12 === date && "text-[#007BFF]"} `} >{date}</p>
 								</div>
