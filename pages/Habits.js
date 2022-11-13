@@ -6,29 +6,29 @@ function Habits() {
 	const currDayHabits = [
 		{
 			name: "Workout",
-			isCompleted: false,
+			isCompleted: true,
 			date: "12-11-2022",
 			color: "color1",
 		},
 
 		{
-			name: "Reading",
-			isCompleted: false,
+			name: "Read",
+			isCompleted: true,
 			date: "12-11-2022",
 			color: "color4",
 		},
 		{
-			name: "Eat Muramba",
-			isCompleted: true,
+			name: "meditate",
+			isCompleted: false,
 			date: "12-11-2022",
 			color: "color5",
 		},
-		// {
-		// 	name: "Drink Ashwaghandha Milk",
-		// 	isCompleted: true,
-		// 	date: "12-11-2022",
-		// 	color: "color6",
-		// },
+		{
+			name: "code",
+			isCompleted: true,
+			date: "12-11-2022",
+			color: "color6",
+		},
 	];
 
 	const weekDays = [
@@ -42,6 +42,9 @@ function Habits() {
 	];
 
 	const periods = ["all", "evening", "morning", "afernoon", "night"]
+
+
+	// html, csss, react, redux, stylecompoent, routing, charting, typscript
 
 	return (
 		<div className="flex h-screen border">
@@ -76,14 +79,14 @@ function Habits() {
 					<p className=" font-medium ">Saurabh</p>{" "}
 				</div>
 			</div>
-			<div className=" w-full grid grid-cols-2 bg-gray-50 p-8 gap-8  ">
+			<div className=" w-full grid grid-cols-2 bg-[#F5F5F5] p-8 gap-8  ">
 				<div className="">
 					<div className="flex justify-between items-end" >
 						<div className=" space-y-2 " >
 							<p className="text-5xl font-bold" >Today</p>
 							<p className="text-gray-400 text-xl"  >October 18</p>
 						</div>
-						<button className=" flex justify-between items-center gap-2 font-medium  bg-blue-400 px-5 py-2 rounded text-lg text-white" >
+						<button className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white" >
 							<PlusSquare />
 							<p>
 								Add Habit
@@ -97,7 +100,7 @@ function Habits() {
 								const { day, date } = Day
 								return <div key={idx} className="text-center">
 									<p className=" text-xs capitalize text-gray-400 " >{day}</p>
-									<p className={`font-bold text-lg ${12 === date && "text-blue-500"} `} >{date}</p>
+									<p className={`font-bold text-lg ${12 === date && "text-[#007BFF]"} `} >{date}</p>
 								</div>
 							})
 						}
@@ -106,7 +109,7 @@ function Habits() {
 					<div className=" flex items-center gap-4 my-8   ">
 						{
 							periods.map((period, idx) => {
-								return <div key={idx} className={`font-bold capitalize px-4 py-2  rounded-md bg-gray-100 
+								return <div key={idx} className={`font-bold capitalize px-4 py-2  rounded-md bg-[#EDEDED]
 								  text-gray-400`} >
 									{period}
 								</div>
@@ -121,14 +124,14 @@ function Habits() {
 								className="flex items-center justify-between"
 							>
 								{habit.isCompleted ? (
-									<div className="border-4 grid place-items-center bg-white border-green-500  text-green-500 w-14 h-14 rounded-full shadow-lg ">
+									<div className="border-4 grid place-items-center bg-white border-[#27B563]  text-[#27B563] w-14 h-14 rounded-full shadow-lg ">
 										<Check className="  w-8 h-8  stroke-3" />
 									</div>
 								) : (
 									<div className=" grid place-items-center bg-white w-14 h-14 rounded-full shadow-lg "></div>
 								)}
 								<div
-									className={`p-2 h-14 w-[85%] flex items-center  font-bold my-6  bg-white ${habit.color} `}
+									className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4  bg-white ${habit.color} `}
 								>
 									{habit.name}
 								</div>
