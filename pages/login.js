@@ -36,7 +36,7 @@ export default function Signin() {
 							</div>
 						</div>
 						{/* <button type="submit" className=" w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 ">Sign in</button> */}
-						<Link href="/Habits" className="block text-center  w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 "> Signin</Link>
+						<Link href="/habits" className="block text-center  w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 "> Signin</Link>
 
 						<div className="flex items-center gap-1  justify-center " >
 							<p className=" text-zinc-400" > Dont have account? </p>
