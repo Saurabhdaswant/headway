@@ -64,7 +64,7 @@ function Habits() {
 					<li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
 						<Calendar className=" w-5 h-5 " /> Rituals
 					</li>
-					<li className="py-3 px-4 flex items-center gap-2  rounded-md font-medium bg-gray-900 text-white my-4">
+					<li className="py-3 px-4 flex items-center gap-2  rounded-md font-medium bg-[#2e2e2e] text-white my-4">
 						<Wind className=" w-5 h-5 " /> Meditations
 					</li>
 					<li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
