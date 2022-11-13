@@ -80,7 +80,7 @@ function Habits() {
 				</div>
 			</div>
 			<div className=" w-full grid grid-cols-2 bg-[#F5F5F5] p-8 gap-8  ">
-				<div className="">
+				<div className="  ">
 					<div className="flex justify-between items-end" >
 						<div className=" space-y-2 " >
 							<p className="text-5xl font-bold" >Today</p>
@@ -139,42 +139,42 @@ function Habits() {
 						);
 					})}
 				</div>
-				<div className=" ">
+				<div className=" w-4/6">
 					<div className="grid grid-cols-2 gap-6 p-6 bg-white rounded-md mt-10" >
 						<div className="flex items-center gap-2 ">
-							<div className=" grid place-items-center bg-[#D6FCD8]  text-[#242424] w-14 h-14 rounded-lg ">
-								<TrendingUp className="  w-8 h-8  " />
+							<div className=" grid place-items-center bg-[#D6FCD8]  text-[#242424] w-10 h-10 rounded-lg ">
+								<TrendingUp className="  w-5 h-5  " />
 							</div>
 							<div>
-								<p className="text-3xl font-medium " >90%</p>
-								<p className="text-gray-400"  >Completion Rate</p>
+								<p className="text-2xl font-medium " >90%</p>
+								<p className="text-gray-400 text-sm "  >Completion Rate</p>
 							</div>
 						</div>
 						<div className="flex items-center gap-2 ">
-							<div className=" grid place-items-center bg-[#FCF4D6]  text-[#242424] w-14 h-14 rounded-lg ">
-								<Zap className="  w-8 h-8  " />
+							<div className=" grid place-items-center bg-[#FCF4D6]  text-[#242424] w-10 h-10 rounded-lg ">
+								<Zap className="  w-5 h-5  " />
 							</div>
 							<div>
-								<p className="text-3xl font-medium " >15</p>
-								<p className="text-gray-400"  >Current Strike</p>
+								<p className="text-2xl font-medium " >15</p>
+								<p className="text-gray-400 text-sm "  >Current Strike</p>
 							</div>
 						</div>
 						<div className="flex items-center gap-2 ">
-							<div className=" grid place-items-center bg-[#F0D6FC]  text-[#242424] w-14 h-14 rounded-lg ">
-								<CheckCircle className="  w-8 h-8  " />
+							<div className=" grid place-items-center bg-[#F0D6FC]  text-[#242424] w-10 h-10 rounded-lg ">
+								<CheckCircle className="  w-5 h-5  " />
 							</div>
 							<div>
-								<p className="text-3xl font-medium " >80</p>
-								<p className="text-gray-400"  >Habits Finished</p>
+								<p className="text-2xl font-medium " >80</p>
+								<p className="text-gray-400 text-sm "  >Habits Finished</p>
 							</div>
 						</div>
 						<div className="flex items-center gap-2 ">
-							<div className=" grid place-items-center bg-[#D6F5FC]  text-[#242424] w-14 h-14 rounded-lg ">
-								<TrendingUp className="  w-8 h-8  " />
+							<div className=" grid place-items-center bg-[#D6F5FC]  text-[#242424] w-10 h-10 rounded-lg ">
+								<TrendingUp className="  w-5 h-5  " />
 							</div>
 							<div>
-								<p className="text-3xl font-medium " >200</p>
-								<p className="text-gray-400"  >Perfect Days</p>
+								<p className="text-2xl font-medium " >200</p>
+								<p className="text-gray-400 text-sm "  >Perfect Days</p>
 							</div>
 						</div>
 					</div>

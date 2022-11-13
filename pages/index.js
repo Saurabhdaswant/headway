@@ -14,10 +14,10 @@ export default function Home() {
         <h1>Welcome to Headway!</h1>
         <Link href="/login">Signin</Link>
       </main>
-      <span >
+      {/* <span >
         <Image src="/logo.svg" alt="Vercel Logo" width={72} height={16} />
       </span>
-      <footer>Made w/ 💙 </footer>
+      <footer>Made w/ 💙 </footer> */}
     </div>
   );
 }
