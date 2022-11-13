@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { BookOpen, Calendar, Check, Plus, PlusSquare, Wind, Zap } from "react-feather";
+import { BookOpen, Calendar, Check, CheckCircle, Plus, PlusSquare, TrendingUp, Wind, Zap } from "react-feather";
 
 function Habits() {
 	const currDayHabits = [
@@ -139,7 +139,46 @@ function Habits() {
 						);
 					})}
 				</div>
-				<div className="bg-white"></div>
+				<div className=" ">
+					<div className="grid grid-cols-2 gap-6 p-6 bg-white rounded-md mt-10" >
+						<div className="flex items-center gap-2 ">
+							<div className=" grid place-items-center bg-[#D6FCD8]  text-[#242424] w-14 h-14 rounded-lg ">
+								<TrendingUp className="  w-8 h-8  " />
+							</div>
+							<div>
+								<p className="text-3xl font-medium " >90%</p>
+								<p className="text-gray-400"  >Completion Rate</p>
+							</div>
+						</div>
+						<div className="flex items-center gap-2 ">
+							<div className=" grid place-items-center bg-[#FCF4D6]  text-[#242424] w-14 h-14 rounded-lg ">
+								<Zap className="  w-8 h-8  " />
+							</div>
+							<div>
+								<p className="text-3xl font-medium " >15</p>
+								<p className="text-gray-400"  >Current Strike</p>
+							</div>
+						</div>
+						<div className="flex items-center gap-2 ">
+							<div className=" grid place-items-center bg-[#F0D6FC]  text-[#242424] w-14 h-14 rounded-lg ">
+								<CheckCircle className="  w-8 h-8  " />
+							</div>
+							<div>
+								<p className="text-3xl font-medium " >80</p>
+								<p className="text-gray-400"  >Habits Finished</p>
+							</div>
+						</div>
+						<div className="flex items-center gap-2 ">
+							<div className=" grid place-items-center bg-[#D6F5FC]  text-[#242424] w-14 h-14 rounded-lg ">
+								<TrendingUp className="  w-8 h-8  " />
+							</div>
+							<div>
+								<p className="text-3xl font-medium " >200</p>
+								<p className="text-gray-400"  >Perfect Days</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
