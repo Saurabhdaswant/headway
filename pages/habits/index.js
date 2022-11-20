@@ -185,7 +185,7 @@ function habits() {
 						<ResponsiveContainer width="100%" height={200}>
 							<AreaChart data={data}>
 								<defs>
-									<linearGradient id="colorPv" x1="0" y1="1" x2="0" y2="0">
+									<linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
 										<stop offset="5%" stopColor="#0F85F2" stopOpacity={0.8} />
 										<stop offset="95%" stopColor="#0F85F2" stopOpacity={0} />
 									</linearGradient>
