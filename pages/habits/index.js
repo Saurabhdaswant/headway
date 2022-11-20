@@ -95,7 +95,7 @@ function Habits() {
     ];
 
     const periods = ["all", "evening", "morning", "afernoon", "night"];
-    const [currentPeriod, setCurrentPeriod] = useState("anytime")
+    const [currentPeriod, setCurrentPeriod] = useState("all")
 
     // html, csss, react, redux, stylecompoent, routing, charting, typscript
 
