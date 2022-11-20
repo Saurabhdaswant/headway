@@ -194,7 +194,7 @@ function Habits() {
                                         const idx = habits.findIndex((h) => h.name === habit.name)
                                         habits[idx].isCompleted = !habits[idx].isCompleted
                                         setHabits([...habits])
-                                    }} className={`border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
+                                    }} className={` cursor-pointer border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
                                         <Check className="  w-8 h-8  stroke-3" />
                                     </div>
                                 }
