@@ -1,8 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import { BookOpen, Calendar, Check, CheckCircle, Plus, PlusSquare, TrendingUp, Wind, Zap } from "react-feather";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 function habits() {
+	const data = [{ name: '10 Nov', completedHabits: 0, }, { name: '11 Nov', completedHabits: 10 }, { name: '12 Nov', completedHabits: 8, }, { name: '14 Nov', completedHabits: 15 }, { name: '14 Nov', completedHabits: 12 }];
+
 	const currDayHabits = [
 		{
 			name: "Workout",
@@ -177,6 +180,23 @@ function habits() {
 								<p className="text-gray-400 text-sm "  >Perfect Days</p>
 							</div>
 						</div>
+					</div>
+					<div className="bg-white mt-10 p-6 pl-0 rounded-md" >
+						<ResponsiveContainer width="100%" height={200}>
+							<AreaChart data={data}>
+								<defs>
+									<linearGradient id="colorPv" x1="0" y1="1" x2="0" y2="0">
+										<stop offset="5%" stopColor="#0F85F2" stopOpacity={0.8} />
+										<stop offset="95%" stopColor="#0F85F2" stopOpacity={0} />
+									</linearGradient>
+								</defs>
+								<Area type="monotone" dataKey="completedHabits" stroke="#0F85F2" fillOpacity={1} fill="url(#colorPv)" />
+								<YAxis dataKey="completedHabits" axisLine={false} tickLine={false} tickCount={8}
+									tickFormatter={number => `${number} k`}
+								/>
+								<CartesianGrid vertical={false} stroke="#2a2a2a" opacity={0.1} />
+							</AreaChart>
+						</ResponsiveContainer>
 					</div>
 				</div>
 			</div>
