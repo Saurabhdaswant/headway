@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { BookOpen, Calendar, Check, CheckCircle, Plus, PlusSquare, TrendingUp, Wind, Zap } from "react-feather";
 
-function Habits() {
+function habits() {
 	const currDayHabits = [
 		{
 			name: "Workout",
@@ -184,4 +184,4 @@ function Habits() {
 	);
 }
 
-export default Habits;
+export default habits;
