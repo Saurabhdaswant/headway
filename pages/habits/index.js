@@ -32,7 +32,7 @@ function Habits() {
         { name: "14 Nov", completedHabits: 12 },
     ];
 
-    const currDayHabits = [
+    const [habits, setHabits] = useState([
         {
             name: "Workout",
             isCompleted: true,
@@ -42,23 +42,45 @@ function Habits() {
 
         {
             name: "Read",
-            isCompleted: true,
+            isCompleted: false,
             date: "12-11-2022",
             color: "color4",
         },
-        // {
-        // 	name: "meditate",
-        // 	isCompleted: false,
-        // 	date: "12-11-2022",
-        // 	color: "color5",
-        // },
         {
             name: "code",
             isCompleted: true,
             date: "12-11-2022",
             color: "color6",
         },
-    ];
+    ])
+
+    // const currDayHabits = [
+    //     {
+    //         name: "Workout",
+    //         isCompleted: true,
+    //         date: "12-11-2022",
+    //         color: "color1",
+    //     },
+
+    //     {
+    //         name: "Read",
+    //         isCompleted: true,
+    //         date: "12-11-2022",
+    //         color: "color4",
+    //     },
+    //     // {
+    //     // 	name: "meditate",
+    //     // 	isCompleted: false,
+    //     // 	date: "12-11-2022",
+    //     // 	color: "color5",
+    //     // },
+    //     {
+    //         name: "code",
+    //         isCompleted: true,
+    //         date: "12-11-2022",
+    //         color: "color6",
+    //     },
+    // ];
 
     const weekDays = [
         { date: 12, day: "sunday" },
@@ -156,19 +178,21 @@ function Habits() {
                         })}
                     </div>
 
-                    {currDayHabits.map((habit, idx) => {
+                    {habits.map((habit, idx) => {
                         return (
                             <div
                                 key={idx}
                                 className="flex items-center justify-between"
                             >
-                                {habit.isCompleted ? (
-                                    <div className="border-4 grid place-items-center bg-white border-[#27B563]  text-[#27B563] w-14 h-14 rounded-full shadow-lg ">
+                                {
+                                    <div onClick={() => {
+                                        const idx = habits.findIndex((h) => h.name === habit.name)
+                                        habits[idx].isCompleted = !habits[idx].isCompleted
+                                        setHabits([...habits])
+                                    }} className={`border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
                                         <Check className="  w-8 h-8  stroke-3" />
                                     </div>
-                                ) : (
-                                    <div className=" grid place-items-center bg-white w-14 h-14 rounded-full shadow-lg "></div>
-                                )}
+                                }
                                 <div
                                     className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4  bg-white ${habit.color} `}
                                 >
@@ -270,10 +294,11 @@ function Habits() {
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
-                    {showAddNewHabitComponent ? <AddNewHabit setShowAddNewHabitComponent={setShowAddNewHabitComponent} /> : null}
+                    {showAddNewHabitComponent ?
+                        <AddNewHabit habits={habits} setHabits={setHabits} setShowAddNewHabitComponent={setShowAddNewHabitComponent} /> : null}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
