@@ -175,7 +175,7 @@ function Habits() {
                                         setCurrentPeriod(period)
                                     }}
                                     key={idx}
-                                    className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${currentPeriod === period ? "bg-[#9fc6eb]   text-[#0F85F2]" : "bg-[#EDEDED]    text-gray-400"}`}
+                                    className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${currentPeriod === period ? "bg-[#9fc6eb]   text-[#091e32]" : "bg-[#EDEDED]    text-gray-400"}`}
                                 >
                                     {period}
                                 </div>
