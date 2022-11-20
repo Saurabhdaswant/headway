@@ -34,23 +34,25 @@ function Habits() {
 
     const [habits, setHabits] = useState([
         {
-            name: "Workout",
-            isCompleted: true,
-            date: "12-11-2022",
-            color: "color1",
-        },
-
-        {
             name: "Read",
             isCompleted: false,
             date: "12-11-2022",
             color: "color4",
+            getDoneIn: "all"
         },
         {
             name: "code",
             isCompleted: true,
             date: "12-11-2022",
             color: "color6",
+            getDoneIn: "evening"
+        },
+        {
+            name: "pushups",
+            isCompleted: true,
+            date: "12-11-2022",
+            color: "color2",
+            getDoneIn: "all"
         },
     ])
 
@@ -93,6 +95,7 @@ function Habits() {
     ];
 
     const periods = ["all", "evening", "morning", "afernoon", "night"];
+    const [currentPeriod, setCurrentPeriod] = useState("anytime")
 
     // html, csss, react, redux, stylecompoent, routing, charting, typscript
 
@@ -168,8 +171,11 @@ function Habits() {
                         {periods.map((period, idx) => {
                             return (
                                 <div
+                                    onClick={() => {
+                                        setCurrentPeriod(period)
+                                    }}
                                     key={idx}
-                                    className={`font-bold capitalize px-4 py-2  rounded-md bg-[#EDEDED]
+                                    className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md bg-[#EDEDED]
 								  text-gray-400`}
                                 >
                                     {period}
@@ -178,7 +184,7 @@ function Habits() {
                         })}
                     </div>
 
-                    {habits.map((habit, idx) => {
+                    {habits.filter(habit => habit.getDoneIn === currentPeriod).map((habit, idx) => {
                         return (
                             <div
                                 key={idx}
