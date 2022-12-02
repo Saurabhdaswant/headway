@@ -10,6 +10,10 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 	// get data using form / input
 	// update the array of habits
 
+
+	// emmpty array
+	// onclick add the day
+
 	const weekDays = [
 		"s",
 		"m",

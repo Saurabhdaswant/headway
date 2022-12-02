@@ -11,7 +11,7 @@ export default function Signin() {
 						<p className="font-bold text-white text-2xl" >Headway</p>
 					</div>
 					<h1 className=" font-semibold text-white text-3xl " >Do the Hard work especially when you dont feel like it! </h1>
-					<h1 className=" font-semibold text-white text-lg  " >- Hamza </h1>
+					<h1 className=" font-semibold text-white text-lg  " >- Hamza Ahmed </h1>
 				</div>
 			</div>
 			<div className=" w-full mx-6 text-zinc-800 relative" >
