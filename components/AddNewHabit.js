@@ -35,7 +35,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 	},)
 
 	return (
-		<div className=' fixed inset-0 z-[100px] flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ' >
+		<div className=' fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ' >
 			<div className='p-8 absolute space-y-8 top-0 right-0 w-[30%] bg-white rounded-md z-50 h-full ' >
 				<div className='flex justify-between' >
 					<h1 className=' text-2xl ' >Add new Habit</h1>
