@@ -13,7 +13,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 	];
 
 	const doitat = ["anytime", "morning", "afternoon", "evening"]
-	const colors = ["bgColor1", "bgColor2", "bgColor3", "bgColor4", "bgColor5", "bgColor6",]
+	const colors = ["pinkSherbet", "mediumPurple", "tealDeer", "khaki", "babyBlue", "spiroDisco",]
 
 	const [habit, setHabit] = useState({
 		name: "",
@@ -70,10 +70,10 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 							<p className="font-semibold"  >Color</p>
 							<div className=' grid grid-cols-6 gap-2 ' >
 								{
-									colors.map((bgColor, idx) => {
+									colors.map((color, idx) => {
 										return <div onClick={() => {
-											setHabit({ ...habit, color: bgColor })
-										}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded ${bgColor}  ${bgColor === habit.color && `outline outline-offset-2 outline-[#0F85F2] `}`}>
+											setHabit({ ...habit, color })
+										}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded  bg-${color}  ${color === habit.color && `outline outline-offset-2 outline-[#0F85F2] `}`}>
 										</div>
 									})
 								}

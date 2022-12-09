@@ -167,7 +167,7 @@ function Habits() {
                                         </div>
                                     }
                                     <div
-                                        className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4  bg-white ${habit.color} `}
+                                        className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4   border-l-4 border-${habit.color} bg-white   `}
                                     >
                                         {habit.name}
                                     </div>
@@ -190,7 +190,7 @@ function Habits() {
                                             </div>
                                         }
                                         <div
-                                            className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4  bg-white ${habit.color} `}
+                                            className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4 border-l-4 border-${habit.color} bg-white   `}
                                         >
                                             {habit.name}
                                         </div>

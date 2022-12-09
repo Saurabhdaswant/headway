@@ -7,6 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'pinkSherbet': '#F38BA0 ',
+        'mediumPurple': '#998bf3 ',
+        'tealDeer': '#8bf3bc ',
+        'khaki': '#f3de8b ',
+        'babyBlue': '#8bd4f3 ',
+        'spiroDisco': '#0fc9f2 ',
+      },
       strokeWidth: {
         '3': '3px',
       }
