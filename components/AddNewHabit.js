@@ -86,7 +86,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 						}
 						setHabits([...habits, habit])
 						setShowAddNewHabitComponent(false)
-					}} type="submit" className=" w-full my-12  font-semibold  bg-[#2e2e2e] text-white px-14 rounded py-4 ">Submit</button>
+					}} type="submit" className=" w-full my-12  font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 ">Submit</button>
 				</div>
 			</div>
 		</div>
