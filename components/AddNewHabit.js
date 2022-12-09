@@ -82,9 +82,9 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 					</div>
 					<button onClick={() => {
 						if (typeof window !== "undefined") {
-							localStorage.setItem("Habits", JSON.stringify([...habits, habit]))
+							localStorage.setItem("Habits", JSON.stringify([...(habits || []), habit]))
 						}
-						setHabits([...habits, habit])
+						setHabits([...(habits || []), habit])
 						setShowAddNewHabitComponent(false)
 					}} type="submit" className=" w-full my-12  font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 ">Submit</button>
 				</div>
