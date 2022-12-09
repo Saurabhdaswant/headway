@@ -2,18 +2,6 @@ import React, { useState } from 'react'
 import { X } from 'react-feather'
 
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
-
-
-
-
-	// keep state for habits ✅
-	// get data using form / input
-	// update the array of habits
-
-
-	// emmpty array
-	// onclick add the day
-
 	const weekDays = [
 		"s",
 		"m",
@@ -33,6 +21,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 		getDoneIn: "",
 		color: "",
 	},)
+
 
 	return (
 		<div className=' fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ' >
@@ -72,7 +61,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 								doitat.map((time, idx) => {
 									return <div onClick={() => {
 										setHabit({ ...habit, getDoneIn: time })
-									}} key={idx} className=" cursor-pointer capitalize text-center  font-medium border-2 border-zinc-200  px-4 py-2 rounded ">{time}</div>
+									}} key={idx} className={` ${habit.getDoneIn === time ? "bg-blue-500 border-blue-500  text-white " : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>{time}</div>
 								})
 							}
 						</div>
