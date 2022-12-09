@@ -74,7 +74,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 								colors.map((bgColor, idx) => {
 									return <div onClick={() => {
 										setHabit({ ...habit, color: bgColor })
-									}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded ${bgColor}`}>
+									}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded ${bgColor}  ${bgColor === habit.color && `outline outline-offset-2`}`}>
 									</div>
 								})
 							}

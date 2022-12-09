@@ -54,7 +54,7 @@ function Habits() {
         let habitsFromLS
         if (typeof window !== "undefined") {
             habitsFromLS = JSON.parse(localStorage.getItem("Habits"))
-            setHabits([...habitsFromLS])
+            setHabits(habitsFromLS)
         }
     }, [])
 
