@@ -37,13 +37,13 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 							setHabit({ ...habit, name: e.target.value })
 						}} value={habit.name} name="habitName" id="habitName" className=" font-medium border-2 border-zinc-200  px-4 py-2 rounded " />
 					</div>
-					<div className="flex flex-col space-y-2 " >
+					{/* <div className="flex flex-col space-y-2 " >
 						<p className="font-semibold"  >Repeat Habit days </p>
 						<div className='space-y-4' >
 							<div className=' grid grid-cols-7 gap-2 ' >
 								{
 									weekDays.map((day, idx) => {
-										return <div key={idx} className=" capitalize text-center  font-medium border-2 border-zinc-200  px-4 py-2 rounded ">{day}</div>
+										return <div key={idx} className={` ${habit.weekDays[idx] === day ? "bg-blue-500 border-blue-500  text-white " : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "} capitalize text-center  font-medium border-2 border-zinc-200  px-4 py-2 rounded`}>{day}</div>
 									})
 								}
 							</div>
@@ -52,7 +52,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 								<div className=" capitalize text-center  font-medium border-2 border-zinc-200  px-4 py-2 rounded ">Every day</div>
 							</div>
 						</div>
-					</div>
+					</div> */}
 
 					<div className="flex flex-col space-y-2 " >
 						<p className="font-semibold"  >Do it at</p>
@@ -81,6 +81,9 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 						</div>
 					</div>
 					<button onClick={() => {
+						if (typeof window !== "undefined") {
+							localStorage.setItem("Habits", JSON.stringify([...habits, habit]))
+						}
 						setHabits([...habits, habit])
 						setShowAddNewHabitComponent(false)
 					}} type="submit" className=" w-full my-8  font-semibold  bg-[#2e2e2e] text-white px-14 rounded py-4 ">Submit</button>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
     BookOpen,
@@ -33,57 +33,7 @@ function Habits() {
         { name: "14 Nov", completedHabits: 12 },
     ];
 
-    const [habits, setHabits] = useState([
-        {
-            name: "Read",
-            isCompleted: false,
-            date: "12-11-2022",
-            color: "color4",
-            getDoneIn: "all"
-        },
-        {
-            name: "code",
-            isCompleted: true,
-            date: "12-11-2022",
-            color: "color6",
-            getDoneIn: "evening"
-        },
-        {
-            name: "pushups",
-            isCompleted: true,
-            date: "12-11-2022",
-            color: "color2",
-            getDoneIn: "all"
-        },
-    ])
-
-    // const currDayHabits = [
-    //     {
-    //         name: "Workout",
-    //         isCompleted: true,
-    //         date: "12-11-2022",
-    //         color: "color1",
-    //     },
-
-    //     {
-    //         name: "Read",
-    //         isCompleted: true,
-    //         date: "12-11-2022",
-    //         color: "color4",
-    //     },
-    //     // {
-    //     // 	name: "meditate",
-    //     // 	isCompleted: false,
-    //     // 	date: "12-11-2022",
-    //     // 	color: "color5",
-    //     // },
-    //     {
-    //         name: "code",
-    //         isCompleted: true,
-    //         date: "12-11-2022",
-    //         color: "color6",
-    //     },
-    // ];
+    const [habits, setHabits] = useState([])
 
     const weekDays = [
         { date: 12, day: "sunday" },
@@ -95,10 +45,18 @@ function Habits() {
         { date: 17, day: "saturday" },
     ];
 
-    const periods = ["all", "evening", "morning", "afernoon", "night"];
+    const periods = ["all", "morning", "afernoon", "evening",];
     const [currentPeriod, setCurrentPeriod] = useState("all")
 
     // html, csss, react, redux, stylecompoent, routing, charting, typscript
+
+    useEffect(() => {
+        let habitsFromLS
+        if (typeof window !== "undefined") {
+            habitsFromLS = JSON.parse(localStorage.getItem("Habits"))
+            setHabits([...habitsFromLS])
+        }
+    }, [])
 
     return (
         <div className="flex h-screen bg-[#F5F5F5]">
@@ -189,29 +147,56 @@ function Habits() {
                         })}
                     </div>
 
-                    {habits.filter(habit => habit.getDoneIn === currentPeriod).map((habit, idx) => {
-                        return (
-                            <div
-                                key={idx}
-                                className="flex items-center justify-between"
-                            >
-                                {
-                                    <div onClick={() => {
-                                        const idx = habits.findIndex((h) => h.name === habit.name)
-                                        habits[idx].isCompleted = !habits[idx].isCompleted
-                                        setHabits([...habits])
-                                    }} className={` cursor-pointer border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
-                                        <Check className="  w-8 h-8  stroke-3" />
-                                    </div>
-                                }
+                    {
+                        currentPeriod === periods[0] ? habits?.map((habit, idx) => {
+                            return (
                                 <div
-                                    className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4  bg-white ${habit.color} `}
+                                    key={idx}
+                                    className="flex items-center justify-between"
                                 >
-                                    {habit.name}
+                                    {
+                                        <div onClick={() => {
+                                            const idx = habits?.findIndex((h) => h.name === habit.name)
+                                            habits[idx].isCompleted = !habits[idx].isCompleted
+                                            if (typeof window !== "undefined") {
+                                                localStorage.setItem("Habits", JSON.stringify([...habits]))
+                                            }
+                                            setHabits([...habits])
+                                        }} className={` cursor-pointer border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
+                                            <Check className="  w-8 h-8  stroke-3" />
+                                        </div>
+                                    }
+                                    <div
+                                        className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4  bg-white ${habit.color} `}
+                                    >
+                                        {habit.name}
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        }) :
+                            habits?.filter(habit => habit.getDoneIn === currentPeriod)?.map((habit, idx) => {
+                                return (
+                                    <div
+                                        key={idx}
+                                        className="flex items-center justify-between"
+                                    >
+                                        {
+                                            <div onClick={() => {
+                                                const idx = habits.findIndex((h) => h.name === habit.name)
+                                                habits[idx].isCompleted = !habits[idx].isCompleted
+                                                setHabits([...habits])
+                                            }} className={` cursor-pointer border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
+                                                <Check className="  w-8 h-8  stroke-3" />
+                                            </div>
+                                        }
+                                        <div
+                                            className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4  bg-white ${habit.color} `}
+                                        >
+                                            {habit.name}
+                                        </div>
+                                    </div>
+                                );
+                            })}
                 </div>
                 <div>
                     <div className="grid grid-cols-2 gap-6 p-6 bg-white rounded-md mt-10">
