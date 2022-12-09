@@ -36,7 +36,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 							<label htmlFor="habitName" className="font-semibold"  >Habit</label>
 							<input onChange={(e) => {
 								setHabit({ ...habit, name: e.target.value })
-							}} value={habit.name} name="habitName" id="habitName" className=" font-medium border-2 border-zinc-200  px-4 py-2 rounded " />
+							}} value={habit.name} name="habitName" id="habitName" className=" outline-none focus:border-[#0F85F2]  font-medium border-2 border-zinc-200   px-4 py-2 rounded " />
 						</div>
 						{/* <div className="flex flex-col space-y-2 " >
 						<p className="font-semibold"  >Repeat Habit days </p>
@@ -61,7 +61,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 									doitat.map((time, idx) => {
 										return <div onClick={() => {
 											setHabit({ ...habit, getDoneIn: time })
-										}} key={idx} className={` ${habit.getDoneIn === time ? "bg-blue-500 border-blue-500  text-white " : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>{time}</div>
+										}} key={idx} className={` ${habit.getDoneIn === time ? "bg-[#0F85F2] border-[#0F85F2]  text-white " : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>{time}</div>
 									})
 								}
 							</div>
@@ -73,7 +73,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 									colors.map((bgColor, idx) => {
 										return <div onClick={() => {
 											setHabit({ ...habit, color: bgColor })
-										}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded ${bgColor}  ${bgColor === habit.color && `outline outline-offset-2`}`}>
+										}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded ${bgColor}  ${bgColor === habit.color && `outline outline-offset-2 outline-[#0F85F2] `}`}>
 										</div>
 									})
 								}
