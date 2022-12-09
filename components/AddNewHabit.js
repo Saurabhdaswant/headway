@@ -30,14 +30,15 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 					<h1 className=' text-2xl ' >Add new Habit</h1>
 					<X onClick={() => setShowAddNewHabitComponent(false)} className=" cursor-pointer " />
 				</div>
-				<div className=' space-y-8 ' >
-					<div className="flex flex-col  space-y-2" >
-						<label htmlFor="habitName" className="font-semibold"  >Habit</label>
-						<input onChange={(e) => {
-							setHabit({ ...habit, name: e.target.value })
-						}} value={habit.name} name="habitName" id="habitName" className=" font-medium border-2 border-zinc-200  px-4 py-2 rounded " />
-					</div>
-					{/* <div className="flex flex-col space-y-2 " >
+				<div className=' flex flex-col justify-between  h-full ' >
+					<div className=' space-y-8 '>
+						<div className="flex flex-col  space-y-2" >
+							<label htmlFor="habitName" className="font-semibold"  >Habit</label>
+							<input onChange={(e) => {
+								setHabit({ ...habit, name: e.target.value })
+							}} value={habit.name} name="habitName" id="habitName" className=" font-medium border-2 border-zinc-200  px-4 py-2 rounded " />
+						</div>
+						{/* <div className="flex flex-col space-y-2 " >
 						<p className="font-semibold"  >Repeat Habit days </p>
 						<div className='space-y-4' >
 							<div className=' grid grid-cols-7 gap-2 ' >
@@ -53,31 +54,30 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 							</div>
 						</div>
 					</div> */}
-
-					<div className="flex flex-col space-y-2 " >
-						<p className="font-semibold"  >Do it at</p>
-						<div className=' grid grid-cols-2 gap-x-6 gap-y-4 ' >
-							{
-								doitat.map((time, idx) => {
-									return <div onClick={() => {
-										setHabit({ ...habit, getDoneIn: time })
-									}} key={idx} className={` ${habit.getDoneIn === time ? "bg-blue-500 border-blue-500  text-white " : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>{time}</div>
-								})
-							}
+						<div className="flex flex-col space-y-2 " >
+							<p className="font-semibold"  >Do it at</p>
+							<div className=' grid grid-cols-2 gap-x-6 gap-y-4 ' >
+								{
+									doitat.map((time, idx) => {
+										return <div onClick={() => {
+											setHabit({ ...habit, getDoneIn: time })
+										}} key={idx} className={` ${habit.getDoneIn === time ? "bg-blue-500 border-blue-500  text-white " : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>{time}</div>
+									})
+								}
+							</div>
 						</div>
-					</div>
-
-					<div className="flex flex-col space-y-2 " >
-						<p className="font-semibold"  >Color</p>
-						<div className=' grid grid-cols-6 gap-2 ' >
-							{
-								colors.map((bgColor, idx) => {
-									return <div onClick={() => {
-										setHabit({ ...habit, color: bgColor })
-									}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded ${bgColor}  ${bgColor === habit.color && `outline outline-offset-2`}`}>
-									</div>
-								})
-							}
+						<div className="flex flex-col space-y-2 " >
+							<p className="font-semibold"  >Color</p>
+							<div className=' grid grid-cols-6 gap-2 ' >
+								{
+									colors.map((bgColor, idx) => {
+										return <div onClick={() => {
+											setHabit({ ...habit, color: bgColor })
+										}} key={idx} className={` cursor-pointer capitalize text-center h-12  rounded ${bgColor}  ${bgColor === habit.color && `outline outline-offset-2`}`}>
+										</div>
+									})
+								}
+							</div>
 						</div>
 					</div>
 					<button onClick={() => {
@@ -86,7 +86,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 						}
 						setHabits([...habits, habit])
 						setShowAddNewHabitComponent(false)
-					}} type="submit" className=" w-full my-8  font-semibold  bg-[#2e2e2e] text-white px-14 rounded py-4 ">Submit</button>
+					}} type="submit" className=" w-full my-12  font-semibold  bg-[#2e2e2e] text-white px-14 rounded py-4 ">Submit</button>
 				</div>
 			</div>
 		</div>
