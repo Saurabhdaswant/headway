@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Check, Edit, Trash2, } from "react-feather";
+import DeleteHabit from './DeleteHabit';
 import EditHabit from './EditHabit';
 
 function Habit({ habits, setHabits, habit }) {
 	const [showHabitEditOptions, setShowHabitEditOptions] = useState(false)
 	const [editHabit, setEditHabit] = useState(false)
+	const [deleteHabit, setDeleteHabit] = useState(false)
 
 
 	return (
@@ -30,11 +32,16 @@ function Habit({ habits, setHabits, habit }) {
 				{showHabitEditOptions &&
 					<div className='flex gap-4  w-14'>
 						<Edit onClick={() => setEditHabit(true)} className='hover:cursor-pointer' />
-						<Trash2 className='hover:cursor-pointer' />
+						<Trash2 onClick={() => {
+
+							setDeleteHabit(true)
+						}} className='hover:cursor-pointer' />
 					</div>}
 			</div>
 			{editHabit ?
 				<EditHabit habits={habits} setHabits={setHabits} habit={habit} setEditHabit={setEditHabit} /> : null}
+			{deleteHabit ?
+				<DeleteHabit habits={habits} setHabits={setHabits} habitId={habit.id} setDeleteHabit={setDeleteHabit} /> : null}
 		</div>
 	)
 }
