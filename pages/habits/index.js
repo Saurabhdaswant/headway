@@ -27,7 +27,7 @@ function Habits() {
         { date: 16, day: "friday" },
         { date: 17, day: "saturday" },
     ];
-    const times = ["all", "morning", "afernoon", "evening"];
+    const times = ["all", "morning", "afternoon", "evening"];
     const [habitTime, setHabitTime] = useState("all")
     const [showAddNewHabitComponent, setShowAddNewHabitComponent] = useState(false);
 
