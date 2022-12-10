@@ -41,12 +41,10 @@ function Habits() {
         }
     }, [])
 
-    // give option to delete or edit habit ✅
-    // onClick edit pass data to  EditHabitComponent , do stuff and update habits array
     // onClick delete show popup and update the habits array
 
     const SideBar = () => {
-        return <div className=" z-50 w-[15%] bg-white ">
+        return <div className=" z-50 w-[15%] bg-white  ">
             <div className="h-[10%] flex items-center gap-2  justify-center  ">
                 <Image
                     src="/headway.svg"
@@ -58,23 +56,25 @@ function Habits() {
                     Headway
                 </p>
             </div>
-            <ul className="h-[80%] max-h-[80%]  px-4 ">
-                <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-                    <Calendar className=" w-5 h-5 " /> Rituals
-                </li>
-                <li className="py-3 px-4 flex items-center gap-2  rounded-md font-medium bg-[#2e2e2e] text-white my-4">
-                    <Wind className=" w-5 h-5 " /> Meditations
-                </li>
-                <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-                    <Zap className=" w-5 h-5 " /> Workout
-                </li>
-                <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-                    <BookOpen className=" w-5 h-5 " /> Jounal
-                </li>
-            </ul>
-            <div className="h-[10%] flex items-center justify-center gap-2 border-t border-gray-200  ">
-                <div className=" w-12 h-12 bg-slate-300 rounded-full"></div>
-                <p className=" font-medium ">Saurabh</p>{" "}
+            <div className=" flex flex-col justify-between  h-[90%]">
+                <ul className="  px-4  ">
+                    <li className="py-3 px-4 flex items-center gap-2  rounded-md font-medium bg-[#2e2e2e] text-white my-4">
+                        <Calendar className=" w-5 h-5 " /> Rituals
+                    </li>
+                    <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
+                        <Wind className=" w-5 h-5 " /> Meditations
+                    </li>
+                    <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
+                        <Zap className=" w-5 h-5 " /> Workout
+                    </li>
+                    <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
+                        <BookOpen className=" w-5 h-5 " /> Jounal
+                    </li>
+                </ul>
+                <div className=" flex items-center justify-center gap-2 border-t py-4 border-gray-200  ">
+                    <div className=" w-12 h-12 bg-slate-300 rounded-full"></div>
+                    <p className=" font-medium ">Saurabh</p>{" "}
+                </div>
             </div>
         </div>
     }
