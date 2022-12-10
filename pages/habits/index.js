@@ -10,26 +10,14 @@ import {
     Wind,
     Zap,
 } from "react-feather";
-import {
-    CartesianGrid,
-    YAxis,
-    ResponsiveContainer,
-    AreaChart,
-    Area,
-} from "recharts";
+
 import AddNewHabit from "../../components/AddNewHabit";
 import Head from "next/head";
 import Habit from "../../components/Habit";
+import HabitsCompletionChart from "../../components/HabitsCompletionChart";
 
 function Habits() {
     const [habits, setHabits] = useState([])
-    const habitCompletionData = [
-        { name: "10 Nov", completedHabits: 0 },
-        { name: "11 Nov", completedHabits: 10 },
-        { name: "12 Nov", completedHabits: 8 },
-        { name: "14 Nov", completedHabits: 15 },
-        { name: "14 Nov", completedHabits: 12 },
-    ];
     const week = [
         { date: 12, day: "sunday" },
         { date: 13, day: "monday" },
@@ -53,9 +41,7 @@ function Habits() {
         }
     }, [])
 
-    // show three dots
-    // onclick dots show dropdown
-    // give option to delete or edit habit
+    // give option to delete or edit habit ✅
     // onClick edit pass data to  EditHabitComponent , do stuff and update habits array
     // onClick delete show popup and update the habits array
 
@@ -139,54 +125,6 @@ function Habits() {
                     </p>
                 </div>
             </div>
-        </div>
-    }
-
-    const HabitsCompletionChart = () => {
-        return <div className="bg-white mt-10 p-6 pl-0 rounded-md">
-            <ResponsiveContainer width="100%" height={200}>
-                <AreaChart data={habitCompletionData}>
-                    <defs>
-                        <linearGradient
-                            id="colorPv"
-                            x1="0"
-                            y1="0"
-                            x2="0"
-                            y2="1"
-                        >
-                            <stop
-                                offset="5%"
-                                stopColor="#0F85F2"
-                                stopOpacity={0.8}
-                            />
-                            <stop
-                                offset="95%"
-                                stopColor="#0F85F2"
-                                stopOpacity={0}
-                            />
-                        </linearGradient>
-                    </defs>
-                    <Area
-                        type="monotone"
-                        dataKey="completedHabits"
-                        stroke="#0F85F2"
-                        fillOpacity={1}
-                        fill="url(#colorPv)"
-                    />
-                    <YAxis
-                        dataKey="completedHabits"
-                        axisLine={false}
-                        tickLine={false}
-                        tickCount={8}
-                        tickFormatter={number => `${number} k`}
-                    />
-                    <CartesianGrid
-                        vertical={false}
-                        stroke="#2a2a2a"
-                        opacity={0.1}
-                    />
-                </AreaChart>
-            </ResponsiveContainer>
         </div>
     }
 
