@@ -244,10 +244,10 @@ function Habits() {
 
                 {
                     habitTime === times[0] ? habits?.map((habit, idx) => {
-                        return <Habit key={idx} habit={habit} />
+                        return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} />
                     }) :
                         habits?.filter(habit => habit.getDoneIn === habitTime)?.map((habit, idx) => {
-                            return <Habit key={idx} habit={habit} />
+                            return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} />
                         })}
             </div>
             <div>

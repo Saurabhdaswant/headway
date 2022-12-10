@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import {
-	Check, Edit, Edit2, Edit3, Trash, Trash2,
-} from "react-feather";
-function Habit({ habit }) {
+import { Check, Edit, Trash2, } from "react-feather";
+
+function Habit({ habits, setHabits, habit }) {
 	const [showHabitEditOptions, setShowHabitEditOptions] = useState(false)
 
 
