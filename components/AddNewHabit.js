@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useId } from 'react'
 import { X } from 'react-feather'
-
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
+	const id = useId();
 	const weekDays = [
 		"s",
 		"m",
@@ -20,6 +20,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 		isCompleted: false,
 		getDoneIn: "",
 		color: "",
+		id
 	},)
 
 
