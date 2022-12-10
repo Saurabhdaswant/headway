@@ -19,10 +19,10 @@ import {
 } from "recharts";
 import AddNewHabit from "../../components/AddNewHabit";
 import Head from "next/head";
+import Habit from "../../components/Habit";
 
 function Habits() {
     const [habits, setHabits] = useState([])
-    const [showAddNewHabitComponent, setShowAddNewHabitComponent] = useState(false);
     const habitCompletionData = [
         { name: "10 Nov", completedHabits: 0 },
         { name: "11 Nov", completedHabits: 10 },
@@ -41,6 +41,7 @@ function Habits() {
     ];
     const times = ["all", "morning", "afernoon", "evening"];
     const [habitTime, setHabitTime] = useState("all")
+    const [showAddNewHabitComponent, setShowAddNewHabitComponent] = useState(false);
 
     const currentDate = new Date().getDate()
     const currentMonth = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date());
@@ -51,6 +52,12 @@ function Habits() {
             setHabits(JSON.parse(localStorage.getItem("Habits")))
         }
     }, [])
+
+    // show three dots
+    // onclick dots show dropdown
+    // give option to delete or edit habit
+    // onClick edit pass data to  EditHabitComponent , do stuff and update habits array
+    // onClick delete show popup and update the habits array
 
     const SideBar = () => {
         return <div className=" z-50 w-[15%] bg-white ">
@@ -237,53 +244,10 @@ function Habits() {
 
                 {
                     habitTime === times[0] ? habits?.map((habit, idx) => {
-                        return (
-                            <div
-                                key={idx}
-                                className="flex items-center justify-between"
-                            >
-                                {
-                                    <div onClick={() => {
-                                        const idx = habits?.findIndex((h) => h.name === habit.name)
-                                        habits[idx].isCompleted = !habits[idx].isCompleted
-                                        if (typeof window !== "undefined") {
-                                            localStorage.setItem("Habits", JSON.stringify([...habits]))
-                                        }
-                                        setHabits([...habits])
-                                    }} className={` cursor-pointer border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
-                                        <Check className="  w-8 h-8  stroke-3" />
-                                    </div>
-                                }
-                                <div
-                                    className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
-                                >
-                                    {habit.name}
-                                </div>
-                            </div>
-                        );
+                        return <Habit key={idx} habit={habit} />
                     }) :
                         habits?.filter(habit => habit.getDoneIn === habitTime)?.map((habit, idx) => {
-                            return (
-                                <div
-                                    key={idx}
-                                    className="flex items-center justify-between"
-                                >
-                                    {
-                                        <div onClick={() => {
-                                            const idx = habits.findIndex((h) => h.name === habit.name)
-                                            habits[idx].isCompleted = !habits[idx].isCompleted
-                                            setHabits([...habits])
-                                        }} className={` cursor-pointer border-4 grid place-items-center bg-white ${habit.isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"} w-14 h-14 rounded-full shadow-lg  `}>
-                                            <Check className="  w-8 h-8  stroke-3" />
-                                        </div>
-                                    }
-                                    <div
-                                        className={`p-2 h-14 w-[85%] flex items-center  font-bold my-4 text-[#2e2e2e]  border-l-4 border-${habit.color} bg-white   `}
-                                    >
-                                        {habit.name}
-                                    </div>
-                                </div>
-                            );
+                            return <Habit key={idx} habit={habit} />
                         })}
             </div>
             <div>
