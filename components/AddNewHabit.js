@@ -1,7 +1,7 @@
 import React, { useState, useId } from "react";
 import { X } from "react-feather";
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
-	const id = useId();
+	const id = Math.floor(Math.random() * 22);
 	const weekDays = ["s", "m", "t", "w", "t", "f", "s"];
 
 	const doitat = ["anytime", "morning", "afternoon", "evening"];
@@ -136,7 +136,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 							}
 
 
-							if (habit.name !== "" || habit.getDoneIn !== "") {
+							if (habit.name !== "" && habit.name.length > 0) {
 
 								if (habit.color === "") {
 									var randomColor = colors[Math.floor(Math.random() * colors.length)];
