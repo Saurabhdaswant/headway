@@ -15,33 +15,41 @@ import AddNewHabit from "../../components/AddNewHabit";
 import Head from "next/head";
 import Habit from "../../components/Habit";
 import HabitsCompletionChart from "../../components/HabitsCompletionChart";
+import days from "../../Data/Days";
+import months from "../../Data/Month";
 
 function Habits() {
     const [habits, setHabits] = useState([])
-    const week = [
-        { date: 12, day: "sunday" },
-        { date: 13, day: "monday" },
-        { date: 14, day: "tuesday" },
-        { date: 14, day: "wednesday" },
-        { date: 15, day: "thursday" },
-        { date: 16, day: "friday" },
-        { date: 17, day: "saturday" },
-    ];
+    const [week, setWeek] = useState([]);
     const times = ["all", "morning", "afternoon", "evening"];
     const [habitTime, setHabitTime] = useState("all")
     const [showAddNewHabitComponent, setShowAddNewHabitComponent] = useState(false);
+    const [currDate, setCurrDate] = useState(new Date())
+    const [currMonthIndex, setCurrMonthIndex] = useState(currDate.getMonth())
 
-    const currentDate = new Date().getDate()
-    const currentMonth = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date());
-    const today = `${currentMonth} ${currentDate}`
+    const year = currDate.getFullYear()
+    const today = `${months[currMonthIndex]} ${currDate.getDate()}`
+
+    const getCurrentWeekDatesString = (currDate) => {
+        let week = []
+
+        for (let i = 1; i <= 7; i++) {
+            let date = currDate.getDate() - currDate.getDay() + i
+            let yearMonthDateString = new Date(year, currMonthIndex, date).toISOString().slice(0, 10)
+            week.push(yearMonthDateString)
+        }
+
+        setWeek(week)
+    }
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             setHabits(JSON.parse(localStorage.getItem("Habits")))
         }
+        getCurrentWeekDatesString(currDate)
     }, [])
 
-    // onClick delete show popup and update the habits array
+
 
     const SideBar = () => {
         return <div className=" z-50 w-[15%] bg-white  ">
@@ -143,8 +151,9 @@ function Habits() {
                 </div>
 
                 <div className="bg-white flex items-center justify-evenly h-20 rounded-md   my-8 ">
-                    {week.map((Day, idx) => {
-                        const { day, date } = Day;
+                    {week.map((yearMonthDateString, idx) => {
+                        const date = new Date(yearMonthDateString).getDate()
+                        const day = days[new Date(yearMonthDateString).getDay()]
                         return (
                             <div
                                 key={idx}
@@ -154,7 +163,7 @@ function Habits() {
                                     {day}
                                 </p>
                                 <p
-                                    className={`font-bold text-lg ${12 === date && "text-[#007BFF]"
+                                    className={`font-bold text-lg ${new Date().getDate() === date && "text-[#007BFF]"
                                         } `}
                                 >
                                     {date}
