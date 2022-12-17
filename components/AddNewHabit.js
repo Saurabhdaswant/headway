@@ -1,9 +1,8 @@
-import React, { useState, useId } from "react";
+import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import { X } from "react-feather";
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
-	const id = Math.floor(Math.random() * 22);
-	const weekDays = ["s", "m", "t", "w", "t", "f", "s"];
-
+	const id = uuidv4();
 	const doitat = ["anytime", "morning", "afternoon", "evening"];
 	const colors = [
 		"pinkSherbet",
@@ -14,10 +13,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 		"spiroDisco",
 	];
 
-	const [errors, setErrors] = useState({
-		name: "",
-		getDoneIn: "",
-	});
+	const [error, setError] = useState(false);
 
 	const [habit, setHabit] = useState({
 		name: "",
@@ -58,28 +54,12 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 								id="name"
 								className={`
 								outline-none focus:border-[#0F85F2]  font-medium 
-								border-2    px-4 py-2 rounded ${errors.name?.length > 0
-										? "border-red-500"
-										: "border-zinc-200"
+								border-2    px-4 py-2 rounded ${habit.name.length > 0 && error
+										? "border-zinc-200"
+										: error ? "border-red-500" : null
 									}`}
 							/>
 						</div>
-						{/* <div className="flex flex-col space-y-2 " >
-						<p className="font-semibold"  >Repeat Habit days </p>
-						<div className='space-y-4' >
-							<div className=' grid grid-cols-7 gap-2 ' >
-								{
-									weekDays.map((day, idx) => {
-										return <div key={idx} className={` ${habit.weekDays[idx] === day ? "bg-blue-500 border-blue-500  text-white " : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "} capitalize text-center  font-medium border-2 border-zinc-200  px-4 py-2 rounded`}>{day}</div>
-									})
-								}
-							</div>
-							<div className=' grid grid-cols-2 gap-6 ' >
-								<div className=" capitalize text-center  font-medium border-2 border-zinc-200  px-4 py-2 rounded ">Week days</div>
-								<div className=" capitalize text-center  font-medium border-2 border-zinc-200  px-4 py-2 rounded ">Every day</div>
-							</div>
-						</div>
-					</div> */}
 						<div className="flex flex-col space-y-2 ">
 							<p className="font-semibold">Do it at</p>
 							<div className=" grid grid-cols-2 gap-x-6 gap-y-4 ">
@@ -125,19 +105,12 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 					</div>
 					<button
 						onClick={() => {
-							if (habit.name.length <= 0) {
-								setErrors({
-									...errors,
-									name: "select the time",
-								});
-								console.log(errors);
+							if (habit.name.trim().length === 0) {
+								setError(true);
 							} else {
-								setErrors({ ...errors, name: "" });
+								setError(false);
 							}
-
-
-							if (habit.name !== "" && habit.name.length > 0) {
-
+							if (habit.name.trim().length !== 0) {
 								if (habit.color === "") {
 									var randomColor = colors[Math.floor(Math.random() * colors.length)];
 									habit.color = randomColor
@@ -146,6 +119,8 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 								if (habit.getDoneIn === "") {
 									habit.getDoneIn = "anytime"
 								}
+
+								habit.createdDate = new Date()
 
 								if (typeof window !== "undefined") {
 									localStorage.setItem(
