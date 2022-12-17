@@ -156,14 +156,15 @@ function Habits() {
                         const day = days[new Date(yearMonthDateString).getDay()]
                         return (
                             <div
+                                onClick={() => setCurrDate(new Date(yearMonthDateString))}
                                 key={idx}
-                                className="text-center space-y-2 "
+                                className="text-center space-y-2 cursor-pointer "
                             >
                                 <p className=" text-xs capitalize text-gray-400 ">
                                     {day}
                                 </p>
                                 <p
-                                    className={`font-bold text-lg ${new Date().getDate() === date && "text-[#007BFF]"
+                                    className={`font-bold text-lg ${currDate.getDate() === date && "text-[#007BFF]"
                                         } `}
                                 >
                                     {date}
@@ -173,7 +174,7 @@ function Habits() {
                     })}
                 </div>
 
-                <div className=" flex items-center gap-4 my-8   ">
+                {/* <div className=" flex items-center gap-4 my-8   ">
                     {times.map((time, idx) => {
                         return (
                             <div
@@ -187,15 +188,20 @@ function Habits() {
                             </div>
                         );
                     })}
-                </div>
-
+                </div> */}
                 {
+                    habits?.map((habit, idx) => {
+                        return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={currDate} />
+                    })
+                }
+
+                {/* {
                     habitTime === times[0] ? habits?.map((habit, idx) => {
                         return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} />
                     }) :
                         habits?.filter(habit => habit.getDoneIn === habitTime)?.map((habit, idx) => {
                             return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} />
-                        })}
+                        })} */}
             </div>
             <div>
                 <HabitsStats />
@@ -203,7 +209,7 @@ function Habits() {
                 {showAddNewHabitComponent ?
                     <AddNewHabit habits={habits} setHabits={setHabits} setShowAddNewHabitComponent={setShowAddNewHabitComponent} /> : null}
             </div>
-        </div>
+        </div >
     }
 
     return (

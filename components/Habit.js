@@ -3,11 +3,16 @@ import { Check, Edit, Trash2, } from "react-feather";
 import DeleteHabit from './DeleteHabit';
 import EditHabit from './EditHabit';
 
-function Habit({ habits, setHabits, habit }) {
+function Habit({ habits, setHabits, habit, currDate }) {
 	const [showHabitEditOptions, setShowHabitEditOptions] = useState(false)
 	const [editHabit, setEditHabit] = useState(false)
 	const [deleteHabit, setDeleteHabit] = useState(false)
 
+	if (habit.checkedOfForDates?.includes(currDate.toISOString().slice(0, 10))) {
+		habit.isCompleted = true
+	} else {
+		habit.isCompleted = false
+	}
 
 	return (
 		<div
@@ -16,6 +21,7 @@ function Habit({ habits, setHabits, habit }) {
 			<div onClick={() => {
 				const idx = habits?.findIndex((h) => h.name === habit.name)
 				habits[idx].isCompleted = !habits[idx].isCompleted
+				habits[idx].checkedOfForDates = [...habit.checkedOfForDates, currDate.toISOString().slice(0, 10)]
 				if (typeof window !== "undefined") {
 					localStorage.setItem("Habits", JSON.stringify([...habits]))
 				}

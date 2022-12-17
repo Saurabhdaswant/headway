@@ -20,6 +20,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 		isCompleted: false,
 		getDoneIn: "",
 		color: "",
+		checkedOfForDates: [],
 		id,
 	});
 
@@ -120,7 +121,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 									habit.getDoneIn = "anytime"
 								}
 
-								habit.createdDate = new Date()
+								habit.createdDate = new Date().toISOString().slice(0, 10)
 
 								if (typeof window !== "undefined") {
 									localStorage.setItem(
