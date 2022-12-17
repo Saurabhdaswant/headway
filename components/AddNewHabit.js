@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import { X } from "react-feather";
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
-	const id = Math.floor(Math.random() * 22);
+	const id = uuidv4();
 	const doitat = ["anytime", "morning", "afternoon", "evening"];
 	const colors = [
 		"pinkSherbet",
