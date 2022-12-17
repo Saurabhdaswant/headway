@@ -21,7 +21,15 @@ function Habit({ habits, setHabits, habit, currDate }) {
 			<div onClick={() => {
 				const idx = habits?.findIndex((h) => h.name === habit.name)
 				habits[idx].isCompleted = !habits[idx].isCompleted
-				habits[idx].checkedOfForDates = [...habit.checkedOfForDates, currDate.toISOString().slice(0, 10)]
+
+				if (habit.isCompleted !== false) {
+					habits[idx].checkedOfForDates = [...habit.checkedOfForDates, currDate.toISOString().slice(0, 10)]
+				} else {
+					const filtered = habit.checkedOfForDates.filter((date, _) => date !== currDate.toISOString().slice(0, 10))
+					habits[idx].checkedOfForDates = filtered
+				}
+
+
 				if (typeof window !== "undefined") {
 					localStorage.setItem("Habits", JSON.stringify([...habits]))
 				}
