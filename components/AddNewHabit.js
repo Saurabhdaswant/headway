@@ -119,6 +119,8 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 									habit.getDoneIn = "anytime"
 								}
 
+								habit.createdDate = new Date()
+
 								if (typeof window !== "undefined") {
 									localStorage.setItem(
 										"Habits",
