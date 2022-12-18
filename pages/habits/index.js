@@ -5,8 +5,10 @@ import {
     // Calendar,
     Check,
     CheckCircle,
+    Layout,
     PlusSquare,
     TrendingUp,
+    User,
     Wind,
     Zap,
 } from "react-feather";
@@ -18,6 +20,7 @@ import HabitsCompletionChart from "../../components/HabitsCompletionChart";
 import days from "../../Data/Days";
 import months from "../../Data/Month";
 import Calendar from "../../components/Calendar"
+import { CalendarIcon, ChartBarIcon, ChartSquareBarIcon, CogIcon, UserCircleIcon, UserIcon } from "@heroicons/react/outline";
 
 function Habits() {
     const [habits, setHabits] = useState([])
@@ -68,16 +71,16 @@ function Habits() {
             <div className=" flex flex-col justify-between  h-[90%]">
                 <ul className="  px-4  ">
                     <li className="py-3 px-4 flex items-center gap-2  rounded-md font-medium bg-[#2e2e2e] text-white my-4">
-                        <Zap className=" w-5 h-5 " /> Habits
+                        <CalendarIcon className=" w-5 h-5 " /> Habit Tracker
                     </li>
                     <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-                        <Wind className=" w-5 h-5 " /> Meditations
+                        <ChartBarIcon className=" w-5 h-5 " /> Dashboard
                     </li>
                     <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-                        <Zap className=" w-5 h-5 " /> Workout
+                        <UserCircleIcon className=" w-[1.4rem] h-[1.4rem] " /> Profile
                     </li>
                     <li className="py-4 px-4 flex items-center gap-2  rounded-md font-medium">
-                        <BookOpen className=" w-5 h-5 " /> Jounal
+                        <CogIcon className=" w-[1.4rem] h-[1.4rem]" /> Settings
                     </li>
                 </ul>
                 <div className=" flex items-center justify-center gap-2 border-t py-4 border-gray-200  ">
