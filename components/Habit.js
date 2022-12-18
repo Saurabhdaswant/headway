@@ -4,6 +4,7 @@ import DeleteHabit from './DeleteHabit';
 import EditHabit from './EditHabit';
 
 function Habit({ habits, setHabits, habit, currDate }) {
+	console.log(currDate);
 	const [showHabitEditOptions, setShowHabitEditOptions] = useState(false)
 	const [editHabit, setEditHabit] = useState(false)
 	const [deleteHabit, setDeleteHabit] = useState(false)

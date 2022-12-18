@@ -14,7 +14,10 @@
         "react-dom": "18.2.0",
         "react-feather": "^2.0.10",
         "recharts": "^2.1.16",
-        "uuid": "^9.0.0"
+        "uuid": "^9.0.0",
+        "@headlessui/react": "^1.6.1",
+        "@heroicons/react": "^1.0.6",
+        "date-fns": "^2.28.0"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.13",
