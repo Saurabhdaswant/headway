@@ -6,6 +6,7 @@
  problem : the thing is if i clicked on 22 and then its showing me tick on 21
 */
 
+// learn date-fns first
 // fix date issues when updating the date
 // fix the filtering of habits timing thing
 // update the header of today component as per design
