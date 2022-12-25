@@ -11,6 +11,7 @@
 // find correct way to store habits to date / date into habit object
 // refactor code using clean code practices and follow next.js course
 // use TypeScript
+// make it mobile / tab responsive
 // Add Animation using Framer motion
 // add signIn and sinUp functionality and store user data
 // use node js and mongodb
