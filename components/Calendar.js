@@ -132,8 +132,8 @@ export default function Example({ setCurrDate, getCurrentWeekDatesString }) {
 							type="button"
 							onClick={() => {
 								setSelectedDay(day)
-								setCurrDate(day)
-								getCurrentWeekDatesString(day)
+								setCurrDate(days[dayIdx + 1])
+								getCurrentWeekDatesString(days[dayIdx + 1])
 							}}
 							className={classNames(
 								isEqual(day, selectedDay) && 'text-white',

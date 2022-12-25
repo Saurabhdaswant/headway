@@ -3,7 +3,10 @@
  the dates are not same when clicked from calendar and week calendar header
  because when clicked on calendar date and checked off the box and click the same date from week header doesnt show the checkedOff icon
 
- problem : the thing is if i clicked on 22 and then its showing me tick on 21
+ problem 1.  on updating date if i clicked on 25 its setting the date as 24 ✅
+ problem 2. if currDate is 14 then its showing 15
+
+
 */
 
 // learn date-fns first and build a small project to understand it
