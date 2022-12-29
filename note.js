@@ -1,17 +1,7 @@
-/*
-! fix date issues when updating the date
- the dates are not same when clicked from calendar and week calendar header
- because when clicked on calendar date and checked off the box and click the same date from week header doesnt show the checkedOff icon
-
- problem 1.  on updating date if i clicked on 25 its setting the date as 24 ✅
- problem 2. if currDate is 14 then its showing 15
-
-
-*/
-
-// learn date-fns first and build a small project to understand it
-// fix date issues when updating the date
-// fix the filtering of habits timing thing
+// learn date-fns first and build a small project to understand it ✅
+// fix date issues when updating the date ✅
+// dont reload the whole app just while updating next month
+// fix the filtering of habits timing thing ✅
 // update the header of today component as per design
 // complete the stats and chart component from design
 // find correct way to store habits to date / date into habit object

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { X } from "react-feather";
+import { startOfToday, format } from "date-fns";
+
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 	const id = uuidv4();
 	const doitat = ["anytime", "morning", "afternoon", "evening"];
@@ -22,6 +24,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 		color: "",
 		checkedOfForDates: [],
 		id,
+		createdDate: format(startOfToday(), "yy-MM-dd ")
 	});
 
 	return (
@@ -120,8 +123,6 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 								if (habit.getDoneIn === "") {
 									habit.getDoneIn = "anytime"
 								}
-
-								habit.createdDate = new Date().toISOString().slice(0, 10)
 
 								if (typeof window !== "undefined") {
 									localStorage.setItem(

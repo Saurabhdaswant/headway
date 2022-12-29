@@ -6,65 +6,18 @@ import {
 	format,
 	getDay,
 	isEqual,
-	isSameDay,
-	isSameMonth,
 	isToday,
 	parse,
-	parseISO,
 	startOfToday,
 } from 'date-fns'
-import { Fragment, useState } from 'react'
-
-const meetings = [
-	{
-		id: 1,
-		name: 'Leslie Alexander',
-		imageUrl:
-			'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		startDatetime: '2022-05-11T13:00',
-		endDatetime: '2022-05-11T14:30',
-	},
-	{
-		id: 2,
-		name: 'Michael Foster',
-		imageUrl:
-			'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		startDatetime: '2022-05-20T09:00',
-		endDatetime: '2022-05-20T11:30',
-	},
-	{
-		id: 3,
-		name: 'Dries Vincent',
-		imageUrl:
-			'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		startDatetime: '2022-05-20T17:00',
-		endDatetime: '2022-05-20T18:30',
-	},
-	{
-		id: 4,
-		name: 'Leslie Alexander',
-		imageUrl:
-			'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		startDatetime: '2022-06-09T13:00',
-		endDatetime: '2022-06-09T14:30',
-	},
-	{
-		id: 5,
-		name: 'Michael Foster',
-		imageUrl:
-			'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		startDatetime: '2022-05-13T14:00',
-		endDatetime: '2022-05-13T14:30',
-	},
-]
+import { useState } from 'react'
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Example({ setCurrDate, getCurrentWeekDatesString }) {
+export default function Calendar({ currDate, setCurrDate }) {
 	let today = startOfToday()
-	let [selectedDay, setSelectedDay] = useState(today)
 	let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
 	let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
 
@@ -82,10 +35,6 @@ export default function Example({ setCurrDate, getCurrentWeekDatesString }) {
 		let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 })
 		setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
 	}
-
-	let selectedDayMeetings = meetings.filter((meeting) =>
-		isSameDay(parseISO(meeting.startDatetime), selectedDay)
-	)
 
 	return (
 		<div className=" bg-white mt-10 px-8 pt-8 pb-4   ">
@@ -110,7 +59,7 @@ export default function Example({ setCurrDate, getCurrentWeekDatesString }) {
 					<ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
 				</button>
 			</div>
-			<div className="  grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
+			<div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
 				<div>S</div>
 				<div>M</div>
 				<div>T</div>
@@ -119,42 +68,25 @@ export default function Example({ setCurrDate, getCurrentWeekDatesString }) {
 				<div>F</div>
 				<div>S</div>
 			</div>
-			<div className=" grid grid-cols-7 mt-2 text-sm">
+			<div className="grid grid-cols-7 mt-2 text-sm">
 				{days.map((day, dayIdx) => (
 					<div
 						key={day.toString()}
 						className={classNames(
 							dayIdx === 0 && colStartClasses[getDay(day)],
-							'p-1'
+							'py-1.5'
 						)}
 					>
 						<button
 							type="button"
 							onClick={() => {
-								setSelectedDay(day)
-								setCurrDate(days[dayIdx + 1])
-								getCurrentWeekDatesString(days[dayIdx + 1])
+								setCurrDate(day)
 							}}
+
 							className={classNames(
-								isEqual(day, selectedDay) && 'text-white',
-								!isEqual(day, selectedDay) &&
-								isToday(day) &&
-								'text-red-500',
-								!isEqual(day, selectedDay) &&
-								!isToday(day) &&
-								isSameMonth(day, firstDayCurrentMonth) &&
-								'text-gray-900',
-								!isEqual(day, selectedDay) &&
-								!isToday(day) &&
-								!isSameMonth(day, firstDayCurrentMonth) &&
-								'text-gray-400',
-								isEqual(day, selectedDay) && isToday(day) && 'bg-blue-500',
-								isEqual(day, selectedDay) &&
-								!isToday(day) &&
-								'bg-gray-900',
-								!isEqual(day, selectedDay) && 'hover:bg-gray-200',
-								(isEqual(day, selectedDay) || isToday(day)) &&
-								'font-semibold',
+								isEqual(currDate, day) && !isToday(day) && ' bg-blue-200 ',
+								isToday(day) && 'text-white bg-blue-500 ',
+								!isEqual(day, currDate) && !isToday(day) && ' hover:bg-gray-200 ',
 								'mx-auto flex h-8 w-8 items-center justify-center rounded-full'
 							)}
 						>
@@ -162,14 +94,6 @@ export default function Example({ setCurrDate, getCurrentWeekDatesString }) {
 								{format(day, 'd')}
 							</time>
 						</button>
-
-						<div className="w-1 h-1 mx-auto mt-1">
-							{meetings.some((meeting) =>
-								isSameDay(parseISO(meeting.startDatetime), day)
-							) && (
-									<div className="w-1 h-1 rounded-full bg-sky-500"></div>
-								)}
-						</div>
 					</div>
 				))}
 			</div>

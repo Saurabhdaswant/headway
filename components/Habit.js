@@ -1,15 +1,16 @@
+import { format } from 'date-fns';
 import React, { useState } from 'react'
 import { Check, Edit, Trash2, } from "react-feather";
 import DeleteHabit from './DeleteHabit';
 import EditHabit from './EditHabit';
 
 function Habit({ habits, setHabits, habit, currDate }) {
-	console.log(currDate);
 	const [showHabitEditOptions, setShowHabitEditOptions] = useState(false)
 	const [editHabit, setEditHabit] = useState(false)
 	const [deleteHabit, setDeleteHabit] = useState(false)
+	const formatedDate = format(currDate, "yy-MM-dd ")
 
-	if (habit.checkedOfForDates?.includes(currDate.toISOString().slice(0, 10))) {
+	if (habit.checkedOfForDates?.includes(formatedDate)) {
 		habit.isCompleted = true
 	} else {
 		habit.isCompleted = false
@@ -24,9 +25,9 @@ function Habit({ habits, setHabits, habit, currDate }) {
 				habits[idx].isCompleted = !habits[idx].isCompleted
 
 				if (habit.isCompleted !== false) {
-					habits[idx].checkedOfForDates = [...habit.checkedOfForDates, currDate.toISOString().slice(0, 10)]
+					habits[idx].checkedOfForDates = [...habit.checkedOfForDates, formatedDate]
 				} else {
-					const filtered = habit.checkedOfForDates.filter((date, _) => date !== currDate.toISOString().slice(0, 10))
+					const filtered = habit.checkedOfForDates.filter((date, _) => date !== formatedDate)
 					habits[idx].checkedOfForDates = filtered
 				}
 

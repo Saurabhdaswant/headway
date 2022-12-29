@@ -1,59 +1,34 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { eachDayOfInterval, endOfWeek, format, isEqual, startOfToday, startOfWeek } from 'date-fns'
 import {
-    BookOpen,
-    // Calendar,
-    Check,
     CheckCircle,
-    Layout,
     PlusSquare,
     TrendingUp,
-    User,
-    Wind,
     Zap,
 } from "react-feather";
+import { CalendarIcon, ChartBarIcon, CogIcon, UserCircleIcon } from "@heroicons/react/outline";
 
 import AddNewHabit from "../../components/AddNewHabit";
 import Head from "next/head";
 import Habit from "../../components/Habit";
-import HabitsCompletionChart from "../../components/HabitsCompletionChart";
-import days from "../../Data/Days";
-import months from "../../Data/Month";
 import Calendar from "../../components/Calendar"
-import { CalendarIcon, ChartBarIcon, ChartSquareBarIcon, CogIcon, UserCircleIcon, UserIcon } from "@heroicons/react/outline";
 
 function Habits() {
     const [habits, setHabits] = useState([])
-    const [week, setWeek] = useState([]);
     const times = ["all", "morning", "afternoon", "evening"];
     const [habitTime, setHabitTime] = useState("all")
     const [showAddNewHabitComponent, setShowAddNewHabitComponent] = useState(false);
-    const [currDate, setCurrDate] = useState(new Date())
-    const [currMonthIndex, setCurrMonthIndex] = useState(currDate.getMonth())
 
-    const year = currDate.getFullYear()
-    const today = `${months[currMonthIndex]} ${currDate.getDate()}`
-
-    const getCurrentWeekDatesString = (currDate) => {
-        let week = []
-
-        for (let i = 1; i <= 7; i++) {
-            let date = currDate.getDate() - currDate.getDay() + i
-            let yearMonthDateString = new Date(year, currMonthIndex, date).toISOString().slice(0, 10)
-            week.push(yearMonthDateString)
-        }
-
-        setWeek(week)
-    }
+    const today = startOfToday()
+    const [selectedDay, setSelectedDay] = useState(today)
+    const week = eachDayOfInterval({ start: startOfWeek(selectedDay), end: endOfWeek(selectedDay) })
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             setHabits(JSON.parse(localStorage.getItem("Habits")))
         }
-        getCurrentWeekDatesString(currDate)
     }, [])
-
-
 
     const SideBar = () => {
         return <div className=" z-50 w-[15%] bg-white  ">
@@ -146,7 +121,7 @@ function Habits() {
                 <div className="flex justify-between items-end">
                     <div className=" space-y-2 ">
                         <p className="text-5xl font-bold">Today</p>
-                        <p className="text-gray-400 text-xl">{today}</p>
+                        <p className="text-gray-400 text-xl">{format(selectedDay, "MMMM dd")}</p>
                     </div>
                     <button onClick={() => setShowAddNewHabitComponent(true)} className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white">
                         <PlusSquare />
@@ -155,23 +130,21 @@ function Habits() {
                 </div>
 
                 <div className="bg-white flex items-center justify-evenly h-20 rounded-md   my-8 ">
-                    {week.map((yearMonthDateString, idx) => {
-                        const date = new Date(yearMonthDateString).getDate()
-                        const day = days[new Date(yearMonthDateString).getDay()]
+                    {week.map((day) => {
                         return (
                             <div
-                                onClick={() => setCurrDate(new Date(yearMonthDateString))}
-                                key={idx}
+                                onClick={() => setSelectedDay(day)}
+                                key={day.toString()}
                                 className="text-center space-y-2 cursor-pointer "
                             >
                                 <p className=" text-xs capitalize text-gray-400 ">
-                                    {day}
+                                    {format(day, "eee")}
                                 </p>
                                 <p
-                                    className={`font-bold text-lg ${currDate.getDate() === date && "text-[#007BFF]"
+                                    className={`font-bold text-lg ${isEqual(selectedDay, day) && "text-[#007BFF]"
                                         } `}
                                 >
-                                    {date}
+                                    {format(day, "d")}
                                 </p>
                             </div>
                         );
@@ -194,23 +167,17 @@ function Habits() {
                     })}
                 </div>
                 {
-                    habits?.map((habit, idx) => {
-                        return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={currDate} />
-                    })
-                }
-
-                {/* {
-                    habitTime === times[0] ? habits?.map((habit, idx) => {
-                        return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} />
-                    }) :
+                    habits.length > 0 ? habitTime === times[0] ? habits?.map((habit, idx) => {
+                        return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
+                    }) : habits?.filter(habit => habit.getDoneIn === habitTime).length > 0 ?
                         habits?.filter(habit => habit.getDoneIn === habitTime)?.map((habit, idx) => {
-                            return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} />
-                        })} */}
+                            return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
+                        }) : <p>No habits in {habitTime}!</p> : <p>No habits today!</p>
+                }
             </div>
             <div>
                 <HabitsStats />
-                <Calendar setCurrDate={setCurrDate} getCurrentWeekDatesString={getCurrentWeekDatesString} />
-                {/* <HabitsCompletionChart /> */}
+                <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
                 {showAddNewHabitComponent ?
                     <AddNewHabit habits={habits} setHabits={setHabits} setShowAddNewHabitComponent={setShowAddNewHabitComponent} /> : null}
             </div>
