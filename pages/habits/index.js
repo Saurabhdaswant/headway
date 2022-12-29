@@ -120,8 +120,16 @@ function Habits() {
             <div className=" w-[60%]  ">
                 <div className="flex justify-between items-end">
                     <div className=" space-y-2 ">
-                        <p className="text-5xl font-bold">Today</p>
-                        <p className="text-gray-400 text-xl">{format(selectedDay, "MMMM dd")}</p>
+                        {
+                            isEqual(selectedDay, today) ?
+                                <>
+                                    <p className="text-5xl font-bold">Today</p>
+                                    <p className="text-gray-400 text-xl">{format(selectedDay, "MMMM dd")}</p>
+                                </> : <>
+                                    <p className="text-5xl font-bold">{format(selectedDay, "MMMM dd")}</p>
+                                    <p className="text-gray-400 text-xl">{format(selectedDay, "eeee")}</p>
+                                </>
+                        }
                     </div>
                     <button onClick={() => setShowAddNewHabitComponent(true)} className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white">
                         <PlusSquare />
