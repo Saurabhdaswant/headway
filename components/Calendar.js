@@ -17,8 +17,7 @@ function classNames(...classes) {
 }
 
 export default function Calendar({ currDate, setCurrDate }) {
-	let today = startOfToday()
-	let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
+	let [currentMonth, setCurrentMonth] = useState(format(currDate, 'MMM-yyyy'))
 	let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
 
 	let days = eachDayOfInterval({
