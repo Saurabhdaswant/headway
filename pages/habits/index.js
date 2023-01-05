@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { eachDayOfInterval, endOfWeek, format, isEqual, startOfToday, startOfWeek } from 'date-fns'
 import {
     CheckCircle,
+    Clipboard,
     PlusSquare,
     TrendingUp,
     Zap,
 } from "react-feather";
-import { CalendarIcon, ChartBarIcon, CogIcon, UserCircleIcon } from "@heroicons/react/outline";
 
 import AddNewHabit from "../../components/AddNewHabit";
 import Head from "next/head";
@@ -17,10 +16,9 @@ import Sidebar from "../../components/Sidebar";
 
 function Habits() {
     const [habits, setHabits] = useState([])
-    const times = ["all", "morning", "afternoon", "evening"];
-    const [habitTime, setHabitTime] = useState("all")
+    const timesOfDay = ["all", "morning", "afternoon", "evening"];
+    const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("all")
     const [showAddNewHabitComponent, setShowAddNewHabitComponent] = useState(false);
-
     const today = startOfToday()
     const [selectedDay, setSelectedDay] = useState(today)
     const week = eachDayOfInterval({ start: startOfWeek(selectedDay), end: endOfWeek(selectedDay) })
@@ -81,6 +79,44 @@ function Habits() {
         </div>
     }
 
+    const byHabitTime = habit => habit.getDoneIn === selectedTimeOfDay
+
+    const NoHabits = ({ text }) => {
+
+        return <div className=" flex flex-col gap-4 items-center " >
+            <Clipboard className="w-20 h-20" />
+            <p className=" text-gray-400 w-full text-center">{text}</p>
+        </div>
+    }
+
+    const Habits = () => {
+        return <>
+            <div className=" flex items-center gap-4 my-8   ">
+                {timesOfDay.map((time, idx) => {
+                    return (
+                        <div
+                            onClick={() => {
+                                setSelectedTimeOfDay(time)
+                            }}
+                            key={idx}
+                            className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${selectedTimeOfDay === time ? "bg-[#9fc6eb]   text-[#091e32]" : "bg-[#EDEDED]    text-gray-400"}`}
+                        >
+                            {time}
+                        </div>
+                    );
+                })}
+            </div>
+            {
+                habits.length > 0 ? selectedTimeOfDay === timesOfDay[0] ? habits?.map((habit, idx) => {
+                    return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
+                }) : habits?.filter(byHabitTime).length > 0 ?
+                    habits?.filter(byHabitTime)?.map((habit, idx) => {
+                        return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
+                    }) : <NoHabits text={`No habits in ${selectedTimeOfDay}!`} /> : <NoHabits text="No habits today!" />
+            }
+        </>
+    }
+
     const Ritual = () => {
         return <div className=" mx-auto w-[70%] flex py-8    gap-8  ">
             <div className=" w-[60%]  ">
@@ -125,29 +161,7 @@ function Habits() {
                     })}
                 </div>
 
-                <div className=" flex items-center gap-4 my-8   ">
-                    {times.map((time, idx) => {
-                        return (
-                            <div
-                                onClick={() => {
-                                    setHabitTime(time)
-                                }}
-                                key={idx}
-                                className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${habitTime === time ? "bg-[#9fc6eb]   text-[#091e32]" : "bg-[#EDEDED]    text-gray-400"}`}
-                            >
-                                {time}
-                            </div>
-                        );
-                    })}
-                </div>
-                {
-                    habits.length > 0 ? habitTime === times[0] ? habits?.map((habit, idx) => {
-                        return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
-                    }) : habits?.filter(habit => habit.getDoneIn === habitTime).length > 0 ?
-                        habits?.filter(habit => habit.getDoneIn === habitTime)?.map((habit, idx) => {
-                            return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
-                        }) : <p>No habits in {habitTime}!</p> : <p>No habits today!</p>
-                }
+                <Habits />
             </div>
             <div>
                 <HabitsStats />
