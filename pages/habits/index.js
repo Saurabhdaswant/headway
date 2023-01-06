@@ -107,7 +107,7 @@ function Habits() {
                 })}
             </div>
             {
-                habits.length > 0 ? selectedTimeOfDay === timesOfDay[0] ? habits?.map((habit, idx) => {
+                habits?.length > 0 ? selectedTimeOfDay === timesOfDay[0] ? habits?.map((habit, idx) => {
                     return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
                 }) : habits?.filter(byHabitTime).length > 0 ?
                     habits?.filter(byHabitTime)?.map((habit, idx) => {
