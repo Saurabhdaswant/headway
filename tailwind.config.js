@@ -24,6 +24,5 @@ module.exports = {
     pattern: /(bg|text|border)-(pinkSherbet|mediumPurple|tealDeer|khaki|babyBlue|spiroDisco)/
   }
   ],
-  plugins: [],
-
+  plugins: [require("tailwind-scrollbar-hide")],
 }

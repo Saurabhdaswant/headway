@@ -105,14 +105,16 @@ function Habits() {
                     );
                 })}
             </div>
-            {
-                habits?.length > 0 ? selectedTimeOfDay === timesOfDay[0] ? habits?.map((habit, idx) => {
-                    return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
-                }) : habits?.filter(byTime).length > 0 ?
-                    habits?.filter(byTime)?.map((habit, idx) => {
+            <div className=" scrollbar-hide h-[44vh]  overflow-auto ">
+                {
+                    habits?.length > 0 ? selectedTimeOfDay === timesOfDay[0] ? habits?.map((habit, idx) => {
                         return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
-                    }) : <NoHabits text={`No habits in ${selectedTimeOfDay}!`} /> : <NoHabits text="No habits today!" />
-            }
+                    }) : habits?.filter(byTime).length > 0 ?
+                        habits?.filter(byTime)?.map((habit, idx) => {
+                            return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
+                        }) : <NoHabits text={`No habits in ${selectedTimeOfDay}!`} /> : <NoHabits text="No habits today!" />
+                }
+            </div>
         </>
     }
 

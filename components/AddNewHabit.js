@@ -49,7 +49,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 						className=" cursor-pointer "
 					/>
 				</div>
-				<div className=" flex flex-col justify-between  h-full ">
+				<div className=" flex flex-col h-full ">
 					<div className=" space-y-8 ">
 						<div className="flex flex-col  space-y-2">
 							<label
@@ -191,7 +191,7 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 							}
 						}}
 						type="submit"
-						className=" w-full my-12  font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 "
+						className=" w-full my-8 font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 "
 					>
 						Submit
 					</button>
