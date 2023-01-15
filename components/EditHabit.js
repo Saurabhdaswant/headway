@@ -22,7 +22,7 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 					<h1 className=' text-2xl ' >Edit Habit</h1>
 					<X onClick={() => setEditHabit(false)} className=" cursor-pointer " />
 				</div>
-				<div className=' flex flex-col justify-between  h-full ' >
+				<div className=' flex flex-col   h-full ' >
 					<div className=' space-y-8 '>
 						<div className="flex flex-col  space-y-2" >
 							<label htmlFor="habitName" className="font-semibold"  >Habit</label>
@@ -105,7 +105,7 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 						}
 						setHabits([...habits])
 						setEditHabit(false)
-					}} type="submit" className=" w-full my-12  font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 ">Edit Habit</button>
+					}} type="submit" className=" w-full my-8 font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 ">Edit Habit</button>
 				</div>
 			</div>
 		</div>
