@@ -5,7 +5,15 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 	const doitat = ["anytime", "morning", "afternoon", "evening"]
 	const colors = ["pinkSherbet", "mediumPurple", "tealDeer", "khaki", "babyBlue", "spiroDisco",]
 	const [currHabit, setCurrHabit] = useState(habit)
-
+	const weekDays = [
+		"monday",
+		"tuesday",
+		"wednesday",
+		"thursday",
+		"friday",
+		"saturday",
+		"sunday",
+	];
 
 	return (
 		<div className=' fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ' >
@@ -21,6 +29,47 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 							<input onChange={(e) => {
 								setCurrHabit({ ...currHabit, name: e.target.value })
 							}} value={currHabit.name} name="habitName" id="habitName" className=" outline-none focus:border-[#0F85F2]  font-medium border-2 border-zinc-200   px-4 py-2 rounded " />
+						</div>
+						<div className="flex flex-col space-y-2 " >
+							<p className="font-semibold"  >Repeat Habit days </p>
+							<div className='space-y-4' >
+								<div className=' grid grid-cols-7 gap-2 ' >
+									{
+										weekDays.map((day, idx) => {
+											return <div onClick={() => {
+												const newRepeatedHabitDays = [...currHabit.repeatHabitDays, day]
+												setCurrHabit({
+													...currHabit,
+													repeatHabitDays: [...new Set(newRepeatedHabitDays)]
+												});
+											}} key={idx} className={` text-sm  ${currHabit.repeatHabitDays.includes(day)
+												? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+												: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+												} cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded `}>{day.slice(0, 3)}</div>
+										})
+									}
+								</div>
+								<div className=' grid grid-cols-2 gap-6 ' >
+									<div onClick={() => {
+										setCurrHabit({
+											...currHabit,
+											repeatHabitDays: weekDays.splice(0, 5)
+										});
+									}} className={`  ${false
+										? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+										: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+										} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>Week days</div>
+									<div onClick={() => {
+										setCurrHabit({
+											...currHabit,
+											repeatHabitDays: weekDays
+										});
+									}} className={`  ${false
+										? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+										: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+										} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>Every day</div>
+								</div>
+							</div>
 						</div>
 						<div className="flex flex-col space-y-2 " >
 							<p className="font-semibold"  >Do it at</p>
