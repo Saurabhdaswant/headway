@@ -42,7 +42,7 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 													...currHabit,
 													repeatHabitDays: [...new Set(newRepeatedHabitDays)]
 												});
-											}} key={idx} className={` text-sm  ${currHabit.repeatHabitDays.includes(day)
+											}} key={idx} className={` text-sm  ${currHabit.repeatHabitDays?.includes(day)
 												? "bg-[#0F85F2] border-[#0F85F2]  text-white "
 												: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
 												} cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded `}>{day.slice(0, 3)}</div>
