@@ -15,7 +15,7 @@ import Habit from "../../components/Habit";
 import Calendar from "../../components/Calendar";
 import Sidebar from "../../components/Sidebar";
 import HabitsStats from "../../components/HabitsStats";
-import { doitat } from "../constants";
+import { doitat } from "../../components/constants";
 
 function Habits() {
     const [habits, setHabits] = useState([]);

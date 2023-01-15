@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { X } from "react-feather";
-import { startOfToday, format } from "date-fns";
-import { doitat } from "../pages/constants";
+import { startOfToday } from "date-fns";
+import { doitat } from "./constants";
 
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 	const id = uuidv4();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { X } from 'react-feather'
-import { doitat } from '../pages/constants';
+import { doitat } from "./constants";
 
 function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 	const colors = ["pinkSherbet", "mediumPurple", "tealDeer", "khaki", "babyBlue", "spiroDisco",]
