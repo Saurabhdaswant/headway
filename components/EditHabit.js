@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { X } from 'react-feather'
+import { doitat } from '../pages/constants';
 
 function EditHabit({ habits, setHabits, habit, setEditHabit }) {
-	const doitat = ["anytime", "morning", "afternoon", "evening"]
 	const colors = ["pinkSherbet", "mediumPurple", "tealDeer", "khaki", "babyBlue", "spiroDisco",]
 	const [currHabit, setCurrHabit] = useState(habit)
 	const weekDays = [
