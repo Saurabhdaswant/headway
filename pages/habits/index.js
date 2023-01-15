@@ -29,7 +29,6 @@ function Habits() {
         }
     }, [])
 
-
     const HabitsStats = () => {
         return <div className="grid grid-cols-2 gap-6 p-6 bg-white rounded-md mt-10">
             <div className="flex items-center gap-2 ">
@@ -79,7 +78,7 @@ function Habits() {
         </div>
     }
 
-    const byHabitTime = habit => habit.getDoneIn === selectedTimeOfDay
+    const byTime = habit => habit.getDoneIn === selectedTimeOfDay
 
     const NoHabits = ({ text }) => {
 
@@ -109,8 +108,8 @@ function Habits() {
             {
                 habits?.length > 0 ? selectedTimeOfDay === timesOfDay[0] ? habits?.map((habit, idx) => {
                     return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
-                }) : habits?.filter(byHabitTime).length > 0 ?
-                    habits?.filter(byHabitTime)?.map((habit, idx) => {
+                }) : habits?.filter(byTime).length > 0 ?
+                    habits?.filter(byTime)?.map((habit, idx) => {
                         return <Habit key={idx} habits={habits} setHabits={setHabits} habit={habit} currDate={selectedDay} />
                     }) : <NoHabits text={`No habits in ${selectedTimeOfDay}!`} /> : <NoHabits text="No habits today!" />
             }

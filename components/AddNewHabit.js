@@ -5,6 +5,15 @@ import { startOfToday, format } from "date-fns";
 
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 	const id = uuidv4();
+	const weekDays = [
+		"monday",
+		"tuesday",
+		"wednesday",
+		"thursday",
+		"friday",
+		"saturday",
+		"sunday",
+	];
 	const doitat = ["anytime", "morning", "afternoon", "evening"];
 	const colors = [
 		"pinkSherbet",
@@ -24,8 +33,11 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 		color: "",
 		checkedOfForDates: [],
 		id,
-		createdDate: format(startOfToday(), "yy-MM-dd ")
+		createdDate: startOfToday(),
+		repeatHabitDays: []
 	});
+
+	console.log(habit.repeatHabitDays);
 
 	return (
 		<div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
@@ -63,6 +75,47 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 										: error ? "border-red-500" : null
 									}`}
 							/>
+						</div>
+						<div className="flex flex-col space-y-2 " >
+							<p className="font-semibold"  >Repeat Habit days </p>
+							<div className='space-y-4' >
+								<div className=' grid grid-cols-7 gap-2 ' >
+									{
+										weekDays.map((day, idx) => {
+											return <div onClick={() => {
+												const newRepeatedHabitDays = [...habit.repeatHabitDays, day]
+												setHabit({
+													...habit,
+													repeatHabitDays: [...new Set(newRepeatedHabitDays)]
+												});
+											}} key={idx} className={` text-sm  ${habit.repeatHabitDays.includes(day)
+												? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+												: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+												} cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded `}>{day.slice(0, 3)}</div>
+										})
+									}
+								</div>
+								<div className=' grid grid-cols-2 gap-6 ' >
+									<div onClick={() => {
+										setHabit({
+											...habit,
+											repeatHabitDays: weekDays.splice(0, 5)
+										});
+									}} className={`  ${false
+										? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+										: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+										} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>Week days</div>
+									<div onClick={() => {
+										setHabit({
+											...habit,
+											repeatHabitDays: weekDays
+										});
+									}} className={`  ${false
+										? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+										: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+										} cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}>Every day</div>
+								</div>
+							</div>
 						</div>
 						<div className="flex flex-col space-y-2 ">
 							<p className="font-semibold">Do it at</p>
