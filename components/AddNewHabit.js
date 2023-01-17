@@ -2,30 +2,11 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { X } from "react-feather";
 import { startOfToday } from "date-fns";
-import { doitat } from "./constants";
+import { colors, doitat, weekDays } from "./constants";
 
 function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 	const id = uuidv4();
-	const weekDays = [
-		"monday",
-		"tuesday",
-		"wednesday",
-		"thursday",
-		"friday",
-		"saturday",
-		"sunday",
-	];
-	const colors = [
-		"pinkSherbet",
-		"mediumPurple",
-		"tealDeer",
-		"khaki",
-		"babyBlue",
-		"spiroDisco",
-	];
-
 	const [error, setError] = useState(false);
-
 	const [habit, setHabit] = useState({
 		name: "",
 		isCompleted: false,
@@ -36,8 +17,6 @@ function AddNewHabit({ habits, setHabits, setShowAddNewHabitComponent }) {
 		createdDate: startOfToday(),
 		repeatHabitDays: []
 	});
-
-	console.log(habit.repeatHabitDays);
 
 	return (
 		<div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">

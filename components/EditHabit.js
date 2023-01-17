@@ -1,19 +1,9 @@
 import React, { useState } from 'react'
 import { X } from 'react-feather'
-import { doitat } from "./constants";
+import { colors, doitat, weekDays } from "./constants";
 
 function EditHabit({ habits, setHabits, habit, setEditHabit }) {
-	const colors = ["pinkSherbet", "mediumPurple", "tealDeer", "khaki", "babyBlue", "spiroDisco",]
 	const [currHabit, setCurrHabit] = useState(habit)
-	const weekDays = [
-		"monday",
-		"tuesday",
-		"wednesday",
-		"thursday",
-		"friday",
-		"saturday",
-		"sunday",
-	];
 
 	return (
 		<div className=' fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ' >
