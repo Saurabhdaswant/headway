@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <main className="flex flex-col items-center gap-4 max-w-5xl my-10 mx-auto " >
         <h1 className=" font-black text-6xl text-center  " >Empower yourself to achieve greatness with <p className="underline decoration-blue-400 ">Headway</p></h1>
-        <Link className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-14 my-8 py-3 rounded text-lg text-white" href="/HabitTracker">Achieve greatness!</Link>
+        <Link className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-14 my-8 py-3 rounded text-lg text-white" href="/app">Achieve greatness!</Link>
       </main>
     </div>
   );
