@@ -53,10 +53,10 @@ const Habits = ({ selectedDay, habits, setHabits }) => {
             <div className=" scrollbar-hide h-[44vh]  overflow-auto ">
                 {habits?.length > 0 ? (
                     selectedTimeOfDay === doitat[0] ? (
-                        habits?.map((habit, idx) => {
+                        habits?.map((habit) => {
                             return (
                                 <Habit
-                                    key={idx}
+                                    key={habit.id}
                                     habits={habits}
                                     setHabits={setHabits}
                                     habit={habit}
@@ -65,10 +65,10 @@ const Habits = ({ selectedDay, habits, setHabits }) => {
                             );
                         })
                     ) : habits?.filter(byTime).length > 0 ? (
-                        habits?.filter(byTime)?.map((habit, idx) => {
+                        habits?.filter(byTime)?.map((habit) => {
                             return (
                                 <Habit
-                                    key={idx}
+                                    key={habit.id}
                                     habits={habits}
                                     setHabits={setHabits}
                                     habit={habit}
