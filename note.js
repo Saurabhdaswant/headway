@@ -3,8 +3,11 @@
 // fix the filtering of habits timing thing ✅
 // update the header of today component as per design  ✅
 // dont reload the whole app just while updating next month ✅
-// fix the filtering habit bug
 // refactor using clean code
+// - no nested components
+// - no Rendering FOR loops with a variable index
+// - Having large component trees inside the same component
+// fix the filtering habit bug
 // complete the next.js course from codeevolution
 // make it mobile / tab responsive
 // complete the stats and chart component from design
