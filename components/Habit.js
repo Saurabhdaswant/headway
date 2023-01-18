@@ -2,18 +2,42 @@ import { format } from 'date-fns';
 import React, { useState } from 'react'
 import { Check, Edit, Trash2, } from "react-feather";
 import DeleteHabit from './DeleteHabit';
-import EditHabit from './EditHabit';
+import HabitForm from './HabitForm';
 
 function Habit({ habits, setHabits, habit, currDate }) {
 	const [showHabitEditOptions, setShowHabitEditOptions] = useState(false)
 	const [editHabit, setEditHabit] = useState(false)
 	const [deleteHabit, setDeleteHabit] = useState(false)
+	const [error, setError] = useState(false)
 	const formatedDate = format(currDate, "yy-MM-dd ")
 
 	if (habit.checkedOfForDates?.includes(formatedDate)) {
 		habit.isCompleted = true
 	} else {
 		habit.isCompleted = false
+	}
+
+	const handleSubmit = (currHabit) => {
+
+
+		if (currHabit.name.trim().length === 0) {
+			setError(true);
+		} else {
+			setError(false);
+		}
+
+		console.log(error)
+
+		if (currHabit.name.trim().length !== 0) {
+			const habitIndex = habits.findIndex((habit, _) => habit.id === currHabit.id)
+			habits[habitIndex] = currHabit
+			if (typeof window !== "undefined") {
+				localStorage.setItem("Habits", JSON.stringify([...habits]))
+			}
+			setHabits([...habits])
+			setEditHabit(false)
+		}
+
 	}
 
 	return (
@@ -55,7 +79,7 @@ function Habit({ habits, setHabits, habit, currDate }) {
 					</div>}
 			</div>
 			{editHabit ?
-				<EditHabit habits={habits} setHabits={setHabits} habit={habit} setEditHabit={setEditHabit} /> : null}
+				<HabitForm formTitle="Edit Habit" habits={habits} setHabits={setHabits} habit={habit} setShowHabitForm={setEditHabit} handleSubmit={handleSubmit} error={error} /> : null}
 			{deleteHabit ?
 				<DeleteHabit habits={habits} setHabits={setHabits} habitId={habit.id} setDeleteHabit={setDeleteHabit} /> : null}
 		</div>

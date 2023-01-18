@@ -8,14 +8,15 @@ import {
     startOfWeek,
 } from "date-fns";
 import { Clipboard, PlusSquare } from "react-feather";
+import { v4 as uuidv4 } from 'uuid';
 
-import AddNewHabit from "../../components/AddNewHabit";
 import Head from "next/head";
 import Habit from "../../components/Habit";
 import Calendar from "../../components/Calendar";
 import Sidebar from "../../components/Sidebar";
 import HabitsStats from "../../components/HabitsStats";
-import { doitat } from "../../components/constants";
+import { colors, doitat } from "../../components/constants";
+import HabitForm from "../../components/HabitForm";
 
 const NoHabits = ({ text }) => {
     return (
@@ -159,12 +160,43 @@ const HabitTracker = () => {
         useState(false);
     const today = startOfToday();
     const [selectedDay, setSelectedDay] = useState(today);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             setHabits(JSON.parse(localStorage.getItem("Habits")));
         }
     }, []);
+
+    const handleSubmit = (currHabit) => {
+        if (currHabit.name.trim().length === 0) {
+            setError(true);
+        } else {
+            setError(false);
+        }
+        if (currHabit.name.trim().length !== 0) {
+            if (currHabit.color === "") {
+                var randomColor = colors[Math.floor(Math.random() * colors.length)];
+                currHabit.color = randomColor
+            }
+
+            if (currHabit.getDoneIn === "") {
+                currHabit.getDoneIn = "anytime"
+            }
+
+            if (typeof window !== "undefined") {
+                localStorage.setItem(
+                    "Habits",
+                    JSON.stringify([
+                        ...(habits || []),
+                        currHabit,
+                    ])
+                );
+            }
+            setHabits([...(habits || []), currHabit]);
+            setShowAddNewHabitComponent(false);
+        }
+    }
 
     return (
         <div className=" mx-auto w-[70%] flex py-8    gap-8  ">
@@ -184,13 +216,33 @@ const HabitTracker = () => {
             <div>
                 <HabitsStats />
                 <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
-                {showAddNewHabitComponent ? (
+                {/* {showAddNewHabitComponent ? (
                     <AddNewHabit
                         habits={habits}
                         setHabits={setHabits}
                         setShowAddNewHabitComponent={
                             setShowAddNewHabitComponent
                         }
+                    />
+                ) : null} */}
+                {showAddNewHabitComponent ? (
+                    <HabitForm
+                        formTitle="Add New Habit"
+                        habit={{
+                            name: "",
+                            isCompleted: false,
+                            getDoneIn: "",
+                            color: "",
+                            checkedOfForDates: [],
+                            id: uuidv4(),
+                            createdDate: startOfToday(),
+                            repeatHabitDays: []
+                        }}
+                        setShowHabitForm={
+                            setShowAddNewHabitComponent
+                        }
+                        handleSubmit={handleSubmit}
+                        error={error}
                     />
                 ) : null}
             </div>

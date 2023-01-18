@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { X } from 'react-feather'
 import { colors, doitat, weekDays } from "./constants";
 
-function EditHabit({ habits, setHabits, habit, setEditHabit }) {
+function HabitForm({ formTitle, habit, setShowHabitForm, handleSubmit, error }) {
 	const [currHabit, setCurrHabit] = useState(habit)
 
 	return (
 		<div className=' fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ' >
 			<div className='p-8 absolute space-y-8 top-0 right-0 w-[30%] bg-white rounded-md z-50 h-full ' >
 				<div className='flex justify-between' >
-					<h1 className=' text-2xl ' >Edit Habit</h1>
-					<X onClick={() => setEditHabit(false)} className=" cursor-pointer " />
+					<h1 className=' text-2xl ' >{formTitle}</h1>
+					<X onClick={() => setShowHabitForm(false)} className=" cursor-pointer " />
 				</div>
 				<div className=' flex flex-col   h-full ' >
 					<div className=' space-y-8 '>
@@ -18,21 +18,26 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 							<label htmlFor="habitName" className="font-semibold"  >Habit</label>
 							<input onChange={(e) => {
 								setCurrHabit({ ...currHabit, name: e.target.value })
-							}} value={currHabit.name} name="habitName" id="habitName" className=" outline-none focus:border-[#0F85F2]  font-medium border-2 border-zinc-200   px-4 py-2 rounded " />
+							}} value={currHabit.name} name="habitName" id="habitName" className={`
+							outline-none focus:border-[#0F85F2]  font-medium 
+							border-2    px-4 py-2 rounded ${currHabit.name.length > 0 && error
+									? "border-zinc-200"
+									: error ? "border-red-500" : null
+								}`} />
 						</div>
 						<div className="flex flex-col space-y-2 " >
 							<p className="font-semibold"  >Repeat Habit days </p>
 							<div className='space-y-4' >
 								<div className=' grid grid-cols-7 gap-2 ' >
 									{
-										weekDays.map((day, idx) => {
+										weekDays.map((day) => {
 											return <div onClick={() => {
 												const newRepeatedHabitDays = [...currHabit.repeatHabitDays, day]
 												setCurrHabit({
 													...currHabit,
 													repeatHabitDays: [...new Set(newRepeatedHabitDays)]
 												});
-											}} key={idx} className={` text-sm  ${currHabit.repeatHabitDays?.includes(day)
+											}} key={day} className={` text-sm  ${currHabit.repeatHabitDays?.includes(day)
 												? "bg-[#0F85F2] border-[#0F85F2]  text-white "
 												: "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
 												} cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded `}>{day.slice(0, 3)}</div>
@@ -43,7 +48,7 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 									<div onClick={() => {
 										setCurrHabit({
 											...currHabit,
-											repeatHabitDays: weekDays.splice(0, 5)
+											repeatHabitDays: [...weekDays].splice(0, 5)
 										});
 									}} className={`  ${false
 										? "bg-[#0F85F2] border-[#0F85F2]  text-white "
@@ -87,19 +92,11 @@ function EditHabit({ habits, setHabits, habit, setEditHabit }) {
 							</div>
 						</div>
 					</div>
-					<button onClick={() => {
-						const habitIndex = habits.findIndex((habit, _) => habit.id === currHabit.id)
-						habits[habitIndex] = currHabit
-						if (typeof window !== "undefined") {
-							localStorage.setItem("Habits", JSON.stringify([...habits]))
-						}
-						setHabits([...habits])
-						setEditHabit(false)
-					}} type="submit" className=" w-full my-8 font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 ">Edit Habit</button>
+					<button onClick={() => handleSubmit(currHabit)} type="submit" className=" w-full my-8 font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 ">{formTitle}</button>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-export default EditHabit
+export default HabitForm
