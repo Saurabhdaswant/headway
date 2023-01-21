@@ -37,9 +37,7 @@ const Habits = ({ selectedDay, habits, setHabits }) => {
                 {doitat.map((time, idx) => {
                     return (
                         <div
-                            onClick={() => {
-                                setSelectedTimeOfDay(time);
-                            }}
+                            onClick={() => setSelectedTimeOfDay(time)}
                             key={idx}
                             className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${selectedTimeOfDay === time
                                 ? "bg-[#9fc6eb]   text-[#091e32]"
@@ -216,15 +214,6 @@ const HabitTracker = () => {
             <div>
                 <HabitsStats />
                 <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
-                {/* {showAddNewHabitComponent ? (
-                    <AddNewHabit
-                        habits={habits}
-                        setHabits={setHabits}
-                        setShowAddNewHabitComponent={
-                            setShowAddNewHabitComponent
-                        }
-                    />
-                ) : null} */}
                 {showAddNewHabitComponent ? (
                     <HabitForm
                         formTitle="Add New Habit"

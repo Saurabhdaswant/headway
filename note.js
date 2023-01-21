@@ -20,8 +20,7 @@
 
 
 
-// head lines :
-
+//? head lines :
 // "Empower yourself to achieve greatness with Headway"
 // "Unlock your true potential with Headway's personal growth tools"
 // "Transform your life one step at a time with Headway"
@@ -38,3 +37,20 @@
 
     // const byDate = habit => isBefore(selectedDay, new Date(habit.createdDate))
     // const byDay = habit => !habit.repeatHabitDays.includes(selectedDay)
+
+
+
+
+
+//! main stuff
+// app
+// Habit
+// HabitForm
+
+//? least concern
+// calendar
+// constants
+// deleteHabit
+// HabitsCompletionChart
+// HabitsStats
+// Sidebar
