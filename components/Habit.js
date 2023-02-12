@@ -1,6 +1,7 @@
-import { format } from "date-fns";
+import { format, getDay, isBefore } from "date-fns";
 import React, { useState } from "react";
 import { Check, Edit, Trash2 } from "react-feather";
+import days from "../Data/Days";
 import DeleteHabit from "./DeleteHabit";
 import HabitForm from "./HabitForm";
 
@@ -10,6 +11,15 @@ function Habit({ habits, setHabits, habit, currDate }) {
 	const [deleteHabit, setDeleteHabit] = useState(false);
 	const [error, setError] = useState(false);
 	const formatedDate = format(currDate, "yy-MM-dd ");
+	const currentDay = days[getDay(currDate)]
+
+	if(isBefore(currDate , new Date(habit.createdDate) )){
+		return
+	}
+
+	if(!habit.repeatHabitDays.includes(currentDay)){
+		return 
+	}
 
 	if (habit.checkedOfForDates?.includes(formatedDate)) {
 		habit.isCompleted = true;

@@ -15,7 +15,7 @@ import Habit from "../../components/Habit";
 import Calendar from "../../components/Calendar";
 import Sidebar from "../../components/Sidebar";
 import HabitsStats from "../../components/HabitsStats";
-import { colors, doitat } from "../../components/constants";
+import { colors, doitat, weekDays } from "../../components/constants";
 import HabitForm from "../../components/HabitForm";
 
 const NoHabits = ({ text }) => {
@@ -220,12 +220,12 @@ const HabitTracker = () => {
                         habit={{
                             name: "",
                             isCompleted: false,
-                            getDoneIn: "",
+                            getDoneIn: "anytime",
                             color: "",
                             checkedOfForDates: [],
                             id: uuidv4(),
                             createdDate: startOfToday(),
-                            repeatHabitDays: []
+                            repeatHabitDays: weekDays
                         }}
                         setShowHabitForm={
                             setShowAddNewHabitComponent
