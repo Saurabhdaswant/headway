@@ -15,6 +15,7 @@ import HabitsStats from "./HabitsStats";
 import Habits from "./Habits";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useToggle from "../hooks/useToggle";
+import { v4 as uuidv4 } from 'uuid';
 
 const Header = ({ selectedDay, today, toggleHabitForm }) => {
   return (
@@ -82,6 +83,7 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
 };
 
 export default function HabitTracker() {
+
   const { habits, setHabits } = useContext(HabitsContext);
   const [showHabitForm, toggleHabitForm] = useToggle(false);
   const today = startOfToday();
@@ -89,8 +91,10 @@ export default function HabitTracker() {
   const [error, setError] = useState(false);
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
 
+
+
   const newHabit = {
-    id: crypto.randomUUID(),
+    id: uuidv4(),
     name: "",
     isCompleted: false,
     getDoneIn: "anytime",

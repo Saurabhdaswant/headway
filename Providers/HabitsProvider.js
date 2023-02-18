@@ -10,7 +10,7 @@ export default function HabitsProvider({ children }) {
     if (typeof window !== "undefined") {
       setHabits(JSON.parse(localStorage.getItem("Habits")));
     }
-  }, [habits]);
+  }, []);
 
   return (
     <HabitsContext.Provider value={{ habits, setHabits }}>
