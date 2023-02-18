@@ -5,7 +5,7 @@ import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
 function HabitForm({
   formTitle,
   habit,
-  setShowHabitForm,
+  toggleHabitForm,
   handleSubmit,
   error,
 }) {
@@ -34,7 +34,7 @@ function HabitForm({
         <div className="flex justify-between">
           <h1 className=" text-2xl ">{formTitle}</h1>
           <X
-            onClick={() => setShowHabitForm(false)}
+            onClick={toggleHabitForm}
             className=" cursor-pointer "
           />
         </div>
