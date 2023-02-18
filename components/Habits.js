@@ -4,7 +4,6 @@ import Habit from "./Habit";
 import { getDay, isAfter, isToday } from "date-fns";
 import days from "../Data/Days";
 import { HabitsContext } from "../Providers/HabitsProvider";
-import { doitat } from "./constants";
 
 const NoHabits = ({ children }) => {
   return (
@@ -19,7 +18,7 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
   const { habits } = useContext(HabitsContext);
 
   const currentDay = days[getDay(selectedDay)];
-  const anyTimeOfDay = selectedTimeOfDay === doitat[0];
+  const anyTimeOfDay = selectedTimeOfDay === "anytime";
 
   const isAfterCreation = (habit) =>
     isToday(selectedDay) || isAfter(selectedDay, new Date(habit.createdDate));
