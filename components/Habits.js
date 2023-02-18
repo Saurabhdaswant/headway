@@ -14,12 +14,8 @@ const NoHabits = ({ children }) => {
   );
 };
 
-export default function Habits({
-  selectedDay,
-  selectedTimeOfDay,
-}) {
-    const { habits } = useContext(HabitsContext);
-
+export default function Habits({ selectedDay, selectedTimeOfDay }) {
+  const { habits } = useContext(HabitsContext);
 
   const currentDay = days[getDay(selectedDay)];
 
@@ -32,9 +28,9 @@ export default function Habits({
     habit.getDoneIn === selectedTimeOfDay;
 
   const filteredHabits = habits
-    .filter(isAfterCreation)
-    .filter(isRepeatDay)
-    .filter(matchesSelectedTimeOfDay);
+    ?.filter(isAfterCreation)
+    ?.filter(isRepeatDay)
+    ?.filter(matchesSelectedTimeOfDay);
 
   if (!filteredHabits || filteredHabits.length === 0) {
     return <NoHabits>No Habits Found!</NoHabits>;
@@ -43,13 +39,7 @@ export default function Habits({
   return (
     <div className=" scrollbar-hide h-[44vh]  overflow-auto ">
       {filteredHabits?.map((habit, _) => {
-        return (
-          <Habit
-            key={habit.id}
-            habit={habit}
-            currDate={selectedDay}
-          />
-        );
+        return <Habit key={habit.id} habit={habit} currDate={selectedDay} />;
       })}
     </div>
   );
