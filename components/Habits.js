@@ -4,6 +4,7 @@ import Habit from "./Habit";
 import { getDay, isAfter, isToday } from "date-fns";
 import days from "../Data/Days";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import { doitat } from "./constants";
 
 const NoHabits = ({ children }) => {
   return (
@@ -18,6 +19,7 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
   const { habits } = useContext(HabitsContext);
 
   const currentDay = days[getDay(selectedDay)];
+  const anyTimeOfDay = selectedTimeOfDay === doitat[0];
 
   const isAfterCreation = (habit) =>
     isToday(selectedDay) || isAfter(selectedDay, new Date(habit.createdDate));
@@ -27,10 +29,16 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
   const matchesSelectedTimeOfDay = (habit) =>
     habit.getDoneIn === selectedTimeOfDay;
 
-  const filteredHabits = habits
-    ?.filter(isAfterCreation)
-    ?.filter(isRepeatDay)
-    ?.filter(matchesSelectedTimeOfDay);
+  let filteredHabits = [];
+
+  if (anyTimeOfDay) {
+    filteredHabits = habits;
+  } else {
+    filteredHabits = habits
+      ?.filter(isAfterCreation)
+      ?.filter(isRepeatDay)
+      ?.filter(matchesSelectedTimeOfDay);
+  }
 
   if (!filteredHabits || filteredHabits.length === 0) {
     return <NoHabits>No Habits Found!</NoHabits>;
