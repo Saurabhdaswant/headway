@@ -152,7 +152,7 @@ export default function HabitTracker() {
                     : "bg-[#EDEDED]    text-gray-400"
                 }`}
               >
-                {time}
+                {time === "anytime" ? "All" : time}
               </div>
             );
           })}
