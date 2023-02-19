@@ -28,16 +28,11 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
   const matchesSelectedTimeOfDay = (habit) =>
     habit.getDoneIn === selectedTimeOfDay;
 
-  let filteredHabits = [];
+  let filteredHabits = habits?.filter(isAfterCreation)?.filter(isRepeatDay);
 
-  if (anyTimeOfDay) {
-    filteredHabits = habits;
-  } else {
-    filteredHabits = habits
-      ?.filter(isAfterCreation)
-      ?.filter(isRepeatDay)
-      ?.filter(matchesSelectedTimeOfDay);
-  }
+  if (!anyTimeOfDay) {
+    filteredHabits = filteredHabits?.filter(matchesSelectedTimeOfDay);
+  } 
 
   if (!filteredHabits || filteredHabits.length === 0) {
     return <NoHabits>No Habits Found!</NoHabits>;
