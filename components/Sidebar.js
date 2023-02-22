@@ -3,7 +3,7 @@ import { CalendarIcon, ChartBarIcon, CogIcon, UserCircleIcon } from "@heroicons/
 import Image from 'next/image';
 
 function Sidebar() {
-	return <div className=" z-50 w-[15%] bg-white  ">
+	return <div className=" hidden xl:block z-50 w-[15%] bg-white  ">
 		<div className="h-[10%] flex items-center gap-2  justify-center  ">
 			<Image
 				src="/headway.svg"

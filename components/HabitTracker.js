@@ -129,8 +129,8 @@ export default function HabitTracker() {
   };
 
   return (
-    <div className=" mx-auto w-[70%] flex py-8    gap-8  ">
-      <main className=" w-[60%]  ">
+    <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%] xl:max-w-[80%] 2xl:max-w-[70%] flex justify-between py-8     lg:gap-8  ">
+      <main className=" mx-auto w-full max-w-xl lg:max-w-[60%]   ">
         <Header
           selectedDay={selectedDay}
           today={today}
@@ -140,7 +140,7 @@ export default function HabitTracker() {
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
-        <div className=" flex items-center gap-4 my-8   ">
+        <div className=" flex items-center gap-4 my-8 overflow-scroll scrollbar-hide   ">
           {doitat.map((time, idx) => {
             return (
               <div
@@ -163,8 +163,10 @@ export default function HabitTracker() {
         />
       </main>
       <div>
+        <div className="hidden lg:block">
         <HabitsStats />
         <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
+        </div>
         {showHabitForm ? (
           <HabitForm
             formTitle="Add New Habit"
