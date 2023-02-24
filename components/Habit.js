@@ -15,6 +15,7 @@ function Habit({ habit, currDate }) {
   const formatedDate = format(currDate, "yy-MM-dd ");
   const { habits, setHabits } = useContext(HabitsContext);
 
+
   if (habit.checkedOfForDates?.includes(formatedDate)) {
     habit.isCompleted = true;
   } else {
@@ -62,21 +63,21 @@ function Habit({ habit, currDate }) {
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center gap-4 justify-between">
       <div
         onClick={handleClick}
         className={` cursor-pointer border-4 grid place-items-center bg-white ${
           habit.isCompleted
             ? "border-[#27B563]  text-[#27B563]"
             : " text-gray-200"
-        } w-14 h-14 rounded-full shadow-lg  `}
+        } w-full max-w-[56px] min-h-[56px] rounded-full shadow-lg  `}
       >
         <Check className="  w-8 h-8  stroke-3" />
       </div>
       <div
         onMouseEnter={toggleHabitEditOptions}
         onMouseLeave={toggleHabitEditOptions}
-        className={`p-2 h-14 w-[85%] flex justify-between items-center  font-bold my-4 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
+        className={`p-2 h-14 w-full  flex justify-between items-center  font-bold my-2 lg:my-4 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
       >
         <p> {habit.name}</p>
         {showHabitEditOptions && (

@@ -7,7 +7,7 @@ import {
   startOfWeek,
 } from "date-fns";
 import React, { useContext, useState } from "react";
-import { PlusSquare } from "react-feather";
+import { Plus, PlusSquare } from "react-feather";
 import Calendar from "./Calendar";
 import { colors, doitat, weekDays } from "./constants";
 import HabitForm from "./HabitForm";
@@ -19,32 +19,22 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Header = ({ selectedDay, today, toggleHabitForm }) => {
   return (
-    <div className="flex justify-between items-end">
+    <div className="flex justify-between items-center lg:items-end ">
       <div className=" space-y-2 ">
-        {isEqual(selectedDay, today) ? (
-          <>
-            <p className="text-5xl font-bold">Today</p>
-            <p className="text-gray-400 text-xl">
-              {format(selectedDay, "MMMM dd")}
-            </p>
-          </>
-        ) : (
-          <>
-            <p className="text-5xl font-bold">
-              {format(selectedDay, "MMMM dd")}
-            </p>
-            <p className="text-gray-400 text-xl">
-              {format(selectedDay, "eeee")}
-            </p>
-          </>
-        )}
+        <>
+          <p className=" text-2xl lg:text-5xl font-bold">
+            {isEqual(selectedDay, today)  ? "Today" : format(selectedDay, "MMMM dd")}
+          </p>
+          <p className="hidden lg:block text-gray-400 text-xl">
+            {format(selectedDay, "eeee")}
+          </p>
+        </>
       </div>
-      <button
+      <button 
         onClick={toggleHabitForm}
-        className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white"
-      >
-        <PlusSquare />
-        <p>Add Habit</p>
+      className=" sm:flex  justify-between items-center gap-2 font-medium  p-2 sm:px-5 sm:py-2  rounded text-lg text-white bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2]">
+        <Plus  />
+        <p className="hidden sm:block " >Add Habit</p>
       </button>
     </div>
   );
@@ -57,7 +47,7 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
   });
 
   return (
-    <div className="bg-white flex items-center justify-evenly h-20 rounded-md   my-8 ">
+    <div className="bg-white flex items-center justify-evenly h-20 rounded-md  my-4 lg:my-8 ">
       {week.map((day) => {
         return (
           <div
@@ -129,7 +119,7 @@ export default function HabitTracker() {
   };
 
   return (
-    <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%] xl:max-w-[80%] 2xl:max-w-[70%] flex justify-between py-8     lg:gap-8  ">
+    <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%] xl:max-w-[80%] 2xl:max-w-[70%] flex justify-between py-4 lg:py-8     lg:gap-8  ">
       <main className=" mx-auto w-full max-w-xl lg:max-w-[60%]   ">
         <Header
           selectedDay={selectedDay}
@@ -140,7 +130,7 @@ export default function HabitTracker() {
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
-        <div className=" flex items-center gap-4 my-8 overflow-scroll scrollbar-hide   ">
+        <div className=" flex items-center gap-4 my-4 lg:my-8 overflow-scroll scrollbar-hide   ">
           {doitat.map((time, idx) => {
             return (
               <div

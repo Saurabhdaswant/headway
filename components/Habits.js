@@ -23,7 +23,7 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
   const isAfterCreation = (habit) =>
     isToday(selectedDay) || isAfter(selectedDay, new Date(habit.createdDate));
 
-  const isRepeatDay = (habit) => habit.repeatHabitDays.includes(currentDay);
+  const isRepeatDay = (habit) => habit.repeatHabitDays?.includes(currentDay);
 
   const matchesSelectedTimeOfDay = (habit) =>
     habit.getDoneIn === selectedTimeOfDay;
