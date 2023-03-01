@@ -5,53 +5,63 @@
 // dont reload the whole app just while updating next month ✅
 // dont show habits on dates which are behind the date of creation ✅
 // dont show habits on days which are not included in repeadted habits list ✅
-// refactor using clean code
-// - no nested components
-// - no Rendering FOR loops with a variable index
-// - Having large component trees inside the same component
-// complete the next.js course from codeevolution
-// make it mobile / tab responsive
-// complete the stats and chart component from design
-// Add Animation using Framer motion
-// add signIn and sinUp functionality and store user data
+// make it mobile / tab responsive ✅
+// inspirations : heavy , medito , habitify , habitNow , diarium
+// social media : where people can see your : workouts , mediations logs , habits progress and much more
+// you cant checkof the future habits
+// you dont need the dashboard section
+// onclick habit show progress of each habit : graphs , charts , cards with numbers
+// on main page only keep the calendar 
+// design ladning page
 // use node js and mongodb
 // use React Querry
-// find correct way to store habits to date / date into habit object
-// learn typescript for react && next.js and refactor the code
+// complete the next.js course from codeevolution
+// Add Animation using Framer motion but before do the css course from josh!
+// refactor the code with ts
 
 
+// LEARN
+// typescript course 
+// master js course
+// just js course
+// css course
+// nextj.s course
+// node.js course
 
-//? head lines :
-// "Empower yourself to achieve greatness with Headway"
-// "Unlock your true potential with Headway's personal growth tools"
-// "Transform your life one step at a time with Headway"
-// "Achieve your aspirations and make headway with Headway's self-improvement tools"
-// "Unlock the power of consistency and progress with Headway"
-// "Experience personal growth and make headway with Headway's self-improvement tools"
-// "Elevate your life and achieve your goals with Headway"
-// "Unlock the power of mindfulness and personal growth with Headway"
-// "Track your progress and make headway towards your goals with Headway"
-// "Unlock the power of self-improvement and make headway with Headway
+// READ
+// - no bx ux guide
+// - frontend unicorn
 
+// WORK to show on twitter
+// design ladning page
+// build the landing page
 
+// Goals for Habit Tracker
 
+// - have an icon for habit
+// - Name of habit 
+// - ability to check them off
+// - show stats of each habit
+// -- habits score in circular chart in percentage
+// -- show current day is ex. 4th day
+// -- show best streak till date 50days
+// -- times completed : this week , this month , this year
+// -- 👆🏽 with number and graph
+// -- sucess and fail pie chart showing with percentage
+// -- reward system 💡
+// - edit each habit
+// - end date
+// - delete each habit
+// - restart the progress
+// - option to fail
+// add signIn and sinUp functionality and store user data - next auth
 
-    // const byDate = habit => isBefore(selectedDay, new Date(habit.createdDate))
-    // const byDay = habit => !habit.repeatHabitDays.includes(selectedDay)
-
-
-
-
-
-//! main stuff
-// app
-// Habit
-// HabitForm
-
-//? least concern
-// calendar
-// constants
-// deleteHabit
-// HabitsCompletionChart
-// HabitsStats
-// Sidebar
+//! when done with habit tracker featues
+// - make them asessible
+// - make them reusable
+// - made with best practices
+//* LEARN CSS COURSE
+// - perfect UI
+// - smooth animation
+//* LEARN TS COURSE
+// - migrate to TS
