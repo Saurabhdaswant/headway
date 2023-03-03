@@ -15,7 +15,7 @@ import HabitsStats from "./HabitsStats";
 import Habits from "./Habits";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useToggle from "../hooks/useToggle";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const Header = ({ selectedDay, today, toggleHabitForm }) => {
   return (
@@ -83,15 +83,12 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
 };
 
 export default function HabitTracker() {
-
   const { habits, setHabits } = useContext(HabitsContext);
   const [showHabitForm, toggleHabitForm] = useToggle(false);
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [error, setError] = useState(false);
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
-
-
 
   const newHabit = {
     id: uuidv4(),
@@ -100,9 +97,10 @@ export default function HabitTracker() {
     getDoneIn: "anytime",
     color: "",
     checkedOfForDates: [],
-    createdDate: startOfToday(),
+    createdDate: new Date(2022, 10, 16),
     repeatHabitDays: weekDays,
-  }
+    streakCount: 50,
+  };
 
   const handleCreateHabit = (currHabit) => {
     if (currHabit.name.trim().length === 0) {
@@ -164,8 +162,8 @@ export default function HabitTracker() {
       </main>
       <div>
         <div className="hidden lg:block">
-        <HabitsStats />
-        <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
+          <HabitsStats />
+          <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
         </div>
         {showHabitForm ? (
           <HabitForm

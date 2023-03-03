@@ -1,3 +1,9 @@
+import {
+  ChartBarIcon,
+  ChartSquareBarIcon,
+  PencilAltIcon,
+  PencilIcon,
+} from "@heroicons/react/outline";
 import { format } from "date-fns";
 import React, { useContext, useState } from "react";
 import { Check, Edit, Trash2 } from "react-feather";
@@ -5,11 +11,13 @@ import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import DeleteHabit from "./DeleteHabit";
 import HabitForm from "./HabitForm";
+import HabitStats from "./HabitStats";
 
 function Habit({ habit, currDate }) {
   const [showHabitEditOptions, toggleHabitEditOptions] = useToggle(false);
   const [showHabitForm, toggleHabitForm] = useToggle(false);
   const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
+  const [showStats, toggleStats] = useToggle(false);
   const [error, setError] = useState(false);
 
   const formatedDate = format(currDate, "yy-MM-dd ");
@@ -81,9 +89,17 @@ function Habit({ habit, currDate }) {
         <p> {habit.name}</p>
         {showHabitEditOptions && (
           <div className="flex gap-4  w-14">
-            <Edit onClick={toggleHabitForm} className="hover:cursor-pointer" />
-            <Trash2
+            {/* <Edit onClick={toggleHabitForm} className="hover:cursor-pointer" /> */}
+            {/* <Trash2
               onClick={toggleDeleteDialog}
+              className="hover:cursor-pointer"
+            /> */}
+            <PencilAltIcon
+              onClick={toggleHabitForm}
+              className="hover:cursor-pointer"
+            />
+            <ChartSquareBarIcon
+              onClick={toggleStats}
               className="hover:cursor-pointer"
             />
           </div>
@@ -104,6 +120,13 @@ function Habit({ habit, currDate }) {
           setHabits={setHabits}
           habitId={habit.id}
           toggleDeleteDialog={toggleDeleteDialog}
+        />
+      )}
+      {showStats && (
+        <HabitStats
+          streakCount={habit.streakCount}
+          createdDate={habit.createdDate}
+          toggleStats={toggleStats}
         />
       )}
     </div>
