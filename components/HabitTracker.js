@@ -165,8 +165,7 @@ export default function HabitTracker() {
         />
       </main>
       <div>
-        <div className="hidden lg:block">
-          <HabitsStats />
+        <div className="hidden lg:block ">
           <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
         </div>
         {showHabitForm ? (
