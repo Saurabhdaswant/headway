@@ -4,7 +4,7 @@ import { X } from "react-feather";
 function HabitStats({ streakCount, createdDate, toggleStats }) {
   const daysSinceCreationOfHabit = differenceInDays(
     startOfToday(),
-    createdDate
+    new Date(createdDate)
   );
 
   const value = Math.floor((streakCount / daysSinceCreationOfHabit) * 100);
