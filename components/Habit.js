@@ -3,8 +3,9 @@ import {
   ChartSquareBarIcon,
   PencilAltIcon,
   PencilIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
-import { format } from "date-fns";
+import { differenceInDays, format, isToday, startOfToday } from "date-fns";
 import React, { useContext, useState } from "react";
 import { Check, Edit, Trash2 } from "react-feather";
 import useToggle from "../hooks/useToggle";
@@ -47,16 +48,40 @@ function Habit({ habit, currDate }) {
     }
   };
 
-  const handleClick = () => {
-    const idx = habits?.findIndex((h) => h.name === habit.name);
+  const handleCheck = () => {
+    const idx = habits?.findIndex((h) => h.id === habit.id);
     habits[idx].isCompleted = !habits[idx].isCompleted;
 
-    if (habit.isCompleted !== false) {
+    if (habit.isCompleted) {
+      habit.totalStreakCount = habit.totalStreakCount + 1;
+      const diff = differenceInDays(
+        startOfToday(),
+        new Date(habit.lastCheckedOffDate)
+      );
+
+      console.log(diff);
+
+      if (diff === 0) {
+        console.log("no gap");
+      } else if (diff === 1) {
+        console.log("increment");
+        habit.currentStreakCount = habit.currentStreakCount + 1;
+        if (habit.currentStreakCount >= habit.bestStreakCount) {
+          habit.bestStreakCount = habit.currentStreakCount;
+        }
+      } else {
+        console.log("broke the streak");
+        habit.currentStreakCount = 0;
+      }
+
+      habit.lastCheckedOffDate = startOfToday();
+
       habits[idx].checkedOfForDates = [
         ...habit.checkedOfForDates,
         formatedDate,
       ];
     } else {
+      habit.totalStreakCount = habit.totalStreakCount - 1;
       const filtered = habit.checkedOfForDates.filter(
         (date, _) => date !== formatedDate
       );
@@ -72,7 +97,7 @@ function Habit({ habit, currDate }) {
   return (
     <div className="flex items-center justify-between">
       <div
-        onClick={handleClick}
+        onClick={handleCheck}
         className={` cursor-pointer border-4 grid place-items-center bg-white ${
           habit.isCompleted
             ? "border-[#27B563]  text-[#27B563]"
@@ -88,18 +113,17 @@ function Habit({ habit, currDate }) {
       >
         <p> {habit.name}</p>
         {showHabitEditOptions && (
-          <div className="flex gap-4  w-14">
-            {/* <Edit onClick={toggleHabitForm} className="hover:cursor-pointer" /> */}
-            {/* <Trash2
-              onClick={toggleDeleteDialog}
+          <div className="flex  gap-4 w-24">
+            <ChartSquareBarIcon
+              onClick={toggleStats}
               className="hover:cursor-pointer"
-            /> */}
+            />
             <PencilAltIcon
               onClick={toggleHabitForm}
               className="hover:cursor-pointer"
             />
-            <ChartSquareBarIcon
-              onClick={toggleStats}
+            <TrashIcon
+              onClick={toggleDeleteDialog}
               className="hover:cursor-pointer"
             />
           </div>
@@ -122,13 +146,7 @@ function Habit({ habit, currDate }) {
           toggleDeleteDialog={toggleDeleteDialog}
         />
       )}
-      {showStats && (
-        <HabitStats
-          streakCount={habit.streakCount}
-          createdDate={habit.createdDate}
-          toggleStats={toggleStats}
-        />
-      )}
+      {showStats && <HabitStats habit={habit} toggleStats={toggleStats} />}
     </div>
   );
 }
