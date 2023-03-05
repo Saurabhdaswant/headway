@@ -58,13 +58,13 @@ function HabitStats({ habit, toggleStats }) {
 
   return (
     <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
-      <div className="p-8 absolute space-y-8 top-0 right-0 w-[30%] bg-white rounded-md z-50 h-full ">
+      <div className="p-8 absolute space-y-10 top-0 right-0 w-[30%] bg-white rounded-md z-50 h-full ">
         <div className="flex justify-between">
           <h1 className=" text-2xl ">Statistics</h1>
           <X onClick={toggleStats} className=" cursor-pointer " />
         </div>
-        <div className="space-y-4">
-          <p className="  text-center   ">Habit Score</p>
+        <div className="space-y-4 ">
+          <p className="  font-semibold   ">Habit Score</p>
           <PieChart width={400} height={170}>
             <Pie
               data={data}
@@ -87,8 +87,8 @@ function HabitStats({ habit, toggleStats }) {
             </Pie>
           </PieChart>
         </div>
-        <div className="space-y-4">
-          <p className="  text-center   ">Streak</p>
+        <div className="space-y-4  ">
+          <p className="  font-semibold   ">Streak</p>
           <div className="flex  justify-between   bg-white rounded-md ">
             <div className="flex items-center gap-4 ">
               <div className=" grid place-items-center bg-[#D6FCD8]  text-[#242424] w-12 h-12 rounded-lg ">
@@ -145,9 +145,9 @@ function HabitStats({ habit, toggleStats }) {
             </div>
           </div>
         </div>
-        <div className="my-4">
-          <p className="  text-center   ">Times Completed</p>
-          <div className="  space-y-4 mt-4 ">
+        <div className="space-y-4 my-4  ">
+          <p className="  font-semibold   ">Times Completed</p>
+          <div className="  space-y-4 ">
             <div className="flex justify-between items-center bg-gray-100 px-4 ">
               <p>This Week</p>
               <h1 className=" font-semibold text-lg ">{completedThisWeek}</h1>
