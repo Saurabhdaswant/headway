@@ -24,7 +24,11 @@ function Habit({ habit, currDate }) {
   const formatedDate = format(currDate, "yy-MM-dd ");
   const { habits, setHabits } = useContext(HabitsContext);
 
-  if (habit.checkedOfForDates?.includes(formatedDate)) {
+  const formatedCheckedOfForDates = habit?.checkedOfForDates.map((date) =>
+    format(new Date(date), "yy-MM-dd ")
+  );
+
+  if (formatedCheckedOfForDates?.includes(formatedDate)) {
     habit.isCompleted = true;
   } else {
     habit.isCompleted = false;
@@ -76,14 +80,11 @@ function Habit({ habit, currDate }) {
 
       habit.lastCheckedOffDate = startOfToday();
 
-      habits[idx].checkedOfForDates = [
-        ...habit.checkedOfForDates,
-        formatedDate,
-      ];
+      habits[idx].checkedOfForDates = [...habit.checkedOfForDates, currDate];
     } else {
       habit.totalStreakCount = habit.totalStreakCount - 1;
       const filtered = habit.checkedOfForDates.filter(
-        (date, _) => date !== formatedDate
+        (date, _) => date !== currDate
       );
       habits[idx].checkedOfForDates = filtered;
     }

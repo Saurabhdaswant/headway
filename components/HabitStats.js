@@ -1,6 +1,7 @@
 import { FireIcon, TrendingUpIcon } from "@heroicons/react/solid";
 import {
   differenceInDays,
+  format,
   isSameYear,
   isThisMonth,
   isThisWeek,
@@ -29,25 +30,22 @@ function HabitStats({ habit, toggleStats }) {
     (missedHabitCount / daysSinceCreationOfHabit) * 100
   );
 
-  const currentHabits = habits.filter((h) => h.id === habit.id);
+  const currentHabit = habits.find((h) => h.id === habit.id);
+  const habitCompletionDates = currentHabit?.checkedOfForDates;
 
-  const completedHabits = currentHabits.filter(
-    (habit) => habit.isCompleted === true
+  const completedHabitsOfYear = habitCompletionDates.filter((date) =>
+    isThisYear(new Date(date))
   );
 
-  const completedHabitsOfYear = completedHabits.filter((habit) =>
-    isThisYear(new Date(habit.lastCheckedOffDate))
+  const completedHabitsOfMonth = habitCompletionDates.filter((date) =>
+    isThisMonth(new Date(date))
   );
 
-  const completedHabitsOfMonth = completedHabits.filter((habit) =>
-    isThisMonth(new Date(habit.lastCheckedOffDate))
+  const completedHabitsOfWeek = habitCompletionDates.filter((date) =>
+    isThisWeek(new Date(date))
   );
 
-  const completedHabitsOfWeek = completedHabits.filter((habit) =>
-    isThisWeek(new Date(habit.lastCheckedOffDate))
-  );
-
-  const completedThisLife = completedHabits.length;
+  const allTimeCompletedHabitsCount = habitCompletionDates.length;
   const completedThisYear = completedHabitsOfYear.length;
   const completedThisMonth = completedHabitsOfMonth.length;
   const completedThisWeek = completedHabitsOfWeek.length;
@@ -66,7 +64,7 @@ function HabitStats({ habit, toggleStats }) {
           <X onClick={toggleStats} className=" cursor-pointer " />
         </div>
         <div className="space-y-4">
-          <p className="  text-center  ">Habit Score</p>
+          <p className="  text-center   ">Habit Score</p>
           <PieChart width={400} height={170}>
             <Pie
               data={data}
@@ -90,7 +88,7 @@ function HabitStats({ habit, toggleStats }) {
           </PieChart>
         </div>
         <div className="space-y-4">
-          <p className="  text-center  ">Streak</p>
+          <p className="  text-center   ">Streak</p>
           <div className="flex  justify-between   bg-white rounded-md ">
             <div className="flex items-center gap-4 ">
               <div className=" grid place-items-center bg-[#D6FCD8]  text-[#242424] w-12 h-12 rounded-lg ">
@@ -148,23 +146,25 @@ function HabitStats({ habit, toggleStats }) {
           </div>
         </div>
         <div className="my-4">
-          <p className="  text-center  ">Times Completed</p>
-          <div className=" divide-y-2  border-y-2 ">
-            <div className="flex justify-between items-center">
+          <p className="  text-center   ">Times Completed</p>
+          <div className="  space-y-4 mt-4 ">
+            <div className="flex justify-between items-center bg-gray-100 px-4 ">
               <p>This Week</p>
-              <h1 className=" font-semibold text-2xl ">{completedThisWeek}</h1>
+              <h1 className=" font-semibold text-lg ">{completedThisWeek}</h1>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center bg-gray-100 px-4 ">
               <p>This Month</p>
-              <h1 className=" font-semibold text-2xl ">{completedThisMonth}</h1>
+              <h1 className=" font-semibold text-lg ">{completedThisMonth}</h1>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center bg-gray-100 px-4 ">
               <p>This Year</p>
-              <h1 className=" font-semibold text-2xl ">{completedThisYear}</h1>
+              <h1 className=" font-semibold text-lg ">{completedThisYear}</h1>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center bg-gray-100 px-4 ">
               <p>All</p>
-              <h1 className=" font-semibold text-2xl ">{completedThisLife}</h1>
+              <h1 className=" font-semibold text-lg ">
+                {allTimeCompletedHabitsCount}
+              </h1>
             </div>
           </div>
         </div>
