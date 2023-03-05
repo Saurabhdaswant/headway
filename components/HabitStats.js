@@ -15,16 +15,25 @@ import { HabitsContext } from "../Providers/HabitsProvider";
 function HabitStats({ habit, toggleStats }) {
   const { habits } = useContext(HabitsContext);
 
-  const daysSinceCreationOfHabit = differenceInDays(
-    new Date(habit.createdDate),
-    startOfToday()
-  );
+  const daysSinceCreationOfHabit =
+    differenceInDays(startOfToday(), new Date(habit.createdDate)) || 1;
 
-  const value = Math.floor(
+  // if the value is zero using || we can set it to 1 which means the habit is created today and there is no difference in days
+
+  const totalStreakPercentage = Math.floor(
     (habit.totalStreakCount / daysSinceCreationOfHabit) * 100
   );
 
-  const completedHabits = habits.filter((habit) => habit.isCompleted === true);
+  const missedHabitCount = daysSinceCreationOfHabit - habit.totalStreakCount;
+  const missedHabitPercentage = Math.floor(
+    (missedHabitCount / daysSinceCreationOfHabit) * 100
+  );
+
+  const currentHabits = habits.filter((h) => h.id === habit.id);
+
+  const completedHabits = currentHabits.filter(
+    (habit) => habit.isCompleted === true
+  );
 
   const completedHabitsOfYear = completedHabits.filter((habit) =>
     isThisYear(new Date(habit.lastCheckedOffDate))
@@ -38,13 +47,14 @@ function HabitStats({ habit, toggleStats }) {
     isThisWeek(new Date(habit.lastCheckedOffDate))
   );
 
+  const completedThisLife = completedHabits.length;
   const completedThisYear = completedHabitsOfYear.length;
   const completedThisMonth = completedHabitsOfMonth.length;
   const completedThisWeek = completedHabitsOfWeek.length;
 
   const data = [
-    { name: "Group A", value: value },
-    { name: "Group B", value: daysSinceCreationOfHabit },
+    { name: "Group A", value: totalStreakPercentage },
+    { name: "Group B", value: missedHabitPercentage },
   ];
   const COLORS = ["#0fc9f2", "#f3f3f3"];
 
@@ -65,14 +75,14 @@ function HabitStats({ habit, toggleStats }) {
               innerRadius={60}
               outerRadius={80}
               fill="#0fc9f2"
-              paddingAngle={1}
+              paddingAngle={0}
               dataKey="value"
             >
               {data.map((entry, index) => (
                 <Cell key={123332} fill={COLORS[index % COLORS.length]} />
               ))}
               <Label
-                value={value}
+                value={totalStreakPercentage}
                 className=" font-bold text-5xl  "
                 position="center"
               />
@@ -138,8 +148,8 @@ function HabitStats({ habit, toggleStats }) {
           </div>
         </div>
         <div className="my-4">
-          <p>Times Completed</p>
-          <div>
+          <p className="  text-center  ">Times Completed</p>
+          <div className=" divide-y-2  border-y-2 ">
             <div className="flex justify-between items-center">
               <p>This Week</p>
               <h1 className=" font-semibold text-2xl ">{completedThisWeek}</h1>
@@ -151,6 +161,10 @@ function HabitStats({ habit, toggleStats }) {
             <div className="flex justify-between items-center">
               <p>This Year</p>
               <h1 className=" font-semibold text-2xl ">{completedThisYear}</h1>
+            </div>
+            <div className="flex justify-between items-center">
+              <p>All</p>
+              <h1 className=" font-semibold text-2xl ">{completedThisLife}</h1>
             </div>
           </div>
         </div>

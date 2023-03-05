@@ -97,7 +97,7 @@ export default function HabitTracker() {
     getDoneIn: "anytime",
     color: "",
     checkedOfForDates: [],
-    createdDate: new Date(2023, 2, 24),
+    createdDate: today,
     repeatHabitDays: weekDays,
     isCompleted: false,
     totalStreakCount: 0,
