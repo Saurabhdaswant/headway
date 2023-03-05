@@ -17,7 +17,7 @@ function HabitStats({ habit, toggleStats }) {
   const { habits } = useContext(HabitsContext);
 
   const daysSinceCreationOfHabit =
-    differenceInDays(startOfToday(), new Date(habit.createdDate)) || 1;
+    differenceInDays(startOfToday(), new Date(habit.createdDate)) + 1;
 
   // if the value is zero using || we can set it to 1 which means the habit is created today and there is no difference in days
 
