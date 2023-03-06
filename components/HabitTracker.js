@@ -99,7 +99,7 @@ export default function HabitTracker() {
     checkedOfForDates: [],
     createdDate: today,
     repeatHabitDays: weekDays,
-    isCompleted: false,
+    // isCompleted: false,
     totalStreakCount: 0,
     lastCheckedOffDate: startOfYesterday(),
     currentStreakCount: 0,

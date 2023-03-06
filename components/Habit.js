@@ -20,10 +20,9 @@ function Habit({ habit, currDate }) {
   const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
   const [showStats, toggleStats] = useToggle(false);
   const [error, setError] = useState(false);
-
-  const formatedDate = format(currDate, "yy-MM-dd ");
   const { habits, setHabits } = useContext(HabitsContext);
 
+  const formatedDate = format(currDate, "yy-MM-dd ");
   const formatedCheckedOfForDates = habit?.checkedOfForDates.map((date) =>
     format(new Date(date), "yy-MM-dd ")
   );
