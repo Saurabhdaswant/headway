@@ -37,21 +37,28 @@ function HabitCard({ habit, currDate }) {
     <div className="flex items-center justify-between">
       <div
         onClick={() => {
+          const idx = habits?.findIndex((h) => h.id === currHabit.id);
+          const newHabits = [...habits];
+          let completedOnDates;
+
           if (isCompleted) {
             const filterdDates = currHabit.checkedOfForDates.filter((date) => {
-              return date !== currDate;
+              return date.getTime() !== currDate.getTime();
             });
 
-            setCurrHabit({
-              ...currHabit,
-              checkedOfForDates: filterdDates,
-            });
+            completedOnDates = filterdDates;
           } else {
-            setCurrHabit({
-              ...currHabit,
-              checkedOfForDates: [...currHabit.checkedOfForDates, currDate],
-            });
+            completedOnDates = [...currHabit.checkedOfForDates, currDate];
           }
+          const newHabit = {
+            ...currHabit,
+            checkedOfForDates: completedOnDates,
+          };
+
+          setCurrHabit(newHabit);
+
+          newHabits[idx] = newHabit;
+          setHabits(newHabits);
         }}
         className={` cursor-pointer border-4 grid place-items-center bg-white ${
           isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"
