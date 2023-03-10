@@ -84,7 +84,7 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
 };
 
 export default function HabitTracker() {
-  const { habits, setHabits } = useContext(HabitsContext);
+  const { habits, updateHabits } = useContext(HabitsContext);
   const [showHabitForm, toggleHabitForm] = useToggle(false);
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
@@ -122,10 +122,7 @@ export default function HabitTracker() {
 
       const newHabits = [...(habits || []), currHabit];
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem("Habits", JSON.stringify(newHabits));
-      }
-      setHabits(newHabits);
+      updateHabits(newHabits);
       toggleHabitForm();
     }
   };

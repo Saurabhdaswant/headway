@@ -1,13 +1,10 @@
 import React from "react";
 
-function DeleteHabit({ habits, setHabits, habitId, toggleDeleteDialog }) {
-	
+function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
   const handleDelete = () => {
     const filteredHabits = habits.filter((habit, _) => habit.id !== habitId);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("Habits", JSON.stringify(filteredHabits));
-    }
-    setHabits(filteredHabits);
+
+    updateHabits(filteredHabits);
     toggleDeleteDialog();
   };
 

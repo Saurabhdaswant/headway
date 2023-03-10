@@ -20,7 +20,7 @@ function Habit({ habit, currDate }) {
   const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
   const [showStats, toggleStats] = useToggle(false);
   const [error, setError] = useState(false);
-  const { habits, setHabits } = useContext(HabitsContext);
+  const { habits, updateHabits } = useContext(HabitsContext);
 
   const formatedDate = format(currDate, "yy-MM-dd ");
   const formatedCheckedOfForDates = habit?.checkedOfForDates.map((date) =>
@@ -43,10 +43,7 @@ function Habit({ habit, currDate }) {
         (habit, _) => habit.id === currHabit.id
       );
       habits[habitIndex] = currHabit;
-      if (typeof window !== "undefined") {
-        localStorage.setItem("Habits", JSON.stringify([...habits]));
-      }
-      setHabits([...habits]);
+      updateHabits([...habits]);
       toggleHabitForm();
     }
   };
@@ -88,10 +85,7 @@ function Habit({ habit, currDate }) {
       habits[idx].checkedOfForDates = filtered;
     }
 
-    if (typeof window !== "undefined") {
-      localStorage.setItem("Habits", JSON.stringify([...habits]));
-    }
-    setHabits([...habits]);
+    updateHabits([...habits]);
   };
 
   return (
@@ -141,7 +135,7 @@ function Habit({ habit, currDate }) {
       {showDeleteDialog && (
         <DeleteHabit
           habits={habits}
-          setHabits={setHabits}
+          updateHabits={updateHabits}
           habitId={habit.id}
           toggleDeleteDialog={toggleDeleteDialog}
         />

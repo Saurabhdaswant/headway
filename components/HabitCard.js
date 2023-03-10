@@ -5,7 +5,7 @@ import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
 
 function HabitCard({ habit, currDate }) {
-  const { habits, setHabits } = useContext(HabitsContext);
+  const { habits, updateHabits } = useContext(HabitsContext);
   const [currHabit, setCurrHabit] = useState({ ...habit });
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -42,9 +42,12 @@ function HabitCard({ habit, currDate }) {
           let completedOnDates;
 
           if (isCompleted) {
-            const filterdDates = currHabit.checkedOfForDates.filter((date) => {
-              return date.getTime() !== currDate.getTime();
-            });
+            const filterdDates = currHabit.checkedOfForDates.filter(
+              (dateStr) => {
+                const dateObject = new Date(dateStr);
+                return dateObject.getTime() !== currDate.getTime();
+              }
+            );
 
             completedOnDates = filterdDates;
           } else {
@@ -58,7 +61,7 @@ function HabitCard({ habit, currDate }) {
           setCurrHabit(newHabit);
 
           newHabits[idx] = newHabit;
-          setHabits(newHabits);
+          updateHabits(newHabits);
         }}
         className={` cursor-pointer border-4 grid place-items-center bg-white ${
           isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"
