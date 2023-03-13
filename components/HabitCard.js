@@ -104,33 +104,24 @@ function HabitCard({ habit, currDate }) {
               totalStreakCount = totalStreakCount - 1;
             }
 
+            const isWithinCurrStreak = isWithinInterval(new Date(currDate), {
+              start: new Date(newCurrStreak.startingDate),
+              end: new Date(newCurrStreak.endingDate),
+            });
+
+            const isWithinBestStreak = isWithinInterval(new Date(currDate), {
+              start: new Date(newBestStreak.startingDate),
+              end: new Date(newBestStreak.endingDate),
+            });
+
             if (newCurrStreak.count > 0) {
-              if (
-                isWithinInterval(new Date(currDate), {
-                  start: new Date(newCurrStreak.startingDate),
-                  end: new Date(newCurrStreak.endingDate),
-                }) &&
-                isWithinInterval(new Date(currDate), {
-                  start: new Date(newBestStreak.startingDate),
-                  end: new Date(newBestStreak.endingDate),
-                })
-              ) {
-                newCurrStreak.count = newCurrStreak.count - 1;
-                newBestStreak.count = newBestStreak.count - 1;
-              } else if (
-                isWithinInterval(new Date(currDate), {
-                  start: new Date(newCurrStreak.startingDate),
-                  end: new Date(newCurrStreak.endingDate),
-                })
-              ) {
-                newCurrStreak.count = newCurrStreak.count - 1;
-              } else if (
-                isWithinInterval(new Date(currDate), {
-                  start: new Date(newBestStreak.startingDate),
-                  end: new Date(newBestStreak.endingDate),
-                })
-              ) {
-                newBestStreak.count = newBestStreak.count - 1;
+              if (isWithinCurrStreak && isWithinBestStreak) {
+                newCurrStreak.count--;
+                newBestStreak.count--;
+              } else if (isWithinCurrStreak) {
+                newCurrStreak.count--;
+              } else if (isWithinBestStreak) {
+                newBestStreak.count--;
               }
             }
           } else {
