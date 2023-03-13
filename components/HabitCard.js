@@ -138,7 +138,7 @@ function HabitCard({ habit, currDate }) {
             lastCheckedOffDate = currDate;
             totalStreakCount = totalStreakCount + 1;
 
-            if (diff === 0) {
+            if (diff === 0 || newCurrStreak.count === 0) {
               newCurrStreak = {
                 ...currHabit.currentStreak,
                 count: newCurrStreak.count + 1,
@@ -146,21 +146,12 @@ function HabitCard({ habit, currDate }) {
                 endingDate: currDate,
               };
             } else if (diff === 1) {
-              if (newCurrStreak.count === 0) {
-                newCurrStreak = {
-                  ...currHabit.currentStreak,
-                  count: newCurrStreak.count + 1,
-                  startingDate: currDate,
-                  endingDate: currDate,
-                };
-              } else {
-                newCurrStreak = {
-                  ...currHabit.currentStreak,
-                  count: newCurrStreak.count + 1,
-                  endingDate: currDate,
-                };
-              }
-            } else if (diff !== 0) {
+              newCurrStreak = {
+                ...currHabit.currentStreak,
+                count: newCurrStreak.count + 1,
+                endingDate: currDate,
+              };
+            } else {
               newCurrStreak = {
                 ...currHabit.currentStreak,
                 count: 1,
