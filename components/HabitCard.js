@@ -1,4 +1,8 @@
-import { ChartSquareBarIcon } from "@heroicons/react/solid";
+import {
+  ChartSquareBarIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
 import {
   differenceInDays,
   format,
@@ -10,13 +14,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { Check } from "react-feather";
 import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import DeleteHabit from "./DeleteHabit";
+import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
 
 function HabitCard({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
   const [currHabit, setCurrHabit] = useState({ ...habit });
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showHabitForm, toggleHabitForm] = useToggle(false);
+  const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
   const [showStats, toggleStats] = useToggle(false);
+  const [showHabitEditOptions, toggleHabitEditOptions] = useToggle(false);
+  const [error, setError] = useState(false);
 
   const formatedDate = format(currDate, "yy-MM-dd ");
   const formatedCheckedOfForDates = currHabit?.checkedOfForDates.map((date) =>
@@ -41,6 +51,23 @@ function HabitCard({ habit, currDate }) {
   // list which will then toggle the value to false
 
   // every thing is working as it supossed to work 👏🏽
+
+  const handleEditHabit = (currHabit) => {
+    if (currHabit.name.trim().length === 0) {
+      setError(true);
+      return;
+    } else {
+      setError(false);
+      const habitIndex = habits.findIndex(
+        (habit, _) => habit.id === currHabit.id
+      );
+
+      setCurrHabit(currHabit);
+      habits[habitIndex] = currHabit;
+      updateHabits([...habits]);
+      toggleHabitForm();
+    }
+  };
 
   return (
     <div className="flex items-center justify-between">
@@ -166,17 +193,46 @@ function HabitCard({ habit, currDate }) {
         <Check className="  w-8 h-8  stroke-3" />
       </div>
       <div
+        onMouseEnter={toggleHabitEditOptions}
+        onMouseLeave={toggleHabitEditOptions}
         className={`p-2 h-14 w-[85%] flex justify-between items-center  font-bold my-4 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
       >
         <p> {habit.name}</p>
-        <div className="flex  gap-4 w-24">
-          <ChartSquareBarIcon
-            onClick={toggleStats}
-            className="hover:cursor-pointer w-10"
-          />
-        </div>
+        {showHabitEditOptions && (
+          <div className="flex  gap-4 w-24">
+            <PencilAltIcon
+              onClick={toggleHabitForm}
+              className="hover:cursor-pointer"
+            />
+            <ChartSquareBarIcon
+              onClick={toggleStats}
+              className="hover:cursor-pointer"
+            />
+            <TrashIcon
+              onClick={toggleDeleteDialog}
+              className="hover:cursor-pointer"
+            />
+          </div>
+        )}
       </div>
-      {showStats && <HabitStats habit={habit} toggleStats={toggleStats} />}
+      {showHabitForm && (
+        <HabitForm
+          formTitle="Edit Habit"
+          habit={currHabit}
+          toggleHabitForm={toggleHabitForm}
+          handleSubmit={handleEditHabit}
+          error={error}
+        />
+      )}
+      {showDeleteDialog && (
+        <DeleteHabit
+          habits={habits}
+          updateHabits={updateHabits}
+          habitId={currHabit.id}
+          toggleDeleteDialog={toggleDeleteDialog}
+        />
+      )}
+      {showStats && <HabitStats habit={currHabit} toggleStats={toggleStats} />}
     </div>
   );
 }
