@@ -69,105 +69,105 @@ function HabitCard({ habit, currDate }) {
     }
   };
 
+  const toggleHabitCompletion = () => {
+    const idx = habits?.findIndex((h) => h.id === currHabit.id);
+    const newHabits = [...habits];
+    let completedOnDates;
+    let lastCheckedOffDate = currHabit.lastCheckedOffDate;
+    let totalStreakCount = currHabit.totalStreakCount;
+    let bestStreakCount = currHabit.bestStreak.count;
+    let newCurrStreak = currHabit.currentStreak;
+    let newBestStreak = currHabit.bestStreak;
+
+    const diff = differenceInDays(
+      startOfToday(),
+      new Date(
+        typeof lastCheckedOffDate === "object"
+          ? lastCheckedOffDate
+          : currHabit.createdDate
+      )
+    );
+
+    if (isCompleted) {
+      const filterdDates = currHabit.checkedOfForDates.filter((dateStr) => {
+        const dateObject = new Date(dateStr);
+        return dateObject.getTime() !== currDate.getTime();
+      });
+
+      completedOnDates = filterdDates;
+      if (totalStreakCount > 0) {
+        totalStreakCount = totalStreakCount - 1;
+      }
+
+      const isWithinCurrStreak = isWithinInterval(new Date(currDate), {
+        start: new Date(newCurrStreak.startingDate),
+        end: new Date(newCurrStreak.endingDate),
+      });
+
+      const isWithinBestStreak = isWithinInterval(new Date(currDate), {
+        start: new Date(newBestStreak.startingDate),
+        end: new Date(newBestStreak.endingDate),
+      });
+
+      if (newCurrStreak.count > 0) {
+        if (isWithinCurrStreak && isWithinBestStreak) {
+          newCurrStreak.count--;
+          newBestStreak.count--;
+        } else if (isWithinCurrStreak) {
+          newCurrStreak.count--;
+        } else if (isWithinBestStreak) {
+          newBestStreak.count--;
+        }
+      }
+    } else {
+      completedOnDates = [...currHabit.checkedOfForDates, currDate];
+      lastCheckedOffDate = currDate;
+      totalStreakCount = totalStreakCount + 1;
+
+      if (diff === 0 || newCurrStreak.count === 0) {
+        newCurrStreak = {
+          ...currHabit.currentStreak,
+          count: newCurrStreak.count + 1,
+          startingDate: currDate,
+          endingDate: currDate,
+        };
+      } else if (diff === 1) {
+        newCurrStreak = {
+          ...currHabit.currentStreak,
+          count: newCurrStreak.count + 1,
+          endingDate: currDate,
+        };
+      } else {
+        newCurrStreak = {
+          ...currHabit.currentStreak,
+          count: 1,
+          startingDate: currDate,
+          endingDate: currDate,
+        };
+      }
+      if (newCurrStreak.count > bestStreakCount) {
+        newBestStreak = { ...newCurrStreak };
+      }
+    }
+    const newHabit = {
+      ...currHabit,
+      checkedOfForDates: completedOnDates,
+      totalStreakCount: totalStreakCount,
+      lastCheckedOffDate: lastCheckedOffDate,
+      currentStreak: newCurrStreak,
+      bestStreak: newBestStreak,
+    };
+
+    setCurrHabit(newHabit);
+
+    newHabits[idx] = newHabit;
+    updateHabits(newHabits);
+  };
+
   return (
     <div className="flex items-center justify-between">
       <div
-        onClick={() => {
-          const idx = habits?.findIndex((h) => h.id === currHabit.id);
-          const newHabits = [...habits];
-          let completedOnDates;
-          let lastCheckedOffDate = currHabit.lastCheckedOffDate;
-          let totalStreakCount = currHabit.totalStreakCount;
-          let bestStreakCount = currHabit.bestStreak.count;
-          let newCurrStreak = currHabit.currentStreak;
-          let newBestStreak = currHabit.bestStreak;
-
-          const diff = differenceInDays(
-            startOfToday(),
-            new Date(
-              typeof lastCheckedOffDate === "object"
-                ? lastCheckedOffDate
-                : currHabit.createdDate
-            )
-          );
-
-          if (isCompleted) {
-            const filterdDates = currHabit.checkedOfForDates.filter(
-              (dateStr) => {
-                const dateObject = new Date(dateStr);
-                return dateObject.getTime() !== currDate.getTime();
-              }
-            );
-
-            completedOnDates = filterdDates;
-            if (totalStreakCount > 0) {
-              totalStreakCount = totalStreakCount - 1;
-            }
-
-            const isWithinCurrStreak = isWithinInterval(new Date(currDate), {
-              start: new Date(newCurrStreak.startingDate),
-              end: new Date(newCurrStreak.endingDate),
-            });
-
-            const isWithinBestStreak = isWithinInterval(new Date(currDate), {
-              start: new Date(newBestStreak.startingDate),
-              end: new Date(newBestStreak.endingDate),
-            });
-
-            if (newCurrStreak.count > 0) {
-              if (isWithinCurrStreak && isWithinBestStreak) {
-                newCurrStreak.count--;
-                newBestStreak.count--;
-              } else if (isWithinCurrStreak) {
-                newCurrStreak.count--;
-              } else if (isWithinBestStreak) {
-                newBestStreak.count--;
-              }
-            }
-          } else {
-            completedOnDates = [...currHabit.checkedOfForDates, currDate];
-            lastCheckedOffDate = currDate;
-            totalStreakCount = totalStreakCount + 1;
-
-            if (diff === 0 || newCurrStreak.count === 0) {
-              newCurrStreak = {
-                ...currHabit.currentStreak,
-                count: newCurrStreak.count + 1,
-                startingDate: currDate,
-                endingDate: currDate,
-              };
-            } else if (diff === 1) {
-              newCurrStreak = {
-                ...currHabit.currentStreak,
-                count: newCurrStreak.count + 1,
-                endingDate: currDate,
-              };
-            } else {
-              newCurrStreak = {
-                ...currHabit.currentStreak,
-                count: 1,
-                startingDate: currDate,
-                endingDate: currDate,
-              };
-            }
-            if (newCurrStreak.count > bestStreakCount) {
-              newBestStreak = { ...newCurrStreak };
-            }
-          }
-          const newHabit = {
-            ...currHabit,
-            checkedOfForDates: completedOnDates,
-            totalStreakCount: totalStreakCount,
-            lastCheckedOffDate: lastCheckedOffDate,
-            currentStreak: newCurrStreak,
-            bestStreak: newBestStreak,
-          };
-
-          setCurrHabit(newHabit);
-
-          newHabits[idx] = newHabit;
-          updateHabits(newHabits);
-        }}
+        onClick={() => toggleHabitCompletion()}
         className={` cursor-pointer border-4 grid place-items-center bg-white ${
           isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"
         } w-14 h-14 rounded-full shadow-lg  `}
