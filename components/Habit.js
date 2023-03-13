@@ -59,18 +59,14 @@ function Habit({ habit, currDate }) {
         new Date(habit.lastCheckedOffDate)
       );
 
-      console.log(diff);
-
       if (diff === 0) {
         console.log("no gap");
       } else if (diff === 1) {
-        console.log("increment");
         habit.currentStreakCount = habit.currentStreakCount + 1;
         if (habit.currentStreakCount >= habit.bestStreakCount) {
           habit.bestStreakCount = habit.currentStreakCount;
         }
       } else {
-        console.log("broke the streak");
         habit.currentStreakCount = 0;
       }
 

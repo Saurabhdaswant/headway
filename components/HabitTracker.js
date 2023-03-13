@@ -5,7 +5,6 @@ import {
   isEqual,
   startOfToday,
   startOfWeek,
-  startOfYesterday,
 } from "date-fns";
 import React, { useContext, useState } from "react";
 import { PlusSquare } from "react-feather";
@@ -101,9 +100,17 @@ export default function HabitTracker() {
     repeatHabitDays: weekDays,
     // isCompleted: false,
     totalStreakCount: 0,
-    lastCheckedOffDate: startOfYesterday(),
-    currentStreakCount: 0,
-    bestStreakCount: 0,
+    lastCheckedOffDate: "",
+    currentStreak: {
+      count: 0,
+      startingDate: "",
+      endingDate: "",
+    },
+    bestStreak: {
+      count: 0,
+      startingDate: "",
+      endingDate: "",
+    },
   };
 
   const handleCreateHabit = (currHabit) => {

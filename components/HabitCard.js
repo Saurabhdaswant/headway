@@ -1,13 +1,22 @@
-import { differenceInDays, format, isToday, startOfToday } from "date-fns";
+import { ChartSquareBarIcon } from "@heroicons/react/solid";
+import {
+  differenceInDays,
+  format,
+  isToday,
+  isWithinInterval,
+  startOfToday,
+} from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
 import { Check } from "react-feather";
 import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import HabitStats from "./HabitStats";
 
 function HabitCard({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
   const [currHabit, setCurrHabit] = useState({ ...habit });
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showStats, toggleStats] = useToggle(false);
 
   const formatedDate = format(currDate, "yy-MM-dd ");
   const formatedCheckedOfForDates = currHabit?.checkedOfForDates.map((date) =>
@@ -40,6 +49,20 @@ function HabitCard({ habit, currDate }) {
           const idx = habits?.findIndex((h) => h.id === currHabit.id);
           const newHabits = [...habits];
           let completedOnDates;
+          let lastCheckedOffDate = currHabit.lastCheckedOffDate;
+          let totalStreakCount = currHabit.totalStreakCount;
+          let bestStreakCount = currHabit.bestStreak.count;
+          let newCurrStreak = currHabit.currentStreak;
+          let newBestStreak = currHabit.bestStreak;
+
+          const diff = differenceInDays(
+            startOfToday(),
+            new Date(
+              typeof lastCheckedOffDate === "object"
+                ? lastCheckedOffDate
+                : currHabit.createdDate
+            )
+          );
 
           if (isCompleted) {
             const filterdDates = currHabit.checkedOfForDates.filter(
@@ -50,12 +73,85 @@ function HabitCard({ habit, currDate }) {
             );
 
             completedOnDates = filterdDates;
+            if (totalStreakCount > 0) {
+              totalStreakCount = totalStreakCount - 1;
+            }
+
+            if (newCurrStreak.count > 0) {
+              if (
+                isWithinInterval(new Date(currDate), {
+                  start: new Date(newCurrStreak.startingDate),
+                  end: new Date(newCurrStreak.endingDate),
+                }) &&
+                isWithinInterval(new Date(currDate), {
+                  start: new Date(newBestStreak.startingDate),
+                  end: new Date(newBestStreak.endingDate),
+                })
+              ) {
+                newCurrStreak.count = newCurrStreak.count - 1;
+                newBestStreak.count = newBestStreak.count - 1;
+              } else if (
+                isWithinInterval(new Date(currDate), {
+                  start: new Date(newCurrStreak.startingDate),
+                  end: new Date(newCurrStreak.endingDate),
+                })
+              ) {
+                newCurrStreak.count = newCurrStreak.count - 1;
+              } else if (
+                isWithinInterval(new Date(currDate), {
+                  start: new Date(newBestStreak.startingDate),
+                  end: new Date(newBestStreak.endingDate),
+                })
+              ) {
+                newBestStreak.count = newBestStreak.count - 1;
+              }
+            }
           } else {
             completedOnDates = [...currHabit.checkedOfForDates, currDate];
+            lastCheckedOffDate = currDate;
+            totalStreakCount = totalStreakCount + 1;
+
+            if (diff === 0) {
+              newCurrStreak = {
+                ...currHabit.currentStreak,
+                count: newCurrStreak.count + 1,
+                startingDate: currDate,
+                endingDate: currDate,
+              };
+            } else if (diff === 1) {
+              if (newCurrStreak.count === 0) {
+                newCurrStreak = {
+                  ...currHabit.currentStreak,
+                  count: newCurrStreak.count + 1,
+                  startingDate: currDate,
+                  endingDate: currDate,
+                };
+              } else {
+                newCurrStreak = {
+                  ...currHabit.currentStreak,
+                  count: newCurrStreak.count + 1,
+                  endingDate: currDate,
+                };
+              }
+            } else if (diff !== 0) {
+              newCurrStreak = {
+                ...currHabit.currentStreak,
+                count: 1,
+                startingDate: currDate,
+                endingDate: currDate,
+              };
+            }
+            if (newCurrStreak.count > bestStreakCount) {
+              newBestStreak = { ...newCurrStreak };
+            }
           }
           const newHabit = {
             ...currHabit,
             checkedOfForDates: completedOnDates,
+            totalStreakCount: totalStreakCount,
+            lastCheckedOffDate: lastCheckedOffDate,
+            currentStreak: newCurrStreak,
+            bestStreak: newBestStreak,
           };
 
           setCurrHabit(newHabit);
@@ -73,7 +169,14 @@ function HabitCard({ habit, currDate }) {
         className={`p-2 h-14 w-[85%] flex justify-between items-center  font-bold my-4 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
       >
         <p> {habit.name}</p>
+        <div className="flex  gap-4 w-24">
+          <ChartSquareBarIcon
+            onClick={toggleStats}
+            className="hover:cursor-pointer w-10"
+          />
+        </div>
       </div>
+      {showStats && <HabitStats habit={habit} toggleStats={toggleStats} />}
     </div>
   );
 }

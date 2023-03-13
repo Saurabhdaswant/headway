@@ -57,8 +57,8 @@ function HabitStats({ habit, toggleStats }) {
   const COLORS = ["#0fc9f2", "#f3f3f3"];
 
   return (
-    <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
-      <div className="p-8 absolute space-y-10 top-0 right-0 w-[30%] bg-white rounded-md z-50 h-full ">
+    <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50  ">
+      <div className="p-4  lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md z-50 h-full">
         <div className="flex justify-between">
           <h1 className=" text-2xl ">Statistics</h1>
           <X onClick={toggleStats} className=" cursor-pointer " />
@@ -114,7 +114,7 @@ function HabitStats({ habit, toggleStats }) {
               </div>
               <div>
                 <p className="text-2xl font-medium ">
-                  {habit.currentStreakCount} Days
+                  {habit.currentStreak.count} Days
                 </p>
                 <p className="text-gray-400 text-sm ">Current Streak </p>
               </div>
@@ -138,7 +138,7 @@ function HabitStats({ habit, toggleStats }) {
               </div>
               <div>
                 <p className="text-2xl font-medium ">
-                  {habit.bestStreakCount} Days
+                  {habit.bestStreak.count} Days
                 </p>
                 <p className="text-gray-400 text-sm ">Best Strike</p>
               </div>
