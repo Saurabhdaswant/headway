@@ -28,17 +28,17 @@ function Habit({ habit, currDate }) {
   const [showHabitEditOptions, toggleHabitEditOptions] = useToggle(false);
   const [error, setError] = useState(false);
 
-  const formatedDate = format(currDate, "yy-MM-dd ");
-  const formatedcompletedOnDates = currHabit?.completedOnDates?.map((date) =>
+  const formattedDate = format(currDate, "yy-MM-dd ");
+  const formattedCompletedOnDates = currHabit?.completedOnDates?.map((date) =>
     format(new Date(date), "yy-MM-dd ")
   );
   useEffect(() => {
-    if (formatedcompletedOnDates.includes(formatedDate)) {
+    if (formattedCompletedOnDates.includes(formattedDate)) {
       setIsCompleted(true);
     } else {
       setIsCompleted(false);
     }
-  }, [formatedcompletedOnDates, formatedDate]);
+  }, [formattedCompletedOnDates, formattedDate]);
 
   // this will always set to false and wont work when we update form the
   // onClick function because onClick it will re-render and on every-render
@@ -79,15 +79,12 @@ function Habit({ habit, currDate }) {
     const newHabits = [...habits];
     const currentHabit = newHabits[habitIndex];
     const completedOnDates = [...currHabit.completedOnDates];
+    const dateIndex = completedOnDates.findIndex(
+      (dateStr) => new Date(dateStr).getTime() === currDate.getTime()
+    );
 
-    if (isCompleted) {
-      const dateIndex = completedOnDates.findIndex(
-        (dateStr) => new Date(dateStr).getTime() === currDate.getTime()
-      );
-
-      if (dateIndex !== -1) {
-        completedOnDates.splice(dateIndex, 1);
-      }
+    if (isCompleted && dateIndex !== -1) {
+      completedOnDates.splice(dateIndex, 1);
     } else {
       completedOnDates.push(currDate);
       currHabit.lastCompletedDate = currDate;
@@ -95,7 +92,7 @@ function Habit({ habit, currDate }) {
 
     const updatedHabit = {
       ...currentHabit,
-      completedOnDates: completedOnDates,
+      completedOnDates,
     };
     newHabits[habitIndex] = updatedHabit;
 
