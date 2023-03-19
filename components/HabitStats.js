@@ -11,9 +11,9 @@ import { X } from "react-feather";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import {
-  findTheBestStreakCount,
-  findTheCurrentStreakDates,
-  getConsecutiveDateArrays,
+  getTheBestStreakCount,
+  getTheCurrentStreakCount,
+  getAllStreaks,
 } from "../utils/utils";
 
 function HabitStats({ habit, toggleStats }) {
@@ -23,16 +23,16 @@ function HabitStats({ habit, toggleStats }) {
     days: 1,
   });
 
-  const consecutiveDates = getConsecutiveDateArrays(
+  const consecutiveDates = getAllStreaks(
     habit.completedOnDates.map((d) => new Date(d))
   );
 
-  const bestStreakCount = findTheBestStreakCount(consecutiveDates);
-  const currentStreakCount = findTheCurrentStreakDates(
+  const bestStreakCount = getTheBestStreakCount(consecutiveDates);
+  const currentStreakCount = getTheCurrentStreakCount(
     consecutiveDates,
     startOfToday(),
     yesterday
-  ).length;
+  );
 
   const daysSinceCreationOfHabit =
     differenceInDays(startOfToday(), new Date(habit.createdDate)) + 1;

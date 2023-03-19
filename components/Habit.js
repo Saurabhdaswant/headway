@@ -14,6 +14,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Check } from "react-feather";
 import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import { getFormattedDates } from "../utils/utils";
 import DeleteHabit from "./DeleteHabit";
 import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
@@ -28,9 +29,9 @@ function Habit({ habit, currDate }) {
   const [showHabitEditOptions, toggleHabitEditOptions] = useToggle(false);
   const [error, setError] = useState(false);
 
-  const formattedDate = format(currDate, "yy-MM-dd ");
-  const formattedCompletedOnDates = currHabit?.completedOnDates?.map((date) =>
-    format(new Date(date), "yy-MM-dd ")
+  const formattedDate = format(currDate, "yy-MM-dd");
+  const formattedCompletedOnDates = getFormattedDates(
+    currHabit?.completedOnDates
   );
   useEffect(() => {
     if (formattedCompletedOnDates.includes(formattedDate)) {
