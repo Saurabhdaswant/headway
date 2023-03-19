@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Clipboard } from "react-feather";
 import Habit from "./Habit";
-import { getDay, isAfter, isSameDay, isToday } from "date-fns";
+import { getDay, isAfter, isSameDay, isToday, startOfToday } from "date-fns";
 import days from "../Data/Days";
 import { HabitsContext } from "../Providers/HabitsProvider";
 
@@ -36,7 +36,11 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
     filteredHabits = filteredHabits?.filter(matchesSelectedTimeOfDay);
   }
 
-  if (!filteredHabits || filteredHabits.length === 0) {
+  if (
+    !filteredHabits ||
+    filteredHabits.length === 0 ||
+    isAfter(selectedDay, startOfToday())
+  ) {
     return <NoHabits>No Habits Found!</NoHabits>;
   }
 
