@@ -6,14 +6,12 @@ import {
   startOfToday,
   startOfWeek,
   sub,
-  differenceInDays,
 } from "date-fns";
 import React, { useContext, useState } from "react";
 import { PlusSquare } from "react-feather";
 import Calendar from "./Calendar";
 import { colors, doitat, weekDays } from "./constants";
 import HabitForm from "./HabitForm";
-import HabitsStats from "./HabitsStats";
 import Habits from "./Habits";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useToggle from "../hooks/useToggle";
@@ -114,11 +112,13 @@ export default function HabitTracker() {
       setError(false);
 
       if (currHabit.color === "") {
-        var randomColor = colors[Math.floor(Math.random() * colors.length)];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
         currHabit.color = randomColor;
       }
 
-      if (currHabit.getDoneIn === "") currHabit.getDoneIn = "anytime";
+      if (currHabit.getDoneIn === "") {
+        currHabit.getDoneIn = "anytime";
+      }
 
       const newHabits = [...(habits || []), currHabit];
 

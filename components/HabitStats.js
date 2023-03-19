@@ -1,26 +1,19 @@
-import { FireIcon, TrendingUpIcon } from "@heroicons/react/solid";
 import {
   differenceInDays,
-  format,
-  isSameYear,
   isThisMonth,
   isThisWeek,
   isThisYear,
-  isToday,
-  isYesterday,
-  startOfDay,
   startOfToday,
   sub,
 } from "date-fns";
 import { useContext } from "react";
-import { X, Zap } from "react-feather";
+import { X } from "react-feather";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import {
   findTheBestStreakCount,
   findTheCurrentStreakDates,
   getConsecutiveDateArrays,
-  getSortedDates,
 } from "../utils/utils";
 
 function HabitStats({ habit, toggleStats }) {
@@ -30,13 +23,13 @@ function HabitStats({ habit, toggleStats }) {
     days: 1,
   });
 
-  const consecutiveDateArrays = getConsecutiveDateArrays(
+  const consecutiveDates = getConsecutiveDateArrays(
     habit.completedOnDates.map((d) => new Date(d))
   );
 
-  const best = findTheBestStreakCount(consecutiveDateArrays);
-  const current = findTheCurrentStreakDates(
-    consecutiveDateArrays,
+  const bestStreakCount = findTheBestStreakCount(consecutiveDates);
+  const currentStreakCount = findTheCurrentStreakDates(
+    consecutiveDates,
     startOfToday(),
     yesterday
   ).length;
@@ -57,21 +50,21 @@ function HabitStats({ habit, toggleStats }) {
   );
 
   const currentHabit = habits.find((h) => h.id === habit.id);
-  const habitCompletionDates = currentHabit?.completedOnDates;
+  const habitCompletedOnDates = currentHabit?.completedOnDates;
 
-  const completedHabitsOfYear = habitCompletionDates.filter((date) =>
+  const completedHabitsOfYear = habitCompletedOnDates.filter((date) =>
     isThisYear(new Date(date))
   );
 
-  const completedHabitsOfMonth = habitCompletionDates.filter((date) =>
+  const completedHabitsOfMonth = habitCompletedOnDates.filter((date) =>
     isThisMonth(new Date(date))
   );
 
-  const completedHabitsOfWeek = habitCompletionDates.filter((date) =>
+  const completedHabitsOfWeek = habitCompletedOnDates.filter((date) =>
     isThisWeek(new Date(date))
   );
 
-  const allTimeCompletedHabitsCount = habitCompletionDates.length;
+  const allTimeCompletedHabitsCount = habitCompletedOnDates.length;
   const completedThisYear = completedHabitsOfYear.length;
   const completedThisMonth = completedHabitsOfMonth.length;
   const completedThisWeek = completedHabitsOfWeek.length;
@@ -139,7 +132,9 @@ function HabitStats({ habit, toggleStats }) {
                 </svg>
               </div>
               <div>
-                <p className="text-2xl font-medium ">{current} Days</p>
+                <p className="text-2xl font-medium ">
+                  {currentStreakCount} Days
+                </p>
                 <p className="text-gray-400 text-sm ">Current Streak </p>
               </div>
             </div>
@@ -161,7 +156,7 @@ function HabitStats({ habit, toggleStats }) {
                 </svg>
               </div>
               <div>
-                <p className="text-2xl font-medium ">{best} Days</p>
+                <p className="text-2xl font-medium ">{bestStreakCount} Days</p>
                 <p className="text-gray-400 text-sm ">Best Strike</p>
               </div>
             </div>
