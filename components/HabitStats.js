@@ -1,5 +1,4 @@
 import {
-  differenceInDays,
   isThisMonth,
   isThisWeek,
   isThisYear,
@@ -14,6 +13,8 @@ import {
   getTheBestStreakCount,
   getTheCurrentStreakCount,
   getAllStreaks,
+  getDates,
+  getDatesWhichOnlyIncludesGivenDays,
 } from "../utils/utils";
 
 function HabitStats({ habit, toggleStats }) {
@@ -34,10 +35,15 @@ function HabitStats({ habit, toggleStats }) {
     yesterday
   );
 
-  const daysSinceCreationOfHabit =
-    differenceInDays(startOfToday(), new Date(habit.createdDate)) + 1;
+  const datesSinceCreationOfHabit = getDates(
+    new Date(habit.createdDate),
+    startOfToday()
+  );
 
-  // if the value is zero using || we can set it to 1 which means the habit is created today and there is no difference in days
+  const daysSinceCreationOfHabit = getDatesWhichOnlyIncludesGivenDays(
+    datesSinceCreationOfHabit,
+    habit.repeatHabitDays
+  ).length;
 
   const totalStreakPercentage = Math.floor(
     (habit.completedOnDates.length / daysSinceCreationOfHabit) * 100

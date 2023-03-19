@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { X } from "react-feather";
+import { getDatesWhichOnlyIncludesGivenDays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
 
 function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
@@ -7,18 +8,33 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
 
   const addDayIntoRepeatHabitDaysList = (day) => {
     if (currHabit.repeatHabitDays.includes(day)) {
-      const filterdList = currHabit.repeatHabitDays.filter((d) => d !== day);
+      const newRepeatedHabitDays = currHabit.repeatHabitDays.filter(
+        (d) => d !== day
+      );
+
+      const newCompletedOnDates = getDatesWhichOnlyIncludesGivenDays(
+        currHabit.completedOnDates,
+        filterdList
+      );
+
       setCurrHabit({
         ...currHabit,
-        repeatHabitDays: [...new Set(filterdList)],
+        repeatHabitDays: [...new Set(newRepeatedHabitDays)],
+        completedOnDates: newCompletedOnDates,
       });
       return;
     }
 
     const newRepeatedHabitDays = [...currHabit.repeatHabitDays, day];
+    const newCompletedOnDates = getDatesWhichOnlyIncludesGivenDays(
+      currHabit.completedOnDates,
+      newRepeatedHabitDays
+    );
+
     setCurrHabit({
       ...currHabit,
       repeatHabitDays: [...new Set(newRepeatedHabitDays)],
+      completedOnDates: newCompletedOnDates,
     });
   };
 

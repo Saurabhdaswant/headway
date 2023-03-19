@@ -97,7 +97,7 @@ export default function HabitTracker() {
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
 
   const result = sub(today, {
-    days: 14,
+    days: 5,
   });
 
   const newHabit = {

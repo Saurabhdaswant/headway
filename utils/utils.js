@@ -90,5 +90,44 @@ export const getSortedDates = (dates) => {
 };
 
 export const getFormattedDates = (dates) => {
-  return dates.map((date) => format(new Date(date), "yy-MM-dd"));
+  return dates?.map((date) => format(new Date(date), "yy-MM-dd"));
+};
+
+export function getDates(startingDate, endingDate) {
+  // Create an empty array to store the dates
+  const dates = [];
+
+  // Convert the starting and ending dates to Date objects
+  const startDate = new Date(startingDate);
+  const endDate = new Date(endingDate);
+
+  // Loop through each day between the starting and ending dates
+  for (
+    let date = startDate;
+    date <= endDate;
+    date.setDate(date.getDate() + 1)
+  ) {
+    // Add the current date to the array
+    dates.push(new Date(date));
+  }
+
+  // Return the array of dates
+  return dates;
+}
+
+export const getDatesWhichOnlyIncludesGivenDays = (theDates, repeatDays) => {
+  const newDates = [];
+  for (let index = 0; index < theDates.length; index++) {
+    const date = theDates[index];
+
+    const dayOfWeek = date
+      .toLocaleDateString("en-US", { weekday: "long" })
+      .toLowerCase();
+
+    if (repeatDays.includes(dayOfWeek)) {
+      newDates.push(date);
+    }
+  }
+
+  return newDates;
 };
