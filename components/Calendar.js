@@ -5,6 +5,7 @@ import {
   endOfMonth,
   format,
   getDay,
+  isAfter,
   isEqual,
   isToday,
   parse,
@@ -79,6 +80,9 @@ export default function Calendar({ currDate, setCurrDate }) {
             <button
               type="button"
               onClick={() => {
+                if (isAfter(day, startOfToday())) {
+                  return;
+                }
                 setCurrDate(day);
               }}
               className={classNames(
@@ -87,7 +91,8 @@ export default function Calendar({ currDate, setCurrDate }) {
                 !isEqual(day, currDate) &&
                   !isToday(day) &&
                   " hover:bg-gray-200 ",
-                "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
+                isAfter(day, startOfToday()) && "text-gray-400",
+                "mx-auto flex h-8 w-8 items-center justify-center rounded-full "
               )}
             >
               <time dateTime={format(day, "yyyy-MM-dd")}>

@@ -2,6 +2,7 @@ import {
   eachDayOfInterval,
   endOfWeek,
   format,
+  isAfter,
   isEqual,
   startOfToday,
   startOfWeek,
@@ -61,7 +62,12 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
       {week.map((day) => {
         return (
           <div
-            onClick={() => setSelectedDay(day)}
+            onClick={() => {
+              if (isAfter(day, startOfToday())) {
+                return;
+              }
+              setSelectedDay(day);
+            }}
             key={day.toString()}
             className="text-center space-y-2 cursor-pointer "
           >
