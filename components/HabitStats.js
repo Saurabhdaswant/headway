@@ -31,7 +31,7 @@ function HabitStats({ habit, toggleStats }) {
   });
 
   const consecutiveDateArrays = getConsecutiveDateArrays(
-    habit.checkedOfForDates.map((d) => new Date(d))
+    habit.completedOnDates.map((d) => new Date(d))
   );
 
   const best = findTheBestStreakCount(consecutiveDateArrays);
@@ -47,17 +47,17 @@ function HabitStats({ habit, toggleStats }) {
   // if the value is zero using || we can set it to 1 which means the habit is created today and there is no difference in days
 
   const totalStreakPercentage = Math.floor(
-    (habit.checkedOfForDates.length / daysSinceCreationOfHabit) * 100
+    (habit.completedOnDates.length / daysSinceCreationOfHabit) * 100
   );
 
   const missedHabitCount =
-    daysSinceCreationOfHabit - habit.checkedOfForDates.length;
+    daysSinceCreationOfHabit - habit.completedOnDates.length;
   const missedHabitPercentage = Math.floor(
     (missedHabitCount / daysSinceCreationOfHabit) * 100
   );
 
   const currentHabit = habits.find((h) => h.id === habit.id);
-  const habitCompletionDates = currentHabit?.checkedOfForDates;
+  const habitCompletionDates = currentHabit?.completedOnDates;
 
   const completedHabitsOfYear = habitCompletionDates.filter((date) =>
     isThisYear(new Date(date))

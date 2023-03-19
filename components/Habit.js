@@ -29,16 +29,16 @@ function Habit({ habit, currDate }) {
   const [error, setError] = useState(false);
 
   const formatedDate = format(currDate, "yy-MM-dd ");
-  const formatedCheckedOfForDates = currHabit?.checkedOfForDates.map((date) =>
+  const formatedcompletedOnDates = currHabit?.completedOnDates?.map((date) =>
     format(new Date(date), "yy-MM-dd ")
   );
   useEffect(() => {
-    if (formatedCheckedOfForDates.includes(formatedDate)) {
+    if (formatedcompletedOnDates.includes(formatedDate)) {
       setIsCompleted(true);
     } else {
       setIsCompleted(false);
     }
-  }, [formatedCheckedOfForDates, formatedDate]);
+  }, [formatedcompletedOnDates, formatedDate]);
 
   // this will always set to false and wont work when we update form the
   // onClick function because onClick it will re-render and on every-render
@@ -70,34 +70,36 @@ function Habit({ habit, currDate }) {
   };
 
   const toggleHabitCompletion = () => {
-    const idx = habits?.findIndex((h) => h.id === currHabit.id);
+    const habitIndex = habits?.findIndex((habit) => habit.id === currHabit.id);
+
+    if (habitIndex === -1) {
+      return;
+    }
+
     const newHabits = [...habits];
-    let completedOnDates;
-    let lastCheckedOffDate = currHabit.lastCheckedOffDate;
+    const currentHabit = newHabits[habitIndex];
+    const completedOnDates = [...currHabit.completedOnDates];
 
     if (isCompleted) {
-      //remove the date from list
+      const dateIndex = completedOnDates.findIndex(
+        (dateStr) => new Date(dateStr).getTime() === currDate.getTime()
+      );
 
-      const filterdDates = currHabit.checkedOfForDates.filter((dateStr) => {
-        const dateObject = new Date(dateStr);
-        return dateObject.getTime() !== currDate.getTime();
-      });
-
-      completedOnDates = filterdDates;
+      if (dateIndex !== -1) {
+        completedOnDates.splice(dateIndex, 1);
+      }
     } else {
-      //add the date in list
-      completedOnDates = [...currHabit.checkedOfForDates, currDate];
-      lastCheckedOffDate = currDate;
+      completedOnDates.push(currDate);
+      currHabit.lastCompletedDate = currDate;
     }
-    const newHabit = {
-      ...currHabit,
-      checkedOfForDates: completedOnDates,
-      lastCheckedOffDate: lastCheckedOffDate,
+
+    const updatedHabit = {
+      ...currentHabit,
+      completedOnDates: completedOnDates,
     };
+    newHabits[habitIndex] = updatedHabit;
 
-    setCurrHabit(newHabit);
-
-    newHabits[idx] = newHabit;
+    setCurrHabit(updatedHabit);
     updateHabits(newHabits);
   };
 

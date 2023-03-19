@@ -101,10 +101,10 @@ export default function HabitTracker() {
     name: "",
     getDoneIn: "anytime",
     color: "",
-    checkedOfForDates: [],
+    completedOnDates: [],
     createdDate: result,
     repeatHabitDays: weekDays,
-    lastCheckedOffDate: "",
+    lastCompletedDate: "",
     // totalStreakCount: 0,
     // currentStreak: {
     //   count: 0,
