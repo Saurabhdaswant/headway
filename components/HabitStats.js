@@ -6,15 +6,40 @@ import {
   isThisMonth,
   isThisWeek,
   isThisYear,
+  isToday,
+  isYesterday,
+  startOfDay,
   startOfToday,
+  sub,
 } from "date-fns";
 import { useContext } from "react";
 import { X, Zap } from "react-feather";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import {
+  findTheBestStreakCount,
+  findTheCurrentStreakDates,
+  getConsecutiveDateArrays,
+  getSortedDates,
+} from "../utils/utils";
 
 function HabitStats({ habit, toggleStats }) {
   const { habits } = useContext(HabitsContext);
+
+  const yesterday = sub(startOfToday(), {
+    days: 1,
+  });
+
+  const consecutiveDateArrays = getConsecutiveDateArrays(
+    habit.checkedOfForDates.map((d) => new Date(d))
+  );
+
+  const best = findTheBestStreakCount(consecutiveDateArrays);
+  const current = findTheCurrentStreakDates(
+    consecutiveDateArrays,
+    startOfToday(),
+    yesterday
+  ).length;
 
   const daysSinceCreationOfHabit =
     differenceInDays(startOfToday(), new Date(habit.createdDate)) + 1;
@@ -22,10 +47,11 @@ function HabitStats({ habit, toggleStats }) {
   // if the value is zero using || we can set it to 1 which means the habit is created today and there is no difference in days
 
   const totalStreakPercentage = Math.floor(
-    (habit.totalStreakCount / daysSinceCreationOfHabit) * 100
+    (habit.checkedOfForDates.length / daysSinceCreationOfHabit) * 100
   );
 
-  const missedHabitCount = daysSinceCreationOfHabit - habit.totalStreakCount;
+  const missedHabitCount =
+    daysSinceCreationOfHabit - habit.checkedOfForDates.length;
   const missedHabitPercentage = Math.floor(
     (missedHabitCount / daysSinceCreationOfHabit) * 100
   );
@@ -113,9 +139,7 @@ function HabitStats({ habit, toggleStats }) {
                 </svg>
               </div>
               <div>
-                <p className="text-2xl font-medium ">
-                  {habit.currentStreak.count} Days
-                </p>
+                <p className="text-2xl font-medium ">{current} Days</p>
                 <p className="text-gray-400 text-sm ">Current Streak </p>
               </div>
             </div>
@@ -137,9 +161,7 @@ function HabitStats({ habit, toggleStats }) {
                 </svg>
               </div>
               <div>
-                <p className="text-2xl font-medium ">
-                  {habit.bestStreak.count} Days
-                </p>
+                <p className="text-2xl font-medium ">{best} Days</p>
                 <p className="text-gray-400 text-sm ">Best Strike</p>
               </div>
             </div>

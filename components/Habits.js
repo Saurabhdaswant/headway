@@ -4,8 +4,6 @@ import Habit from "./Habit";
 import { getDay, isAfter, isSameDay, isToday } from "date-fns";
 import days from "../Data/Days";
 import { HabitsContext } from "../Providers/HabitsProvider";
-import HabitCard from "./HabitCard";
-import HabitCardV2 from "./HabitCardV2";
 
 const NoHabits = ({ children }) => {
   return (
@@ -45,9 +43,7 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
   return (
     <div className=" scrollbar-hide h-[44vh]  overflow-auto ">
       {filteredHabits?.map((habit, _) => {
-        return (
-          <HabitCardV2 key={habit.id} habit={habit} currDate={selectedDay} />
-        );
+        return <Habit key={habit.id} habit={habit} currDate={selectedDay} />;
       })}
     </div>
   );
