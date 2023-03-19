@@ -104,18 +104,6 @@ export default function HabitTracker() {
     completedOnDates: [],
     createdDate: result,
     repeatHabitDays: weekDays,
-    lastCompletedDate: "",
-    // totalStreakCount: 0,
-    // currentStreak: {
-    //   count: 0,
-    //   startingDate: "",
-    //   endingDate: "",
-    // },
-    // bestStreak: {
-    //   count: 0,
-    //   startingDate: "",
-    //   endingDate: "",
-    // },
   };
 
   const handleCreateHabit = (currHabit) => {

@@ -87,7 +87,6 @@ function Habit({ habit, currDate }) {
       completedOnDates.splice(dateIndex, 1);
     } else {
       completedOnDates.push(currDate);
-      currHabit.lastCompletedDate = currDate;
     }
 
     const updatedHabit = {
