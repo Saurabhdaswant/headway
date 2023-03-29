@@ -1,7 +1,30 @@
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
+import headway from "../public/headway.png";
+import HabitScheduler from "../public/Schedulers.svg";
+import HabitStats from "../public/Stats.svg";
+import { Check } from "react-feather";
 
 export default function Home() {
+  const CirclCheckBox = () => {
+    return (
+      <div className="bg-white rounded-full w-10 flex justify-center shadow-md items-center h-10 ">
+        <Check className=" stroke-green-500 rounded-2xl stroke-3 " />
+      </div>
+    );
+  };
+
+  const InfoCard = ({ title, description }) => {
+    return (
+      <div className="flex gap-6">
+        <CirclCheckBox />
+        <p className=" flex-1 max-w-md text-xl font-medium text-[#6D7280] ">
+          <strong className="text-[#303850]"> {title}</strong> : {description}
+        </p>
+      </div>
+    );
+  };
   return (
     <div>
       <Head>
@@ -11,20 +34,20 @@ export default function Home() {
       </Head>
       <main
         className="flex items-center justify-center  h-[100vh]  bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
-via-white  via-opacity-5  "
+via-white  via-opacity-5 relative  "
       >
         <main className=" z-50 flex flex-col text-center items-center  gap-4 max-w-3xl space-y-8  my-10 mx-auto ">
           <h1 className=" font-bold text-7xl text-center text-[#212121]  ">
             Build Better Habits with
-            <p className="underline decoration-blue-400  inline px-5 ">
+            <em className="underline decoration-blue-400  inline px-5 ">
               Headway
-            </p>
+            </em>
             Today!
           </h1>
-          <p className=" font-medium text-xl text-slate-500 ">
+          <blockquote className=" font-medium text-xl text-slate-500 ">
             Take the First Step Towards a Better Life with Headway: Track Your
             Habits, Achieve Your Goals, and Build a Happier, Healthier You.
-          </p>
+          </blockquote>
           <Link
             className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-14 py-4 shadow-2xl shadow-blue-400  rounded-lg text-lg text-white"
             href="/app"
@@ -36,6 +59,80 @@ via-white  via-opacity-5  "
         <div className=" absolute w-[400px]  h-[400px] left-[830px] top-[100px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]  "></div>
         <div className=" absolute w-[400px]  h-[400px] left-[-169.45px] top-[-172.22px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]  "></div>
       </main>
+
+      <section className=" h-[100vh]">
+        <Image
+          src={headway}
+          width="1184"
+          className=" absolute left-1/2 transform -translate-x-1/2 top-[600px] border-[1rem] rounded-lg border-white  "
+          alt="headay's habit tracker img"
+        />
+      </section>
+      <section className=" h-[100vh] bg-[#F0F1F5]   ">
+        <div className="  py-20 grid grid-cols-2 max-w-6xl h-[100vh] mx-auto">
+          <div className="space-y-12">
+            <h2 className="font-bold text-4xl  text-[#212121] ">
+              Track Your Progress <br /> with Ease
+            </h2>
+            <InfoCard
+              title="Know your streaks"
+              description="Keep
+          track of your current and best streaks to stay motivated and achieve
+          your goals."
+            />
+            <InfoCard
+              title="Habits Score"
+              description="Get a clear picture of how far you've come by viewing your completion percentage for each habit."
+            />
+            <InfoCard
+              title="Times Completed"
+              description="View a quick summary of times completed for the selected habit, including this week, this month, and this year."
+            />
+          </div>
+          <Image
+            src={HabitStats}
+            className=" relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  "
+            alt="headay's habit tracker img"
+          />
+        </div>
+      </section>
+      <section className=" h-[100vh]    ">
+        <div className="  py-20 grid grid-cols-2 max-w-6xl h-[100vh] mx-auto">
+          <Image
+            width={500}
+            src={HabitScheduler}
+            className=" relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  "
+            alt="headay's habit tracker img"
+          />
+          <div className="space-y-12">
+            <h2 className="font-bold text-4xl  text-[#212121] ">
+              Habit Tracking on <br /> Your Terms
+            </h2>
+            <InfoCard
+              title="Flexible habit scheduling"
+              description="Choose which days of the week you want to complete a habit, and track your progress with ease."
+            />
+            <InfoCard
+              title="Color-coded habits"
+              description="Assign a unique color to each habit to keep them organized and visually appealing."
+            />
+            <InfoCard
+              title="Choose your habit time"
+              description="Set a schedule that works for you, whether that's morning, afternoon, or evening."
+            />
+          </div>
+        </div>
+      </section>
+      <section className="  bg-[#0D0D0D] py-32    ">
+        <div className="max-w-4xl mx-auto flex flex-col  gap-14 items-center">
+          <h2 className="font-bold text-5xl text-center  text-white ">
+            Do the hard work especially <br /> when you dont feel like it!
+          </h2>
+          <button className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-14 py-4  rounded-lg text-lg text-white">
+            <Link href="/app">Build Habits Right Now!</Link>
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
