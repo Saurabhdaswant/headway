@@ -37,7 +37,7 @@ export default function Calendar({ currDate, setCurrDate }) {
   }
 
   return (
-    <div className=" bg-white mt-10 px-8 pt-8 pb-4 min-w-[390px] ">
+    <div className=" bg-white mt-10 p-6 min-w-[390px] ">
       <div className="flex items-center ">
         <h2 className="flex-auto font-semibold text-gray-900">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
@@ -74,7 +74,7 @@ export default function Calendar({ currDate, setCurrDate }) {
             key={day.toString()}
             className={classNames(
               dayIdx === 0 && colStartClasses[getDay(day)],
-              "py-1.5"
+              "py-1"
             )}
           >
             <button

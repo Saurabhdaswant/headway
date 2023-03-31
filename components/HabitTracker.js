@@ -21,17 +21,17 @@ import { v4 as uuidv4 } from "uuid";
 const Header = ({ selectedDay, today, toggleHabitForm }) => {
   return (
     <div className="flex justify-between items-end">
-      <div className=" space-y-2 ">
+      <div className="  ">
         {isEqual(selectedDay, today) ? (
           <>
-            <p className="text-5xl font-bold">Today</p>
+            <p className="text-3xl font-bold text-[#2e2e2e]">Today</p>
             <p className="text-gray-400 text-xl">
-              {format(selectedDay, "MMMM dd")}
+              {format(selectedDay, "eeee")} {format(selectedDay, "MMMM dd")}
             </p>
           </>
         ) : (
           <>
-            <p className="text-5xl font-bold">
+            <p className="text-3xl font-bold text-[#2e2e2e]">
               {format(selectedDay, "MMMM dd")}
             </p>
             <p className="text-gray-400 text-xl">
@@ -75,9 +75,9 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
               {format(day, "eee")}
             </p>
             <p
-              className={`font-bold text-lg ${
-                isEqual(selectedDay, day) && "text-[#007BFF]"
-              } `}
+              className={` font-bold text-lg ${
+                isEqual(selectedDay, day) ? "text-[#007BFF]" : "text-gray-600"
+              }  `}
             >
               {format(day, "d")}
             </p>
@@ -153,7 +153,7 @@ export default function HabitTracker() {
                 key={idx}
                 className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${
                   selectedTimeOfDay === time
-                    ? "bg-[#9fc6eb]   text-[#091e32]"
+                    ? "bg-[#BFE1FF]   text-[#02518B]"
                     : "bg-[#EDEDED]    text-gray-400"
                 }`}
               >
@@ -168,9 +168,9 @@ export default function HabitTracker() {
         />
       </main>
       <div>
-        <div className="hidden lg:block ">
+        {/* <div className="hidden lg:block ">
           <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
-        </div>
+        </div> */}
         {showHabitForm ? (
           <HabitForm
             formTitle="Add New Habit"

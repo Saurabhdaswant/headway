@@ -14,7 +14,7 @@ function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
         <p className=" text-xl font-bold w-[60%] ">
           Are you sure you want to delete this Habit?
         </p>
-        <p className="  text-gray-400 font-bold mt-2">
+        <p className="  text-gray-400 font-medium mt-2">
           This action cannot be undone
         </p>
         <div className="flex justify-between gap-x-4 mt-14 ">

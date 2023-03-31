@@ -113,9 +113,17 @@ function Habit({ habit, currDate }) {
       <div
         onMouseEnter={toggleHabitEditOptions}
         onMouseLeave={toggleHabitEditOptions}
-        className={`p-2 h-14 w-[85%] flex justify-between items-center  font-bold my-2 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
+        className={` p-3 rounded  w-[85%] flex justify-between items-center   my-2 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
       >
-        <p> {habit.name}</p>
+        <div className="space-y-1 ">
+          <p className="font-bold"> {habit.name}</p>
+          <p
+            className={`text-sm px-2 font-medium capitalize  bg-${habit.color} bg-opacity-10 rounded-sm text-${habit.color}`}
+          >
+            {" "}
+            {habit.getDoneIn}
+          </p>
+        </div>
         {showHabitEditOptions && (
           <div className="flex  gap-4 w-24">
             <PencilAltIcon
