@@ -45,7 +45,7 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
   }
 
   return (
-    <div className=" scrollbar-hide h-[44vh]  overflow-auto ">
+    <div className=" scrollbar-hide h-[50vh]  overflow-auto ">
       {filteredHabits?.map((habit, _) => {
         return <Habit key={habit.id} habit={habit} currDate={selectedDay} />;
       })}
