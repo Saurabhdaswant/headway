@@ -37,7 +37,7 @@ export default function Calendar({ currDate, setCurrDate }) {
   }
 
   return (
-    <div className=" bg-white mt-10 p-6 min-w-[390px] ">
+    <div className=" bg-white mt-10 p-6 min-w-[390px] shadow-md rounded-md ">
       <div className="flex items-center ">
         <h2 className="flex-auto font-semibold text-gray-900">
           {format(firstDayCurrentMonth, "MMMM yyyy")}

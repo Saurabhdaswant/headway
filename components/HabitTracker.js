@@ -10,15 +10,18 @@ import {
 } from "date-fns";
 import React, { useContext, useState } from "react";
 import { PlusSquare } from "react-feather";
-import Calendar from "./Calendar";
 import { colors, doitat, weekDays } from "./constants";
 import HabitForm from "./HabitForm";
 import Habits from "./Habits";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useToggle from "../hooks/useToggle";
 import { v4 as uuidv4 } from "uuid";
+import { CalendarIcon } from "@heroicons/react/outline";
+import Calendar from "./Calendar";
 
-const Header = ({ selectedDay, today, toggleHabitForm }) => {
+const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
+  const [showCalendar, toggleCalendar] = useToggle(false);
+
   return (
     <div className="flex justify-between items-end">
       <div className="  ">
@@ -40,13 +43,27 @@ const Header = ({ selectedDay, today, toggleHabitForm }) => {
           </>
         )}
       </div>
-      <button
-        onClick={toggleHabitForm}
-        className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white"
-      >
-        <PlusSquare />
-        <p>Add Habit</p>
-      </button>
+      <div className="flex items-end gap-6">
+        <button
+          className="p-2 bg-white rounded text-gray-600 "
+          onClick={() => toggleCalendar()}
+        >
+          <CalendarIcon className=" w-7" />
+        </button>
+        <button
+          onClick={toggleHabitForm}
+          className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white"
+        >
+          <PlusSquare />
+          <p>Add Habit</p>
+        </button>
+      </div>
+
+      {showCalendar ? (
+        <div className="hidden lg:block absolute top-[88px]  left-2/4 ">
+          <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
+        </div>
+      ) : null}
     </div>
   );
 };
@@ -140,6 +157,7 @@ export default function HabitTracker() {
           selectedDay={selectedDay}
           today={today}
           toggleHabitForm={toggleHabitForm}
+          setSelectedDay={setSelectedDay}
         />
         <WeekDatePicker
           selectedDay={selectedDay}
@@ -168,9 +186,6 @@ export default function HabitTracker() {
         />
       </main>
       <div>
-        {/* <div className="hidden lg:block ">
-          <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
-        </div> */}
         {showHabitForm ? (
           <HabitForm
             formTitle="Add New Habit"
