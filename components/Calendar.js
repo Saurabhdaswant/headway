@@ -43,7 +43,7 @@ export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
   return (
     <div
       ref={ref}
-      className=" bg-white mt-10 p-6 min-w-[390px] shadow-md rounded-md "
+      className=" bg-white mt-10 p-4 min-w-[307px] shadow-md rounded-md "
     >
       <div className="flex items-center ">
         <h2 className="flex-auto font-semibold text-gray-900">
@@ -66,7 +66,7 @@ export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
           <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>
-      <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
+      <div className="grid grid-cols-7 mt-4 text-xs leading-6 text-center text-gray-500">
         <div>S</div>
         <div>M</div>
         <div>T</div>
@@ -81,7 +81,7 @@ export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
             key={day.toString()}
             className={classNames(
               dayIdx === 0 && colStartClasses[getDay(day)],
-              "py-1"
+              "py-1.5"
             )}
           >
             <button
@@ -100,7 +100,7 @@ export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
                   !isToday(day) &&
                   " hover:bg-gray-200 ",
                 isAfter(day, startOfToday()) && "text-gray-400",
-                "mx-auto flex h-8 w-8 items-center justify-center rounded-full "
+                "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
               )}
             >
               <time dateTime={format(day, "yyyy-MM-dd")}>
@@ -109,6 +109,25 @@ export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
             </button>
           </div>
         ))}
+      </div>
+      <div className="flex text-sm pt-4 justify-between font-semibold  border-t-2 border-gray-100 mt-2">
+        <button
+          className="uppercase"
+          onClick={() => {
+            toggleCalendar();
+          }}
+        >
+          Close
+        </button>
+        <button
+          className="uppercase"
+          onClick={() => {
+            setCurrDate(startOfToday());
+            toggleCalendar();
+          }}
+        >
+          Today
+        </button>
       </div>
     </div>
   );
