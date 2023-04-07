@@ -91,6 +91,7 @@ export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
                   return;
                 }
                 setCurrDate(day);
+                toggleCalendar();
               }}
               className={classNames(
                 isEqual(currDate, day) && !isToday(day) && " bg-blue-200 ",
