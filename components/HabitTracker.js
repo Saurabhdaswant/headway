@@ -34,7 +34,7 @@ const DialogComponent = ({ children, showDialog, toggleDialog }) => {
         <CalendarIcon className=" w-7" />
       </button>
       {showDialog && (
-        <div className=" absolute top-[88px]  left-2/4 ">{children}</div>
+        <div className=" absolute top-[88px] mt-10 left-2/4 ">{children}</div>
       )}
     </div>
   );
