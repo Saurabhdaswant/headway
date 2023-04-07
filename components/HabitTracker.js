@@ -8,7 +8,7 @@ import {
   startOfWeek,
   sub,
 } from "date-fns";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { PlusSquare } from "react-feather";
 import { colors, doitat, weekDays } from "./constants";
 import HabitForm from "./HabitForm";
@@ -18,10 +18,30 @@ import useToggle from "../hooks/useToggle";
 import { v4 as uuidv4 } from "uuid";
 import { CalendarIcon } from "@heroicons/react/outline";
 import Calendar from "./Calendar";
+import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
+
+const DialogComponent = ({ children, showDialog, toggleDialog }) => {
+  const ref = useRef(null);
+
+  useClickOutsideToClose(ref, toggleDialog);
+
+  return (
+    <div ref={ref}>
+      <button
+        className="p-2 bg-white rounded text-gray-600 "
+        onClick={() => toggleDialog()}
+      >
+        <CalendarIcon className=" w-7" />
+      </button>
+      {showDialog && (
+        <div className=" absolute top-[88px]  left-2/4 ">{children}</div>
+      )}
+    </div>
+  );
+};
 
 const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
-  const [showCalendar, toggleCalendar] = useToggle(false);
-
+  const [showDialog, toggleDialog] = useToggle(false);
   return (
     <div className="flex justify-between items-end">
       <div className="  ">
@@ -44,12 +64,14 @@ const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
         )}
       </div>
       <div className="flex items-end gap-6">
-        <button
-          className="p-2 bg-white rounded text-gray-600 "
-          onClick={() => toggleCalendar()}
-        >
-          <CalendarIcon className=" w-7" />
-        </button>
+        <DialogComponent showDialog={showDialog} toggleDialog={toggleDialog}>
+          <Calendar
+            currDate={selectedDay}
+            setCurrDate={setSelectedDay}
+            toggleDialog={toggleDialog}
+          />
+        </DialogComponent>
+
         <button
           onClick={toggleHabitForm}
           className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white"
@@ -58,16 +80,6 @@ const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
           <p>Add Habit</p>
         </button>
       </div>
-
-      {showCalendar ? (
-        <div className=" absolute top-[88px]  left-2/4 ">
-          <Calendar
-            currDate={selectedDay}
-            setCurrDate={setSelectedDay}
-            toggleCalendar={toggleCalendar}
-          />
-        </div>
-      ) : null}
     </div>
   );
 };
