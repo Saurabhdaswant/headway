@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
 
 function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
   const handleDelete = () => {
@@ -8,9 +9,12 @@ function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
     toggleDeleteDialog();
   };
 
+  const ref = useRef(null);
+  useClickOutsideToClose(ref, toggleDeleteDialog);
+
   return (
     <div className=" fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
-      <div className="bg-white p-8 rounded-lg  ">
+      <div ref={ref} className="bg-white p-8 rounded-lg  ">
         <p className=" text-xl font-bold w-[60%] ">
           Are you sure you want to delete this Habit?
         </p>

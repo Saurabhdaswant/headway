@@ -61,7 +61,11 @@ const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
 
       {showCalendar ? (
         <div className="hidden lg:block absolute top-[88px]  left-2/4 ">
-          <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
+          <Calendar
+            currDate={selectedDay}
+            setCurrDate={setSelectedDay}
+            toggleCalendar={toggleCalendar}
+          />
         </div>
       ) : null}
     </div>

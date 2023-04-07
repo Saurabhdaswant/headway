@@ -11,13 +11,14 @@ import {
   parse,
   startOfToday,
 } from "date-fns";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Calendar({ currDate, setCurrDate }) {
+export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
   let [currentMonth, setCurrentMonth] = useState(format(currDate, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
@@ -36,8 +37,14 @@ export default function Calendar({ currDate, setCurrDate }) {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
+  const ref = useRef(null);
+  useClickOutsideToClose(ref, toggleCalendar);
+
   return (
-    <div className=" bg-white mt-10 p-6 min-w-[390px] shadow-md rounded-md ">
+    <div
+      ref={ref}
+      className=" bg-white mt-10 p-6 min-w-[390px] shadow-md rounded-md "
+    >
       <div className="flex items-center ">
         <h2 className="flex-auto font-semibold text-gray-900">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
