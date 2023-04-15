@@ -18,12 +18,9 @@ import useToggle from "../hooks/useToggle";
 import { v4 as uuidv4 } from "uuid";
 import { CalendarIcon } from "@heroicons/react/outline";
 import Calendar from "./Calendar";
-import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
 
-const DialogComponent = ({ children, showDialog, toggleDialog }) => {
+export const DialogComponent = ({ children, toggleDialog }) => {
   const ref = useRef(null);
-
-  useClickOutsideToClose(ref, toggleDialog);
 
   return (
     <div ref={ref}>
@@ -33,9 +30,7 @@ const DialogComponent = ({ children, showDialog, toggleDialog }) => {
       >
         <CalendarIcon className=" w-7" />
       </button>
-      {showDialog && (
-        <div className=" absolute top-[88px] mt-10 left-2/4 ">{children}</div>
-      )}
+      <div className=" absolute bottom-1/4 mt-10  ">{children}</div>
     </div>
   );
 };
@@ -64,12 +59,15 @@ const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
         )}
       </div>
       <div className="flex items-end gap-6">
-        <DialogComponent showDialog={showDialog} toggleDialog={toggleDialog}>
-          <Calendar
-            currDate={selectedDay}
-            setCurrDate={setSelectedDay}
-            toggleDialog={toggleDialog}
-          />
+        <DialogComponent toggleDialog={toggleDialog}>
+          {showDialog && (
+            <Calendar
+              currDate={selectedDay}
+              setCurrDate={setSelectedDay}
+              toggleCalendar={toggleDialog}
+              canSelectDaysAfterToday={false}
+            />
+          )}
         </DialogComponent>
 
         <button

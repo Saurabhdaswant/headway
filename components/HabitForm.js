@@ -3,9 +3,14 @@ import { X } from "react-feather";
 import { getDatesWhichOnlyIncludesGivenDays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
 import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
+import { DialogComponent } from "./HabitTracker";
+import Calendar from "./Calendar";
+import useToggle from "../hooks/useToggle";
+import { startOfToday } from "date-fns";
 
 function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
   const [currHabit, setCurrHabit] = useState(habit);
+  const [showDialog, toggleDialog] = useToggle(false);
 
   const addDayIntoRepeatHabitDaysList = (day) => {
     if (currHabit.repeatHabitDays.includes(day)) {
@@ -42,6 +47,13 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
   const ref = useRef(null);
   useClickOutsideToClose(ref, toggleHabitForm);
 
+  const updateEndDate = (date) => {
+    setCurrHabit({
+      ...currHabit,
+      endDate: date,
+    });
+  };
+
   return (
     <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
       <div
@@ -53,7 +65,7 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
           <X onClick={toggleHabitForm} className=" cursor-pointer " />
         </div>
         <div className=" flex flex-col   h-full ">
-          <div className=" space-y-4  lg:space-y-8 ">
+          <div className=" space-y-4  lg:space-y-8 overflow-scroll scrollbar-hide h-[70vh] ">
             <div className="flex flex-col  lg:space-y-2">
               <label htmlFor="habitName" className="font-semibold pb-2">
                 Habit
@@ -172,6 +184,22 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
                   );
                 })}
               </div>
+            </div>
+            <div className="flex flex-col space-y-2 ">
+              <p className="font-semibold">End Date</p>
+              <DialogComponent
+                showDialog={showDialog}
+                toggleDialog={toggleDialog}
+              >
+                {showDialog && (
+                  <Calendar
+                    currDate={startOfToday()}
+                    setCurrDate={updateEndDate}
+                    toggleCalendar={toggleDialog}
+                    canSelectDaysAfterToday={true}
+                  />
+                )}
+              </DialogComponent>
             </div>
           </div>
           <button

@@ -17,7 +17,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
+export default function Calendar({
+  currDate,
+  setCurrDate,
+  toggleCalendar,
+  canSelectDaysAfterToday,
+}) {
   let [currentMonth, setCurrentMonth] = useState(format(currDate, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
@@ -80,7 +85,7 @@ export default function Calendar({ currDate, setCurrDate, toggleCalendar }) {
             <button
               type="button"
               onClick={() => {
-                if (isAfter(day, startOfToday())) {
+                if (isAfter(day, startOfToday()) && !canSelectDaysAfterToday) {
                   return;
                 }
                 setCurrDate(day);
