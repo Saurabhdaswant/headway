@@ -18,25 +18,28 @@ import useToggle from "../hooks/useToggle";
 import { v4 as uuidv4 } from "uuid";
 import { CalendarIcon } from "@heroicons/react/outline";
 import Calendar from "./Calendar";
+import useClickOutSide from "../hooks/useClickOutSide";
 
-export const DialogComponent = ({ children, toggleDialog }) => {
-  const ref = useRef(null);
+// export const DialogComponent = ({ children, setShowDialog }) => {
+//   let domNode = useClickOutSide(() => setShowDialog(false));
 
-  return (
-    <div ref={ref}>
-      <button
-        className="p-2 bg-white rounded text-gray-600 "
-        onClick={() => toggleDialog()}
-      >
-        <CalendarIcon className=" w-7" />
-      </button>
-      <div className=" absolute bottom-1/4 mt-10  ">{children}</div>
-    </div>
-  );
-};
+//   return (
+//     <div ref={domNode}>
+//       <button
+//         className="p-2 bg-white rounded text-gray-600 "
+//         onClick={() => setShowDialog((prev) => !prev)}
+//       >
+//         <CalendarIcon className=" w-7" />
+//       </button>
+//       <div className=" absolute bottom-1/4 mt-10  ">{children}</div>
+//     </div>
+//   );
+// };
 
 const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
-  const [showDialog, toggleDialog] = useToggle(false);
+  const [showDialog, setShowDialog] = useState(false);
+  let domNode = useClickOutSide(() => setShowDialog(false));
+
   return (
     <div className="flex justify-between items-end">
       <div className="  ">
@@ -59,16 +62,36 @@ const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
         )}
       </div>
       <div className="flex items-end gap-6">
-        <DialogComponent toggleDialog={toggleDialog}>
+        {/* <DialogComponent setShowDialog={setShowDialog}>
           {showDialog && (
             <Calendar
               currDate={selectedDay}
               setCurrDate={setSelectedDay}
-              toggleCalendar={toggleDialog}
+              toggleCalendar={() => setShowDialog(false)}
               canSelectDaysAfterToday={false}
             />
           )}
-        </DialogComponent>
+        </DialogComponent> */}
+
+        <div ref={domNode}>
+          <button
+            className="p-2 bg-white rounded text-gray-600 "
+            onClick={() => setShowDialog(true)}
+          >
+            <CalendarIcon className=" w-7" />
+          </button>
+
+          <div className=" absolute bottom-1/4 mt-10  ">
+            {showDialog && (
+              <Calendar
+                currDate={selectedDay}
+                setCurrDate={setSelectedDay}
+                toggleCalendar={() => setShowDialog(false)}
+                canSelectDaysAfterToday={false}
+              />
+            )}
+          </div>
+        </div>
 
         <button
           onClick={toggleHabitForm}
