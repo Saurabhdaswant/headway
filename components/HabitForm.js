@@ -8,7 +8,13 @@ import useToggle from "../hooks/useToggle";
 import { startOfToday } from "date-fns";
 import useClickOutSide from "../hooks/useClickOutSide";
 
-function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
+function HabitForm({
+  formTitle,
+  habit,
+  setShowHabitForm,
+  handleSubmit,
+  error,
+}) {
   const [currHabit, setCurrHabit] = useState(habit);
   const [showDialog, toggleDialog] = useToggle(false);
 
@@ -51,17 +57,15 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
     });
   };
 
-  let domNode = useClickOutSide(() => toggleHabitForm());
-
   return (
     <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
-      <div
-        key={domNode}
-        className=" p-4  lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md z-50 h-full "
-      >
+      <div className=" p-4  lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md z-50 h-full ">
         <div className="flex justify-between">
           <h1 className=" text-2xl ">{formTitle}</h1>
-          <X onClick={toggleHabitForm} className=" cursor-pointer " />
+          <X
+            onClick={() => setShowHabitForm(false)}
+            className=" cursor-pointer "
+          />
         </div>
         <div className=" flex flex-col   h-full ">
           <div className=" space-y-4  lg:space-y-8 overflow-scroll scrollbar-hide h-[70vh] ">

@@ -23,7 +23,7 @@ function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
   const [currHabit, setCurrHabit] = useState({ ...habit });
   const [isCompleted, setIsCompleted] = useState(false);
-  const [showHabitForm, toggleHabitForm] = useToggle(false);
+  const [showHabitForm, setShowHabitForm] = useState(false);
   const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
   const [showStats, toggleStats] = useToggle(false);
   const [showHabitEditOptions, toggleHabitEditOptions] = useToggle(false);
@@ -67,7 +67,7 @@ function Habit({ habit, currDate }) {
       setCurrHabit(currHabit);
       habits[habitIndex] = currHabit;
       updateHabits([...habits]);
-      toggleHabitForm();
+      setShowHabitForm(false);
     }
   };
 
@@ -128,7 +128,7 @@ function Habit({ habit, currDate }) {
         {showHabitEditOptions && (
           <div className="flex  gap-4 w-24">
             <PencilAltIcon
-              onClick={toggleHabitForm}
+              onClick={() => setShowHabitForm(true)}
               className="hover:cursor-pointer"
             />
             <ChartSquareBarIcon
@@ -146,7 +146,7 @@ function Habit({ habit, currDate }) {
         <HabitForm
           formTitle="Edit Habit"
           habit={currHabit}
-          toggleHabitForm={toggleHabitForm}
+          setShowHabitForm={setShowHabitForm}
           handleSubmit={handleEditHabit}
           error={error}
         />

@@ -20,23 +20,7 @@ import { CalendarIcon } from "@heroicons/react/outline";
 import Calendar from "./Calendar";
 import useClickOutSide from "../hooks/useClickOutSide";
 
-// export const DialogComponent = ({ children, setShowDialog }) => {
-//   let domNode = useClickOutSide(() => setShowDialog(false));
-
-//   return (
-//     <div ref={domNode}>
-//       <button
-//         className="p-2 bg-white rounded text-gray-600 "
-//         onClick={() => setShowDialog((prev) => !prev)}
-//       >
-//         <CalendarIcon className=" w-7" />
-//       </button>
-//       <div className=" absolute bottom-1/4 mt-10  ">{children}</div>
-//     </div>
-//   );
-// };
-
-const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
+const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
   const [showDialog, setShowDialog] = useState(false);
   let domNode = useClickOutSide(() => setShowDialog(false));
 
@@ -62,17 +46,6 @@ const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
         )}
       </div>
       <div className="flex items-end gap-6">
-        {/* <DialogComponent setShowDialog={setShowDialog}>
-          {showDialog && (
-            <Calendar
-              currDate={selectedDay}
-              setCurrDate={setSelectedDay}
-              toggleCalendar={() => setShowDialog(false)}
-              canSelectDaysAfterToday={false}
-            />
-          )}
-        </DialogComponent> */}
-
         <div ref={domNode}>
           <button
             className="p-2 bg-white rounded text-gray-600 "
@@ -94,7 +67,7 @@ const Header = ({ selectedDay, today, toggleHabitForm, setSelectedDay }) => {
         </div>
 
         <button
-          onClick={toggleHabitForm}
+          onClick={() => setShowHabitForm(true)}
           className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white"
         >
           <PlusSquare />
@@ -144,7 +117,7 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
 
 export default function HabitTracker() {
   const { habits, updateHabits } = useContext(HabitsContext);
-  const [showHabitForm, toggleHabitForm] = useToggle(false);
+  const [showHabitForm, setShowHabitForm] = useState(false);
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [error, setError] = useState(false);
@@ -183,7 +156,7 @@ export default function HabitTracker() {
       const newHabits = [...(habits || []), currHabit];
 
       updateHabits(newHabits);
-      toggleHabitForm();
+      setShowHabitForm(false);
     }
   };
 
@@ -193,7 +166,7 @@ export default function HabitTracker() {
         <Header
           selectedDay={selectedDay}
           today={today}
-          toggleHabitForm={toggleHabitForm}
+          setShowHabitForm={setShowHabitForm}
           setSelectedDay={setSelectedDay}
         />
         <WeekDatePicker
@@ -227,7 +200,7 @@ export default function HabitTracker() {
           <HabitForm
             formTitle="Add New Habit"
             habit={newHabit}
-            toggleHabitForm={toggleHabitForm}
+            setShowHabitForm={setShowHabitForm}
             handleSubmit={handleCreateHabit}
             error={error}
           />
