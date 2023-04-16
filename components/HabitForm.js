@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { X } from "react-feather";
 import { filterDatesByWeekdays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
-import useClickOutSideToClose from "../hooks/useClickOutSideToClose";
 import { DialogComponent } from "./HabitTracker";
 import Calendar from "./Calendar";
 import useToggle from "../hooks/useToggle";
@@ -44,9 +43,6 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
     });
   };
 
-  const ref = useRef(null);
-  useClickOutSideToClose(ref, toggleHabitForm);
-
   const updateEndDate = (date) => {
     setCurrHabit({
       ...currHabit,
@@ -56,10 +52,7 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
 
   return (
     <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
-      <div
-        ref={ref}
-        className=" p-4  lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md z-50 h-full "
-      >
+      <div className=" p-4  lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md z-50 h-full ">
         <div className="flex justify-between">
           <h1 className=" text-2xl ">{formTitle}</h1>
           <X onClick={toggleHabitForm} className=" cursor-pointer " />

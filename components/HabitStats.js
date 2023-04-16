@@ -5,7 +5,6 @@ import {
   startOfToday,
   sub,
 } from "date-fns";
-import { useRef } from "react";
 import { X } from "react-feather";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import {
@@ -15,7 +14,6 @@ import {
   getDates,
   filterDatesByWeekdays,
 } from "../utils/utils";
-import useClickOutSideToClose from "../hooks/useClickOutSideToClose";
 import Calendar from "./Calendar";
 
 function HabitStats({ habit, toggleStats }) {
@@ -82,19 +80,13 @@ function HabitStats({ habit, toggleStats }) {
   ];
   const COLORS = ["#0fc9f2", "#f3f3f3"];
 
-  const ref = useRef(null);
-  useClickOutSideToClose(ref, toggleStats);
-
   const completedHabitDatesISO = datesWhenHabitWasCompleted.map((date) =>
     date?.toISOString()
   );
 
   return (
     <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50  ">
-      <div
-        ref={ref}
-        className="p-4 lg:p-8 absolute space-y-4 scrollbar-hide lg:space-y-8 top-0 right-0 w-full overflow-scroll max-w-[450px] bg-white rounded-md rounded-r-none z-50 h-full"
-      >
+      <div className="p-4 lg:p-8 absolute space-y-4 scrollbar-hide lg:space-y-8 top-0 right-0 w-full overflow-scroll max-w-[450px] bg-white rounded-md rounded-r-none z-50 h-full">
         <div className="flex justify-between">
           <h1 className=" text-2xl ">Statistics</h1>
           <X onClick={toggleStats} className=" cursor-pointer " />
