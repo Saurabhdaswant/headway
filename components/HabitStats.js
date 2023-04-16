@@ -15,7 +15,7 @@ import {
   getDates,
   filterDatesByWeekdays,
 } from "../utils/utils";
-import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
+import useClickOutSideToClose from "../hooks/useClickOutSideToClose";
 import Calendar from "./Calendar";
 
 function HabitStats({ habit, toggleStats }) {
@@ -83,7 +83,7 @@ function HabitStats({ habit, toggleStats }) {
   const COLORS = ["#0fc9f2", "#f3f3f3"];
 
   const ref = useRef(null);
-  useClickOutsideToClose(ref, toggleStats);
+  useClickOutSideToClose(ref, toggleStats);
 
   const completedHabitDatesISO = datesWhenHabitWasCompleted.map((date) =>
     date?.toISOString()

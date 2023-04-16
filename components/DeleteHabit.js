@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
+import useClickOutSideToClose from "../hooks/useClickOutSideToClose";
 
 function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
   const handleDelete = () => {
@@ -10,7 +10,7 @@ function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
   };
 
   const ref = useRef(null);
-  useClickOutsideToClose(ref, toggleDeleteDialog);
+  useClickOutSideToClose(ref, toggleDeleteDialog);
 
   return (
     <div className=" fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">

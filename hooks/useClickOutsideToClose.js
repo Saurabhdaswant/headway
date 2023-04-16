@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function useClickOutsideToClose(ref, callback) {
+export default function useClickOutSideToClose(ref, callback) {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { X } from "react-feather";
 import { filterDatesByWeekdays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
-import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
+import useClickOutSideToClose from "../hooks/useClickOutSideToClose";
 import { DialogComponent } from "./HabitTracker";
 import Calendar from "./Calendar";
 import useToggle from "../hooks/useToggle";
@@ -45,7 +45,7 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
   };
 
   const ref = useRef(null);
-  useClickOutsideToClose(ref, toggleHabitForm);
+  useClickOutSideToClose(ref, toggleHabitForm);
 
   const updateEndDate = (date) => {
     setCurrHabit({
