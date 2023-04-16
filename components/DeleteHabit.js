@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import useClickOutSideToClose from "../hooks/useClickOutSideToClose";
-
 function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
   const handleDelete = () => {
     const filteredHabits = habits.filter((habit, _) => habit.id !== habitId);
