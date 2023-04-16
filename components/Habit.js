@@ -33,6 +33,7 @@ function Habit({ habit, currDate }) {
   const formattedCompletedOnDates = getFormattedDates(
     currHabit?.completedOnDates
   );
+
   useEffect(() => {
     if (formattedCompletedOnDates.includes(formattedDate)) {
       setIsCompleted(true);
@@ -87,7 +88,7 @@ function Habit({ habit, currDate }) {
     if (isCompleted && dateIndex !== -1) {
       completedOnDates.splice(dateIndex, 1);
     } else {
-      completedOnDates.push(currDate);
+      completedOnDates.push(currDate.toISOString());
     }
 
     const updatedHabit = {

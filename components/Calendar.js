@@ -22,6 +22,7 @@ export default function Calendar({
   setCurrDate,
   toggleCalendar,
   canSelectDaysAfterToday,
+  completedHabitDates,
 }) {
   let [currentMonth, setCurrentMonth] = useState(format(currDate, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
@@ -82,51 +83,70 @@ export default function Calendar({
               "py-1.5"
             )}
           >
-            <button
-              type="button"
-              onClick={() => {
-                if (isAfter(day, startOfToday()) && !canSelectDaysAfterToday) {
-                  return;
-                }
-                setCurrDate(day);
-                toggleCalendar();
-              }}
-              className={classNames(
-                isEqual(currDate, day) && !isToday(day) && " bg-blue-200 ",
-                isToday(day) && "text-white bg-blue-500 ",
-                !isEqual(day, currDate) &&
-                  !isToday(day) &&
-                  " hover:bg-gray-200 ",
-                isAfter(day, startOfToday()) && "text-gray-400",
-                "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
-              )}
-            >
-              <time dateTime={format(day, "yyyy-MM-dd")}>
-                {format(day, "d")}
-              </time>
-            </button>
+            {toggleCalendar ? (
+              <button
+                type="button"
+                onClick={() => {
+                  if (
+                    isAfter(day, startOfToday()) &&
+                    !canSelectDaysAfterToday
+                  ) {
+                    return;
+                  }
+                  setCurrDate(day);
+                  toggleCalendar();
+                }}
+                className={classNames(
+                  isEqual(currDate, day) && !isToday(day) && " bg-blue-200 ",
+                  isToday(day) && "text-white bg-blue-500 ",
+                  !isEqual(day, currDate) &&
+                    !isToday(day) &&
+                    " hover:bg-gray-200 ",
+                  isAfter(day, startOfToday()) && "text-gray-400",
+                  "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
+                )}
+              >
+                <time dateTime={format(day, "yyyy-MM-dd")}>
+                  {format(day, "d")}
+                </time>
+              </button>
+            ) : (
+              <div
+                className={classNames(
+                  completedHabitDates?.includes(day.toISOString()) &&
+                    "text-white bg-green-500 ",
+                  "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
+                )}
+              >
+                <time dateTime={format(day, "yyyy-MM-dd")}>
+                  {format(day, "d")}
+                </time>
+              </div>
+            )}
           </div>
         ))}
       </div>
-      <div className="flex text-sm pt-4 justify-between font-semibold  border-t-2 border-gray-100 mt-2">
-        <button
-          className="uppercase"
-          onClick={() => {
-            toggleCalendar();
-          }}
-        >
-          Close
-        </button>
-        <button
-          className="uppercase"
-          onClick={() => {
-            setCurrDate(startOfToday());
-            toggleCalendar();
-          }}
-        >
-          Today
-        </button>
-      </div>
+      {toggleCalendar && (
+        <div className="flex text-sm pt-4 justify-between font-semibold  border-t-2 border-gray-100 mt-2">
+          <button
+            className="uppercase"
+            onClick={() => {
+              toggleCalendar();
+            }}
+          >
+            Close
+          </button>
+          <button
+            className="uppercase"
+            onClick={() => {
+              setCurrDate(startOfToday());
+              toggleCalendar();
+            }}
+          >
+            Today
+          </button>
+        </div>
+      )}
     </div>
   );
 }

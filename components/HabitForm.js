@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { X } from "react-feather";
-import { getDatesWhichOnlyIncludesGivenDays } from "../utils/utils";
+import { filterDatesByWeekdays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
 import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
 import { DialogComponent } from "./HabitTracker";
@@ -18,9 +18,9 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
         (d) => d !== day
       );
 
-      const newCompletedOnDates = getDatesWhichOnlyIncludesGivenDays(
+      const newCompletedOnDates = filterDatesByWeekdays(
         currHabit.completedOnDates,
-        filterdList
+        newRepeatedHabitDays
       );
 
       setCurrHabit({
@@ -32,7 +32,7 @@ function HabitForm({ formTitle, habit, toggleHabitForm, handleSubmit, error }) {
     }
 
     const newRepeatedHabitDays = [...currHabit.repeatHabitDays, day];
-    const newCompletedOnDates = getDatesWhichOnlyIncludesGivenDays(
+    const newCompletedOnDates = filterDatesByWeekdays(
       currHabit.completedOnDates,
       newRepeatedHabitDays
     );

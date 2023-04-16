@@ -5,22 +5,20 @@ import {
   startOfToday,
   sub,
 } from "date-fns";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { X } from "react-feather";
 import { Cell, Label, Pie, PieChart } from "recharts";
-import { HabitsContext } from "../Providers/HabitsProvider";
 import {
   getTheBestStreakCount,
   getTheCurrentStreakCount,
   getAllStreaks,
   getDates,
-  getDatesWhichOnlyIncludesGivenDays,
+  filterDatesByWeekdays,
 } from "../utils/utils";
 import useClickOutsideToClose from "../hooks/useClickOutSideToClose";
+import Calendar from "./Calendar";
 
 function HabitStats({ habit, toggleStats }) {
-  const { habits } = useContext(HabitsContext);
-
   const yesterday = sub(startOfToday(), {
     days: 1,
   });
@@ -41,37 +39,39 @@ function HabitStats({ habit, toggleStats }) {
     startOfToday()
   );
 
-  const daysSinceCreationOfHabit = getDatesWhichOnlyIncludesGivenDays(
+  const daysSinceCreationOfHabit = filterDatesByWeekdays(
     datesSinceCreationOfHabit,
     habit.repeatHabitDays
   ).length;
 
+  const datesWhenHabitWasCompleted = filterDatesByWeekdays(
+    habit?.completedOnDates,
+    habit.repeatHabitDays
+  );
+
   const totalStreakPercentage = Math.floor(
-    (habit.completedOnDates.length / daysSinceCreationOfHabit) * 100
+    (datesWhenHabitWasCompleted.length / daysSinceCreationOfHabit) * 100
   );
 
   const missedHabitCount =
-    daysSinceCreationOfHabit - habit.completedOnDates.length;
+    daysSinceCreationOfHabit - datesWhenHabitWasCompleted.length;
   const missedHabitPercentage = Math.floor(
     (missedHabitCount / daysSinceCreationOfHabit) * 100
   );
 
-  const currentHabit = habits.find((h) => h.id === habit.id);
-  const habitCompletedOnDates = currentHabit?.completedOnDates;
-
-  const completedHabitsOfYear = habitCompletedOnDates.filter((date) =>
+  const completedHabitsOfYear = datesWhenHabitWasCompleted.filter((date) =>
     isThisYear(new Date(date))
   );
 
-  const completedHabitsOfMonth = habitCompletedOnDates.filter((date) =>
+  const completedHabitsOfMonth = datesWhenHabitWasCompleted.filter((date) =>
     isThisMonth(new Date(date))
   );
 
-  const completedHabitsOfWeek = habitCompletedOnDates.filter((date) =>
+  const completedHabitsOfWeek = datesWhenHabitWasCompleted.filter((date) =>
     isThisWeek(new Date(date))
   );
 
-  const allTimeCompletedHabitsCount = habitCompletedOnDates.length;
+  const allTimeCompletedHabitsCount = datesWhenHabitWasCompleted.length;
   const completedThisYear = completedHabitsOfYear.length;
   const completedThisMonth = completedHabitsOfMonth.length;
   const completedThisWeek = completedHabitsOfWeek.length;
@@ -85,11 +85,15 @@ function HabitStats({ habit, toggleStats }) {
   const ref = useRef(null);
   useClickOutsideToClose(ref, toggleStats);
 
+  const completedHabitDatesISO = datesWhenHabitWasCompleted.map((date) =>
+    date?.toISOString()
+  );
+
   return (
     <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50  ">
       <div
         ref={ref}
-        className="p-4 lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md rounded-r-none z-50 h-full"
+        className="p-4 lg:p-8 absolute space-y-4 scrollbar-hide lg:space-y-8 top-0 right-0 w-full overflow-scroll max-w-[450px] bg-white rounded-md rounded-r-none z-50 h-full"
       >
         <div className="flex justify-between">
           <h1 className=" text-2xl ">Statistics</h1>
@@ -197,6 +201,14 @@ function HabitStats({ habit, toggleStats }) {
               </h1>
             </div>
           </div>
+        </div>
+
+        <div className="space-y-4 my-4  ">
+          <p className="  font-semibold   ">Calendar Progrees</p>
+          <Calendar
+            currDate={startOfToday()}
+            completedHabitDates={completedHabitDatesISO}
+          />
         </div>
       </div>
     </div>

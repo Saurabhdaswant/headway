@@ -115,17 +115,17 @@ export function getDates(startingDate, endingDate) {
   return dates;
 }
 
-export const getDatesWhichOnlyIncludesGivenDays = (theDates, repeatDays) => {
+export const filterDatesByWeekdays = (theDates, repeatDays) => {
   const newDates = [];
   for (let index = 0; index < theDates.length; index++) {
     const date = theDates[index];
 
-    const dayOfWeek = date
+    const dayOfWeek = new Date(date)
       .toLocaleDateString("en-US", { weekday: "long" })
       .toLowerCase();
 
     if (repeatDays.includes(dayOfWeek)) {
-      newDates.push(date);
+      newDates.push(new Date(date));
     }
   }
 
