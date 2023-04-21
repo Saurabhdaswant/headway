@@ -35,7 +35,7 @@ function Habit({ habit, currDate }) {
   );
 
   useEffect(() => {
-    if (formattedCompletedOnDates.includes(formattedDate)) {
+    if (formattedCompletedOnDates?.includes(formattedDate)) {
       setIsCompleted(true);
     } else {
       setIsCompleted(false);

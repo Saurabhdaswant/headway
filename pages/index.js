@@ -36,28 +36,29 @@ export default function Home() {
         className="flex items-center justify-center  h-[100vh]  bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
 via-white  via-opacity-5 relative  "
       >
-        <main className=" z-50 flex flex-col text-center items-center  gap-4 max-w-3xl space-y-8  my-10 mx-auto ">
-          <h1 className=" font-bold text-7xl text-center text-[#212121]  ">
-            Build Better Habits with
-            <em className="underline decoration-blue-400  inline px-5 ">
-              Headway
-            </em>
-            Today!
-          </h1>
-          <blockquote className=" font-medium text-xl text-slate-500 ">
-            Take the First Step Towards a Better Life with Headway: Track Your
-            Habits, Achieve Your Goals, and Build a Happier, Healthier You.
-          </blockquote>
+        <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 space-y-6 lg:space-y-10 xl:space-y-16  my-10 mx-auto ">
+          <div className="space-y-4 lg:space-y-6 xl:space-y-8">
+            <h1 className=" font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center text-[#212121]  ">
+              Build Better Habits with
+              <em className="underline decoration-blue-400  inline mx-2 sm:mx-3 xl:mx-5 ">
+                Headway
+              </em>
+              Today!
+            </h1>
+            <blockquote className=" font-medium tracking-wide  	 sm:text-lg lg:text-xl  text-slate-500 ">
+              Take the First Step Towards a Better Life, Track Your Habits,
+              Achieve Your Goals, and Build a Happier, Healthier You.
+            </blockquote>
+          </div>
           <Link
-            className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-14 py-4 shadow-2xl shadow-blue-400  rounded-lg text-lg text-white"
+            className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-8 lg:px-11 lg:py-4 py-3 xl:px-14   lg:shadow-2xl lg:shadow-blue-400  rounded-lg text-lg text-white"
             href="/app"
           >
             Start tracking!
           </Link>
         </main>
-
-        <div className=" absolute w-[400px]  h-[400px] left-[830px] top-[100px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]  "></div>
         <div className=" absolute w-[400px]  h-[400px] left-[-169.45px] top-[-172.22px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]  "></div>
+        <div className=" hidden lg:block  absolute w-[400px]  h-[400px] left-[800px] 2xl:left-[1100px] xl:top-[100px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]   "></div>
       </main>
 
       <section className=" h-[100vh]">
