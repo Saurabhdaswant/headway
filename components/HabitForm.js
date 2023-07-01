@@ -1,30 +1,59 @@
 import React, { useState } from "react";
 import { X } from "react-feather";
+import { filterDatesByWeekdays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
+import { DialogComponent } from "./HabitTracker";
+import Calendar from "./Calendar";
+import useToggle from "../hooks/useToggle";
+import { startOfToday } from "date-fns";
+import useClickOutSide from "../hooks/useClickOutSide";
 
 function HabitForm({
   formTitle,
   habit,
-  toggleHabitForm,
+  setShowHabitForm,
   handleSubmit,
   error,
 }) {
   const [currHabit, setCurrHabit] = useState(habit);
+  const [showDialog, toggleDialog] = useToggle(false);
 
   const addDayIntoRepeatHabitDaysList = (day) => {
     if (currHabit.repeatHabitDays.includes(day)) {
-      const filterdList = currHabit.repeatHabitDays.filter((d) => d !== day);
+      const newRepeatedHabitDays = currHabit.repeatHabitDays.filter(
+        (d) => d !== day
+      );
+
+      const newCompletedOnDates = filterDatesByWeekdays(
+        currHabit.completedOnDates,
+        newRepeatedHabitDays
+      );
+
       setCurrHabit({
         ...currHabit,
-        repeatHabitDays: [...new Set(filterdList)],
+        repeatHabitDays: [...new Set(newRepeatedHabitDays)],
+        completedOnDates: newCompletedOnDates,
       });
       return;
     }
 
     const newRepeatedHabitDays = [...currHabit.repeatHabitDays, day];
+    const newCompletedOnDates = filterDatesByWeekdays(
+      currHabit.completedOnDates,
+      newRepeatedHabitDays
+    );
+
     setCurrHabit({
       ...currHabit,
       repeatHabitDays: [...new Set(newRepeatedHabitDays)],
+      completedOnDates: newCompletedOnDates,
+    });
+  };
+
+  const updateEndDate = (date) => {
+    setCurrHabit({
+      ...currHabit,
+      endDate: date,
     });
   };
 
@@ -34,12 +63,12 @@ function HabitForm({
         <div className="flex justify-between">
           <h1 className=" text-2xl ">{formTitle}</h1>
           <X
-            onClick={toggleHabitForm}
+            onClick={() => setShowHabitForm(false)}
             className=" cursor-pointer "
           />
         </div>
         <div className=" flex flex-col   h-full ">
-          <div className=" space-y-4  lg:space-y-8 ">
+          <div className=" space-y-4  lg:space-y-8 overflow-scroll scrollbar-hide h-[70vh] ">
             <div className="flex flex-col  lg:space-y-2">
               <label htmlFor="habitName" className="font-semibold pb-2">
                 Habit
@@ -159,6 +188,22 @@ function HabitForm({
                 })}
               </div>
             </div>
+            {/* <div className="flex flex-col space-y-2 ">
+              <p className="font-semibold">End Date</p>
+              <DialogComponent
+                showDialog={showDialog}
+                toggleDialog={toggleDialog}
+              >
+                {showDialog && (
+                  <Calendar
+                    currDate={startOfToday()}
+                    setCurrDate={updateEndDate}
+                    toggleCalendar={toggleDialog}
+                    canSelectDaysAfterToday={true}
+                  />
+                )}
+              </DialogComponent>
+            </div> */}
           </div>
           <button
             onClick={() => handleSubmit(currHabit)}

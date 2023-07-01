@@ -2,40 +2,78 @@ import {
   eachDayOfInterval,
   endOfWeek,
   format,
+  isAfter,
   isEqual,
   startOfToday,
   startOfWeek,
+  sub,
 } from "date-fns";
-import React, { useContext, useState } from "react";
-import { Plus, PlusSquare } from "react-feather";
-import Calendar from "./Calendar";
+import React, { useContext, useRef, useState } from "react";
+import { PlusSquare } from "react-feather";
 import { colors, doitat, weekDays } from "./constants";
 import HabitForm from "./HabitForm";
-import HabitsStats from "./HabitsStats";
 import Habits from "./Habits";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useToggle from "../hooks/useToggle";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { CalendarIcon } from "@heroicons/react/outline";
+import Calendar from "./Calendar";
+import useClickOutSide from "../hooks/useClickOutSide";
 
-const Header = ({ selectedDay, today, toggleHabitForm }) => {
+const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
+  const [showDialog, setShowDialog] = useState(false);
+  let domNode = useClickOutSide(() => setShowDialog(false));
+
   return (
-    <div className="flex justify-between items-center lg:items-end ">
-      <div className=" space-y-2 ">
-        <>
-          <p className=" text-2xl lg:text-5xl font-bold">
-            {isEqual(selectedDay, today)  ? "Today" : format(selectedDay, "MMMM dd")}
-          </p>
-          <p className="hidden lg:block text-gray-400 text-xl">
-            {format(selectedDay, "eeee")}
-          </p>
-        </>
+    <div className="flex justify-between items-end">
+      <div className="  ">
+        {isEqual(selectedDay, today) ? (
+          <>
+            <p className="text-3xl font-bold text-[#2e2e2e]">Today</p>
+            <p className="text-gray-400 text-xl">
+              {format(selectedDay, "eeee")} {format(selectedDay, "MMMM dd")}
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-3xl font-bold text-[#2e2e2e]">
+              {format(selectedDay, "MMMM dd")}
+            </p>
+            <p className="text-gray-400 text-xl">
+              {format(selectedDay, "eeee")}
+            </p>
+          </>
+        )}
       </div>
-      <button 
-        onClick={toggleHabitForm}
-      className=" sm:flex  justify-between items-center gap-2 font-medium  p-2 sm:px-5 sm:py-2  rounded text-lg text-white bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2]">
-        <Plus  />
-        <p className="hidden sm:block " >Add Habit</p>
-      </button>
+      <div className="flex items-end gap-6">
+        <div ref={domNode}>
+          <button
+            className="p-2 bg-white rounded text-gray-600 "
+            onClick={() => setShowDialog(true)}
+          >
+            <CalendarIcon className=" w-7" />
+          </button>
+
+          <div className=" absolute bottom-1/4 mt-10  ">
+            {showDialog && (
+              <Calendar
+                currDate={selectedDay}
+                setCurrDate={setSelectedDay}
+                toggleCalendar={() => setShowDialog(false)}
+                canSelectDaysAfterToday={false}
+              />
+            )}
+          </div>
+        </div>
+
+        <button
+          onClick={() => setShowHabitForm(true)}
+          className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white"
+        >
+          <PlusSquare />
+          <p>Add Habit</p>
+        </button>
+      </div>
     </div>
   );
 };
@@ -51,7 +89,12 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
       {week.map((day) => {
         return (
           <div
-            onClick={() => setSelectedDay(day)}
+            onClick={() => {
+              if (isAfter(day, startOfToday())) {
+                return;
+              }
+              setSelectedDay(day);
+            }}
             key={day.toString()}
             className="text-center space-y-2 cursor-pointer "
           >
@@ -59,9 +102,9 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
               {format(day, "eee")}
             </p>
             <p
-              className={`font-bold text-lg ${
-                isEqual(selectedDay, day) && "text-[#007BFF]"
-              } `}
+              className={` font-bold text-lg ${
+                isEqual(selectedDay, day) ? "text-[#007BFF]" : "text-gray-600"
+              }  `}
             >
               {format(day, "d")}
             </p>
@@ -73,26 +116,26 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
 };
 
 export default function HabitTracker() {
-
-  const { habits, setHabits } = useContext(HabitsContext);
-  const [showHabitForm, toggleHabitForm] = useToggle(false);
+  const { habits, updateHabits } = useContext(HabitsContext);
+  const [showHabitForm, setShowHabitForm] = useState(false);
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [error, setError] = useState(false);
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
 
-
+  const result = sub(today, {
+    days: 5,
+  });
 
   const newHabit = {
     id: uuidv4(),
     name: "",
-    isCompleted: false,
     getDoneIn: "anytime",
     color: "",
-    checkedOfForDates: [],
-    createdDate: startOfToday(),
+    completedOnDates: [],
+    createdDate: result,
     repeatHabitDays: weekDays,
-  }
+  };
 
   const handleCreateHabit = (currHabit) => {
     if (currHabit.name.trim().length === 0) {
@@ -102,19 +145,18 @@ export default function HabitTracker() {
       setError(false);
 
       if (currHabit.color === "") {
-        var randomColor = colors[Math.floor(Math.random() * colors.length)];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
         currHabit.color = randomColor;
       }
 
-      if (currHabit.getDoneIn === "") currHabit.getDoneIn = "anytime";
+      if (currHabit.getDoneIn === "") {
+        currHabit.getDoneIn = "anytime";
+      }
 
       const newHabits = [...(habits || []), currHabit];
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem("Habits", JSON.stringify(newHabits));
-      }
-      setHabits(newHabits);
-      toggleHabitForm();
+      updateHabits(newHabits);
+      setShowHabitForm(false);
     }
   };
 
@@ -124,7 +166,8 @@ export default function HabitTracker() {
         <Header
           selectedDay={selectedDay}
           today={today}
-          toggleHabitForm={toggleHabitForm}
+          setShowHabitForm={setShowHabitForm}
+          setSelectedDay={setSelectedDay}
         />
         <WeekDatePicker
           selectedDay={selectedDay}
@@ -138,7 +181,7 @@ export default function HabitTracker() {
                 key={idx}
                 className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${
                   selectedTimeOfDay === time
-                    ? "bg-[#9fc6eb]   text-[#091e32]"
+                    ? "bg-[#BFE1FF]   text-[#02518B]"
                     : "bg-[#EDEDED]    text-gray-400"
                 }`}
               >
@@ -153,15 +196,11 @@ export default function HabitTracker() {
         />
       </main>
       <div>
-        <div className="hidden lg:block">
-        <HabitsStats />
-        <Calendar currDate={selectedDay} setCurrDate={setSelectedDay} />
-        </div>
         {showHabitForm ? (
           <HabitForm
             formTitle="Add New Habit"
             habit={newHabit}
-            toggleHabitForm={toggleHabitForm}
+            setShowHabitForm={setShowHabitForm}
             handleSubmit={handleCreateHabit}
             error={error}
           />

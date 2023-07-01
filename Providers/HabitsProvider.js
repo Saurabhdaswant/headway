@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from "react";
 export const HabitsContext = createContext();
 
 export default function HabitsProvider({ children }) {
-    const [habits, setHabits] = useState([]);
+  const [habits, setHabits] = useState([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -11,8 +11,16 @@ export default function HabitsProvider({ children }) {
     }
   }, []);
 
+  const updateHabits = (newHabits) => {
+    setHabits(newHabits);
+
+    if (typeof window !== "undefined") {
+      localStorage.setItem("Habits", JSON.stringify([...newHabits]));
+    }
+  };
+
   return (
-    <HabitsContext.Provider value={{ habits, setHabits }}>
+    <HabitsContext.Provider value={{ habits, updateHabits }}>
       {children}
     </HabitsContext.Provider>
   );
