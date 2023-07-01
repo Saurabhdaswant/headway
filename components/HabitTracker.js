@@ -46,7 +46,7 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
         )}
       </div>
       <div className="flex items-end gap-6">
-        <div ref={domNode}>
+        <div ref={domNode} className="relative">
           <button
             className="p-2 bg-white rounded text-gray-600 "
             onClick={() => setShowDialog(true)}
@@ -54,7 +54,7 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
             <CalendarIcon className=" w-7" />
           </button>
 
-          <div className=" absolute bottom-1/4 mt-10  ">
+          <div className=" absolute  mt-10  ">
             {showDialog && (
               <Calendar
                 currDate={selectedDay}
