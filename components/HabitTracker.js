@@ -85,7 +85,7 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
   });
 
   return (
-    <div className="bg-white flex items-center justify-evenly h-20 rounded-md   my-8 ">
+    <div className="bg-white flex items-center justify-evenly h-20 rounded-md  my-4 lg:my-8 ">
       {week.map((day) => {
         return (
           <div
@@ -161,7 +161,7 @@ export default function HabitTracker() {
   };
 
   return (
-    <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%] xl:max-w-[80%] 2xl:max-w-[70%] flex justify-between py-8     lg:gap-8  ">
+    <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%] xl:max-w-[80%] 2xl:max-w-[70%] flex justify-between py-4 lg:py-8     lg:gap-8  ">
       <main className=" mx-auto w-full max-w-xl lg:max-w-[60%]   ">
         <Header
           selectedDay={selectedDay}
@@ -173,7 +173,7 @@ export default function HabitTracker() {
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
-        <div className=" flex items-center gap-4 my-8 overflow-scroll scrollbar-hide   ">
+        <div className=" flex items-center gap-4 my-4 lg:my-8 overflow-scroll scrollbar-hide   ">
           {doitat.map((time, idx) => {
             return (
               <div
