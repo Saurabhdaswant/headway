@@ -133,7 +133,7 @@ export default function HabitTracker() {
     getDoneIn: "anytime",
     color: "",
     completedOnDates: [],
-    createdDate: result,
+    createdDate: today,
     repeatHabitDays: weekDays,
   };
 

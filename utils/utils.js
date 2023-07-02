@@ -40,18 +40,18 @@ export function getTheLengthOfStreaks(streaks) {
 export function getTheBestStreakCount(streaks) {
   const streaksCount = getTheLengthOfStreaks(streaks);
 
-  let bestCount;
+  if (streaksCount.length === 0) {
+    // If there are no streaks, return undefined or some suitable value
+    return 0;
+  }
 
-  for (let i = 0; i < streaksCount.length; i++) {
-    if (streaksCount.length === 1) {
-      bestCount = streaksCount[0];
-      return bestCount;
-    }
+  // Initialize bestCount with the first streak count
+  let bestCount = streaksCount[0];
 
-    if (streaksCount[i] > streaksCount[i - 1]) {
+  // Start the loop from the second streak count
+  for (let i = 1; i < streaksCount.length; i++) {
+    if (streaksCount[i] > bestCount) {
       bestCount = streaksCount[i];
-    } else {
-      bestCount = streaksCount[i - 1];
     }
   }
 
