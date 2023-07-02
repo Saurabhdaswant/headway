@@ -119,7 +119,7 @@ function Habit({ habit, currDate }) {
         <div className="space-y-1 ">
           <p className="font-bold"> {habit.name}</p>
           <p
-            className={`text-sm px-2 font-medium capitalize  bg-${habit.color} bg-opacity-10 rounded-sm text-${habit.color}`}
+            className={`text-sm px-2 font-medium capitalize inline-block  bg-${habit.color} bg-opacity-10 rounded-sm text-${habit.color}`}
           >
             {" "}
             {habit.getDoneIn}
