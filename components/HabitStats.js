@@ -23,7 +23,7 @@ function HabitStats({ habit, toggleStats }) {
   });
 
   const consecutiveDates = getAllStreaks(
-    habit.completedOnDates?.map((d) => new Date(d))
+    habit.completedOnDates.map((d) => new Date(d))
   );
 
   const bestStreakCount = getTheBestStreakCount(consecutiveDates);
@@ -81,7 +81,7 @@ function HabitStats({ habit, toggleStats }) {
   ];
   const COLORS = ["#0fc9f2", "#f3f3f3"];
 
-  const completedHabitDatesISO = datesWhenHabitWasCompleted?.map((date) =>
+  const completedHabitDatesISO = datesWhenHabitWasCompleted.map((date) =>
     date?.toISOString()
   );
   let domNode = useClickOutSide(() => toggleStats());
@@ -109,7 +109,7 @@ function HabitStats({ habit, toggleStats }) {
               paddingAngle={0}
               dataKey="value"
             >
-              {data?.map((entry, index) => (
+              {data.map((entry, index) => (
                 <Cell key={123332} fill={COLORS[index % COLORS.length]} />
               ))}
               <Label
