@@ -41,7 +41,7 @@ export default function Habits({ selectedDay, selectedTimeOfDay }) {
     habit.getDoneIn === selectedTimeOfDay;
 
   let filteredHabits = habits
-    // ?.filter(isAfterCreation)
+    ?.filter(isAfterCreation)
     ?.filter(isRepeatDay)
     ?.filter(isBeforeEndDate);
 

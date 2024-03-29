@@ -4,6 +4,7 @@ import {
   format,
   isAfter,
   isEqual,
+  startOfMonth,
   startOfToday,
   startOfWeek,
   sub,
@@ -127,13 +128,19 @@ export default function HabitTracker() {
     days: 5,
   });
 
+  const now = new Date();
+  const firstDayOfMonth = startOfMonth(now);
+
+  console.log(firstDayOfMonth, "wtf ??");
+  // console.log(today, "wtf ??");
+
   const newHabit = {
     id: uuidv4(),
     name: "",
     getDoneIn: "anytime",
     color: "",
     completedOnDates: [],
-    createdDate: today,
+    createdDate: firstDayOfMonth,
     repeatHabitDays: weekDays,
   };
 
