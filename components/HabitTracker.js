@@ -8,6 +8,7 @@ import {
   startOfToday,
   startOfWeek,
   sub,
+  subDays,
 } from "date-fns";
 import React, { useContext, useRef, useState } from "react";
 import { PlusSquare } from "react-feather";
@@ -128,11 +129,11 @@ export default function HabitTracker() {
     days: 5,
   });
 
-  const now = new Date();
-  const firstDayOfMonth = startOfMonth(now);
+  // Get the current date
+  const currentDate = new Date();
 
-  console.log(firstDayOfMonth, "wtf ??");
-  // console.log(today, "wtf ??");
+  // Subtract 4 days from the current date
+  const dateFourDaysAgo = subDays(currentDate, 3);
 
   const newHabit = {
     id: uuidv4(),
@@ -140,7 +141,7 @@ export default function HabitTracker() {
     getDoneIn: "anytime",
     color: "",
     completedOnDates: [],
-    createdDate: firstDayOfMonth,
+    createdDate: dateFourDaysAgo,
     repeatHabitDays: weekDays,
   };
 
