@@ -125,15 +125,11 @@ export default function HabitTracker() {
   const [error, setError] = useState(false);
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
 
-  const result = sub(today, {
+  const dateWhichIsBeforeCurrDate = sub(today, {
     days: 5,
   });
 
-  // Get the current date
-  const currentDate = new Date();
-
-  // Subtract 4 days from the current date
-  const dateFourDaysAgo = subDays(currentDate, 3);
+  // use this if needed instead of today! 👆🏽
 
   const newHabit = {
     id: uuidv4(),
@@ -141,7 +137,7 @@ export default function HabitTracker() {
     getDoneIn: "anytime",
     color: "",
     completedOnDates: [],
-    createdDate: dateFourDaysAgo,
+    createdDate: today,
     repeatHabitDays: weekDays,
   };
 
