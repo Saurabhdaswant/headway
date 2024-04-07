@@ -27,23 +27,23 @@ export default function Home() {
     );
   };
 
-  const [habits, sethabits] = useState([]);
+  // const [habits, sethabits] = useState([]);
 
-  useEffect(() => {
-    async function gethabits() {
-      const res = await fetch("http://localhost:5000/api/habits", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const habits = await res.json();
+  // useEffect(() => {
+  //   async function gethabits() {
+  //     const res = await fetch("http://localhost:5000/api/habits", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const habits = await res.json();
 
-      sethabits(habits);
-    }
-    gethabits();
-  }, []);
+  //     sethabits(habits);
+  //   }
+  //   gethabits();
+  // }, []);
 
-  console.log("getting habits here : ", habits);
+  // console.log("getting habits here : ", habits);
 
   return (
     <div>
