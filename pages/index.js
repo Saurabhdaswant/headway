@@ -5,6 +5,7 @@ import headway from "../public/headway.png";
 import HabitScheduler from "../public/Schedulers.svg";
 import HabitStats from "../public/Stats.svg";
 import { Check } from "react-feather";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const CirclCheckBox = () => {
@@ -25,6 +26,25 @@ export default function Home() {
       </div>
     );
   };
+
+  const [habits, sethabits] = useState([]);
+
+  useEffect(() => {
+    async function gethabits() {
+      const res = await fetch("http://localhost:5000/api/habits", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const habits = await res.json();
+
+      sethabits(habits);
+    }
+    gethabits();
+  }, []);
+
+  console.log("getting habits here : ", habits);
+
   return (
     <div>
       <Head>
