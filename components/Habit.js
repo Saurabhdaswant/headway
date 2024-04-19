@@ -142,8 +142,6 @@ function Habit({ habit, currDate }) {
       )}
       {showDeleteDialog && (
         <DeleteHabit
-          habits={habits}
-          updateHabits={updateHabits}
           habitId={currHabit.id}
           toggleDeleteDialog={toggleDeleteDialog}
         />

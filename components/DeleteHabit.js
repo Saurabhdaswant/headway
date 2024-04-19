@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { HabitsContext } from "../Providers/HabitsProvider";
 import useClickOutSide from "../hooks/useClickOutSide";
 
-function DeleteHabit({ habits, updateHabits, habitId, toggleDeleteDialog }) {
+function DeleteHabit({ habitId, toggleDeleteDialog }) {
+  const { habits, updateHabits } = useContext(HabitsContext);
+
   const handleDelete = () => {
     const filteredHabits = habits.filter((habit, _) => habit.id !== habitId);
 
