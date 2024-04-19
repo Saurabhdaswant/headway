@@ -20,7 +20,6 @@ function Habit({ habit, currDate }) {
   const [showHabitForm, setShowHabitForm] = useState(false);
   const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
   const [showStats, toggleStats] = useToggle(false);
-  const [showHabitEditOptions, toggleHabitEditOptions] = useToggle(false);
   const [error, setError] = useState(false);
 
   const formattedDate = format(currDate, "yy-MM-dd");
