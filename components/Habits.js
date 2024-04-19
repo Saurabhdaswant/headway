@@ -33,17 +33,11 @@ export function Habits({ selectedDay, selectedTimeOfDay }) {
     isAfter(selectedDay, new Date(habit.createdDate));
 
   const isRepeatDay = (habit) => habit.repeatHabitDays.includes(currentDay);
-  const isBeforeEndDate = (habit) =>
-    habit.endDate === undefined ||
-    isBefore(selectedDay, new Date(habit.endDate));
 
   const matchesSelectedTimeOfDay = (habit) =>
     habit.getDoneIn === selectedTimeOfDay;
 
-  let filteredHabits = habits
-    ?.filter(isAfterCreation)
-    ?.filter(isRepeatDay)
-    ?.filter(isBeforeEndDate);
+  let filteredHabits = habits?.filter(isAfterCreation)?.filter(isRepeatDay);
 
   if (!anyTimeOfDay) {
     filteredHabits = filteredHabits?.filter(matchesSelectedTimeOfDay);
