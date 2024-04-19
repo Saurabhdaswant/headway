@@ -58,3 +58,13 @@
 // HabitsCompletionChart
 // HabitsStats
 // Sidebar
+
+// i went over the code and saw how things i've built
+// and its a simple code base
+// what i learnt is that the main thing is the habit object
+
+// baki ka everything is sorted well
+// one thing to fix later is : isCompleted feature
+
+// write now i can start creating new habits which has the similar key and values
+// and then see if everything is rendered / calculated correctly
