@@ -106,9 +106,7 @@ function Habit({ habit, currDate }) {
         <Check className="  w-8 h-8  stroke-3" />
       </div>
       <div
-        onMouseEnter={toggleHabitEditOptions}
-        onMouseLeave={toggleHabitEditOptions}
-        className={` p-3 rounded  w-[85%] flex justify-between items-center   my-2 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
+        className={` p-3 group  rounded  w-[85%] flex justify-between items-center   my-2 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
       >
         <div className="space-y-1 ">
           <p className="font-bold"> {habit.name}</p>
@@ -119,22 +117,20 @@ function Habit({ habit, currDate }) {
             {habit.getDoneIn}
           </p>
         </div>
-        {showHabitEditOptions && (
-          <div className="flex  gap-4 w-24">
-            <PencilAltIcon
-              onClick={() => setShowHabitForm(true)}
-              className="hover:cursor-pointer"
-            />
-            <ChartSquareBarIcon
-              onClick={toggleStats}
-              className="hover:cursor-pointer"
-            />
-            <TrashIcon
-              onClick={toggleDeleteDialog}
-              className="hover:cursor-pointer"
-            />
-          </div>
-        )}
+        <div className="flex opacity-0 group-hover:opacity-100  gap-4 w-24">
+          <PencilAltIcon
+            onClick={() => setShowHabitForm(true)}
+            className="hover:cursor-pointer"
+          />
+          <ChartSquareBarIcon
+            onClick={toggleStats}
+            className="hover:cursor-pointer"
+          />
+          <TrashIcon
+            onClick={toggleDeleteDialog}
+            className="hover:cursor-pointer"
+          />
+        </div>
       </div>
       {showHabitForm && (
         <HabitForm
