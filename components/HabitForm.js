@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { X } from "react-feather";
 import { filterDatesByWeekdays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
-import { DialogComponent } from "./HabitTracker";
-import Calendar from "./Calendar";
 import useToggle from "../hooks/useToggle";
-import { startOfToday } from "date-fns";
-import useClickOutSide from "../hooks/useClickOutSide";
 
 function HabitForm({
   formTitle,

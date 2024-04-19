@@ -5,12 +5,12 @@
 // dont reload the whole app just while updating next month ✅
 // dont show habits on dates which are behind the date of creation ✅
 // dont show habits on days which are not included in repeadted habits list ✅
+// use node js and mongodb ✅
 // complete the next.js course from codeevolution
 // make it mobile / tab responsive
 // complete the stats and chart component from design
 // Add Animation using Framer motion
 // add signIn and sinUp functionality and store user data
-// use node js and mongodb
 // use React Querry
 // find correct way to store habits to date / date into habit object
 // learn typescript for react && next.js and refactor the code
@@ -47,7 +47,7 @@
 // const byDay = habit => !habit.repeatHabitDays.includes(selectedDay)
 
 //! main stuff
-// app
+// /habits
 // Habit
 // HabitForm
 

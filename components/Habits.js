@@ -21,7 +21,7 @@ const NoHabits = ({ children }) => {
   );
 };
 
-export default function Habits({ selectedDay, selectedTimeOfDay }) {
+export function Habits({ selectedDay, selectedTimeOfDay }) {
   const { habits } = useContext(HabitsContext);
 
   const currentDay = days[getDay(selectedDay)];
