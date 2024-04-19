@@ -3,13 +3,7 @@ import {
   PencilAltIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import {
-  differenceInDays,
-  format,
-  isToday,
-  isWithinInterval,
-  startOfToday,
-} from "date-fns";
+import { format } from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
 import { Check } from "react-feather";
 import useToggle from "../hooks/useToggle";
