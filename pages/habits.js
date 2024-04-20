@@ -31,9 +31,9 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
         {isEqual(selectedDay, today) ? (
           <>
             <p className="text-3xl font-bold text-[#2e2e2e]">Today</p>
-            <p className="text-gray-400 text-xl">
+            {/* <p className="text-gray-400 text-xl">
               {format(selectedDay, "eeee")} {format(selectedDay, "MMMM dd")}
-            </p>
+            </p> */}
           </>
         ) : (
           <>
@@ -49,10 +49,10 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
       <div className="flex items-end gap-6">
         <div ref={domNode} className="relative">
           <button
-            className="p-2 bg-white rounded text-gray-600 "
+            className="p-3 bg-white rounded-full text-gray-600 "
             onClick={() => setShowDialog(true)}
           >
-            <CalendarIcon className=" w-7" />
+            <CalendarIcon className=" w-6" />
           </button>
 
           <div className=" absolute  mt-10  ">
@@ -69,10 +69,9 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
 
         <button
           onClick={() => setShowHabitForm(true)}
-          className=" flex justify-between items-center gap-2 font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-5 py-2 rounded text-lg text-white"
+          className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
         >
-          <PlusSquare />
-          <p>Add Habit</p>
+          <p>Create Habit</p>
         </button>
       </div>
     </div>
@@ -86,7 +85,7 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
   });
 
   return (
-    <div className="bg-white flex items-center justify-evenly h-20 rounded-md  my-4 lg:my-8 ">
+    <div className=" flex items-center justify-evenly h-20 rounded-md  my-4 lg:my-8 ">
       {week.map((day) => {
         return (
           <div
@@ -190,7 +189,7 @@ function App() {
             selectedDay={selectedDay}
             setSelectedDay={setSelectedDay}
           />
-          <div className=" flex items-center gap-4 my-4 lg:my-8 overflow-scroll scrollbar-hide   ">
+          {/* <div className=" flex items-center gap-4 my-4 lg:my-8 overflow-scroll scrollbar-hide   ">
             {doitat.map((time, idx) => {
               return (
                 <div
@@ -206,7 +205,7 @@ function App() {
                 </div>
               );
             })}
-          </div>
+          </div> */}
           <HabitsRenderer
             selectedDay={selectedDay}
             selectedTimeOfDay={selectedTimeOfDay}
