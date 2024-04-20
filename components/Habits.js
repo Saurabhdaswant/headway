@@ -32,7 +32,7 @@ export function Habits({ selectedDay, selectedTimeOfDay }) {
     isToday(selectedDay) ||
     isAfter(selectedDay, new Date(habit.createdDate));
 
-  const isRepeatDay = (habit) => habit.repeatHabitDays.includes(currentDay);
+  const isRepeatDay = (habit) => habit.repeatHabitDays?.includes(currentDay);
 
   const matchesSelectedTimeOfDay = (habit) =>
     habit.getDoneIn === selectedTimeOfDay;
@@ -54,7 +54,7 @@ export function Habits({ selectedDay, selectedTimeOfDay }) {
   return (
     <div className=" scrollbar-hide h-[50vh]  overflow-auto ">
       {filteredHabits?.map((habit, _) => {
-        return <Habit key={habit.id} habit={habit} currDate={selectedDay} />;
+        return <Habit key={habit._id} habit={habit} currDate={selectedDay} />;
       })}
     </div>
   );

@@ -15,7 +15,6 @@ import React, { useContext, useState } from "react";
 import { PlusSquare } from "react-feather";
 import { colors, doitat, weekDays } from "../components/constants";
 import HabitForm from "../components/HabitForm";
-import { v4 as uuidv4 } from "uuid";
 import { CalendarIcon } from "@heroicons/react/outline";
 import { Habits as HabitsRenderer } from "../components/Habits";
 import Calendar from "../components/Calendar";
@@ -131,7 +130,6 @@ function App() {
   // use this if needed instead of today! 👆🏽
 
   const newHabit = {
-    id: uuidv4(),
     name: "",
     getDoneIn: "anytime",
     color: "",
@@ -140,23 +138,32 @@ function App() {
     repeatHabitDays: weekDays,
   };
 
-  const handleCreateHabit = (currHabit) => {
-    if (currHabit.name.trim().length === 0) {
+  const handleCreateHabit = async (habit) => {
+    if (habit.name.trim().length === 0) {
       setError(true);
       return;
     } else {
       setError(false);
 
-      if (currHabit.color === "") {
+      if (habit.color === "") {
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        currHabit.color = randomColor;
+        habit.color = randomColor;
       }
 
-      if (currHabit.getDoneIn === "") {
-        currHabit.getDoneIn = "anytime";
+      if (habit.getDoneIn === "") {
+        habit.getDoneIn = "anytime";
       }
 
-      const newHabits = [...(habits || []), currHabit];
+      const res = await fetch("http://localhost:5000/api/newHabit", {
+        method: "POST",
+        body: JSON.stringify({ habit: habit }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const habitWithId = await res.json();
+
+      const newHabits = [...(habits || []), habitWithId];
 
       updateHabits(newHabits);
       setShowHabitForm(false);

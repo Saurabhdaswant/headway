@@ -5,11 +5,18 @@ import useClickOutSide from "../hooks/useClickOutSide";
 function DeleteHabit({ habitId, toggleDeleteDialog }) {
   const { habits, updateHabits } = useContext(HabitsContext);
 
-  const handleDelete = () => {
-    const filteredHabits = habits.filter((habit, _) => habit.id !== habitId);
+  const handleDelete = async () => {
+    const res = await fetch(`http://localhost:5000/api/habits/${habitId}`, {
+      method: "DELETE",
+    });
 
-    updateHabits(filteredHabits);
-    toggleDeleteDialog();
+    const json = await res.json();
+    if (json.acknowledged) {
+      const filteredHabits = habits.filter((habit, _) => habit._id !== habitId);
+
+      updateHabits(filteredHabits);
+      toggleDeleteDialog();
+    }
   };
 
   let domNode = useClickOutSide(() => toggleDeleteDialog());

@@ -54,7 +54,7 @@ function Habit({ habit, currDate }) {
     } else {
       setError(false);
       const habitIndex = habits.findIndex(
-        (habit, _) => habit.id === currHabit.id
+        (habit, _) => habit._id === currHabit._id
       );
 
       setCurrHabit(currHabit);
@@ -65,7 +65,9 @@ function Habit({ habit, currDate }) {
   };
 
   const toggleHabitCompletion = () => {
-    const habitIndex = habits?.findIndex((habit) => habit.id === currHabit.id);
+    const habitIndex = habits?.findIndex(
+      (habit) => habit._id === currHabit._id
+    );
 
     if (habitIndex === -1) {
       return;
@@ -142,7 +144,7 @@ function Habit({ habit, currDate }) {
       )}
       {showDeleteDialog && (
         <DeleteHabit
-          habitId={currHabit.id}
+          habitId={currHabit._id}
           toggleDeleteDialog={toggleDeleteDialog}
         />
       )}
