@@ -47,20 +47,37 @@ function Habit({ habit, currDate }) {
 
   // every thing is working as it supossed to work 👏🏽
 
-  const handleEditHabit = (currHabit) => {
+  const handleEditHabit = async (currHabit) => {
     if (currHabit.name.trim().length === 0) {
       setError(true);
       return;
     } else {
-      setError(false);
-      const habitIndex = habits.findIndex(
-        (habit, _) => habit._id === currHabit._id
+      const res = await fetch(
+        `http://localhost:5000/api/habits/${currHabit._id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            updatedHabit: currHabit,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      setCurrHabit(currHabit);
-      habits[habitIndex] = currHabit;
-      updateHabits([...habits]);
-      setShowHabitForm(false);
+      const json = await res.json();
+
+      if (json.acknowledged) {
+        setError(false);
+        const habitIndex = habits.findIndex(
+          (habit, _) => habit._id === currHabit._id
+        );
+
+        setCurrHabit(currHabit);
+        habits[habitIndex] = currHabit;
+        updateHabits([...habits]);
+        setShowHabitForm(false);
+      }
     }
   };
 
