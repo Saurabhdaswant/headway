@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { API_ENDPOINTS } from "../constants";
 
 export const HabitsContext = createContext();
 
@@ -7,14 +8,11 @@ export default function HabitsProvider({ children }) {
 
   useEffect(() => {
     async function gethabits() {
-      const res = await fetch(
-        "https://monkfish-app-xk9mf.ondigitalocean.app/api/habits",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const habits = await res.json();
 
       setHabits(habits);
