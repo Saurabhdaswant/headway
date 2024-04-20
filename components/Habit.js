@@ -152,7 +152,7 @@ function Habit({ habit, currDate }) {
               onClick={() => toggleHabitCompletion()}
               className={` cursor-pointer border-2  grid place-items-center bg-white ${
                 isCompleted
-                  ? " border-[#27b562ef] bg-[#27b562ef]  text-white"
+                  ? " border-[#27b562ef] bg-[#27b562ef]  text-[#27b562ef]"
                   : " text-gray-200"
               } w-8 h-8 rounded-full shadow-lg -mt-2   `}
             >
