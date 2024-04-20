@@ -46,7 +46,13 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
           </>
         )}
       </div>
-      <div className="flex items-end gap-6">
+      <div className="flex items-end gap-3">
+        <button
+          onClick={() => setShowHabitForm(true)}
+          className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
+        >
+          <p>Create Habit</p>
+        </button>
         <div ref={domNode} className="relative">
           <button
             className="p-3 bg-white rounded-full text-gray-600 "
@@ -66,13 +72,6 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
             )}
           </div>
         </div>
-
-        <button
-          onClick={() => setShowHabitForm(true)}
-          className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
-        >
-          <p>Create Habit</p>
-        </button>
       </div>
     </div>
   );
