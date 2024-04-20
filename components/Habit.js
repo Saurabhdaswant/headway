@@ -82,7 +82,7 @@ function Habit({ habit, currDate }) {
     }
   };
 
-  const toggleHabitCompletion = () => {
+  const toggleHabitCompletion = async () => {
     const habitIndex = habits?.findIndex(
       (habit) => habit._id === currHabit._id
     );
@@ -108,10 +108,28 @@ function Habit({ habit, currDate }) {
       ...currentHabit,
       completedOnDates,
     };
-    newHabits[habitIndex] = updatedHabit;
 
-    setCurrHabit(updatedHabit);
-    updateHabits(newHabits);
+    const res = await fetch(
+      `${API_ENDPOINTS.BASE_URL}/habits/${updatedHabit._id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          updatedHabit,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const json = await res.json();
+
+    if (json.acknowledged) {
+      newHabits[habitIndex] = updatedHabit;
+
+      setCurrHabit(updatedHabit);
+      updateHabits(newHabits);
+    }
   };
 
   return (
