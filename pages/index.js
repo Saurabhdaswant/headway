@@ -26,7 +26,7 @@ export default function Home() {
     );
   };
 
-  console.log(process.env.NEXT_PUBLIC_ISLOCAL, "is local");
+  console.log(process.env.NEXT_PUBLIC_ISLOCAL, "is local please");
   console.log(process.env.NEXT_PUBLIC_ISAPI, "API");
 
   return (
