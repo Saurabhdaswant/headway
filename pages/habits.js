@@ -40,9 +40,9 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
             <p className="text-3xl font-bold text-[#2e2e2e]">
               {format(selectedDay, "MMMM dd")}
             </p>
-            <p className="text-gray-400 text-xl">
+            {/* <p className="text-gray-400 text-xl">
               {format(selectedDay, "eeee")}
-            </p>
+            </p> */}
           </>
         )}
       </div>
