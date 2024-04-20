@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useClickOutSide from "../hooks/useClickOutSide";
+import { API_ENDPOINTS } from "../constants";
 
 function DeleteHabit({ habitId, toggleDeleteDialog }) {
   const { habits, updateHabits } = useContext(HabitsContext);
 
   const handleDelete = async () => {
-    const res = await fetch(`http://localhost:5000/api/habits/${habitId}`, {
+    const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits/${habitId}`, {
       method: "DELETE",
     });
 

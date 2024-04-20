@@ -12,6 +12,7 @@ import { getFormattedDates } from "../utils/utils";
 import DeleteHabit from "./DeleteHabit";
 import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
+import { API_ENDPOINTS } from "../constants";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
@@ -53,7 +54,7 @@ function Habit({ habit, currDate }) {
       return;
     } else {
       const res = await fetch(
-        `http://localhost:5000/api/habits/${currHabit._id}`,
+        `${API_ENDPOINTS.BASE_URL}/habits/${currHabit._id}`,
         {
           method: "PUT",
           body: JSON.stringify({

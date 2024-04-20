@@ -1,10 +1,11 @@
 import React from "react";
+import { API_ENDPOINTS } from "../constants";
 
 export default function BulkEdit() {
   const { habits } = useContext(HabitsContext);
 
   async function addMultipleHabits(habits) {
-    const url = "http://localhost:5000/api/habits/bulk";
+    const url = `${API_ENDPOINTS.BASE_URL}/habits/bulk`;
     const options = {
       method: "POST",
       headers: {

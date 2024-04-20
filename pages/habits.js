@@ -19,6 +19,7 @@ import { CalendarIcon } from "@heroicons/react/outline";
 import { Habits as HabitsRenderer } from "../components/Habits";
 import Calendar from "../components/Calendar";
 import useClickOutSide from "../hooks/useClickOutSide";
+import { API_ENDPOINTS } from "../constants";
 
 const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
   const [showDialog, setShowDialog] = useState(false);
@@ -154,7 +155,7 @@ function App() {
         habit.getDoneIn = "anytime";
       }
 
-      const res = await fetch("http://localhost:5000/api/newHabit", {
+      const res = await fetch(`${API_ENDPOINTS.BASE_URL}/newHabit`, {
         method: "POST",
         body: JSON.stringify({ habit: habit }),
         headers: {
