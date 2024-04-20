@@ -134,39 +134,60 @@ function Habit({ habit, currDate }) {
 
   return (
     <div className="flex items-center justify-between ">
-      <div
+      {/* <div
         onClick={() => toggleHabitCompletion()}
         className={` cursor-pointer border-4 grid place-items-center bg-white ${
           isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"
         } w-14 h-14 rounded-full shadow-lg   `}
       >
         <Check className="  w-8 h-8  stroke-3" />
-      </div>
+      </div> */}
       <div
-        className={` p-3 group  rounded  w-[85%] flex justify-between items-center   my-2 text-[#2e2e2e]   border-l-4 border-${habit.color} bg-white   `}
+        className={` group  rounded-2xl  w-full md:max-w-[65%] mx-auto flex justify-between items-center   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
       >
-        <div className="space-y-1 ">
-          <p className="font-bold"> {habit.name}</p>
-          <p
-            className={`text-sm px-2 font-medium capitalize inline-block  bg-${habit.color} bg-opacity-10 rounded-sm text-${habit.color}`}
-          >
-            {" "}
-            {habit.getDoneIn}
-          </p>
-        </div>
-        <div className="flex opacity-0 group-hover:opacity-100  gap-4 w-24">
-          <PencilAltIcon
-            onClick={() => setShowHabitForm(true)}
-            className="hover:cursor-pointer"
-          />
-          <ChartSquareBarIcon
-            onClick={toggleStats}
-            className="hover:cursor-pointer"
-          />
-          <TrashIcon
-            onClick={toggleDeleteDialog}
-            className="hover:cursor-pointer"
-          />
+        <div className="space-y-3  py-3  w-full ">
+          <div className=" flex items-center justify-between border-b px-3 border-gray-100">
+            <p className=" font-semibold  pb-3   "> {habit.name}</p>
+            <div
+              onClick={() => toggleHabitCompletion()}
+              className={` cursor-pointer border-2  grid place-items-center bg-white ${
+                isCompleted
+                  ? " border-[#27b562ef]  text-[#27b562ef]"
+                  : " text-gray-200"
+              } w-8 h-8 rounded-full shadow-lg -mt-2   `}
+            >
+              <Check className="  w-4 h-4  stroke-3" />
+            </div>
+          </div>
+          <div className="flex justify-between items-center pr-3">
+            <p
+              className={`text-xs px-2.5 py-1 mx-3 font-medium  capitalize inline-block   rounded-full  ${
+                habit.getDoneIn === "evening" &&
+                " bg-purple-100 text-purple-400"
+              } ${
+                habit.getDoneIn === "anytime" && "bg-gray-100  text-gray-400"
+              } 
+              ${
+                habit.getDoneIn === "morning" && "bg-orange-100 text-orange-400"
+              } `}
+            >
+              {habit.getDoneIn}
+            </p>
+            <div className="flex opacity-0 group-hover:opacity-100  gap-4 w-24">
+              <PencilAltIcon
+                onClick={() => setShowHabitForm(true)}
+                className="hover:cursor-pointer"
+              />
+              <ChartSquareBarIcon
+                onClick={toggleStats}
+                className="hover:cursor-pointer"
+              />
+              <TrashIcon
+                onClick={toggleDeleteDialog}
+                className="hover:cursor-pointer"
+              />
+            </div>
+          </div>
         </div>
       </div>
       {showHabitForm && (
