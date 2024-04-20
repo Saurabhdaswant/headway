@@ -6,9 +6,20 @@ export default function HabitsProvider({ children }) {
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHabits(JSON.parse(localStorage.getItem("Habits")));
+    async function gethabits() {
+      const res = await fetch(
+        "https://monkfish-app-xk9mf.ondigitalocean.app/api/habits",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const habits = await res.json();
+
+      setHabits(habits);
     }
+    gethabits();
   }, []);
 
   const updateHabits = (newHabits) => {

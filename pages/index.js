@@ -5,7 +5,6 @@ import headway from "../public/headway.png";
 import HabitScheduler from "../public/Schedulers.svg";
 import HabitStats from "../public/Stats.svg";
 import { Check } from "react-feather";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   const CirclCheckBox = () => {
@@ -26,27 +25,6 @@ export default function Home() {
       </div>
     );
   };
-
-  const [habits, sethabits] = useState([]);
-
-  useEffect(() => {
-    async function gethabits() {
-      const res = await fetch(
-        "https://monkfish-app-xk9mf.ondigitalocean.app/api/habits",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const habits = await res.json();
-
-      sethabits(habits);
-    }
-    gethabits();
-  }, []);
-
-  console.log("getting habits here : ", habits);
 
   return (
     <div>
@@ -73,6 +51,7 @@ via-white  via-opacity-5 relative  "
               Achieve Your Goals, and Build a Happier, Healthier You.
             </blockquote>
           </div>
+
           <Link
             className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-8 lg:px-11 lg:py-4 py-3 xl:px-14   lg:shadow-2xl lg:shadow-blue-400  rounded-lg text-lg text-white"
             href="/habits"
