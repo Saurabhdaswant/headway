@@ -2,13 +2,18 @@ import { useContext } from "react";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { API_ENDPOINTS } from "../constants";
+import { TokenContext } from "../Providers/TokenProvider";
 
 function DeleteHabit({ habitId, toggleDeleteDialog }) {
   const { habits, updateHabits } = useContext(HabitsContext);
+  const { token } = useContext(TokenContext);
 
   const handleDelete = async () => {
     const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits/${habitId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const json = await res.json();

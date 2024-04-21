@@ -13,9 +13,12 @@ import DeleteHabit from "./DeleteHabit";
 import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
 import { API_ENDPOINTS } from "../constants";
+import { TokenContext } from "../Providers/TokenProvider";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
+  const { token } = useContext(TokenContext);
+
   const [currHabit, setCurrHabit] = useState({ ...habit });
   const [isCompleted, setIsCompleted] = useState(false);
   const [showHabitForm, setShowHabitForm] = useState(false);
@@ -62,6 +65,7 @@ function Habit({ habit, currDate }) {
           }),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -118,6 +122,7 @@ function Habit({ habit, currDate }) {
         }),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       }
     );
