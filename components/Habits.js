@@ -37,7 +37,10 @@ export function Habits({ selectedDay, selectedTimeOfDay }) {
   const matchesSelectedTimeOfDay = (habit) =>
     habit.getDoneIn === selectedTimeOfDay;
 
-  let filteredHabits = habits?.filter(isAfterCreation)?.filter(isRepeatDay);
+  let filteredHabits =
+    habits &&
+    habits.length > 0 &&
+    habits?.filter(isAfterCreation)?.filter(isRepeatDay);
 
   if (!anyTimeOfDay) {
     filteredHabits = filteredHabits?.filter(matchesSelectedTimeOfDay);

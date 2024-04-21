@@ -11,11 +11,10 @@ import {
   startOfWeek,
   sub,
 } from "date-fns";
-import React, { useContext, useState } from "react";
-import { PlusSquare } from "react-feather";
-import { colors, doitat, weekDays } from "../components/constants";
+import React, { useContext, useEffect, useState } from "react";
+import { colors, weekDays } from "../components/constants";
 import HabitForm from "../components/HabitForm";
-import { CalendarIcon } from "@heroicons/react/outline";
+import { CalendarIcon, LogoutIcon } from "@heroicons/react/outline";
 import { Habits as HabitsRenderer } from "../components/Habits";
 import Calendar from "../components/Calendar";
 import useClickOutSide from "../hooks/useClickOutSide";
@@ -72,6 +71,17 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
             )}
           </div>
         </div>
+        <div ref={domNode} className="relative">
+          <button
+            className="p-3 bg-white rounded-full text-gray-600 "
+            onClick={() => {
+              localStorage.removeItem("authToken");
+              window.location.href = "/";
+            }}
+          >
+            <LogoutIcon className=" w-6" />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -121,6 +131,19 @@ function App() {
   const [selectedDay, setSelectedDay] = useState(today);
   const [error, setError] = useState(false);
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = window.localStorage.getItem("authToken");
+
+      if (!token) {
+        window.location.href = "/login";
+      }
+
+      setToken(token);
+    }
+  }, []);
 
   const dateWhichIsBeforeCurrDate = sub(today, {
     days: 5,
@@ -158,6 +181,7 @@ function App() {
         body: JSON.stringify({ habit: habit }),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       const habitWithId = await res.json();
