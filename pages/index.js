@@ -54,7 +54,7 @@ via-white  via-opacity-5 relative  "
 
           <Link
             className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-8 lg:px-11 lg:py-4 py-3 xl:px-14   lg:shadow-2xl lg:shadow-blue-400  rounded-lg text-lg text-white"
-            href="/habits"
+            href="/login"
           >
             Start tracking!
           </Link>

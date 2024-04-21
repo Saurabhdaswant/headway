@@ -1,14 +1,20 @@
 import Head from "next/head";
 import Image from "next/image";
 import { API_ENDPOINTS } from "../constants";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
+import { TokenContext } from "../Providers/TokenProvider";
 
 export default function Signin() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  // const { token } = useContext(TokenContext);
+
+  // if (token) {
+  //   window.location.href = "/habits";
+  // }
 
   const handleSubmit = async () => {
     try {
