@@ -25,7 +25,7 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
   let domNode = useClickOutSide(() => setShowDialog(false));
 
   return (
-    <div className="flex justify-between items-end">
+    <div className="flex flex-col md:flex-row gap-y-4 justify-between md:items-end">
       <div className="  ">
         {isEqual(selectedDay, today) ? (
           <>
@@ -45,42 +45,43 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
           </>
         )}
       </div>
-      <div className="flex items-end gap-3">
+      <div className="flex justify-between md:justify-normal   items-end gap-3">
         <button
-          onClick={() => setShowHabitForm(true)}
-          className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
+          className="p-3 bg-white rounded-full text-gray-600 "
+          onClick={() => setShowDialog(true)}
         >
-          <p>Create Habit</p>
+          <CalendarIcon className=" w-6" />
         </button>
-        <div ref={domNode} className="relative">
-          <button
-            className="p-3 bg-white rounded-full text-gray-600 "
-            onClick={() => setShowDialog(true)}
-          >
-            <CalendarIcon className=" w-6" />
-          </button>
-
-          <div className=" absolute  mt-10  ">
-            {showDialog && (
-              <Calendar
-                currDate={selectedDay}
-                setCurrDate={setSelectedDay}
-                toggleCalendar={() => setShowDialog(false)}
-                canSelectDaysAfterToday={false}
-              />
-            )}
+        <div className="flex gap-3">
+          <div ref={domNode} className="relative">
+            <button
+              onClick={() => setShowHabitForm(true)}
+              className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
+            >
+              <p>Create Habit</p>
+            </button>
+            <div className=" absolute  mt-10  ">
+              {showDialog && (
+                <Calendar
+                  currDate={selectedDay}
+                  setCurrDate={setSelectedDay}
+                  toggleCalendar={() => setShowDialog(false)}
+                  canSelectDaysAfterToday={false}
+                />
+              )}
+            </div>
           </div>
-        </div>
-        <div>
-          <button
-            className="p-3 bg-white rounded-full text-gray-600 "
-            onClick={() => {
-              localStorage.removeItem("authToken");
-              window.location.href = "/";
-            }}
-          >
-            <LogoutIcon className=" w-6" />
-          </button>
+          <div>
+            <button
+              className="p-3 bg-white rounded-full text-gray-600 "
+              onClick={() => {
+                localStorage.removeItem("authToken");
+                window.location.href = "/";
+              }}
+            >
+              <LogoutIcon className=" w-6" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
