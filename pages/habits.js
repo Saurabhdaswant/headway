@@ -11,7 +11,7 @@ import {
   startOfWeek,
   sub,
 } from "date-fns";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { colors, weekDays } from "../components/constants";
 import HabitForm from "../components/HabitForm";
 import { CalendarIcon, LogoutIcon } from "@heroicons/react/outline";
@@ -23,6 +23,8 @@ import { API_ENDPOINTS } from "../constants";
 const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
   const [showDialog, setShowDialog] = useState(false);
   let domNode = useClickOutSide(() => setShowDialog(false));
+
+  const ref = useRef();
 
   return (
     <div className="flex flex-col md:flex-row gap-y-4 justify-between md:items-end">
@@ -46,31 +48,31 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
         )}
       </div>
       <div className="flex justify-between md:justify-normal   items-end gap-3">
-        <button
-          className="p-3 bg-white rounded-full text-gray-600 "
-          onClick={() => setShowDialog(true)}
-        >
-          <CalendarIcon className=" w-6" />
-        </button>
-        <div className="flex gap-3">
-          <div ref={domNode} className="relative">
-            <button
-              onClick={() => setShowHabitForm(true)}
-              className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
-            >
-              <p>Create Habit</p>
-            </button>
-            <div className=" absolute  mt-10  ">
-              {showDialog && (
-                <Calendar
-                  currDate={selectedDay}
-                  setCurrDate={setSelectedDay}
-                  toggleCalendar={() => setShowDialog(false)}
-                  canSelectDaysAfterToday={false}
-                />
-              )}
-            </div>
+        <div ref={domNode} className="relative">
+          <button
+            className="p-3 bg-white rounded-full   text-gray-600 "
+            onClick={() => setShowDialog(true)}
+          >
+            <CalendarIcon className=" w-6" />
+          </button>
+          <div className=" absolute  mt-5  ">
+            {showDialog && (
+              <Calendar
+                currDate={selectedDay}
+                setCurrDate={setSelectedDay}
+                toggleCalendar={() => setShowDialog(false)}
+                canSelectDaysAfterToday={false}
+              />
+            )}
           </div>
+        </div>
+        <div className="flex gap-3">
+          <button
+            onClick={() => setShowHabitForm(true)}
+            className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
+          >
+            <p>Create Habit</p>
+          </button>
           <div>
             <button
               className="p-3 bg-white rounded-full text-gray-600 "
