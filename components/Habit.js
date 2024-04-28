@@ -148,7 +148,7 @@ function Habit({ habit, currDate }) {
         <Check className="  w-8 h-8  stroke-3" />
       </div> */}
       <div
-        className={`rounded-2xl  w-full md:max-w-[65%] mx-auto flex justify-between items-center   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
+        className={` md:group   rounded-2xl  w-full md:max-w-[65%] mx-auto flex justify-between items-center   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
       >
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">
@@ -179,7 +179,7 @@ function Habit({ habit, currDate }) {
             >
               {habit.getDoneIn}
             </p>
-            {/* <div className="flex opacity-0 group-hover:opacity-100  gap-4 w-24">
+            <div className="flex opacity-0 md:group-hover:opacity-100  gap-4 w-24">
               <PencilAltIcon
                 onClick={() => setShowHabitForm(true)}
                 className="hover:cursor-pointer"
@@ -192,7 +192,7 @@ function Habit({ habit, currDate }) {
                 onClick={toggleDeleteDialog}
                 className="hover:cursor-pointer"
               />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
