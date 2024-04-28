@@ -20,7 +20,13 @@ import Calendar from "../components/Calendar";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { API_ENDPOINTS } from "../constants";
 
-const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
+const Header = ({
+  selectedDay,
+  today,
+  setShowHabitForm,
+  setSelectedDay,
+  habitsLength,
+}) => {
   const [showDialog, setShowDialog] = useState(false);
   let domNode = useClickOutSide(() => setShowDialog(false));
 
@@ -68,8 +74,9 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
         </div>
         <div className="flex gap-3">
           <button
+            disabled={habitsLength >= 5}
             onClick={() => setShowHabitForm(true)}
-            className=" flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white"
+            className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
           >
             <p>Create Habit</p>
           </button>
@@ -210,6 +217,7 @@ function App() {
             today={today}
             setShowHabitForm={setShowHabitForm}
             setSelectedDay={setSelectedDay}
+            habitsLength={habits?.length}
           />
           <WeekDatePicker
             selectedDay={selectedDay}
