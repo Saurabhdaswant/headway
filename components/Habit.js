@@ -165,6 +165,7 @@ function Habit({ habit, currDate }) {
               <Check className="  w-4 h-4  stroke-3" />
             </div>
           </div>
+
           <div className="flex justify-between items-center pr-3">
             <p
               className={`text-xs px-2.5 py-1 mx-3 font-medium  capitalize inline-block   rounded-full  ${
@@ -179,18 +180,29 @@ function Habit({ habit, currDate }) {
             >
               {habit.getDoneIn}
             </p>
-            <div className="flex  md:opacity-0 md:group-hover:opacity-100  gap-4 w-24">
+            <div className="flex md:hidden   gap-4 w-24">
+              <PencilAltIcon
+                className="w-6 h-6"
+                onClick={() => setShowHabitForm(true)}
+              />
+              <ChartSquareBarIcon className="w-6 h-6" onClick={toggleStats} />
+              <TrashIcon
+                className="w-6 h-6"
+                onClick={toggleDeleteDialog}
+              />{" "}
+            </div>
+            <div className=" hidden md:flex opacity-0 md:group-hover:opacity-100  gap-4 w-24">
               <PencilAltIcon
                 onClick={() => setShowHabitForm(true)}
-                className="hover:cursor-pointer"
+                className="hover:cursor-pointer "
               />
               <ChartSquareBarIcon
                 onClick={toggleStats}
-                className="hover:cursor-pointer"
+                className="hover:cursor-pointer "
               />
               <TrashIcon
                 onClick={toggleDeleteDialog}
-                className="hover:cursor-pointer"
+                className="hover:cursor-pointer "
               />
             </div>
           </div>
