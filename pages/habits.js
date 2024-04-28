@@ -71,7 +71,7 @@ const Header = ({ selectedDay, today, setShowHabitForm, setSelectedDay }) => {
             )}
           </div>
         </div>
-        <div ref={domNode} className="relative">
+        <div>
           <button
             className="p-3 bg-white rounded-full text-gray-600 "
             onClick={() => {

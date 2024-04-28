@@ -83,7 +83,19 @@ export default function Calendar({
               "py-1.5"
             )}
           >
-            {toggleCalendar ? (
+            {completedHabitDates && completedHabitDates.length > 0 ? (
+              <div
+                className={classNames(
+                  completedHabitDates?.includes(day.toISOString()) &&
+                    "text-white bg-green-500 ",
+                  "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
+                )}
+              >
+                <time dateTime={format(day, "yyyy-MM-dd")}>
+                  {format(day, "d")}
+                </time>
+              </div>
+            ) : (
               <button
                 type="button"
                 onClick={() => {
@@ -110,18 +122,6 @@ export default function Calendar({
                   {format(day, "d")}
                 </time>
               </button>
-            ) : (
-              <div
-                className={classNames(
-                  completedHabitDates?.includes(day.toISOString()) &&
-                    "text-white bg-green-500 ",
-                  "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
-                )}
-              >
-                <time dateTime={format(day, "yyyy-MM-dd")}>
-                  {format(day, "d")}
-                </time>
-              </div>
             )}
           </div>
         ))}
