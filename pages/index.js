@@ -19,7 +19,7 @@ export default function Home() {
     return (
       <div className="flex gap-6">
         <CirclCheckBox />
-        <p className=" flex-1 max-w-md text-xl font-medium text-[#6D7280] ">
+        <p className=" flex-1 max-w-md  md:text-xl font-medium text-[#6D7280] ">
           <strong className="text-[#303850]"> {title}</strong> : {description}
         </p>
       </div>
@@ -34,7 +34,7 @@ export default function Home() {
         <link rel="icon" href="/headway.svg" />
       </Head>
       <main
-        className="flex items-center justify-center  h-[100vh]  bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
+        className="flex md:items-center justify-center md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
 via-white  via-opacity-5 relative  "
       >
         <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 space-y-6 lg:space-y-10 xl:space-y-16  my-10 mx-auto ">
@@ -63,18 +63,19 @@ via-white  via-opacity-5 relative  "
         <div className=" hidden lg:block  absolute w-[400px]  h-[400px] left-[800px] 2xl:left-[1100px] xl:top-[100px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]   "></div>
       </main>
 
-      <section className=" h-[100vh]">
+      <section className="md:h-[100vh]">
         <Image
           src={headway}
           width="1184"
-          className=" absolute left-1/2 transform -translate-x-1/2 top-[600px] border-[1rem] rounded-lg border-white  "
+          className=" md:absolute md:left-1/2 md:transform md:-translate-x-1/2 top-[600px] border-[1rem] rounded-lg border-white  "
           alt="headay's habit tracker img"
         />
       </section>
+
       <section className=" h-[100vh] bg-[#F0F1F5]   ">
-        <div className="  py-20 grid grid-cols-2 max-w-6xl h-[100vh] mx-auto">
-          <div className="space-y-12">
-            <h2 className="font-bold text-4xl  text-[#212121] ">
+        <div className="  py-20 grid md:grid-cols-2 max-w-xs md:max-w-6xl h-[100vh] mx-auto">
+          <div className=" space-y-6 md:space-y-12">
+            <h2 className="font-bold text-2xl  md:text-4xl  text-[#212121] ">
               Track Your Progress <br /> with Ease
             </h2>
             <InfoCard
@@ -99,16 +100,17 @@ via-white  via-opacity-5 relative  "
           />
         </div>
       </section>
+
       <section className=" h-[100vh]    ">
-        <div className="  py-20 grid grid-cols-2 max-w-6xl h-[100vh] mx-auto">
+        <div className="  py-20 grid md:grid-cols-2  max-w-xs md:max-w-6xl h-[100vh] mx-auto">
           <Image
             width={500}
             src={HabitScheduler}
             className=" relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  "
             alt="headay's habit tracker img"
           />
-          <div className="space-y-12">
-            <h2 className="font-bold text-4xl  text-[#212121] ">
+          <div className="space-y-6 md:space-y-12">
+            <h2 className="font-bold text-2xl  md:text-4xl  text-[#212121] ">
               Habit Tracking on <br /> Your Terms
             </h2>
             <InfoCard
@@ -128,11 +130,11 @@ via-white  via-opacity-5 relative  "
       </section>
       <section className="  bg-[#0D0D0D] py-32    ">
         <div className="max-w-4xl mx-auto flex flex-col  gap-14 items-center">
-          <h2 className="font-bold text-5xl text-center  text-white ">
+          <h2 className="font-bold text-2xl md:text-5xl text-center  text-white ">
             Do the hard work especially <br /> when you dont feel like it!
           </h2>
           <button className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-14 py-4  rounded-lg text-lg text-white">
-            <Link href="/app">Build Habits Right Now!</Link>
+            <Link href="/habits">Build Habits Right Now!</Link>
           </button>
         </div>
       </section>
