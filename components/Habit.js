@@ -220,12 +220,14 @@ function Habit({ habit, currDate }) {
           />
         )}
       </AnimatePresence>
-      {showDeleteDialog && (
-        <DeleteHabit
-          habitId={currHabit._id}
-          toggleDeleteDialog={toggleDeleteDialog}
-        />
-      )}
+      <AnimatePresence>
+        {showDeleteDialog && (
+          <DeleteHabit
+            habitId={currHabit._id}
+            toggleDeleteDialog={toggleDeleteDialog}
+          />
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {showStats && (
