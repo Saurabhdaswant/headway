@@ -4,6 +4,8 @@ import { filterDatesByWeekdays } from "../utils/utils";
 import { arraysHaveSameStrings, colors, doitat, weekDays } from "./constants";
 import useToggle from "../hooks/useToggle";
 
+import { motion } from "framer-motion";
+
 function HabitForm({
   formTitle,
   habit,
@@ -54,8 +56,31 @@ function HabitForm({
   };
 
   return (
-    <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
-      <div className=" p-4  lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md z-50 h-full ">
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{
+          type: "spring",
+          bounce: 0,
+          duration: 0.6,
+        }}
+        onClick={() => setShowHabitForm(false)}
+        className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 "
+        div
+      />
+      <motion.div
+        initial={{ x: 450 }}
+        animate={{ x: 0 }}
+        exit={{ x: 450 }}
+        transition={{
+          type: "spring",
+          bounce: 0,
+          duration: 0.6,
+        }}
+        className=" p-4  lg:p-8 absolute space-y-4 lg:space-y-8 top-0 right-0 w-full max-w-[450px] bg-white rounded-md z-50 h-full "
+      >
         <div className="flex justify-between">
           <h1 className=" text-2xl ">{formTitle}</h1>
           <X
@@ -131,7 +156,10 @@ function HabitForm({
                   </div>
                   <div
                     onClick={() =>
-                      setCurrHabit({ ...currHabit, repeatHabitDays: weekDays })
+                      setCurrHabit({
+                        ...currHabit,
+                        repeatHabitDays: weekDays,
+                      })
                     }
                     className={`  ${
                       currHabit.repeatHabitDays?.length === 7
@@ -209,8 +237,8 @@ function HabitForm({
             {formTitle}
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </>
   );
 }
 

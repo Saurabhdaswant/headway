@@ -14,6 +14,7 @@ import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
+import { AnimatePresence } from "framer-motion";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
@@ -208,15 +209,17 @@ function Habit({ habit, currDate }) {
           </div>
         </div>
       </div>
-      {showHabitForm && (
-        <HabitForm
-          formTitle="Edit Habit"
-          habit={currHabit}
-          setShowHabitForm={setShowHabitForm}
-          handleSubmit={handleEditHabit}
-          error={error}
-        />
-      )}
+      <AnimatePresence>
+        {showHabitForm && (
+          <HabitForm
+            formTitle="Edit Habit"
+            habit={currHabit}
+            setShowHabitForm={setShowHabitForm}
+            handleSubmit={handleEditHabit}
+            error={error}
+          />
+        )}
+      </AnimatePresence>
       {showDeleteDialog && (
         <DeleteHabit
           habitId={currHabit._id}

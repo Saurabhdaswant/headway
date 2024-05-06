@@ -19,6 +19,7 @@ import { Habits as HabitsRenderer } from "../components/Habits";
 import Calendar from "../components/Calendar";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { API_ENDPOINTS } from "../constants";
+import { AnimatePresence } from "framer-motion";
 
 const Header = ({
   selectedDay,
@@ -245,7 +246,7 @@ function App() {
             selectedTimeOfDay={selectedTimeOfDay}
           />
         </main>
-        <div>
+        <AnimatePresence>
           {showHabitForm ? (
             <HabitForm
               formTitle="Add New Habit"
@@ -255,7 +256,7 @@ function App() {
               error={error}
             />
           ) : null}
-        </div>
+        </AnimatePresence>
       </div>
     </div>
   );
