@@ -1,12 +1,13 @@
+import React from "react";
 import { useContext } from "react";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
 
-function DeleteHabit({ habitId, toggleDeleteDialog }) {
+export default function DeleteHabit({ habitId, toggleDeleteDialog }) {
   const { habits, updateHabits } = useContext(HabitsContext);
-  const { token } = useContext(TokenContext);
+  const { token }: any = useContext(TokenContext);
 
   const handleDelete = async () => {
     const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits/${habitId}`, {
@@ -25,7 +26,7 @@ function DeleteHabit({ habitId, toggleDeleteDialog }) {
     }
   };
 
-  let domNode = useClickOutSide(() => toggleDeleteDialog());
+  let domNode: any = useClickOutSide(() => toggleDeleteDialog());
 
   return (
     <div className=" fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 ">
@@ -56,5 +57,3 @@ function DeleteHabit({ habitId, toggleDeleteDialog }) {
     </div>
   );
 }
-
-export default DeleteHabit;
