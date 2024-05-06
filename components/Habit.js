@@ -226,7 +226,12 @@ function Habit({ habit, currDate }) {
           toggleDeleteDialog={toggleDeleteDialog}
         />
       )}
-      {showStats && <HabitStats habit={currHabit} toggleStats={toggleStats} />}
+
+      <AnimatePresence>
+        {showStats && (
+          <HabitStats habit={currHabit} toggleStats={toggleStats} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

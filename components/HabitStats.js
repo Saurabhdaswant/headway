@@ -15,7 +15,7 @@ import {
   filterDatesByWeekdays,
 } from "../utils/utils";
 import Calendar from "./Calendar";
-import useClickOutSide from "../hooks/useClickOutSide";
+import { motion } from "framer-motion";
 
 function HabitStats({ habit, toggleStats }) {
   const yesterday = sub(startOfToday(), {
@@ -84,12 +84,32 @@ function HabitStats({ habit, toggleStats }) {
   const completedHabitDatesISO = datesWhenHabitWasCompleted.map((date) =>
     date?.toISOString()
   );
-  let domNode = useClickOutSide(() => toggleStats());
 
   return (
-    <div className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50  ">
-      <div
-        ref={domNode}
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{
+          type: "spring",
+          bounce: 0,
+          duration: 0.6,
+        }}
+        onClick={toggleStats}
+        className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 "
+        div
+      />
+      <motion.div
+        initial={{ x: 450 }}
+        animate={{ x: 0 }}
+        exit={{ x: 450 }}
+        transition={{
+          type: "spring",
+          bounce: 0,
+          duration: 0.6,
+        }}
+        // ref={domNode}
         className="p-4 lg:p-8 absolute space-y-4 scrollbar-hide lg:space-y-8 top-0 right-0 w-full overflow-scroll max-w-[450px] bg-white rounded-md rounded-r-none z-50 h-full"
       >
         <div className="flex justify-between">
@@ -207,8 +227,8 @@ function HabitStats({ habit, toggleStats }) {
             completedHabitDates={completedHabitDatesISO}
           />
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </>
   );
 }
 
