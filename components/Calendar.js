@@ -12,7 +12,7 @@ import {
   startOfToday,
 } from "date-fns";
 import { useState } from "react";
-
+import { motion } from "framer-motion";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -43,7 +43,17 @@ export default function Calendar({
   }
 
   return (
-    <div className=" bg-white  p-4 min-w-[307px] shadow-md rounded-md ">
+    <motion.div
+      transition={{
+        type: "spring",
+        bounce: 0,
+        duration: "0.6",
+      }}
+      exit={{
+        opacity: 0,
+      }}
+      className=" bg-white  p-4 min-w-[307px] shadow-md rounded-md "
+    >
       <div className="flex items-center ">
         <h2 className="flex-auto font-semibold text-gray-900">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
@@ -147,7 +157,7 @@ export default function Calendar({
           </button>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

@@ -63,14 +63,16 @@ const Header = ({
             <CalendarIcon className=" w-6" />
           </button>
           <div className=" absolute  mt-5  ">
-            {showDialog && (
-              <Calendar
-                currDate={selectedDay}
-                setCurrDate={setSelectedDay}
-                toggleCalendar={() => setShowDialog(false)}
-                canSelectDaysAfterToday={false}
-              />
-            )}
+            <AnimatePresence>
+              {showDialog && (
+                <Calendar
+                  currDate={selectedDay}
+                  setCurrDate={setSelectedDay}
+                  toggleCalendar={() => setShowDialog(false)}
+                  canSelectDaysAfterToday={false}
+                />
+              )}
+            </AnimatePresence>
           </div>
         </div>
         <div className="flex gap-3">
