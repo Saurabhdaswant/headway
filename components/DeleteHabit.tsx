@@ -1,7 +1,6 @@
 import React from "react";
 import { useContext } from "react";
 import { HabitsContext } from "../Providers/HabitsProvider";
-import useClickOutSide from "../hooks/useClickOutSide";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
 import { motion } from "framer-motion";

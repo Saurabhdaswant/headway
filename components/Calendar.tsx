@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+import React from "react";
 
 export default function Calendar({
   currDate,
