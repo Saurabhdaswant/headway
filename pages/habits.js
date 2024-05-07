@@ -62,7 +62,7 @@ const Header = ({
           >
             <CalendarIcon className=" w-6" />
           </button>
-          <div className=" absolute  mt-5  ">
+          <div className=" absolute  mt-3  ">
             <AnimatePresence>
               {showDialog && (
                 <Calendar

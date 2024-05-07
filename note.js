@@ -69,12 +69,7 @@
 // write now i can start creating new habits which has the similar key and values
 // and then see if everything is rendered / calculated correctly
 
-// i'm implementing my new
-// @framer
-//  motion knowledge on
-// @headway_app
-
-// which i've learned from
-// @emilkowalski_
-
-// improving ux one step at a time
+// design : https://hype4.academy/video-courses/web-design-course
+// react : https://www.joyofreact.com/
+// animation : https://animations.dev/
+// css : https://css-for-js.dev/

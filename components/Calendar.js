@@ -47,9 +47,18 @@ export default function Calendar({
       transition={{
         type: "spring",
         bounce: 0,
-        duration: "0.6",
+        duration: 0.2,
+      }}
+      initial={{
+        scale: 0.9,
+        opacity: 0,
+      }}
+      animate={{
+        scale: 1,
+        opacity: 1,
       }}
       exit={{
+        scale: 0.9,
         opacity: 0,
       }}
       className=" bg-white  p-4 min-w-[307px] shadow-md rounded-md "
