@@ -77,7 +77,7 @@ const Header = ({
         </div>
         <div className="flex gap-3">
           <button
-            disabled={habitsLength >= 5}
+            // disabled={habitsLength >= 5}
             onClick={() => setShowHabitForm(true)}
             className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
           >
