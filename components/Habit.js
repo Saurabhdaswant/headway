@@ -170,14 +170,16 @@ function Habit({ habit, currDate }) {
           <div className="flex justify-between items-center pr-3">
             <p
               className={`text-xs px-2.5 py-1 mx-3 font-medium  capitalize inline-block   rounded-full  ${
-                habit.getDoneIn === "evening" &&
-                " bg-purple-100 text-purple-400"
+                habit.getDoneIn === "evening" && " bg-pink-100 text-pink-400"
               } ${
                 habit.getDoneIn === "anytime" && "bg-gray-100  text-gray-400"
               } 
               ${
                 habit.getDoneIn === "morning" && "bg-orange-100 text-orange-400"
-              } `}
+              } ${
+                habit.getDoneIn === "afternoon" &&
+                "bg-violet-100 text-violet-400"
+              }  `}
             >
               {habit.getDoneIn}
             </p>
