@@ -78,7 +78,7 @@ via-white  via-opacity-5 relative  "
                   delay: 0.6,
                   type: "spring",
                   bounce: 0,
-                  duration: 1.3,
+                  duration: 1.2,
                 },
               }}
               whileHover={{
