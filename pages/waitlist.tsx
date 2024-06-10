@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { API_ENDPOINTS } from "../constants";
 
 const transitionMain = {
   bounce: 0,
@@ -7,6 +9,31 @@ const transitionMain = {
 };
 
 export default function Home() {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [buttonText, setButtonText] = useState("Stay Updated");
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    setButtonText("Adding...");
+
+    const res = await fetch(`${API_ENDPOINTS.BASE_URL}/waitlist`, {
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    if (data.message) {
+      setTimeout(() => {
+        setIsLoading(false);
+        setButtonText(data.message);
+      }, 2000);
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -67,6 +94,9 @@ via-white  via-opacity-5 relative  "
 
             <div className="flex justify-center items-center gap-2">
               <motion.input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 initial={{
                   y: 50,
                   opacity: 0,
@@ -87,6 +117,8 @@ via-white  via-opacity-5 relative  "
               />
 
               <motion.button
+                disabled={isLoading}
+                onClick={() => handleSubmit()}
                 initial={{
                   y: 50,
                   opacity: 0,
@@ -118,9 +150,9 @@ via-white  via-opacity-5 relative  "
                     duration: 0.4,
                   },
                 }}
-                className=" font-medium  min-w-fit focus:outline-gray-400   bg-[#212121] text-white px-8  lg:py-4 py-3     rounded-full text-lg "
+                className=" font-medium disabled:bg-opacity-80 disabled:cursor-not-allowed  min-w-fit focus:outline-gray-400   bg-[#212121] text-white px-8  lg:py-4 py-3     rounded-full text-lg "
               >
-                Stay Updated
+                {buttonText}
               </motion.button>
             </div>
           </AnimatePresence>
