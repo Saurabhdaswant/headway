@@ -65,42 +65,64 @@ via-white  via-opacity-5 relative  "
               </motion.blockquote>
             </div>
 
-            <motion.button
-              initial={{
-                y: 50,
-                opacity: 0,
-              }}
-              animate={{
-                y: 0,
-                opacity: 1,
+            <div className="flex justify-center items-center gap-2">
+              <motion.input
+                initial={{
+                  y: 50,
+                  opacity: 0,
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
 
-                transition: {
-                  delay: 0.6,
-                  type: "spring",
-                  bounce: 0,
-                  duration: 1.2,
-                },
-              }}
-              whileHover={{
-                scale: 1.1,
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.4,
-                },
-              }}
-              whileTap={{
-                scale: 1,
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.4,
-                },
-              }}
-              className=" font-medium   bg-[#212121] text-white px-8 lg:px-11 lg:py-4 py-3 xl:px-14     rounded-full text-lg "
-            >
-              Stay Updated
-            </motion.button>
+                  transition: {
+                    delay: 0.6,
+                    type: "spring",
+                    bounce: 0,
+                    duration: 1.2,
+                  },
+                }}
+                placeholder="Email"
+                className=" font-medium  text-gray-800 bg-white  px-8 min-w-full lg:py-4 py-3  border focus:outline-gray-400     rounded-full text-lg "
+              />
+
+              <motion.button
+                initial={{
+                  y: 50,
+                  opacity: 0,
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+
+                  transition: {
+                    delay: 0.6,
+                    type: "spring",
+                    bounce: 0,
+                    duration: 1.2,
+                  },
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.2,
+                  },
+                }}
+                whileTap={{
+                  scale: 1,
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.4,
+                  },
+                }}
+                className=" font-medium  min-w-fit focus:outline-gray-400   bg-[#212121] text-white px-8  lg:py-4 py-3     rounded-full text-lg "
+              >
+                Stay Updated
+              </motion.button>
+            </div>
           </AnimatePresence>
         </main>
         <div className=" absolute w-[400px]  h-[400px] left-[-169.45px] top-[-172.22px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]  "></div>
