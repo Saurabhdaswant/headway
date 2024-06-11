@@ -42,10 +42,10 @@ export default function Home() {
         <link rel="icon" href="/headway.svg" />
       </Head>
       <main
-        className="flex md:items-center justify-center md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
+        className="flex  md:items-center justify-center h-screen md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
 via-white  via-opacity-5 relative  "
       >
-        <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 space-y-6 lg:space-y-10 xl:space-y-16  my-10 mx-auto ">
+        <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 space-y-6 lg:space-y-10 xl:space-y-16 mt-72 md:mt-0  my-10 mx-auto ">
           <AnimatePresence>
             <div className="space-y-4 lg:space-y-6 xl:space-y-8">
               <motion.h1
@@ -113,7 +113,7 @@ via-white  via-opacity-5 relative  "
                   },
                 }}
                 placeholder="Email"
-                className=" font-medium  text-gray-800 bg-white  px-8 min-w-full lg:py-4 py-3  border focus:outline-gray-400     rounded-full text-lg "
+                className=" font-medium  text-gray-800 bg-white w-fit  px-8 md:min-w-full lg:py-4 py-3  border focus:outline-gray-400     rounded-full md:text-lg "
               />
 
               <motion.button
@@ -150,7 +150,7 @@ via-white  via-opacity-5 relative  "
                     duration: 0.4,
                   },
                 }}
-                className=" font-medium disabled:bg-opacity-80 disabled:cursor-not-allowed  min-w-fit focus:outline-gray-400   bg-[#212121] text-white px-8  lg:py-4 py-3     rounded-full text-lg "
+                className=" font-medium disabled:bg-opacity-80 disabled:cursor-not-allowed  min-w-fit focus:outline-gray-400   bg-[#212121] text-white px-4 md:px-8  lg:py-4 py-3     rounded-full md:text-lg "
               >
                 {buttonText}
               </motion.button>
