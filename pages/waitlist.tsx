@@ -13,7 +13,19 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [buttonText, setButtonText] = useState("Stay Updated");
 
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const isValid = emailPattern.test(email);
+
   const handleSubmit = async () => {
+    if (!isValid) {
+      setButtonText("Incorrect Email!");
+
+      setTimeout(() => {
+        setButtonText("Stay Updated");
+      }, 3000);
+      return;
+    }
+
     setIsLoading(true);
     setButtonText("Adding...");
 
@@ -117,7 +129,7 @@ via-white  via-opacity-5 relative  "
               />
 
               <motion.button
-                disabled={isLoading}
+                disabled={isLoading || email === ""}
                 onClick={() => handleSubmit()}
                 initial={{
                   y: 50,
