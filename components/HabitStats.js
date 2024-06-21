@@ -118,7 +118,11 @@ function HabitStats({ habit, toggleStats }) {
         </div>
         <div className="space-y-4 ">
           <p className="  font-semibold   ">Habit Score</p>
-          <PieChart width={400} height={170}>
+          <PieChart
+            width={400}
+            height={170}
+            className="max-w-[350px] md:max-w-full"
+          >
             <Pie
               data={data}
               cx={200}

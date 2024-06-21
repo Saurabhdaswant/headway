@@ -63,9 +63,9 @@
 // css : https://css-for-js.dev/
 
 // bugs :
-// - create , edit and stats popup enter and exit fucks up
-// - overflowing of stats component is fucked up , should not be able to go round and round
-// - more space in the bottom for habits
+// - create , edit and stats popup enter and exit fucks up - fixed ✅
+// - overflowing of stats component is fucked up , should not be able to go round and round - fixed ✅
+// - more space in the bottom for habits  - fixed ✅
 
 // features :
 // find a way to add the "why" behind the habit
