@@ -13,8 +13,8 @@ function Sidebar() {
   return (
     <div className=" hidden xl:block z-50 w-[15%] bg-white  ">
       <div className="h-[10%] flex items-center gap-2  justify-center  ">
-        <Image src="/headway.svg" alt="Vercel Logo" width={10} height={0} />
-        <p className=" text-xl font-extrabold  text-gray-900 ">Headway</p>
+        <Image src="/habstrack.svg" alt="Vercel Logo" width={10} height={0} />
+        <p className=" text-xl font-extrabold  text-gray-900 ">Habstrack</p>
       </div>
       <div className=" flex flex-col justify-between  h-[90%]">
         <ul className="  px-4  ">

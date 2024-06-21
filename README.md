@@ -1,10 +1,10 @@
-# Headway
+# Habstrack
 
-Headway is a simple, yet powerful, habit tracker application that helps you keep track of your daily routines and make progress towards achieving your personal goals. Designed with user-friendliness in mind, Headway is the perfect tool to bring a little more organization and productivity to your life.
+Habstrack is a simple, yet powerful, habit tracker application that helps you keep track of your daily routines and make progress towards achieving your personal goals. Designed with user-friendliness in mind, Habstrack is the perfect tool to bring a little more organization and productivity to your life.
 
-Try it out: [Live Demo](https://headwayy.vercel.app/)
+Try it out: [Live Demo](https://habstracky.vercel.app/)
 
-![Project Screenshot](https://github.com/Saurabhdaswant/headway/assets/77434364/4d6b3fe2-8b99-45a4-b42f-afaba0dc24c8)
+![Project Screenshot](https://github.com/Saurabhdaswant/habstrack/assets/77434364/4d6b3fe2-8b99-45a4-b42f-afaba0dc24c8)
 
 ## Tech Stack
 
@@ -19,13 +19,13 @@ Before you begin, ensure you have met the following requirements:
 
 - You have installed the latest version of [Node.js and npm](https://nodejs.org/en/download/)
 
-### Installing Headway
+### Installing Habstrack
 
-To install Headway, follow these steps:
+To install Habstrack, follow these steps:
 
 ```
-git clone https://github.com/yourusername/headway.git
-cd headway
+git clone https://github.com/yourusername/habstrack.git
+cd habstrack
 npm install
 ```
 
