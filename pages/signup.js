@@ -117,7 +117,7 @@
 
 import React, { useEffect } from "react";
 
-export default function signup() {
+export default function Signup() {
   useEffect(() => {
     window.location.href = "/";
   }, []);
