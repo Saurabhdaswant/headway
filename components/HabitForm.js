@@ -71,9 +71,9 @@ function HabitForm({
         div
       />
       <motion.div
-        initial={{ x: 450 }}
+        initial={{ x: "100%" }}
         animate={{ x: 0 }}
-        exit={{ x: 450 }}
+        exit={{ x: "100%" }}
         transition={{
           type: "spring",
           bounce: 0,
@@ -88,7 +88,7 @@ function HabitForm({
             className=" cursor-pointer "
           />
         </div>
-        <div className=" flex flex-col   h-full ">
+        <div className=" flex flex-col">
           <div className=" space-y-4  lg:space-y-8 overflow-scroll scrollbar-hide h-[70vh] ">
             <div className="flex flex-col  lg:space-y-2">
               <label htmlFor="habitName" className="font-semibold pb-2">

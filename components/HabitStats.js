@@ -101,9 +101,9 @@ function HabitStats({ habit, toggleStats }) {
         div
       />
       <motion.div
-        initial={{ x: 450 }}
+        initial={{ x: "100%" }}
         animate={{ x: 0 }}
-        exit={{ x: 450 }}
+        exit={{ x: "100%" }}
         transition={{
           type: "spring",
           bounce: 0,
