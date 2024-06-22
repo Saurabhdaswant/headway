@@ -13,7 +13,7 @@ import Image from "next/image";
 
 const Header = ({ setShowHabitForm }) => {
   return (
-    <div className="flex flex-col md:flex-row gap-y-4 justify-between md:items-end">
+    <div className="flex gap-y-4 justify-between md:items-end">
       <p className="text-3xl font-bold text-[#2e2e2e]">Goals</p>
       <div className="flex justify-between md:justify-normal   items-end gap-3">
         <div className="flex gap-3">
@@ -117,7 +117,7 @@ function Goals() {
       <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%]  2xl:max-w-[70%] flex justify-between py-4 lg:py-8     lg:gap-8   ">
         <main className=" mx-auto w-full max-w-xl lg:max-w-[60%] ">
           <Header setShowHabitForm={setShowHabitForm} />
-          <div className=" grid md:grid-cols-2  mt-8 gap-4 items-start scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
+          <div className=" grid md:grid-cols-2  mt-8 md:gap-4 items-start scrollbar-hide h-[90vh]   overflow-auto ">
             {habits?.map((habit, _) => {
               return (
                 <>
