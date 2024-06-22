@@ -7,9 +7,9 @@
 // dont show habits on days which are not included in repeadted habits list ✅
 // use node js and mongodb ✅
 // complete the next.js course from codeevolution
-// make it mobile / tab responsive
+// make it mobile / tab responsive - ✅
 // complete the stats and chart component from design
-// Add Animation using Framer motion
+// Add Animation using Framer motion - ✅
 // add signIn and sinUp functionality and store user data - ✅
 // use React Querry
 // find correct way to store habits to date / date into habit object
