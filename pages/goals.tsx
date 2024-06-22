@@ -117,7 +117,7 @@ function Goals() {
       <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%]  2xl:max-w-[70%] flex justify-between py-4 lg:py-8     lg:gap-8   ">
         <main className=" mx-auto w-full max-w-xl lg:max-w-[60%] ">
           <Header setShowHabitForm={setShowHabitForm} />
-          <div className=" grid md:grid-cols-2  mt-8 md:gap-4 items-start scrollbar-hide h-[87vh]   overflow-auto ">
+          <div className=" grid md:grid-cols-2  mt-8 gap-4 items-start scrollbar-hide h-[87vh]   overflow-auto ">
             {habits?.map((habit, _) => {
               return (
                 <>
