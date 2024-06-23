@@ -128,6 +128,7 @@ function Goals() {
             {habits?.map((habit, idx) => {
               return (
                 <div
+                  key={idx}
                   className={` relative  flex bg-black  flex-col justify-between p-6 h-[300px] shadow-sm transition-shadow hover:shadow-lg hover:cursor-pointer group   rounded-2xl  w-full  `}
                 >
                   {/* <p className="pb-1">💼</p> */}
