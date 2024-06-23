@@ -69,3 +69,13 @@
 
 // features :
 // find a way to add the "why" behind the habit
+
+// goals page
+// - create goal api - we already have
+// - create goal UI
+// - get goals - we already have
+// - figure out img upload
+// - goal detail page design
+// - figure out sub goals type : habit - one time
+// - figure out how habits and goals will be connected
+// - impliment sidebar - we already have

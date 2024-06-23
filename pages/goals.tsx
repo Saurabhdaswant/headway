@@ -11,6 +11,13 @@ import { API_ENDPOINTS } from "../constants";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
+const imgs = [
+  "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1601141256817-c60897f2776a?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1614152412509-7a5afc18c75b?q=80&w=3027&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?q=80&w=2920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
+
 const Header = ({ setShowHabitForm }) => {
   return (
     <div className="flex gap-y-4 justify-between md:items-end">
@@ -117,98 +124,62 @@ function Goals() {
       <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%]  2xl:max-w-[70%] flex justify-between py-4 lg:py-8     lg:gap-8   ">
         <main className=" mx-auto w-full max-w-xl lg:max-w-[60%] ">
           <Header setShowHabitForm={setShowHabitForm} />
-          <div className=" grid md:grid-cols-2  mt-8 gap-4 items-start scrollbar-hide h-[87vh]   overflow-auto ">
-            {habits?.map((habit, _) => {
+          <div className=" space-y-4   mt-8 gap-4 px-10 items-start scrollbar-hide h-[87vh]   overflow-auto ">
+            {habits?.map((habit, idx) => {
               return (
-                <>
-                  <div
-                    className={` hover:cursor-pointer group   rounded-xl  w-full mx-auto flex justify-between items-center text-[#2e2e2e]  bg-white  border border-slate-100`}
-                  >
-                    <div className="space-y-3  py-3  w-full ">
-                      <div className="  border-b  border-gray-100  px-3">
-                        {/* <p className="pb-1">💼</p> */}
-                        <p className=" font-semibold text-xl capitalize pb-1.5  ">
-                          {" "}
-                          {habit.name}
-                        </p>
-                        <p className=" text-sm font-medium  pb-3  text-[#2e2e2e9d]  ">
-                          Dream of launching a venture that not only generates
-                          profit but also benefits the environment. Research
-                          eco-freiendlyl...
-                        </p>
+                <div
+                  className={` relative  flex bg-black  flex-col justify-between p-6 h-[300px] shadow-sm transition-shadow hover:shadow-lg hover:cursor-pointer group   rounded-2xl  w-full  `}
+                >
+                  {/* <p className="pb-1">💼</p> */}
+                  <div className="z-10">
+                    <p className=" font-semibold text-2xl   text-[#e1e1e1] capitalize pb-2  ">
+                      {" "}
+                      {habit.name}
+                    </p>
+                    <p className=" font-normal text-gray-400 pb-3  max-w-[30rem]   ">
+                      Transform your physique by building muscle, increasing
+                      strength, and achieving a powerful, sculpted look. Follow
+                      a structured workout plan, ...
+                    </p>
+                  </div>
 
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <p
-                              className={`text-xs    capitalize    rounded-full    text-gray-500 `}
-                            >
-                              deadline date
-                            </p>
-                            <p
-                              className={`text-sm py-1  pb-3  capitalize  font-medium    rounded-full    text-gray-900 `}
-                            >
-                              25 / 05 / 24
-                            </p>
-                          </div>
-                          <div>
-                            <p
-                              className={`text-xs    capitalize    rounded-full    text-gray-500 `}
-                            >
-                              time left
-                            </p>
-                            <p
-                              className={`text-sm py-1  pb-3  capitalize font-medium    rounded-full    text-gray-900 `}
-                            >
-                              25 Days
-                            </p>
-                          </div>
-                        </div>
-                        <div className=" w-full gap-2">
-                          <Image
-                            src={
-                              "https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?q=80&w=2920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            }
-                            width="1000"
-                            height="1000"
-                            className=" w-full rounded-lg border-white  "
-                            alt="headay's habit tracker img"
-                          />
-                          {/* <Image
-                            src={habstrack}
-                            width="200"
-                            className=" rounded-lg border-white  "
-                            alt="headay's habit tracker img"
-                          /> */}
-                        </div>
-                      </div>
+                  <div className="flex z-10  gap-4 items-center">
+                    <div>
+                      <p
+                        className={`text-xs    capitalize    rounded-full    text-gray-400 `}
+                      >
+                        deadline date
+                      </p>
+                      <p
+                        className={`text-sm py-1    capitalize  font-medium    rounded-full    text-gray-100 `}
+                      >
+                        25 / 05 / 24
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className={`text-xs    capitalize    rounded-full    text-gray-400 `}
+                      >
+                        time left
+                      </p>
+                      <p
+                        className={`text-sm py-1    capitalize font-medium    rounded-full    text-gray-100 `}
+                      >
+                        25 Days
+                      </p>
                     </div>
                   </div>
-                  {/* <AnimatePresence>
-                    {showHabitForm && (
-                      <HabitForm
-                        formTitle="Edit Habit"
-                        habit={currHabit}
-                        setShowHabitForm={setShowHabitForm}
-                        handleSubmit={handleEditHabit}
-                        error={error}
-                      />
-                    )}
-                  </AnimatePresence>
-                  <AnimatePresence>
-                    {showDeleteDialog && (
-                      <DeleteHabit
-                        habitId={currHabit._id}
-                        toggleDeleteDialog={toggleDeleteDialog}
-                      />
-                    )}
-                  </AnimatePresence>
-
-                  <AnimatePresence>
-                    {showStats && (
-                      <HabitStats habit={currHabit} toggleStats={toggleStats} />
-                    )}
-                  </AnimatePresence> */}
-                </>
+                  <div className=" absolute  right-0 top-0 h-full  rounded-lg  overflow-hidden  gap-2">
+                    <div className="w-[400px] absolute z-[8] h-[400px] bg-gradient-to-r from-black "></div>
+                    <Image
+                      src={imgs[idx]}
+                      width="400"
+                      height="400"
+                      className=" w-full rounded-lg text-center  "
+                      alt="headay's habit tracker img"
+                    />
+                  </div>
+                </div>
               );
             })}
           </div>
