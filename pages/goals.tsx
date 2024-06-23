@@ -48,7 +48,6 @@ const Header = ({ setShowHabitForm }) => {
 };
 
 function Goals() {
-  const { habits, updateHabits } = useContext(HabitsContext);
   const [showHabitForm, setShowHabitForm] = useState(false);
   const today = startOfToday();
   const [error, setError] = useState(false);
@@ -81,38 +80,7 @@ function Goals() {
     repeatHabitDays: weekDays,
   };
 
-  const handleCreateHabit = async (habit) => {
-    if (habit.name.trim().length === 0) {
-      setError(true);
-      return;
-    } else {
-      setError(false);
-
-      if (habit.color === "") {
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        habit.color = randomColor;
-      }
-
-      if (habit.getDoneIn === "") {
-        habit.getDoneIn = "anytime";
-      }
-
-      const res = await fetch(`${API_ENDPOINTS.BASE_URL}/newHabit`, {
-        method: "POST",
-        body: JSON.stringify({ habit: habit }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const habitWithId = await res.json();
-
-      const newHabits = [...(habits || []), habitWithId];
-
-      updateHabits(newHabits);
-      setShowHabitForm(false);
-    }
-  };
+  const handleCreateHabit = async () => {};
 
   return (
     <div className="flex h-screen bg-[#F5F5F5] relative overflow-hidden">
@@ -124,61 +92,89 @@ function Goals() {
       <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%]  2xl:max-w-[70%] flex justify-between py-4 lg:py-8     lg:gap-8   ">
         <main className=" mx-auto w-full max-w-xl lg:max-w-[60%] ">
           <Header setShowHabitForm={setShowHabitForm} />
-          <div className=" space-y-4   mt-8 gap-4 px-10 items-start scrollbar-hide h-[87vh]   overflow-auto ">
-            {habits?.map((habit, idx) => {
+          <div className=" space-y-4   mt-8 gap-4  items-start scrollbar-hide h-[87vh]   overflow-auto ">
+            {[
+              {
+                name: "Buy a Range Rover",
+                description:
+                  "Save and plan finances to purchase a luxury Range Rover, symbolizing success and achievement.",
+              },
+              {
+                name: "Get Jacked",
+                description:
+                  "Follow a strict workout and nutrition plan to build a muscular and well-defined physique.",
+              },
+              {
+                name: "Get Continental GT 365",
+                description:
+                  "Strategize and save to buy a high-end Bentley Continental GT, enjoying the pinnacle of automotive luxury.",
+              },
+              {
+                name: "Build a Big House",
+                description:
+                  "Design and construct a spacious, dream home that reflects your style and provides comfort for your family",
+              },
+            ]?.map((habit, idx) => {
               return (
                 <div
                   key={idx}
-                  className={` relative  flex bg-black  flex-col justify-between p-6 h-[300px] shadow-sm transition-shadow hover:shadow-lg hover:cursor-pointer group   rounded-2xl  w-full  `}
+                  className={` relative  flex bg-white  flex-col justify-between p-6 h-[300px] shadow-sm transition-shadow hover:shadow-lg hover:cursor-pointer group   rounded-2xl  w-full  `}
                 >
                   {/* <p className="pb-1">💼</p> */}
                   <div className="z-10">
-                    <p className=" font-semibold text-2xl   text-[#e1e1e1] capitalize pb-2  ">
+                    <p className=" font-semibold text-2xl   text-[#272727] capitalize pb-2  ">
                       {" "}
                       {habit.name}
                     </p>
-                    <p className=" font-normal text-gray-400 pb-3  max-w-[30rem]   ">
-                      Transform your physique by building muscle, increasing
-                      strength, and achieving a powerful, sculpted look. Follow
-                      a structured workout plan, ...
+                    <p className=" font-normal text-gray-600 pb-3  max-w-[25rem]   ">
+                      {habit.description}
                     </p>
                   </div>
 
                   <div className="flex z-10  gap-4 items-center">
                     <div>
                       <p
-                        className={`text-xs    capitalize    rounded-full    text-gray-400 `}
+                        className={`text-xs    capitalize    rounded-full    text-gray-600 `}
                       >
                         deadline date
                       </p>
                       <p
-                        className={`text-sm py-1    capitalize  font-medium    rounded-full    text-gray-100 `}
+                        className={`text-sm py-1    capitalize  font-medium    rounded-full    text-gray-900 `}
                       >
                         25 / 05 / 24
                       </p>
                     </div>
                     <div>
                       <p
-                        className={`text-xs    capitalize    rounded-full    text-gray-400 `}
+                        className={`text-xs    capitalize    rounded-full    text-gray-600 `}
                       >
                         time left
                       </p>
                       <p
-                        className={`text-sm py-1    capitalize font-medium    rounded-full    text-gray-100 `}
+                        className={`text-sm py-1    capitalize font-medium    rounded-full    text-gray-900 `}
                       >
                         25 Days
                       </p>
                     </div>
                   </div>
-                  <div className=" absolute  right-0 top-0 h-full  rounded-lg  overflow-hidden  gap-2">
-                    <div className="w-[400px] absolute z-[8] h-[400px] bg-gradient-to-r from-black "></div>
-                    <Image
+                  <div
+                    style={{
+                      backgroundImage: `url(${imgs[idx]})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      // height: "100vh",
+                      // width: "100vw",
+                    }}
+                    className=" absolute  right-0 top-0 h-[300px] w-[350px]  rounded-r-lg  overflow-hidden  gap-2"
+                  >
+                    {/* <div className="w-[400px] absolute z-[8] h-[400px] bg-gradient-to-r from-white "></div> */}
+                    {/* <Image
                       src={imgs[idx]}
-                      width="400"
-                      height="400"
-                      className=" w-full rounded-lg text-center  "
+                      width="1000"
+                      height="1000"
+                      className=" w-full  text-center  "
                       alt="headay's habit tracker img"
-                    />
+                    /> */}
                   </div>
                 </div>
               );
