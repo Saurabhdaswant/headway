@@ -206,6 +206,8 @@ function App() {
     }
   };
 
+  console.log(habits, "habits are here ? ");
+
   return (
     <div className="flex h-screen bg-[#F5F5F5] relative overflow-hidden">
       <Head>

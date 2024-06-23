@@ -71,11 +71,27 @@
 // find a way to add the "why" behind the habit
 
 // goals page
-// - create goal api - we already have
-// - create goal UI
-// - get goals - we already have
-// - figure out img upload
-// - goal detail page design
-// - figure out sub goals type : habit - one time
+
+// - API'S
+// -- create goal
+// -- add sub goals / habits
+// -- get goals
+// -- update goals
+// -- delete goals
+
+// - UI
+// -- create goal form dialog
+// -- goal detail page
+// -- handle ui for sub goals / habits
+
 // - figure out how habits and goals will be connected
+// - here is how you do it :
+// create goal and get the goal
+// each habit should have the goal id
+// now create habits in bulk and get them back
+// once you have that habits array
+// replace the habits array of goal obj and return the goal
+
+// - figure out sub goals type : habit - one time
 // - impliment sidebar - we already have
+// - figure out img upload
