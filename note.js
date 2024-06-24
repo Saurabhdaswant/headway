@@ -74,10 +74,9 @@
 
 // - API'S
 // -- create goal - done
-// -- add sub goals / habits
-// -- get goals
-// -- update goals
-// -- delete goals
+// -- get goals - done
+// -- update goals - done
+// -- delete goals - done
 
 // - UI
 // -- create goal form dialog - done

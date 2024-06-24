@@ -6,8 +6,9 @@ const { formatDistance } = require("date-fns");
 import React, { useEffect, useState } from "react";
 import { LogoutIcon } from "@heroicons/react/outline";
 import { AnimatePresence } from "framer-motion";
-import GoalForm from "../components/GoalForm";
-import { API_ENDPOINTS } from "../constants";
+import { useRouter } from "next/router";
+import { API_ENDPOINTS } from "../../constants";
+import GoalForm from "../../components/GoalForm";
 
 const imgs = [
   "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -50,32 +51,7 @@ function Goals() {
   const today = startOfToday();
   const [error, setError] = useState(false);
   const [token, setToken] = useState(null);
-  const [goals, setGoals] = useState([
-    {
-      name: "Buy a Range Rover",
-      description:
-        "Save and plan finances to purchase a luxury Range Rover, symbolizing success and achievement.",
-      deadlineDate: today,
-    },
-    {
-      name: "Get Jacked",
-      description:
-        "Follow a strict workout and nutrition plan to build a muscular and well-defined physique.",
-      deadlineDate: today,
-    },
-    {
-      name: "Get Continental GT 365",
-      description:
-        "Strategize and save to buy a high-end Bentley Continental GT, enjoying the pinnacle of automotive luxury.",
-      deadlineDate: today,
-    },
-    {
-      name: "Build a Big House",
-      description:
-        "Design and construct a spacious, dream home that reflects your style and provides comfort for your family",
-      deadlineDate: today,
-    },
-  ]);
+  const [goals, setGoals] = useState([]);
 
   useEffect(() => {
     const token = localStorage && localStorage?.getItem("authToken");
@@ -121,6 +97,8 @@ function Goals() {
     deadlineDate: today,
   };
 
+  const router = useRouter();
+
   const handleCreateHabit = async (goal) => {
     const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goal`, {
       method: "POST",
@@ -158,6 +136,7 @@ function Goals() {
 
               return (
                 <div
+                  onClick={() => router.push(`goals/${habit._id}`)}
                   key={idx}
                   className={` ${
                     imgs[idx] ? "h-[300px]" : "h-[200px]"
