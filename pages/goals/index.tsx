@@ -17,35 +17,6 @@ const imgs = [
   "https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?q=80&w=2920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
 
-const Header = ({ setShowHabitForm }) => {
-  return (
-    <div className="flex gap-y-4 justify-between md:items-end">
-      <p className="text-3xl font-bold text-[#2e2e2e]">Goals</p>
-      <div className="flex justify-between md:justify-normal   items-end gap-3">
-        <div className="flex gap-3">
-          <button
-            onClick={() => setShowHabitForm(true)}
-            className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
-          >
-            <p>Add Goal</p>
-          </button>
-          <div>
-            <button
-              className="p-3 bg-white rounded-full text-gray-600 "
-              onClick={() => {
-                localStorage.removeItem("authToken");
-                window.location.href = "/";
-              }}
-            >
-              <LogoutIcon className=" w-6" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 function Goals() {
   const [showHabitForm, setShowHabitForm] = useState(false);
   const today = startOfToday();
@@ -222,3 +193,32 @@ function Goals() {
 }
 
 export default Goals;
+
+const Header = ({ setShowHabitForm }) => {
+  return (
+    <div className="flex gap-y-4 justify-between md:items-end">
+      <p className="text-3xl font-bold text-[#2e2e2e]">Goals</p>
+      <div className="flex justify-between md:justify-normal   items-end gap-3">
+        <div className="flex gap-3">
+          <button
+            onClick={() => setShowHabitForm(true)}
+            className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
+          >
+            <p>Add Goal</p>
+          </button>
+          <div>
+            <button
+              className="p-3 bg-white rounded-full text-gray-600 "
+              onClick={() => {
+                localStorage.removeItem("authToken");
+                window.location.href = "/";
+              }}
+            >
+              <LogoutIcon className=" w-6" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
