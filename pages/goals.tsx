@@ -118,14 +118,16 @@ function Goals() {
       <div className=" mx-auto w-full max-w-[90%]  md:max-w-[95%]  2xl:max-w-[70%] flex justify-between py-4 lg:py-8     lg:gap-8   ">
         <main className=" mx-auto w-full max-w-xl lg:max-w-[60%] ">
           <Header setShowHabitForm={setShowHabitForm} />
-          <div className=" space-y-4   mt-8 gap-4  items-start scrollbar-hide h-[87vh]   overflow-auto ">
+          <div className=" space-y-4   mt-8 gap-4 pb-5 items-start scrollbar-hide h-[87vh]   overflow-auto ">
             {goals?.map((habit: any, idx) => {
               const result = formatDistance(today, habit?.deadlineDate);
 
               return (
                 <div
                   key={idx}
-                  className={` relative  flex bg-white  flex-col justify-between p-6 h-[300px] shadow-sm transition-shadow hover:shadow-lg hover:cursor-pointer group   rounded-2xl  w-full  `}
+                  className={` ${
+                    imgs[idx] ? "h-[300px]" : "h-[200px]"
+                  } relative  flex bg-white  flex-col justify-between p-6  shadow-sm transition-shadow hover:shadow-lg hover:cursor-pointer group   rounded-2xl  w-full  `}
                 >
                   {/* <p className="pb-1">💼</p> */}
                   <div className="z-10">
