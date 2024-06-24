@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { API_ENDPOINTS } from "../../constants";
 
-export default function goal() {
+export default function Goal() {
   const router = useRouter();
   const { goal: id } = router.query;
   const [goal, setGoal] = useState<any>();
