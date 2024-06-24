@@ -95,3 +95,11 @@
 // - figure out sub goals type : habit - one time
 // - impliment sidebar - we already have
 // - figure out img upload
+
+// goal obj :
+
+// - name
+// - description
+// - deadline date - optional
+// - images - optional
+// - created date

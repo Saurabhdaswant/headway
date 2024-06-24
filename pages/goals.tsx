@@ -1,15 +1,12 @@
 import Head from "next/head";
-import { HabitsContext } from "../Providers/HabitsProvider";
 
-import { startOfToday, sub } from "date-fns";
+import { format, startOfToday, sub } from "date-fns";
+const { formatDistance } = require("date-fns");
 
-import React, { useContext, useEffect, useState } from "react";
-import { colors, weekDays } from "../components/constants";
-import HabitForm from "../components/HabitForm";
+import React, { useEffect, useState } from "react";
 import { LogoutIcon } from "@heroicons/react/outline";
-import { API_ENDPOINTS } from "../constants";
 import { AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import GoalForm from "../components/GoalForm";
 
 const imgs = [
   "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -53,6 +50,33 @@ function Goals() {
   const [error, setError] = useState(false);
   const [token, setToken] = useState(null);
 
+  const [goals, setGoals] = useState([
+    {
+      name: "Buy a Range Rover",
+      description:
+        "Save and plan finances to purchase a luxury Range Rover, symbolizing success and achievement.",
+      deadlineDate: today,
+    },
+    {
+      name: "Get Jacked",
+      description:
+        "Follow a strict workout and nutrition plan to build a muscular and well-defined physique.",
+      deadlineDate: today,
+    },
+    {
+      name: "Get Continental GT 365",
+      description:
+        "Strategize and save to buy a high-end Bentley Continental GT, enjoying the pinnacle of automotive luxury.",
+      deadlineDate: today,
+    },
+    {
+      name: "Build a Big House",
+      description:
+        "Design and construct a spacious, dream home that reflects your style and provides comfort for your family",
+      deadlineDate: today,
+    },
+  ]);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = window.localStorage.getItem("authToken");
@@ -71,16 +95,18 @@ function Goals() {
 
   // use this if needed instead of today! 👆🏽
 
-  const newHabit = {
+  const newGoal = {
     name: "",
-    getDoneIn: "anytime",
-    color: "",
-    completedOnDates: [],
+    description: "",
     createdDate: today,
-    repeatHabitDays: weekDays,
+    deadlineDate: today,
   };
 
-  const handleCreateHabit = async () => {};
+  const handleCreateHabit = async (goal) => {
+    console.log(goal, "how does this look like ?");
+    setGoals([...goals, goal]);
+    setShowHabitForm(false);
+  };
 
   return (
     <div className="flex h-screen bg-[#F5F5F5] relative overflow-hidden">
@@ -93,28 +119,9 @@ function Goals() {
         <main className=" mx-auto w-full max-w-xl lg:max-w-[60%] ">
           <Header setShowHabitForm={setShowHabitForm} />
           <div className=" space-y-4   mt-8 gap-4  items-start scrollbar-hide h-[87vh]   overflow-auto ">
-            {[
-              {
-                name: "Buy a Range Rover",
-                description:
-                  "Save and plan finances to purchase a luxury Range Rover, symbolizing success and achievement.",
-              },
-              {
-                name: "Get Jacked",
-                description:
-                  "Follow a strict workout and nutrition plan to build a muscular and well-defined physique.",
-              },
-              {
-                name: "Get Continental GT 365",
-                description:
-                  "Strategize and save to buy a high-end Bentley Continental GT, enjoying the pinnacle of automotive luxury.",
-              },
-              {
-                name: "Build a Big House",
-                description:
-                  "Design and construct a spacious, dream home that reflects your style and provides comfort for your family",
-              },
-            ]?.map((habit, idx) => {
+            {goals?.map((habit: any, idx) => {
+              const result = formatDistance(today, habit?.deadlineDate);
+
               return (
                 <div
                   key={idx}
@@ -141,7 +148,7 @@ function Goals() {
                       <p
                         className={`text-sm py-1    capitalize  font-medium    rounded-full    text-gray-900 `}
                       >
-                        25 / 05 / 24
+                        {format(habit.deadlineDate, "MM/dd/yyyy")}
                       </p>
                     </div>
                     <div>
@@ -153,29 +160,31 @@ function Goals() {
                       <p
                         className={`text-sm py-1    capitalize font-medium    rounded-full    text-gray-900 `}
                       >
-                        25 Days
+                        {result}
                       </p>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      backgroundImage: `url(${imgs[idx]})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      // height: "100vh",
-                      // width: "100vw",
-                    }}
-                    className=" absolute  right-0 top-0 h-[300px] w-[350px]  rounded-r-lg  overflow-hidden  gap-2"
-                  >
-                    {/* <div className="w-[400px] absolute z-[8] h-[400px] bg-gradient-to-r from-white "></div> */}
-                    {/* <Image
+                  {imgs[idx] ? (
+                    <div
+                      style={{
+                        backgroundImage: `url(${imgs[idx]})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        // height: "100vh",
+                        // width: "100vw",
+                      }}
+                      className=" absolute  right-0 top-0 h-[300px] w-[350px]  rounded-r-lg  overflow-hidden  gap-2"
+                    >
+                      {/* <div className="w-[400px] absolute z-[8] h-[400px] bg-gradient-to-r from-white "></div> */}
+                      {/* <Image
                       src={imgs[idx]}
                       width="1000"
                       height="1000"
                       className=" w-full  text-center  "
                       alt="headay's habit tracker img"
                     /> */}
-                  </div>
+                    </div>
+                  ) : null}
                 </div>
               );
             })}
@@ -183,9 +192,9 @@ function Goals() {
         </main>
         <AnimatePresence>
           {showHabitForm ? (
-            <HabitForm
-              formTitle="Add New Habit"
-              habit={newHabit}
+            <GoalForm
+              formTitle="Add Goal"
+              goal={newGoal}
               setShowHabitForm={setShowHabitForm}
               handleSubmit={handleCreateHabit}
               error={error}

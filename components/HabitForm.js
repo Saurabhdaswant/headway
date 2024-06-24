@@ -68,7 +68,6 @@ function HabitForm({
         }}
         onClick={() => setShowHabitForm(false)}
         className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 "
-        div
       />
       <motion.div
         initial={{ x: "100%" }}

@@ -1,13 +1,15 @@
 import { useState } from "react";
 
-export default function useToggle(initialValue: boolean) {
+export default function useToggle(
+  initialValue: boolean
+): [boolean, () => void] {
   if (typeof initialValue !== "boolean") {
     console.warn("Invalid type for useToggle");
   }
 
   const [value, setValue] = useState<boolean>(initialValue);
 
-  function toggleValue() {
+  function toggleValue(): void {
     setValue((currentValue) => !currentValue);
   }
 

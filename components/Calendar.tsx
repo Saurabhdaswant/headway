@@ -24,7 +24,7 @@ export default function Calendar({
   toggleCalendar,
   canSelectDaysAfterToday,
   completedHabitDates,
-}) {
+}: any) {
   let [currentMonth, setCurrentMonth] = useState(format(currDate, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
