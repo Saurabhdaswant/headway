@@ -73,18 +73,18 @@
 // goals page
 
 // - API'S
-// -- create goal
+// -- create goal - done
 // -- add sub goals / habits
 // -- get goals
 // -- update goals
 // -- delete goals
 
 // - UI
-// -- create goal form dialog
+// -- create goal form dialog - done
+// -- handle ui for adding habits
 // -- goal detail page
-// -- handle ui for sub goals / habits
 
-// - figure out how habits and goals will be connected
+// - figure out how habits and goals will be connected - done
 // - here is how you do it :
 // create goal and get the goal
 // each habit should have the goal id

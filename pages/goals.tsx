@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { LogoutIcon } from "@heroicons/react/outline";
 import { AnimatePresence } from "framer-motion";
 import GoalForm from "../components/GoalForm";
+import { API_ENDPOINTS } from "../constants";
 
 const imgs = [
   "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -49,7 +50,6 @@ function Goals() {
   const today = startOfToday();
   const [error, setError] = useState(false);
   const [token, setToken] = useState(null);
-
   const [goals, setGoals] = useState([
     {
       name: "Buy a Range Rover",
@@ -78,6 +78,25 @@ function Goals() {
   ]);
 
   useEffect(() => {
+    const token = localStorage && localStorage?.getItem("authToken");
+    async function getGoals() {
+      const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goals`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const goals = await res.json();
+
+      setGoals(goals);
+    }
+
+    if (token) {
+      getGoals();
+    }
+  }, []);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const token = window.localStorage.getItem("authToken");
 
@@ -103,7 +122,19 @@ function Goals() {
   };
 
   const handleCreateHabit = async (goal) => {
-    console.log(goal, "how does this look like ?");
+    const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goal`, {
+      method: "POST",
+      body: JSON.stringify({
+        goal,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const newgoal = await res.json();
+    console.log(newgoal, "goal given by backend");
+
     setGoals([...goals, goal]);
     setShowHabitForm(false);
   };
@@ -120,7 +151,10 @@ function Goals() {
           <Header setShowHabitForm={setShowHabitForm} />
           <div className=" space-y-4   mt-8 gap-4 pb-5 items-start scrollbar-hide h-[87vh]   overflow-auto ">
             {goals?.map((habit: any, idx) => {
-              const result = formatDistance(today, habit?.deadlineDate);
+              const result = formatDistance(
+                today,
+                new Date(habit?.deadlineDate)
+              );
 
               return (
                 <div
@@ -150,7 +184,7 @@ function Goals() {
                       <p
                         className={`text-sm py-1    capitalize  font-medium    rounded-full    text-gray-900 `}
                       >
-                        {format(habit.deadlineDate, "MM/dd/yyyy")}
+                        {format(new Date(habit.deadlineDate), "MM/dd/yyyy")}
                       </p>
                     </div>
                     <div>
