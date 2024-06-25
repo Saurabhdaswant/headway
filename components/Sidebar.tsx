@@ -37,10 +37,10 @@ function Sidebar() {
             );
           })}
         </ul>
-        <div className="flex items-center justify-center gap-2 border-t py-4 border-gray-200">
+        {/* <div className="flex items-center justify-center gap-2 border-t py-4 border-gray-200">
           <div className="w-12 h-12 bg-slate-300 rounded-full"></div>
           <p className="font-medium">Saurabh</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
