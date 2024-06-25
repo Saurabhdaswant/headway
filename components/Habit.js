@@ -153,7 +153,7 @@ function Habit({ habit, currDate }) {
       >
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">
-            <p className=" font-semibold  pb-3   "> {habit.name}</p>
+            <p className=" font-semibold  pb-3   "> {currHabit.name}</p>
             <div
               onClick={() => toggleHabitCompletion()}
               onTouchStart={() => toggleHabitCompletion()}
@@ -170,18 +170,21 @@ function Habit({ habit, currDate }) {
           <div className="flex justify-between items-center pr-3">
             <p
               className={`text-xs px-2.5 py-1 mx-3 font-medium  capitalize inline-block   rounded-full  ${
-                habit.getDoneIn === "evening" && " bg-pink-100 text-pink-400"
+                currHabit.getDoneIn === "evening" &&
+                " bg-pink-100 text-pink-400"
               } ${
-                habit.getDoneIn === "anytime" && "bg-gray-100  text-gray-400"
+                currHabit.getDoneIn === "anytime" &&
+                "bg-gray-100  text-gray-400"
               } 
               ${
-                habit.getDoneIn === "morning" && "bg-orange-100 text-orange-400"
+                currHabit.getDoneIn === "morning" &&
+                "bg-orange-100 text-orange-400"
               } ${
-                habit.getDoneIn === "afternoon" &&
+                currHabit.getDoneIn === "afternoon" &&
                 "bg-violet-100 text-violet-400"
               }  `}
             >
-              {habit.getDoneIn}
+              {currHabit.getDoneIn}
             </p>
             <div className="flex md:hidden   gap-4 w-24">
               <PencilAltIcon

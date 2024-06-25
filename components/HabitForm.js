@@ -193,7 +193,7 @@ function HabitForm({
                 })}
               </div>
             </div>
-            <div className="flex flex-col space-y-2 ">
+            {/* <div className="flex flex-col space-y-2 ">
               <p className="font-semibold">Color</p>
               <div className=" grid grid-cols-6 gap-2 ">
                 {colors.map((color, idx) => {
@@ -210,7 +210,7 @@ function HabitForm({
                   );
                 })}
               </div>
-            </div>
+            </div> */}
             {/* <div className="flex flex-col space-y-2 ">
               <p className="font-semibold">End Date</p>
               <DialogComponent
