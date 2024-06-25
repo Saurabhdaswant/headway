@@ -80,8 +80,8 @@
 
 // - UI
 // -- create goal form dialog - done
-// -- handle ui for adding habits
-// -- goal detail page
+// -- handle ui for adding habits - done
+// -- goal detail page - done
 
 // - figure out how habits and goals will be connected - done
 // - here is how you do it :
@@ -91,14 +91,5 @@
 // once you have that habits array
 // replace the habits array of goal obj and return the goal
 
-// - figure out sub goals type : habit - one time
 // - impliment sidebar - we already have
 // - figure out img upload
-
-// goal obj :
-
-// - name
-// - description
-// - deadline date - optional
-// - images - optional
-// - created date
