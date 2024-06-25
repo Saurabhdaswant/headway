@@ -4,7 +4,7 @@ import { CheckCircle, Headphones, Target, Users, Zap } from "react-feather";
 import { useRouter } from "next/router";
 
 const sidebarItems = [
-  { name: "Dashboard", icon: ChartBarIcon, path: "/" },
+  { name: "Dashboard", icon: ChartBarIcon, path: "/stats" },
   { name: "Goals", icon: Target, path: "/goals" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
   { name: "Tribe", icon: Users, path: "/tribe" },
@@ -23,7 +23,7 @@ function Sidebar() {
         <ul className="px-4">
           {sidebarItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.path;
+            const isActive = pathname.startsWith(item.path);
             return (
               <li
                 key={item.name}
