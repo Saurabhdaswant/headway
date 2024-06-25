@@ -246,6 +246,7 @@ function App() {
             })}
           </div> */}
           <HabitsRenderer
+            habits={habits}
             selectedDay={selectedDay}
             selectedTimeOfDay={selectedTimeOfDay}
           />
