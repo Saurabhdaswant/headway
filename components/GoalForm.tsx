@@ -117,7 +117,7 @@ function GoalForm({ formTitle, goal, setShowHabitForm, handleSubmit, error }) {
                         })
                       }
                       toggleCalendar={() => toggleCalendar()}
-                      canSelectDaysAfterToday={false}
+                      canSelectDaysAfterToday
                     />
                   )}
                 </AnimatePresence>
