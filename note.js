@@ -82,6 +82,13 @@
 // -- create goal form dialog - done
 // -- handle ui for adding habits - done
 // -- goal detail page - done
+// - impliment sidebar - done
+// - figure out img upload
+
+// bugs :
+
+// - cant choose date after today's date
+// - the goal habit card does not go away after i delete
 
 // - figure out how habits and goals will be connected - done
 // - here is how you do it :
@@ -90,6 +97,3 @@
 // now create habits in bulk and get them back
 // once you have that habits array
 // replace the habits array of goal obj and return the goal
-
-// - impliment sidebar - we already have
-// - figure out img upload

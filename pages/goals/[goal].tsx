@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { API_ENDPOINTS } from "../../constants";
 import { format, startOfToday, formatDistance } from "date-fns";
 import { Calendar, Plus } from "react-feather";
@@ -8,6 +8,7 @@ import HabitForm from "../../components/HabitForm";
 import { weekDays } from "../../components/constants";
 import { Habits as HabitsRenderer } from "../../components/Habits";
 import Layout from "../../components/Layout";
+import { HabitsContext } from "../../Providers/HabitsProvider";
 
 export default function Goal() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Goal() {
   const [error, setError] = useState(false);
   const [token, setToken] = useState(null);
   const [showHabitForm, setShowHabitForm] = useState(false);
+  const { habits, updateHabits } = useContext(HabitsContext);
 
   const newHabit = {
     name: "",
@@ -86,6 +88,8 @@ export default function Goal() {
       const data = await res.json();
 
       const newHabits = [...(goal.habits || []), data.habit];
+      updateHabits([...habits, data.habit]);
+
       setGoal({ ...goal, habits: newHabits });
       setShowHabitForm(false);
     }
@@ -158,7 +162,10 @@ export default function Goal() {
             </p>
           </div>
         </div>
-        {/* <HabitsRenderer habits={goal?.habits} selectedDay={today} /> */}
+
+        <div className="max-w-[700px] mx-auto">
+          <HabitsRenderer habits={goal?.habits} selectedDay={today} />
+        </div>
         <AnimatePresence>
           {showHabitForm ? (
             <HabitForm
