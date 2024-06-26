@@ -97,7 +97,7 @@ export default function Goal() {
 
   return (
     <Layout>
-      <div className=" w-[80%] relative  overflow-hidden pt-10">
+      <div className=" w-full md:w-[80%] relative  overflow-hidden pt-10">
         <div className="mx-auto  max-w-[700px]">
           <div className="z-10">
             <p className=" font-bold text-4xl  text-[#272727] capitalize   ">
