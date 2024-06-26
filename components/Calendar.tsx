@@ -6,6 +6,7 @@ import {
   format,
   getDay,
   isAfter,
+  isBefore,
   isEqual,
   isToday,
   parse,
@@ -24,6 +25,7 @@ export default function Calendar({
   toggleCalendar,
   canSelectDaysAfterToday,
   completedHabitDates,
+  isThisCalendarRenderedInGoalsPage,
 }: any) {
   let [currentMonth, setCurrentMonth] = useState(format(currDate, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
@@ -120,6 +122,13 @@ export default function Calendar({
                 type="button"
                 onClick={() => {
                   if (
+                    isThisCalendarRenderedInGoalsPage &&
+                    isBefore(day, startOfToday())
+                  ) {
+                    return;
+                  }
+
+                  if (
                     isAfter(day, startOfToday()) &&
                     !canSelectDaysAfterToday
                   ) {
@@ -134,7 +143,15 @@ export default function Calendar({
                   !isEqual(day, currDate) &&
                     !isToday(day) &&
                     " hover:bg-gray-200 ",
-                  isAfter(day, startOfToday()) && "text-gray-400",
+                  isAfter(day, startOfToday()) &&
+                    "text-gray-400 cursor-not-allowed",
+                  isThisCalendarRenderedInGoalsPage &&
+                    isBefore(day, startOfToday())
+                    ? "text-gray-400 cursor-not-allowed"
+                    : isThisCalendarRenderedInGoalsPage
+                    ? "text-black"
+                    : "",
+
                   "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
                 )}
               >
