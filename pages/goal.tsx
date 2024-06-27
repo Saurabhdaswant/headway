@@ -179,7 +179,7 @@ const GoalDetailPage = ({ data }) => {
               </li>
             </ul>
           )}
-          {section.images && (
+          {/* {section.images && (
             <div className="mb-4">
               <div className="flex flex-wrap">
                 {section.images.map((image, idx) => (
@@ -195,12 +195,12 @@ const GoalDetailPage = ({ data }) => {
                 Add Image
               </button>
             </div>
-          )}
+          )} */}
           {section.quotes && (
             <div className="mb-4">
               {section.quotes.map((quote, idx) => (
                 <blockquote key={idx} className="italic text-gray-600">
-                  "{quote.quote}"
+                  {/* "{quote.quote}" */}
                 </blockquote>
               ))}
             </div>
