@@ -247,11 +247,13 @@ function App() {
               );
             })}
           </div> */}
-            <HabitsRenderer
-              habits={habits}
-              selectedDay={selectedDay}
-              selectedTimeOfDay={selectedTimeOfDay}
-            />
+            <div className=" grid justify-center  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
+              <HabitsRenderer
+                habits={habits}
+                selectedDay={selectedDay}
+                selectedTimeOfDay={selectedTimeOfDay}
+              />
+            </div>
           </main>
           <AnimatePresence>
             {showHabitForm ? (

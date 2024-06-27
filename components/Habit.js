@@ -139,7 +139,7 @@ function Habit({ habit, currDate }) {
   };
 
   return (
-    <div className="flex items-center justify-between ">
+    <div className="w-full">
       {/* <div
         onClick={() => toggleHabitCompletion()}
         className={` cursor-pointer border-4 grid place-items-center bg-white ${
@@ -149,7 +149,7 @@ function Habit({ habit, currDate }) {
         <Check className="  w-8 h-8  stroke-3" />
       </div> */}
       <div
-        className={` group   rounded-2xl  w-full md:max-w-[65%] mx-auto flex justify-between items-center   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
+        className={` group   rounded-2xl  w-[400px]  flex justify-between items-center   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
       >
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">

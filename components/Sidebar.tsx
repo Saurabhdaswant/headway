@@ -18,7 +18,7 @@ function Sidebar() {
   const { pathname } = router;
 
   return (
-    <div className=" hidden md:block z-50 w-[20%] bg-gray-50">
+    <div className=" hidden md:block z-50 w-[20%] bg-white">
       <div className="flex flex-col mt-10 justify-between h-[90%]">
         <ul className="px-4">
           {sidebarItems.map((item) => {

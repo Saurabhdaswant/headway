@@ -97,3 +97,14 @@
 // now create habits in bulk and get them back
 // once you have that habits array
 // replace the habits array of goal obj and return the goal
+
+// goals detail page design 💡
+
+// white space consistency
+
+// add stuff to fill the page
+// - progress bar
+// - make the habits / miltestions page better looking
+// - notes / logs to anaa hi chahiye
+// - visuals
+// - update , delete
