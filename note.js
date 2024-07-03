@@ -101,10 +101,19 @@
 // goals detail page design 💡
 
 // white space consistency
+// consistency in colors
+// better cards
+// consistency in font weight
+// better / new colors
 
 // add stuff to fill the page
-// - progress bar
+// - goal check box button
+// - bigger goal progress tracker for habits like github calendar if the goal is habit based
+// - if its a task based goal then show normal progress bar
+// - add milestone adding and rendering feature
 // - make the habits / miltestions page better looking
 // - notes / logs to anaa hi chahiye
 // - visuals
 // - update , delete
+// - habit and goal check accomplishment reward feature
+// -

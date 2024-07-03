@@ -27,6 +27,7 @@ export default function HabitsProvider({ children }) {
       !token &&
       router.pathname !== "/login" &&
       router.pathname !== "/signup" &&
+      router.pathname !== "/waitlist" &&
       router.pathname !== "/"
     ) {
       router.push("/login");
