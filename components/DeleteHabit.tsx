@@ -4,10 +4,15 @@ import { HabitsContext } from "../Providers/HabitsProvider";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+import { GoalContext } from "../Providers/GoalProvider";
 
 export default function DeleteHabit({ habitId, toggleDeleteDialog }) {
   const { habits, updateHabits } = useContext(HabitsContext);
+  const { goal, updateGoal } = useContext(GoalContext);
   const { token }: any = useContext(TokenContext);
+  const { pathname } = useRouter();
+  const isInsideGoalsPage = pathname.startsWith("/goals");
 
   const handleDelete = async () => {
     const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits/${habitId}`, {
@@ -18,11 +23,27 @@ export default function DeleteHabit({ habitId, toggleDeleteDialog }) {
     });
 
     const json = await res.json();
-    if (json.acknowledged) {
-      const filteredHabits = habits.filter((habit, _) => habit._id !== habitId);
+    if (json.habit.acknowledged) {
+      if (isInsideGoalsPage) {
+        const habits = goal.habits;
+        const filteredHabits = habits.filter(
+          (habit, _) => habit._id !== habitId
+        );
 
-      updateHabits(filteredHabits);
-      toggleDeleteDialog();
+        updateGoal({
+          ...goal,
+          habits: filteredHabits,
+        });
+
+        toggleDeleteDialog();
+      } else {
+        const filteredHabits = habits.filter(
+          (habit, _) => habit._id !== habitId
+        );
+
+        updateHabits(filteredHabits);
+        toggleDeleteDialog();
+      }
     }
   };
 

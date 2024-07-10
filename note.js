@@ -73,16 +73,16 @@
 // goals page
 
 // - API'S
-// -- create goal - done
-// -- get goals - done
-// -- update goals - done
-// -- delete goals - done
+// -- create goal - done ✅
+// -- get goals - done ✅
+// -- update goals - done ✅
+// -- delete goals - done ✅
 
 // - UI
-// -- create goal form dialog - done
-// -- handle ui for adding habits - done
-// -- goal detail page - done
-// - impliment sidebar - done
+// -- create goal form dialog - done ✅
+// -- handle ui for adding habits - done ✅
+// -- goal detail page - done ✅
+// - impliment sidebar - done ✅
 // - figure out img upload
 
 // bugs :
@@ -90,7 +90,7 @@
 // - cant choose date after today's date
 // - the goal habit card does not go away after i delete
 
-// - figure out how habits and goals will be connected - done
+// - figure out how habits and goals will be connected - done ✅
 // - here is how you do it :
 // create goal and get the goal
 // each habit should have the goal id
@@ -117,3 +117,9 @@
 // - update , delete
 // - habit and goal check accomplishment reward feature
 // -
+
+//     name: "Design Engineer $80k to $100k",
+//     description: "It's more than just a financial target. It's about a promise and commitment. I aim to marry the love of my life, Shreya. To earn her family's trust and show my dedication, I understand the need to distinguish myself from the crowd, both in ambition and achievement. It's imp to show that I can provide and care for our future.",
+//   const dateWhichIsAfterCurrDate = add(today, {
+//     days: 309,
+//   });

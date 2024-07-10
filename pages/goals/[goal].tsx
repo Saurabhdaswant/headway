@@ -9,43 +9,15 @@ import { weekDays } from "../../components/constants";
 import { Habits as HabitsRenderer } from "../../components/Habits";
 import Layout from "../../components/Layout";
 import { HabitsContext } from "../../Providers/HabitsProvider";
+import { GoalContext } from "../../Providers/GoalProvider";
 
 export default function Goal() {
+  const { goal, updateGoal } = useContext(GoalContext);
+
   const router = useRouter();
   const { goal: id } = router.query;
   const today = startOfToday();
-  const dateWhichIsAfterCurrDate = add(today, {
-    days: 309,
-  });
-  const [goal, setGoal] = useState<any>({
-    _id: "667995f1215fdf5b00ddd8cf",
-    name: "Design Engineer $80k to $100k",
-    description:
-      "It's more than just a financial target. It's about a promise and commitment. I aim to marry the love of my life, Shreya. To earn her family's trust and show my dedication, I understand the need to distinguish myself from the crowd, both in ambition and achievement. It's imp to show that I can provide and care for our future.",
-    createdDate: today,
-    deadlineDate: dateWhichIsAfterCurrDate,
-    habits: [
-      {
-        name: "Follow Skin Care Routine",
-        getDoneIn: "anytime",
-        color: "",
-        completedOnDates: [],
-        createdDate: "2024-06-26T18:30:00.000Z",
-        repeatHabitDays: [
-          "monday",
-          "tuesday",
-          "wednesday",
-          "thursday",
-          "friday",
-          "saturday",
-          "sunday",
-        ],
-        _id: "667d72461927d4e7b89bb418",
-        userId: "6624da6f5aabb9dd2417e67f",
-        goalId: "667995f1215fdf5b00ddd8cf",
-      },
-    ],
-  });
+
   const [error, setError] = useState(false);
   const [token, setToken] = useState(null);
   const [showHabitForm, setShowHabitForm] = useState(false);
@@ -75,7 +47,7 @@ export default function Goal() {
   useEffect(() => {
     const token = localStorage && localStorage?.getItem("authToken");
 
-    async function getGoals() {
+    async function getGoal() {
       const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goals/${id}`, {
         headers: {
           "Content-Type": "application/json",
@@ -83,13 +55,12 @@ export default function Goal() {
         },
       });
       const goal = await res.json();
-
-      // setGoal(goal);
+      updateGoal(goal);
     }
 
     if (id) {
       if (token && id) {
-        getGoals();
+        getGoal();
       }
     }
   }, [id]);
@@ -121,7 +92,7 @@ export default function Goal() {
       const newHabits = [...(goal.habits || []), data.habit];
       updateHabits([...habits, data.habit]);
 
-      setGoal({ ...goal, habits: newHabits });
+      updateGoal({ ...goal, habits: newHabits });
       setShowHabitForm(false);
     }
   };
@@ -140,13 +111,12 @@ export default function Goal() {
           ></div>
           <div className="z-10">
             <p className=" font-bold text-4xl  text-[#272727] capitalize   ">
-              {" "}
               {goal?.name}
             </p>
             <p className=" font-normal text-gray-600  mt-6    ">
               {goal?.description}
             </p>
-          </div>{" "}
+          </div>
           <div className="flex mt-8 items-center gap-1">
             <Calendar strokeWidth="2" size="20" />
             <p
@@ -158,7 +128,9 @@ export default function Goal() {
             <p
               className={`text-sm py-1    capitalize  font-bold    rounded-full    text-gray-900 `}
             >
-              {goal ? format(new Date(goal?.createdDate), "MM/dd/yyyy") : null}
+              {goal && goal?.createdDate
+                ? format(new Date(goal?.createdDate), "MM/dd/yyyy")
+                : null}
             </p>
           </div>
           <div className="grid grid-cols-3 gap-4 mt-10">
@@ -183,7 +155,9 @@ export default function Goal() {
               <p
                 className={` text-2xl font-black py-1    capitalize     rounded-full    text-gray-900 `}
               >
-                {goal ? format(new Date(goal?.deadlineDate), "PPP") : null}
+                {goal && goal?.deadlineDate
+                  ? format(new Date(goal?.deadlineDate), "PPP")
+                  : null}
               </p>
             </div>
             <div className="p-6 bg-white rounded-lg">
@@ -193,7 +167,7 @@ export default function Goal() {
               <p
                 className={` text-2xl font-black py-1    capitalize    rounded-full    text-gray-900 `}
               >
-                {goal
+                {goal && goal?.deadlineDate
                   ? formatDistance(today, new Date(goal?.deadlineDate))
                   : null}
               </p>
