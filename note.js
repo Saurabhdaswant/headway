@@ -89,6 +89,7 @@
 
 // - cant choose date after today's date - done ✅
 // - the goal habit card does not go away after i delete - done ✅
+// - fix habit width issue on mobile - done ✅
 
 // - figure out how habits and goals will be connected - done ✅
 // - here is how you do it :
