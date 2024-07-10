@@ -143,14 +143,18 @@ export default function Calendar({
                   !isEqual(day, currDate) &&
                     !isToday(day) &&
                     " hover:bg-gray-200 ",
-                  isAfter(day, startOfToday()) &&
+
+                  !isThisCalendarRenderedInGoalsPage &&
+                    isAfter(day, startOfToday()) &&
                     "text-gray-400 cursor-not-allowed",
+
                   isThisCalendarRenderedInGoalsPage &&
-                    isBefore(day, startOfToday())
-                    ? "text-gray-400 cursor-not-allowed"
-                    : isThisCalendarRenderedInGoalsPage
-                    ? "text-black"
-                    : "",
+                    isBefore(day, startOfToday()) &&
+                    "text-gray-400 cursor-not-allowed",
+
+                  isThisCalendarRenderedInGoalsPage &&
+                    isAfter(day, startOfToday()) &&
+                    "text-black",
 
                   "mx-auto flex h-6 w-6 items-center justify-center rounded-full "
                 )}
