@@ -90,6 +90,13 @@
 // - cant choose date after today's date - done ✅
 // - the goal habit card does not go away after i delete - done ✅
 // - fix habit width issue on mobile - done ✅
+// - add img to goal
+// - delete goal
+// -- find the api - done
+// -- copy code from habit delete uin - done
+// -- update that componenet to our needs -
+// -- use that componenet -
+// - update goal
 
 // - figure out how habits and goals will be connected - done ✅
 // - here is how you do it :

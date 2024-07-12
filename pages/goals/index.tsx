@@ -10,6 +10,9 @@ import { useRouter } from "next/router";
 import { API_ENDPOINTS } from "../../constants";
 import GoalForm from "../../components/GoalForm";
 import Layout from "../../components/Layout";
+import useToggle from "../../hooks/useToggle";
+import DeleteGoal from "../../components/DeleteGoal";
+import { TrashIcon } from "@heroicons/react/solid";
 
 const imgs = [
   "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -19,6 +22,8 @@ const imgs = [
 ];
 
 function Goals() {
+  const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
+
   const [showHabitForm, setShowHabitForm] = useState(false);
   const today = startOfToday();
   const [error, setError] = useState(false);
@@ -100,15 +105,15 @@ function Goals() {
           <main className=" mx-auto w-full max-w-[70%]  ">
             <Header setShowHabitForm={setShowHabitForm} />
             <div className=" space-y-4   mt-8 gap-4 pb-5 items-start scrollbar-hide h-[87vh]   overflow-auto ">
-              {goals?.map((habit: any, idx) => {
+              {goals?.map((goal: any, idx) => {
                 const result = formatDistance(
                   today,
-                  new Date(habit?.deadlineDate)
+                  new Date(goal?.deadlineDate)
                 );
 
                 return (
                   <div
-                    onClick={() => router.push(`goals/${habit._id}`)}
+                    onClick={() => router.push(`goals/${goal._id}`)}
                     key={idx}
                     className={` ${
                       imgs[idx] ? "h-[300px]" : "h-[200px]"
@@ -118,10 +123,10 @@ function Goals() {
                     <div className="z-10">
                       <p className=" font-semibold text-2xl   text-[#272727] capitalize pb-2  ">
                         {" "}
-                        {habit.name}
+                        {goal.name}
                       </p>
                       <p className=" font-normal text-gray-600 pb-3  max-w-[25rem]   ">
-                        {habit.description}
+                        {goal.description}
                       </p>
                     </div>
 
@@ -135,7 +140,7 @@ function Goals() {
                         <p
                           className={`text-sm py-1    capitalize  font-medium    rounded-full    text-gray-900 `}
                         >
-                          {format(new Date(habit.deadlineDate), "MM/dd/yyyy")}
+                          {format(new Date(goal.deadlineDate), "MM/dd/yyyy")}
                         </p>
                       </div>
                       <div>
@@ -150,6 +155,13 @@ function Goals() {
                           {result}
                         </p>
                       </div>
+                      <TrashIcon
+                        className="w-6 h-6"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleDeleteDialog();
+                        }}
+                      />{" "}
                     </div>
                     {imgs[idx] ? (
                       <div
@@ -172,6 +184,16 @@ function Goals() {
                     /> */}
                       </div>
                     ) : null}
+                    <AnimatePresence>
+                      {showDeleteDialog && (
+                        <DeleteGoal
+                          goalId={goal._id}
+                          goals={goals}
+                          setGoals={setGoals}
+                          toggleDeleteDialog={toggleDeleteDialog}
+                        />
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}
