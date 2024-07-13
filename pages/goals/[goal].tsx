@@ -220,18 +220,18 @@ export default function Goal() {
         <div className=" scrollbar-hide h-[70vh] mt-2 pb-10   overflow-auto mx-auto  max-w-[800px]">
           <HabitsRenderer habits={goal?.habits} selectedDay={today} />
         </div>
-        <AnimatePresence>
-          {showHabitForm ? (
-            <HabitForm
-              formTitle="Add New Habit"
-              habit={newHabit}
-              setShowHabitForm={setShowHabitForm}
-              handleSubmit={handleCreateHabit}
-              error={error}
-            />
-          ) : null}
-        </AnimatePresence>
       </div>
+      <AnimatePresence>
+        {showHabitForm ? (
+          <HabitForm
+            formTitle="Add New Habit"
+            habit={newHabit}
+            setShowHabitForm={setShowHabitForm}
+            handleSubmit={handleCreateHabit}
+            error={error}
+          />
+        ) : null}
+      </AnimatePresence>
     </Layout>
   );
 }
