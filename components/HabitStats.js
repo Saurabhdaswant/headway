@@ -203,20 +203,20 @@ function HabitStats({ habit, toggleStats }) {
         <div className="space-y-4 my-4  ">
           <p className="  font-semibold   ">Times Completed</p>
           <div className="  space-y-4 ">
-            <div className="flex justify-between items-center bg-gray-100 px-4 ">
-              <p>This Week</p>
+            <div className="flex justify-between items-center  px-4 ">
+              <p className=" uppercase text-base text-gray-400 ">This Week</p>
               <h1 className=" font-semibold text-lg ">{completedThisWeek}</h1>
             </div>
-            <div className="flex justify-between items-center bg-gray-100 px-4 ">
-              <p>This Month</p>
+            <div className="flex justify-between items-center  px-4 ">
+              <p className=" uppercase text-base text-gray-400 ">This Month</p>
               <h1 className=" font-semibold text-lg ">{completedThisMonth}</h1>
             </div>
-            <div className="flex justify-between items-center bg-gray-100 px-4 ">
-              <p>This Year</p>
+            <div className="flex justify-between items-center  px-4 ">
+              <p className=" uppercase text-base text-gray-400 ">This Year</p>
               <h1 className=" font-semibold text-lg ">{completedThisYear}</h1>
             </div>
-            <div className="flex justify-between items-center bg-gray-100 px-4 ">
-              <p>All</p>
+            <div className="flex justify-between items-center  px-4 ">
+              <p className=" uppercase text-base text-gray-400 ">All</p>
               <h1 className=" font-semibold text-lg ">
                 {allTimeCompletedHabitsCount}
               </h1>
