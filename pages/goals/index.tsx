@@ -126,32 +126,32 @@ function Goals() {
                         {" "}
                         {goal.name}
                       </p>
-                      <p className=" font-normal text-gray-600 pb-3  max-w-[25rem]   ">
+                      <p className=" font-normal line-clamp-4 text-gray-600   max-w-[25rem]   ">
                         {goal.description}
                       </p>
                     </div>
 
-                    <div className="flex z-10  gap-4 items-center">
+                    <div className="flex z-10 justify-between max-w-[25.5rem]  gap-4 items-center">
                       <div>
                         <p
-                          className={`text-xs    capitalize    rounded-full    text-gray-600 `}
+                          className={`text-sm    capitalize    rounded-full    text-gray-600 `}
                         >
-                          deadline date
+                          deadline
                         </p>
                         <p
-                          className={`text-sm py-1    capitalize  font-medium    rounded-full    text-gray-900 `}
+                          className={` py-1    capitalize  font-medium    rounded-full    text-gray-900 `}
                         >
-                          {format(new Date(goal.deadlineDate), "MM/dd/yyyy")}
+                          {format(new Date(goal.deadlineDate), "PPP")}
                         </p>
                       </div>
                       <div>
                         <p
-                          className={`text-xs    capitalize    rounded-full    text-gray-600 `}
+                          className={`text-sm    capitalize    rounded-full    text-gray-600 `}
                         >
-                          time left
+                          Remaining
                         </p>
                         <p
-                          className={`text-sm py-1    capitalize font-medium    rounded-full    text-gray-900 `}
+                          className={` py-1    capitalize font-medium    rounded-full    text-gray-900 `}
                         >
                           {result}
                         </p>
