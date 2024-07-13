@@ -151,12 +151,12 @@ export default function Goal() {
               className={`text-sm py-1    capitalize  font-bold    rounded-full    text-gray-900 `}
             >
               {goal && goal?.createdDate
-                ? format(new Date(goal?.createdDate), "MM/dd/yyyy")
+                ? format(new Date(goal?.createdDate), "PP")
                 : null}
             </p>
           </div>
           <div className="grid grid-cols-3 gap-4 mt-10">
-            <div className="p-6  bg-white rounded-lg">
+            <div className="p-4  bg-white rounded-lg">
               <p className={`    capitalize    rounded-full    text-gray-600 `}>
                 Time Indicator
               </p>
@@ -170,7 +170,7 @@ export default function Goal() {
               </div>
               {/* <span className="text-sm text-gray-600">40%</span> */}
             </div>{" "}
-            <div className="p-6 bg-white rounded-lg">
+            <div className="p-4 bg-white rounded-lg">
               <p className={`    capitalize    rounded-full    text-gray-600 `}>
                 Deadline
               </p>
@@ -178,11 +178,11 @@ export default function Goal() {
                 className={` text-2xl font-black py-1    capitalize     rounded-full    text-gray-900 `}
               >
                 {goal && goal?.deadlineDate
-                  ? format(new Date(goal?.deadlineDate), "PPP")
+                  ? format(new Date(goal?.deadlineDate), "PP")
                   : null}
               </p>
             </div>
-            <div className="p-6 bg-white rounded-lg">
+            <div className="p-4 bg-white rounded-lg">
               <p className={`    capitalize    rounded-full    text-gray-600 `}>
                 Remaining
               </p>

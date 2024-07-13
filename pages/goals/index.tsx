@@ -141,7 +141,7 @@ function Goals() {
                         <p
                           className={` py-1    capitalize  font-medium    rounded-full    text-gray-900 `}
                         >
-                          {format(new Date(goal.deadlineDate), "PPP")}
+                          {format(new Date(goal.deadlineDate), "PP")}
                         </p>
                       </div>
                       <div>
