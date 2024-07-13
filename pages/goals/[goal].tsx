@@ -1,7 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { API_ENDPOINTS } from "../../constants";
-import { format, startOfToday, formatDistance, add } from "date-fns";
+import {
+  format,
+  startOfToday,
+  formatDistance,
+  differenceInDays,
+  parseISO,
+} from "date-fns";
 import { Calendar, Plus } from "react-feather";
 import { AnimatePresence } from "framer-motion";
 import HabitForm from "../../components/HabitForm";
@@ -97,6 +103,22 @@ export default function Goal() {
     }
   };
 
+  function calculateProgress(goal) {
+    const totalDays = differenceInDays(
+      parseISO(goal.deadlineDate),
+      parseISO(goal.createdDate)
+    );
+    const currentDate = parseISO(format(new Date(), "yyyy-MM-dd"));
+    const elapsedDays = differenceInDays(
+      currentDate,
+      parseISO(goal.createdDate)
+    );
+    const ratio = elapsedDays / totalDays;
+    const number = 10 + 90 * ratio;
+
+    return number;
+  }
+
   return (
     <Layout>
       <div className=" w-full md:w-[80%] h-[100vh]  relative bg-[#F5F5F5]  overflow-auto pt-10">
@@ -136,13 +158,13 @@ export default function Goal() {
           <div className="grid grid-cols-3 gap-4 mt-10">
             <div className="p-6  bg-white rounded-lg">
               <p className={`    capitalize    rounded-full    text-gray-600 `}>
-                Progress
+                Time Indicator
               </p>
               <div className="relative mt-4 pt-1">
-                <div className="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-200">
                   <div
-                    style={{ width: `${40}%` }}
-                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
+                    style={{ width: `${calculateProgress(goal)}%` }}
+                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-400"
                   ></div>
                 </div>
               </div>
@@ -150,7 +172,7 @@ export default function Goal() {
             </div>{" "}
             <div className="p-6 bg-white rounded-lg">
               <p className={`    capitalize    rounded-full    text-gray-600 `}>
-                deadline date
+                Deadline
               </p>
               <p
                 className={` text-2xl font-black py-1    capitalize     rounded-full    text-gray-900 `}
@@ -162,7 +184,7 @@ export default function Goal() {
             </div>
             <div className="p-6 bg-white rounded-lg">
               <p className={`    capitalize    rounded-full    text-gray-600 `}>
-                time left
+                Remaining
               </p>
               <p
                 className={` text-2xl font-black py-1    capitalize    rounded-full    text-gray-900 `}

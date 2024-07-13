@@ -64,6 +64,7 @@ function Goals() {
   const dateWhichIsBeforeCurrDate = sub(today, {
     days: 5,
   });
+  const specificDate = new Date("2022-12-01T00:00:00Z");
 
   // use this if needed instead of today! 👆🏽
 
@@ -155,13 +156,13 @@ function Goals() {
                           {result}
                         </p>
                       </div>
-                      <TrashIcon
+                      {/* <TrashIcon
                         className="w-6 h-6"
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleDeleteDialog();
                         }}
-                      />{" "}
+                      />{" "} */}
                     </div>
                     {imgs[idx] ? (
                       <div

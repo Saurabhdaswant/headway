@@ -91,11 +91,7 @@
 // - the goal habit card does not go away after i delete - done ✅
 // - fix habit width issue on mobile - done ✅
 // - add img to goal
-// - delete goal
-// -- find the api - done
-// -- copy code from habit delete uin - done
-// -- update that componenet to our needs -
-// -- use that componenet -
+// - delete goal - done
 // - update goal
 
 // - figure out how habits and goals will be connected - done ✅
@@ -117,8 +113,9 @@
 // add stuff to fill the page
 // - goal check box button
 // - bigger goal progress tracker for habits like github calendar if the goal is habit based
-// - if its a task based goal then show normal progress bar
+// - if its a milestone based goal then show normal progress bar
 // - add milestone adding and rendering feature
+
 // - make the habits / miltestions page better looking
 // - notes / logs to anaa hi chahiye
 // - visuals
