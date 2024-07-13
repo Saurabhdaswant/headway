@@ -129,7 +129,6 @@ function HabitStats({ habit, toggleStats }) {
               cy={80}
               innerRadius={60}
               outerRadius={80}
-              fill="#0fc9f2"
               paddingAngle={0}
               dataKey="value"
             >
@@ -139,6 +138,7 @@ function HabitStats({ habit, toggleStats }) {
               <Label
                 value={totalStreakPercentage}
                 className=" font-bold text-5xl  "
+                fill="#242424"
                 position="center"
               />
             </Pie>
