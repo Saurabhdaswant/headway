@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { API_ENDPOINTS } from "../../constants";
 import {
   format,
@@ -352,9 +352,15 @@ export default function Goal() {
 const Milestone = ({ idx, setMilestones, milestones, milestone }) => {
   const { isCompleted, name } = milestone;
 
+  const handleInput = (e: any) => {
+    let newMilestones = [...milestones];
+    newMilestones[idx].name = e.target.value;
+    setMilestones(newMilestones);
+  };
+
   return (
     <div
-      className="rounded-xl select-none flex items-center gap-4  p-3 w-full bg-white"
+      className="rounded-xl flex items-center gap-4  p-3 w-full bg-white"
       key={idx}
     >
       <div
@@ -367,11 +373,20 @@ const Milestone = ({ idx, setMilestones, milestones, milestone }) => {
           isCompleted
             ? " border-[#27b562ef]  text-[#27b562ef]"
             : " text-gray-200"
-        } w-8 h-8 rounded-full shadow-lg  `}
+        } min-w-8 min-h-8 rounded-full shadow-lg  `}
       >
         <Check className="  w-4 h-4  stroke-3" />
       </div>
-      <p className={isCompleted ? "line-through" : ""}>{name}</p>
+
+      <input
+        value={name}
+        onChange={handleInput}
+        className={` w-full ${
+          isCompleted
+            ? "line-through"
+            : "bg-none w-full border-none outline-none "
+        }`}
+      />
       <TrashIcon
         onClick={() => {
           const filteredMilestones = milestones.filter(
