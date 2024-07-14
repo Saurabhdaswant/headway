@@ -16,6 +16,7 @@ import { Habits as HabitsRenderer } from "../../components/Habits";
 import Layout from "../../components/Layout";
 import { HabitsContext } from "../../Providers/HabitsProvider";
 import { GoalContext } from "../../Providers/GoalProvider";
+import { TrashIcon } from "@heroicons/react/outline";
 
 export default function Goal() {
   const { goal, updateGoal } = useContext(GoalContext);
@@ -321,28 +322,15 @@ export default function Goal() {
 
               <div className=" scrollbar-hide h-[70vh] mt-2 pb-10   overflow-auto mx-auto  max-w-[800px]">
                 <div className="space-y-2 mt-2 pb-4">
-                  {milestones.map(({ name, isCompleted }, idx) => {
+                  {milestones.map((milestone, idx) => {
                     return (
-                      <div
-                        className="rounded-xl select-none flex items-center gap-4 justify-between p-3 w-full bg-white"
+                      <Milestone
                         key={idx}
-                      >
-                        <p className={isCompleted && " line-through"}>{name}</p>
-                        <div
-                          onClick={() => {
-                            let newMilestones = [...milestones];
-                            newMilestones[idx].isCompleted = !isCompleted;
-                            setMilestones(newMilestones);
-                          }}
-                          className={` cursor-pointer border-2  grid place-items-center bg-white ${
-                            isCompleted
-                              ? " border-[#27b562ef]  text-[#27b562ef]"
-                              : " text-gray-200"
-                          } w-8 h-8 rounded-full shadow-lg  `}
-                        >
-                          <Check className="  w-4 h-4  stroke-3" />
-                        </div>
-                      </div>
+                        idx={idx}
+                        setMilestones={setMilestones}
+                        milestones={milestones}
+                        milestone={milestone}
+                      />
                     );
                   })}
                 </div>
@@ -365,3 +353,39 @@ export default function Goal() {
     </Layout>
   );
 }
+
+const Milestone = ({ idx, setMilestones, milestones, milestone }) => {
+  const { isCompleted, name } = milestone;
+
+  return (
+    <div
+      className="rounded-xl select-none flex items-center gap-4  p-3 w-full bg-white"
+      key={idx}
+    >
+      <div
+        onClick={() => {
+          let newMilestones = [...milestones];
+          newMilestones[idx].isCompleted = !isCompleted;
+          setMilestones(newMilestones);
+        }}
+        className={` cursor-pointer border-2  grid place-items-center bg-white ${
+          isCompleted
+            ? " border-[#27b562ef]  text-[#27b562ef]"
+            : " text-gray-200"
+        } w-8 h-8 rounded-full shadow-lg  `}
+      >
+        <Check className="  w-4 h-4  stroke-3" />
+      </div>
+      <p className={isCompleted ? "line-through" : ""}>{name}</p>
+      <TrashIcon
+        onClick={() => {
+          const filteredMilestones = milestones.filter(
+            (_, index) => index !== idx
+          );
+          setMilestones(filteredMilestones);
+        }}
+        className="hover:cursor-pointer w-6"
+      />
+    </div>
+  );
+};
