@@ -8,7 +8,7 @@ import {
   differenceInDays,
   parseISO,
 } from "date-fns";
-import { Calendar, Plus } from "react-feather";
+import { Calendar, Check, Plus } from "react-feather";
 import { AnimatePresence } from "framer-motion";
 import HabitForm from "../../components/HabitForm";
 import { weekDays } from "../../components/constants";
@@ -251,8 +251,8 @@ export default function Goal() {
             <button
               onClick={() => setShowHabits(true)}
               className={`
-               py-2 px-4 rounded-md
-              ${showHabits && "text-[#242424] bg-white "} 
+               py-2 px-4 rounded-md capitalize
+              ${showHabits && "text-[#242424] bg-white shadow-md "} 
              `}
             >
               habits
@@ -261,8 +261,8 @@ export default function Goal() {
               onClick={() => setShowHabits(false)}
               className={`
               ${
-                !showHabits && "bg-white text-[#242424]"
-              }  py-2 px-4 rounded-md`}
+                !showHabits && "bg-white shadow-md text-[#242424]"
+              }  py-2 px-4 rounded-md capitalize`}
             >
               milestones
             </button>
@@ -314,35 +314,38 @@ export default function Goal() {
                 }}
                 className={`
 							outline-none focus:border-[#0F85F2] w-full font-medium 
-							border-2    px-4 py-2 rounded 
+							border-2    px-4 py-3 shadow-md rounded-xl
             border-zinc-200
               `}
               />
 
-              <div className="space-y-2 mt-2">
-                {milestones.map(({ name, isCompleted }, idx) => {
-                  return (
-                    <div
-                      onClick={() => {
-                        let newMilestones = [...milestones];
-                        newMilestones[idx].isCompleted = !isCompleted;
-                        setMilestones(newMilestones);
-                      }}
-                      className={
-                        isCompleted
-                          ? ` rounded-xl p-3 w-full
-                        bg-green-500
-                      }`
-                          : ` rounded-xl p-3 w-full
-                        bg-white
-                      }`
-                      }
-                      key={idx}
-                    >
-                      {name}
-                    </div>
-                  );
-                })}
+              <div className=" scrollbar-hide h-[70vh] mt-2 pb-10   overflow-auto mx-auto  max-w-[800px]">
+                <div className="space-y-2 mt-2 pb-4">
+                  {milestones.map(({ name, isCompleted }, idx) => {
+                    return (
+                      <div
+                        className="rounded-xl select-none flex items-center gap-4 justify-between p-3 w-full bg-white"
+                        key={idx}
+                      >
+                        <p className={isCompleted && " line-through"}>{name}</p>
+                        <div
+                          onClick={() => {
+                            let newMilestones = [...milestones];
+                            newMilestones[idx].isCompleted = !isCompleted;
+                            setMilestones(newMilestones);
+                          }}
+                          className={` cursor-pointer border-2  grid place-items-center bg-white ${
+                            isCompleted
+                              ? " border-[#27b562ef]  text-[#27b562ef]"
+                              : " text-gray-200"
+                          } w-8 h-8 rounded-full shadow-lg  `}
+                        >
+                          <Check className="  w-4 h-4  stroke-3" />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           )}
