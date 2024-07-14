@@ -158,13 +158,13 @@ export default function Goal() {
 
   function calculateProgress(goal) {
     const totalDays = differenceInDays(
-      parseISO(goal.deadlineDate),
-      parseISO(goal.createdDate)
+      parseISO(goal?.deadlineDate),
+      parseISO(goal?.createdDate)
     );
     const currentDate = parseISO(format(new Date(), "yyyy-MM-dd"));
     const elapsedDays = differenceInDays(
       currentDate,
-      parseISO(goal.createdDate)
+      parseISO(goal?.createdDate)
     );
     const ratio = elapsedDays / totalDays;
     const number = 10 + 90 * ratio;
