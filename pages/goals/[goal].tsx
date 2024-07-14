@@ -275,9 +275,9 @@ export default function Goal() {
                   onClick={() => {
                     setShowHabitForm(true);
                   }}
-                  className="flex mt-8 cursor-pointer items-center gap-1"
+                  className="flex mt-8 cursor-pointer items-center gap-1 hover:bg-gray-200 py-1.5 p-2 rounded-md"
                 >
-                  <Plus strokeWidth="2" size="20" />
+                  <Plus strokeWidth="2" size="20" color="#4b5563" />
                   <p
                     className={`text-sm font-medium    capitalize    rounded-full    text-gray-600 `}
                   >
