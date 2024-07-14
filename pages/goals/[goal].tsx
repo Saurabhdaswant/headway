@@ -173,7 +173,7 @@ export default function Goal() {
 
   return (
     <Layout>
-      <div className=" w-full md:w-[80%] h-[100vh]  relative bg-[#F5F5F5]  overflow-auto pt-10">
+      <div className=" w-full md:w-[80%] h-[100vh] bg-[#F5F5F5]  overflow-auto pt-10">
         <div className="mx-auto  max-w-[800px]">
           <div
             style={{
