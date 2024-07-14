@@ -271,11 +271,6 @@ export default function Goal() {
           {showHabits && (
             <>
               <div className="w-full flex justify-between">
-                <div className="flex mt-8 cursor-pointer items-center gap-1">
-                  <p className={`font-bold    capitalize    rounded-full    `}>
-                    Habits
-                  </p>
-                </div>
                 <div
                   onClick={() => {
                     setShowHabitForm(true);
