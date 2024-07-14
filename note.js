@@ -128,3 +128,27 @@
 //   const dateWhichIsAfterCurrDate = add(today, {
 //     days: 309,
 //   });
+
+// how does milstone work ?
+
+// its a one time check thing
+// is specific to goal only
+// looks like  a habit but isnt one
+// if all the milstones checked then the goal is completed
+// on goal completed we need to show a success UI
+
+// ojb : name and isCompleted - ✅
+// create milestone button
+// - gets the ojb
+// - calls an api : createMilstone
+// - in the backend :
+// --- gets the goal id
+// --- and that obj is added into the milstones array
+// render that
+// on click make is !isComplete
+// and call the api
+// in the backend :
+// - get the id
+// - find the goal
+// - inside that goal find the milstone
+// - update the milstone

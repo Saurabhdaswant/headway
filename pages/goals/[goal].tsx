@@ -29,6 +29,8 @@ export default function Goal() {
   const [showHabitForm, setShowHabitForm] = useState(false);
   const { habits, updateHabits } = useContext(HabitsContext);
 
+  const [showHabits, setShowHabits] = useState(true);
+
   const newHabit = {
     name: "",
     getDoneIn: "anytime",
@@ -37,6 +39,26 @@ export default function Goal() {
     createdDate: today,
     repeatHabitDays: weekDays,
   };
+
+  const [milestone, setMilestone] = useState({
+    name: "",
+    isCompleted: false,
+  });
+
+  const [milestones, setMilestones] = useState([
+    {
+      name: "build a kickass product",
+      isCompleted: false,
+    },
+    {
+      name: "learn framer motion",
+      isCompleted: false,
+    },
+    {
+      name: "apply to 400 job application",
+      isCompleted: false,
+    },
+  ]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -100,6 +122,36 @@ export default function Goal() {
 
       updateGoal({ ...goal, habits: newHabits });
       setShowHabitForm(false);
+    }
+  };
+
+  const handleCreateMilestone = async (milestone) => {
+    if (milestone.name.trim().length === 0) {
+      return;
+    } else {
+      setMilestones([...milestones, milestone]);
+      setMilestone({
+        name: "",
+        isCompleted: false,
+      });
+
+      // const res = await fetch(
+      //   `${API_ENDPOINTS.BASE_URL}/goals/addMilestone/${goal._id}`,
+      //   {
+      //     method: "PUT",
+      //     body: JSON.stringify({ milestone }),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+      // const data = await res.json();
+      // console.log(data, "riyal ? ");
+      // const newMilestones = [...(goal.milestones || []), data.milestone];
+      // updateMilestones([...milestones, data.Milestone]);
+      // updateGoal({ ...goal, milestones: newMilestones });
+      // setShowMilestoneForm(false);
     }
   };
 
@@ -195,30 +247,105 @@ export default function Goal() {
               </p>
             </div>
           </div>
-          <div className="w-full flex justify-between">
-            <div className="flex mt-8 cursor-pointer items-center gap-1">
-              <p className={`font-bold    capitalize    rounded-full    `}>
-                Habits
-              </p>
-            </div>
-            <div
-              onClick={() => {
-                setShowHabitForm(true);
-              }}
-              className="flex mt-8 cursor-pointer items-center gap-1"
+          <div className=" w-full max-w-fit p-1 rounded-md bg-gray-200   mt-8 flex justify-center">
+            <button
+              onClick={() => setShowHabits(true)}
+              className={`
+               py-2 px-4 rounded-md
+              ${showHabits && "text-[#242424] bg-white "} 
+             `}
             >
-              <Plus strokeWidth="2" size="20" />
-              <p
-                className={`text-sm font-medium    capitalize    rounded-full    text-gray-600 `}
-              >
-                Add Habit
-              </p>
-            </div>
+              habits
+            </button>
+            <button
+              onClick={() => setShowHabits(false)}
+              className={`
+              ${
+                !showHabits && "bg-white text-[#242424]"
+              }  py-2 px-4 rounded-md`}
+            >
+              milestones
+            </button>
           </div>
-        </div>
+          {showHabits && (
+            <>
+              <div className="w-full flex justify-between">
+                <div className="flex mt-8 cursor-pointer items-center gap-1">
+                  <p className={`font-bold    capitalize    rounded-full    `}>
+                    Habits
+                  </p>
+                </div>
+                <div
+                  onClick={() => {
+                    setShowHabitForm(true);
+                  }}
+                  className="flex mt-8 cursor-pointer items-center gap-1"
+                >
+                  <Plus strokeWidth="2" size="20" />
+                  <p
+                    className={`text-sm font-medium    capitalize    rounded-full    text-gray-600 `}
+                  >
+                    Add Habit
+                  </p>
+                </div>
+              </div>
+              <div className=" scrollbar-hide h-[70vh] mt-2 pb-10   overflow-auto mx-auto  max-w-[800px]">
+                <HabitsRenderer habits={goal?.habits} selectedDay={today} />
+              </div>
+            </>
+          )}
 
-        <div className=" scrollbar-hide h-[70vh] mt-2 pb-10   overflow-auto mx-auto  max-w-[800px]">
-          <HabitsRenderer habits={goal?.habits} selectedDay={today} />
+          {!showHabits && (
+            <div className="my-4">
+              <input
+                onChange={(e) =>
+                  setMilestone({
+                    ...milestone,
+                    name: e.target.value,
+                  })
+                }
+                value={milestone.name}
+                name="habitName"
+                id="habitName"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleCreateMilestone(milestone);
+                  }
+                }}
+                className={`
+							outline-none focus:border-[#0F85F2] w-full font-medium 
+							border-2    px-4 py-2 rounded 
+            border-zinc-200
+              `}
+              />
+
+              <div className="space-y-2 mt-2">
+                {milestones.map(({ name, isCompleted }, idx) => {
+                  return (
+                    <div
+                      onClick={() => {
+                        let newMilestones = [...milestones];
+                        newMilestones[idx].isCompleted = !isCompleted;
+                        setMilestones(newMilestones);
+                      }}
+                      className={
+                        isCompleted
+                          ? ` rounded-xl p-3 w-full
+                        bg-green-500
+                      }`
+                          : ` rounded-xl p-3 w-full
+                        bg-white
+                      }`
+                      }
+                      key={idx}
+                    >
+                      {name}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <AnimatePresence>
