@@ -46,20 +46,9 @@ export default function Goal() {
     isCompleted: false,
   });
 
-  const [milestones, setMilestones] = useState([
-    {
-      name: "build a kickass product",
-      isCompleted: false,
-    },
-    {
-      name: "learn framer motion",
-      isCompleted: false,
-    },
-    {
-      name: "apply to 400 job application",
-      isCompleted: false,
-    },
-  ]);
+  const [milestones, setMilestones] = useState(
+    (goal && goal?.milestones) || []
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -130,29 +119,23 @@ export default function Goal() {
     if (milestone.name.trim().length === 0) {
       return;
     } else {
-      setMilestones([...milestones, milestone]);
+      const res = await fetch(
+        `${API_ENDPOINTS.BASE_URL}/goals/addMilestone/${goal._id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ milestone }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await res.json();
+      setMilestones([...(milestones || []), data.milestone]);
       setMilestone({
         name: "",
         isCompleted: false,
       });
-
-      // const res = await fetch(
-      //   `${API_ENDPOINTS.BASE_URL}/goals/addMilestone/${goal._id}`,
-      //   {
-      //     method: "PUT",
-      //     body: JSON.stringify({ milestone }),
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   }
-      // );
-      // const data = await res.json();
-      // console.log(data, "riyal ? ");
-      // const newMilestones = [...(goal.milestones || []), data.milestone];
-      // updateMilestones([...milestones, data.Milestone]);
-      // updateGoal({ ...goal, milestones: newMilestones });
-      // setShowMilestoneForm(false);
     }
   };
 
