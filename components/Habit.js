@@ -14,7 +14,7 @@ import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
@@ -114,6 +114,11 @@ function Habit({ habit, currDate }) {
       completedOnDates,
     };
 
+    // newHabits[habitIndex] = updatedHabit;
+
+    // setCurrHabit(updatedHabit);
+    // updateHabits(newHabits);
+
     const res = await fetch(
       `${API_ENDPOINTS.BASE_URL}/habits/${updatedHabit._id}`,
       {
@@ -138,30 +143,36 @@ function Habit({ habit, currDate }) {
     }
   };
 
+  const [isPressing, press] = useToggle(false);
+
   return (
     <>
-      {/* <div
-        onClick={() => toggleHabitCompletion()}
-        className={` cursor-pointer border-4 grid place-items-center bg-white ${
-          isCompleted ? "border-[#27B563]  text-[#27B563]" : " text-gray-200"
-        } w-14 h-14 rounded-full shadow-lg   `}
-      >
-        <Check className="  w-8 h-8  stroke-3" />
-      </div> */}
-      <div
+      <motion.div
+        whileTap={isPressing ? "onPress" : "_"}
+        transition={{
+          type: "ease",
+          duration: "0.2",
+        }}
+        variants={{
+          onPress: {
+            scale: 0.95,
+          },
+        }}
         className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
       >
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">
             <p className=" font-semibold  pb-3   "> {currHabit.name}</p>
             <div
+              onMouseDown={() => press()}
+              onMouseUp={() => press()}
               onClick={() => toggleHabitCompletion()}
               onTouchStart={() => toggleHabitCompletion()}
               className={` cursor-pointer border-2  grid place-items-center bg-white ${
                 isCompleted
                   ? " border-[#27b562ef]  text-[#27b562ef]"
                   : " text-gray-200"
-              } w-8 h-8 rounded-full shadow-lg -mt-2   `}
+              } w-8 h-8 rounded-full shadow-lg -mt-2 `}
             >
               <Check className="  w-4 h-4  stroke-3" />
             </div>
@@ -213,7 +224,7 @@ function Habit({ habit, currDate }) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       <AnimatePresence>
         {showHabitForm && (
           <HabitForm
