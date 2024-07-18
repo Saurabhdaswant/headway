@@ -155,7 +155,7 @@ function Habit({ habit, currDate }) {
         }}
         variants={{
           onPress: {
-            scale: 0.95,
+            scale: 0.97,
           },
         }}
         className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
@@ -172,7 +172,7 @@ function Habit({ habit, currDate }) {
                 isCompleted
                   ? " border-[#27b562ef]  text-[#27b562ef]"
                   : " text-gray-200"
-              } w-8 h-8 rounded-full shadow-lg -mt-2 `}
+              } w-8 h-8 rounded-full shadow-lg -mt-2 transition-colors `}
             >
               <Check className="  w-4 h-4  stroke-3" />
             </div>
