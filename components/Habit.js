@@ -167,7 +167,13 @@ function Habit({ habit, currDate }) {
               onMouseDown={() => press()}
               onMouseUp={() => press()}
               onClick={() => toggleHabitCompletion()}
-              onTouchStart={() => toggleHabitCompletion()}
+              onTouchStart={() => {
+                press();
+                toggleHabitCompletion();
+              }}
+              onTouchEnd={() => {
+                press();
+              }}
               className={` cursor-pointer border-2  grid place-items-center bg-white ${
                 isCompleted
                   ? " border-[#27b562ef]  text-[#27b562ef]"
