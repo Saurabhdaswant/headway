@@ -148,14 +148,21 @@ function Habit({ habit, currDate }) {
   return (
     <>
       <motion.div
+        // initial={{
+        //   y: 100,
+        //   opacity: 0,
+        // }}
+        // animate={{
+        //   y: 0,
+        //   opacity: 1,
+        // }}
         whileTap={isPressing ? "onPress" : "_"}
         transition={{
-          type: "ease",
-          duration: "0.2",
+          type: "spring",
         }}
         variants={{
           onPress: {
-            scale: 0.97,
+            scale: 0.91,
           },
         }}
         className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}

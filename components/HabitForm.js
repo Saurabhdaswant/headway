@@ -82,10 +82,16 @@ function HabitForm({
       >
         <div className="flex justify-between">
           <h1 className=" text-2xl ">{formTitle}</h1>
-          <X
-            onClick={() => setShowHabitForm(false)}
-            className=" cursor-pointer "
-          />
+          <motion.div
+            whileTap={{
+              scale: 0.8,
+            }}
+          >
+            <X
+              onClick={() => setShowHabitForm(false)}
+              className=" cursor-pointer "
+            />
+          </motion.div>
         </div>
         <div className=" flex flex-col">
           <div className=" space-y-4  lg:space-y-8 overflow-scroll scrollbar-hide h-[70vh] ">
@@ -127,7 +133,7 @@ function HabitForm({
                           currHabit.repeatHabitDays?.includes(day)
                             ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
                             : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                        } cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded `}
+                        } cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded transition-colors`}
                       >
                         {day.slice(0, 3)}
                       </div>
@@ -149,7 +155,7 @@ function HabitForm({
                       )
                         ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
                         : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                    } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}
+                    } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors`}
                   >
                     Week days
                   </div>
@@ -164,7 +170,7 @@ function HabitForm({
                       currHabit.repeatHabitDays?.length === 7
                         ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
                         : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                    } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}
+                    } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors`}
                   >
                     Every day
                   </div>
@@ -185,7 +191,7 @@ function HabitForm({
                         currHabit.getDoneIn === time
                           ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
                           : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                      } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded `}
+                      } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors `}
                     >
                       {time}
                     </div>
@@ -228,13 +234,21 @@ function HabitForm({
               </DialogComponent>
             </div> */}
           </div>
-          <button
+          <motion.button
+            initial={{ boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)" }}
+            whileHover={{ boxShadow: "5px 5px 5px rgba(0, 0, 0, 10)" }}
+            // transition={{
+            //   type: "spring",
+            // }}
+            whileTap={{
+              scale: 0.9,
+            }}
             onClick={() => handleSubmit(currHabit)}
             type="submit"
-            className=" w-full my-8 font-semibold  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 "
+            className=" w-full my-8 font-semibold transition-colors  bg-[#2e2e2e] hover:bg-[#2e2e2eed] text-white px-14 rounded py-4 "
           >
             {formTitle}
-          </button>
+          </motion.button>
         </div>
       </motion.div>
     </>
