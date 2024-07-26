@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useToggle from "../hooks/useToggle";
 import { CameraIcon, UsersIcon } from "@heroicons/react/solid";
 
-export default function playground() {
+export default function Playground() {
   const [isInputVisible, showInput] = useToggle(true);
 
   const show = isInputVisible ? "bigger" : "_";

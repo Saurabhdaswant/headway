@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import useToggle from "../../hooks/useToggle";
 
-export default function playground() {
+export default function HoverCards() {
   const [isHovering, hover] = useToggle(false);
   const whileHover = isHovering ? "hovered" : "_";
 

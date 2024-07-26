@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Bookmark, Save, Trash } from "react-feather";
 import useToggle from "../../hooks/useToggle";
 
-export default function playground() {
+export default function TagsContainer() {
   const [isInputVisible, showInput] = useToggle(false);
 
   const [lils, setLils] = useState([1]);

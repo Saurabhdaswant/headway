@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CameraIcon, UsersIcon } from "@heroicons/react/solid";
 import useToggle from "../../hooks/useToggle";
 
-export default function playground() {
+export default function CalendarWidget() {
   const [isInputVisible, showInput] = useToggle(true);
 
   const show = isInputVisible ? "bigger" : "_";
