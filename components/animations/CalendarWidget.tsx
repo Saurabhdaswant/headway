@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
-import useToggle from "../hooks/useToggle";
 import { CameraIcon, UsersIcon } from "@heroicons/react/solid";
+import useToggle from "../../hooks/useToggle";
 
 export default function playground() {
   const [isInputVisible, showInput] = useToggle(true);
@@ -149,104 +149,3 @@ export default function playground() {
     </div>
   );
 }
-
-// import React, { useState } from "react";
-
-// import { AnimatePresence, motion } from "framer-motion";
-// import useToggle from "../hooks/useToggle";
-// import { Bookmark, Camera, Save, Trash } from "react-feather";
-// import { exit } from "process";
-
-// export default function playground() {
-//   const [isInputVisible, showInput] = useToggle(false);
-
-//   const show = isInputVisible ? "bigger" : "_";
-
-//   return (
-//     <div className="bg-[#F5F5F5] grid place-items-center h-screen text-white">
-//       <motion.div
-//         onClick={() => {
-//           showInput();
-//         }}
-//         animate={show}
-//         transition={{
-//           type: "ease-in-out",
-//           bounce: 0,
-//           duration: 0.2,
-//         }}
-//         initial={{
-//           height: 116,
-//           width: 200,
-//         }}
-//         variants={{
-//           bigger: {
-//             width: 460,
-//             height: 211,
-//           },
-//         }}
-//         className={`cursor-pointer overflow-hidden py-4 flex flex-col justify-between   border group  transition-colors  rounded-xl  bg-[#1A1A1A] `}
-//       >
-//         <div
-//           className={` flex justify-between px-4 pb-4 ${
-//             isInputVisible && "border-b"
-//           }`}
-//         >
-//           <div>
-//             <div>in 15 min's</div>
-//             <div>Design Sync</div>
-//             <div>123pm : 12pm</div>
-//           </div>
-//           <motion.div
-//             layout
-//             animate={show}
-//             initial={{
-//               opacity: 0,
-//             }}
-//             variants={{
-//               bigger: {
-//                 opacity: 1,
-//               },
-//             }}
-//           >
-//             {" "}
-//             <Camera />{" "}
-//           </motion.div>
-//         </div>
-
-//         <div className=" flex justify-between px-4">
-//           <motion.div
-//             layout
-//             animate={show}
-//             initial={{
-//               opacity: 0,
-//             }}
-//             variants={{
-//               bigger: {
-//                 opacity: 1,
-//               },
-//             }}
-//           >
-//             <div>in 15 min's</div>
-//             <div>Design Sync</div>
-//             <div>123pm : 12pm</div>
-//           </motion.div>
-//           <motion.div
-//             layout
-//             animate={show}
-//             initial={{
-//               opacity: 0,
-//             }}
-//             variants={{
-//               bigger: {
-//                 opacity: 1,
-//               },
-//             }}
-//           >
-//             {" "}
-//             <Camera />{" "}
-//           </motion.div>
-//         </div>
-//       </motion.div>
-//     </div>
-//   );
-// }
