@@ -1,145 +1,177 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
-import useToggle from "../hooks/useToggle";
-import { CameraIcon, UserAddIcon } from "@heroicons/react/solid";
-import { User } from "react-feather";
+import { motion } from "framer-motion";
+import {
+  CheckCircleIcon,
+  DotsCircleHorizontalIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/solid";
 
 export default function Playground() {
-  const [isInputVisible, showInput] = useToggle(false);
+  const [view, setView] = useState("red");
 
-  const show = isInputVisible ? "bigger" : "_";
+  const content = useMemo(() => {
+    switch (view) {
+      case "blue":
+        return (
+          <>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              <DotsCircleHorizontalIcon width={80} height={80} />{" "}
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              Analyzing Transaction
+            </motion.span>
+          </>
+        );
+      case "green":
+        return (
+          <>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              <CheckCircleIcon width={80} height={80} />{" "}
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              Transaction Safe
+            </motion.span>
+          </>
+        );
+      case "red":
+        return (
+          <>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              <ExclamationCircleIcon width={80} height={80} />{" "}
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              Transaction Warning
+            </motion.span>
+          </>
+        );
+    }
+  }, [view]);
+
+  const bg = useMemo(() => {
+    switch (view) {
+      case "blue":
+        return "#dbeafe";
+      case "green":
+        return "#d1fae5";
+      case "red":
+        return "#fee2e2";
+    }
+  }, [view]);
+
+  const c = useMemo(() => {
+    switch (view) {
+      case "blue":
+        return "#3b82f6";
+      case "green":
+        return "#10b981";
+      case "red":
+        return "#ef4444";
+    }
+  }, [view]);
+
+  useEffect(() => {
+    const colorSequence = ["blue", "green", "blue", "red"];
+    let currentIndex = 0;
+
+    const intervalId = setInterval(() => {
+      setView(colorSequence[currentIndex]);
+      currentIndex = (currentIndex + 1) % colorSequence.length;
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="bg-[#F5F5F5] grid place-items-center h-screen text-white">
-      <div className=" relative border border-red-500 ">
+      <motion.div
+        key={view}
+        style={{
+          backgroundColor: bg,
+          color: c,
+        }}
+        className=" py-10 px-14 text-5xl  rounded-full font-semibold"
+      >
         <motion.div
-          onClick={() => {
-            showInput();
-          }}
-          animate={show}
-          transition={{
-            type: "spring",
-            bounce: 0.2,
-            duration: 0.25,
-          }}
-          initial={{
-            width: 160,
-            height: 42,
-          }}
+          key={view}
+          animate={view}
+          className="flex items-center  gap-6"
           variants={{
-            bigger: {
-              width: 320,
-              height: 190,
+            blue: {
+              width: 630,
+            },
+            green: {
+              width: 520,
+            },
+            red: {
+              width: 600,
             },
           }}
-          className={`cursor-pointer absolute -translate-x-1/2 bottom-0  select-none  shadow-lg  p-2 flex flex-col gap-2    transition-colors  rounded-xl text-[#2e2e2e] bg-white  border border-slate-100 `}
+          transition={{
+            type: "spring",
+            bounce: 0.5,
+          }}
         >
-          {isInputVisible && (
-            <motion.div
-              layout
-              animate={show}
-              transition={{
-                duration: 0.2,
-              }}
-              initial={{
-                opacity: 0,
-                filter: "blur(4px)",
-                // scale: 0.5,
-              }}
-              variants={{
-                bigger: {
-                  opacity: 1,
-                  filter: "blur(0px)",
-                  // scale: 1,
-                },
-              }}
-              exit={{
-                opacity: 0,
-                filter: "blur(4px)",
-                // scale: 0.1,
-              }}
-              className="flex flex-col overflow-hidden  gap-2 "
-            >
-              <motion.div className="text-sm  mt-0.5 whitespace-nowrap font-medium">
-                Saurabh Sunil Daswant
-              </motion.div>
-              <motion.div className="text-sm  mt-0.5 whitespace-nowrap font-medium">
-                Saurabh Sunil Daswant
-              </motion.div>{" "}
-              <motion.div className="text-sm  mt-0.5 whitespace-nowrap font-medium">
-                Saurabh Sunil Daswant
-              </motion.div>{" "}
-              <motion.div className="text-sm  mt-0.5 whitespace-nowrap font-medium">
-                Saurabh Sunil Daswant
-              </motion.div>{" "}
-              <motion.div className="text-sm  mt-0.5 whitespace-nowrap font-medium">
-                Saurabh Sunil Daswant
-              </motion.div>
-            </motion.div>
-          )}
-          <div className="flex  items-center justify-between gap-2 ">
-            <div className="flex items-center gap-2 overflow-hidden ">
-              <div className="flex items-center gap-2">
-                <motion.div className={` cursor-pointer  text-orange-400  `}>
-                  {" "}
-                  <UserAddIcon width={20} height={20} />{" "}
-                </motion.div>
-                <div className="text-sm  text-nowrap text-[#2e2e2e90]">
-                  name
-                </div>
-              </div>
-              <AnimatePresence>
-                {isInputVisible && (
-                  <motion.div
-                    layout
-                    animate={show}
-                    transition={{
-                      duration: 0.15,
-                    }}
-                    initial={{
-                      opacity: 0,
-                      filter: "blur(4px)",
-                      scale: 0.5,
-                    }}
-                    variants={{
-                      bigger: {
-                        opacity: 1,
-                        filter: "blur(0px)",
-                        scale: 1,
-                      },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      filter: "blur(4px)",
-                      scale: 0.1,
-                    }}
-                    className="text-sm  mt-0.5 whitespace-nowrap font-medium"
-                  >
-                    Saurabh Sunil Daswant
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            <AnimatePresence mode="popLayout">
-              {isInputVisible ? (
-                <motion.div
-                  layout
-                  className=" z-50  bg-orange-100 min-w-fit text-orange-400 text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full "
-                >
-                  15 mins
-                </motion.div>
-              ) : (
-                <motion.div
-                  layout
-                  className=" z-50   bg-green-100 min-w-fit text-green-400 text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full "
-                >
-                  15 mins
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          {content}
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }

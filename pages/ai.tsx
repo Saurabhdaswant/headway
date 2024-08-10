@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import useToggle from "../hooks/useToggle";
-import { CameraIcon, UserAddIcon } from "@heroicons/react/solid";
-import { User } from "react-feather";
+import { UserAddIcon } from "@heroicons/react/solid";
 
 export default function Playground() {
   const [isInputVisible, showInput] = useToggle(false);
