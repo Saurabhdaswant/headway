@@ -3,15 +3,54 @@ import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   CheckCircleIcon,
+  CogIcon,
   DotsCircleHorizontalIcon,
   ExclamationCircleIcon,
+  SparklesIcon,
 } from "@heroicons/react/solid";
 
 export default function Playground() {
-  const [view, setView] = useState("red");
+  const [view, setView] = useState("default");
+  let [isGreen, setIsGreen] = useState(false);
+  let [isRed, setIsRed] = useState(false);
 
   const content = useMemo(() => {
     switch (view) {
+      case "default":
+        return (
+          <>
+            <motion.div
+              initial={{
+                opacity: 0,
+                scale: 0.5,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              <SparklesIcon className=" " width={80} height={80} />{" "}
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+              }}
+            >
+              Transaction
+            </motion.span>
+          </>
+        );
       case "blue":
         return (
           <>
@@ -25,7 +64,7 @@ export default function Playground() {
                 duration: 0.8,
               }}
             >
-              <DotsCircleHorizontalIcon width={80} height={80} />{" "}
+              <CogIcon className=" animate-spin" width={80} height={80} />{" "}
             </motion.div>
             <motion.span
               initial={{ opacity: 0, x: -100 }}
@@ -78,6 +117,9 @@ export default function Playground() {
               animate={{
                 opacity: 1,
                 scale: 1,
+                rotate: isRed
+                  ? [0, 20, -15, 12.5, -10, 10, -7.5, 7.5, -5, 5, 0]
+                  : [0, -15, 5, -2, 0],
               }}
               exit={{ opacity: 0, scale: 0.5 }}
               transition={{
@@ -107,6 +149,8 @@ export default function Playground() {
 
   const bg = useMemo(() => {
     switch (view) {
+      case "default":
+        return "#fff";
       case "blue":
         return "#dbeafe";
       case "green":
@@ -118,6 +162,8 @@ export default function Playground() {
 
   const c = useMemo(() => {
     switch (view) {
+      case "default":
+        return "#000";
       case "blue":
         return "#3b82f6";
       case "green":
@@ -127,21 +173,43 @@ export default function Playground() {
     }
   }, [view]);
 
-  useEffect(() => {
-    const colorSequence = ["blue", "green", "blue", "red"];
-    let currentIndex = 0;
+  // useEffect(() => {
+  //   const colorSequence = ["blue", "green", "blue", "red"];
+  //   let currentIndex = 0;
 
-    const intervalId = setInterval(() => {
-      setView(colorSequence[currentIndex]);
-      currentIndex = (currentIndex + 1) % colorSequence.length;
-    }, 2000);
+  //   const intervalId = setInterval(() => {
+  //     setView(colorSequence[currentIndex]);
+  //     currentIndex = (currentIndex + 1) % colorSequence.length;
+  //   }, 2000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   return (
-    <div className="bg-[#F5F5F5] grid place-items-center h-screen text-white">
+    <div className="bg-[#F5F5F5] cursor-pointer grid place-items-center h-screen text-white">
       <motion.div
+        onClick={() => {
+          if (isGreen) {
+            setIsGreen(false);
+          } else setIsGreen(true);
+
+          setTimeout(() => {
+            if (isGreen) {
+              setView("green");
+            } else {
+              setView("red");
+              // setTimeout(() => {
+              //   setIsRed(true);
+              // }, 1000);
+            }
+          }, 2000);
+
+          setTimeout(() => {
+            setView("default");
+          }, 4000);
+
+          setView("blue");
+        }}
         key={view}
         style={{
           backgroundColor: bg,
@@ -154,6 +222,9 @@ export default function Playground() {
           animate={view}
           className="flex items-center  gap-6"
           variants={{
+            default: {
+              width: 400,
+            },
             blue: {
               width: 630,
             },
