@@ -1,24 +1,25 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   CheckCircleIcon,
-  CogIcon,
-  DotsCircleHorizontalIcon,
   ExclamationCircleIcon,
   SparklesIcon,
 } from "@heroicons/react/solid";
+import { Loader } from "react-feather";
 
 export default function Playground() {
-  const [view, setView] = useState("default");
+  const [buttonState, setButtonState] = useState("default");
   let [isGreen, setIsGreen] = useState(false);
-  let [isRed, setIsRed] = useState(false);
 
   const content = useMemo(() => {
-    switch (view) {
+    switch (buttonState) {
       case "default":
         return (
-          <>
+          <motion.div
+            key="default"
+            className="flex items-center overflow-hidden gap-6"
+          >
             <motion.div
               initial={{
                 opacity: 0,
@@ -32,158 +33,174 @@ export default function Playground() {
               transition={{
                 type: "spring",
                 bounce: 0.4,
-                duration: 0.8,
+                duration: 0.9,
               }}
             >
               <SparklesIcon className=" " width={80} height={80} />{" "}
             </motion.div>
             <motion.span
-              initial={{ opacity: 0, x: 100 }}
+              initial={{ opacity: 0, x: 150 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{
                 type: "spring",
                 bounce: 0.4,
-                duration: 0.8,
+                duration: 0.9,
               }}
             >
               Transaction
             </motion.span>
-          </>
+          </motion.div>
         );
-      case "blue":
+      case "loading":
         return (
-          <>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              transition={{
-                type: "spring",
-                bounce: 0.4,
-                duration: 0.8,
-              }}
-            >
-              <CogIcon className=" animate-spin" width={80} height={80} />{" "}
-            </motion.div>
-            <motion.span
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{
-                type: "spring",
-                bounce: 0.4,
-                duration: 0.8,
-              }}
-            >
-              Analyzing Transaction
-            </motion.span>
-          </>
-        );
-      case "green":
-        return (
-          <>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              transition={{
-                type: "spring",
-                bounce: 0.4,
-                duration: 0.8,
-              }}
-            >
-              <CheckCircleIcon width={80} height={80} />{" "}
-            </motion.div>
-            <motion.span
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{
-                type: "spring",
-                bounce: 0.4,
-                duration: 0.8,
-              }}
-            >
-              Transaction Safe
-            </motion.span>
-          </>
-        );
-      case "red":
-        return (
-          <>
+          <motion.div
+            key="loading"
+            className="flex items-center overflow-hidden gap-6"
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{
                 opacity: 1,
                 scale: 1,
-                rotate: isRed
-                  ? [0, 20, -15, 12.5, -10, 10, -7.5, 7.5, -5, 5, 0]
-                  : [0, -15, 5, -2, 0],
               }}
-              exit={{ opacity: 0, scale: 0.5 }}
+              exit={{
+                opacity: 0,
+                scale: 0,
+                transition: {
+                  duration: 0.01,
+                },
+              }}
               transition={{
                 type: "spring",
                 bounce: 0.4,
-                duration: 0.8,
+                duration: 0.9,
+              }}
+            >
+              <Loader
+                className=" animate-spin"
+                strokeWidth={3}
+                width={80}
+                height={80}
+              />
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, x: -150, filter: "blur(2px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              exit={{
+                opacity: 0,
+                x: -150,
+                filter: "blur(2px)",
+                transition: {
+                  duration: 0.25,
+                },
+              }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.9,
+              }}
+              className=" text-nowrap "
+            >
+              Analyzing Transaction
+            </motion.span>
+          </motion.div>
+        );
+      case "success":
+        return (
+          <motion.div
+            key="success"
+            className="flex overflow-hidden  items-center gap-6"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{
+                opacity: 0,
+                scale: 0,
+                transition: {
+                  duration: 0.01,
+                },
+              }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.9,
+              }}
+            >
+              <CheckCircleIcon width={80} height={80} />{" "}
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, x: 150, filter: "blur(2px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              exit={{
+                opacity: 0,
+                x: 150,
+                filter: "blur(2px)",
+                transition: {
+                  duration: 0.25,
+                },
+              }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.9,
+              }}
+              className=" text-nowrap "
+            >
+              Transaction Safe
+            </motion.span>
+          </motion.div>
+        );
+      case "failed":
+        return (
+          <motion.div
+            key="failed"
+            className="flex overflow-hidden  items-center gap-6"
+          >
+            {" "}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{
+                opacity: 0,
+                scale: 0,
+                transition: {
+                  duration: 0.01,
+                },
+              }}
+              transition={{
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.9,
               }}
             >
               <ExclamationCircleIcon width={80} height={80} />{" "}
             </motion.div>
             <motion.span
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
+              initial={{ opacity: 0, x: 150, filter: "blur(2px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              exit={{
+                opacity: 0,
+                x: 150,
+                filter: "blur(2px)",
+                transition: {
+                  duration: 0.25,
+                },
+              }}
               transition={{
                 type: "spring",
                 bounce: 0.4,
-                duration: 0.8,
+                duration: 0.9,
               }}
+              className=" text-nowrap "
             >
               Transaction Warning
             </motion.span>
-          </>
+          </motion.div>
         );
     }
-  }, [view]);
-
-  const bg = useMemo(() => {
-    switch (view) {
-      case "default":
-        return "#fff";
-      case "blue":
-        return "#dbeafe";
-      case "green":
-        return "#d1fae5";
-      case "red":
-        return "#fee2e2";
-    }
-  }, [view]);
-
-  const c = useMemo(() => {
-    switch (view) {
-      case "default":
-        return "#000";
-      case "blue":
-        return "#3b82f6";
-      case "green":
-        return "#10b981";
-      case "red":
-        return "#ef4444";
-    }
-  }, [view]);
-
-  // useEffect(() => {
-  //   const colorSequence = ["blue", "green", "blue", "red"];
-  //   let currentIndex = 0;
-
-  //   const intervalId = setInterval(() => {
-  //     setView(colorSequence[currentIndex]);
-  //     currentIndex = (currentIndex + 1) % colorSequence.length;
-  //   }, 2000);
-
-  //   return () => clearInterval(intervalId);
-  // }, []);
+  }, [buttonState]);
 
   return (
     <div className="bg-[#F5F5F5] cursor-pointer grid place-items-center h-screen text-white">
@@ -195,53 +212,44 @@ export default function Playground() {
 
           setTimeout(() => {
             if (isGreen) {
-              setView("green");
+              setButtonState("success");
             } else {
-              setView("red");
-              // setTimeout(() => {
-              //   setIsRed(true);
-              // }, 1000);
+              setButtonState("failed");
             }
           }, 2000);
 
-          setTimeout(() => {
-            setView("default");
-          }, 4000);
-
-          setView("blue");
+          setButtonState("loading");
         }}
-        key={view}
-        style={{
-          backgroundColor: bg,
-          color: c,
+        animate={buttonState}
+        variants={{
+          default: {
+            backgroundColor: "#fff",
+            color: "#000",
+            width: 500,
+          },
+          loading: {
+            backgroundColor: "#dbeafe",
+            color: "#3b82f6",
+            width: 760,
+          },
+          success: {
+            backgroundColor: "#d1fae5",
+            color: "#10b981",
+            width: 600,
+          },
+          failed: {
+            backgroundColor: "#fee2e2",
+            color: "#ef4444",
+            width: 710,
+          },
         }}
-        className=" py-10 px-14 text-5xl  rounded-full font-semibold"
+        transition={{
+          type: "spring",
+          bounce: 0.4,
+        }}
+        className=" py-10 px-14 text-5xl  rounded-full font-bold"
       >
-        <motion.div
-          key={view}
-          animate={view}
-          className="flex items-center  gap-6"
-          variants={{
-            default: {
-              width: 400,
-            },
-            blue: {
-              width: 630,
-            },
-            green: {
-              width: 520,
-            },
-            red: {
-              width: 600,
-            },
-          }}
-          transition={{
-            type: "spring",
-            bounce: 0.5,
-          }}
-        >
-          {content}
-        </motion.div>
+        <AnimatePresence mode="popLayout">{content}</AnimatePresence>
       </motion.div>
     </div>
   );
