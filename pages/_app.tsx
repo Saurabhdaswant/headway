@@ -5,13 +5,15 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <TokenProvider>
-      <HabitsProvider>
-        <GoalProvider>
-          <Component {...pageProps} />
-        </GoalProvider>
-      </HabitsProvider>
-    </TokenProvider>
+    <main>
+      <TokenProvider>
+        <HabitsProvider>
+          <GoalProvider>
+            <Component {...pageProps} />
+          </GoalProvider>
+        </HabitsProvider>
+      </TokenProvider>
+    </main>
   );
 }
 
