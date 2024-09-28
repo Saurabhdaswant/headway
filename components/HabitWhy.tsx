@@ -29,7 +29,7 @@ export default function HabitWhy({ why, name, setShowDialog }: any) {
           </h1>
           <X
             onClick={() => setShowDialog(false)}
-            className=" cursor-pointer w-4 h-5 "
+            className=" cursor-pointer w-7 h-7 "
           />
         </div>
         <div className="space-y-4 font-medium  md:font-normal text-lg text-gray-500 ">
