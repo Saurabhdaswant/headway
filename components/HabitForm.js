@@ -120,6 +120,31 @@ function HabitForm({
               }`}
               />
             </div>
+            <div className="flex flex-col  lg:space-y-2">
+              <label htmlFor="why" className="font-semibold pb-2">
+                Why ?
+              </label>
+              <input
+                onChange={(e) =>
+                  setCurrHabit({
+                    ...currHabit,
+                    why: e.target.value,
+                  })
+                }
+                value={currHabit.why}
+                name="why"
+                id="why"
+                className={`
+							outline-none focus:border-[#0F85F2]  font-medium 
+							border-2    px-4 py-2 rounded ${
+                currHabit.why?.length > 0 && error
+                  ? "border-zinc-200"
+                  : error
+                  ? "border-red-500"
+                  : null
+              }`}
+              />
+            </div>
             <div className="flex flex-col space-y-2 ">
               <p className="font-semibold">Repeat Habit days </p>
               <div className="space-y-4">

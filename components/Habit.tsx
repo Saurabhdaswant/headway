@@ -218,33 +218,15 @@ function Habit({ habit, currDate }) {
               >
                 {currHabit.getDoneIn}
               </p>
-              <TooltipProvider delayDuration={0.1}>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <button className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400">
-                      why ?
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent className="text-sm text-gray-700 bg-white p-2 rounded-md shadow-lg">
-                    <ul>
-                      <li>Will help you get new jobs if you get fired</li>
-                      <li>
-                        To purchase your first MacBook with your hard earned
-                        money
-                      </li>
-                      <li>
-                        To build a reputation of a chad level design engineer
-                      </li>
-                    </ul>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <button
-                className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400"
-                onClick={() => setShowDialog(true)}
-              >
-                why ?
-              </button>
+
+              {habit?.why && (
+                <button
+                  className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400"
+                  onClick={() => setShowDialog(true)}
+                >
+                  why ?
+                </button>
+              )}
               {showDialog && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -277,16 +259,12 @@ function Habit({ habit, currDate }) {
                       />
                     </div>
                     <div className="space-y-4 ">
-                      <ul className="list-disc list-inside">
-                        <li>Will help you get new jobs if you get fired</li>
-                        <li>
-                          To purchase your first MacBook with your hard earned
-                          money
-                        </li>
-                        <li>
-                          To build a reputation of a chad level design engineer
-                        </li>
-                      </ul>
+                      {habit.why}
+                      {/* <ul className="list-disc list-inside">
+                        {habit.why.map((reason, index) => (
+                          <li key={index}>{reason}</li>
+                        ))}
+                      </ul> */}
                     </div>
                   </motion.div>
                 </motion.div>
