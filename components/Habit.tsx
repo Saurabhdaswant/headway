@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/outline";
 import { format } from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
-import { Check } from "react-feather";
+import { Check, X } from "react-feather";
 import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import { getFormattedDates } from "../utils/utils";
@@ -150,6 +150,7 @@ function Habit({ habit, currDate }) {
   };
 
   const [isPressing, press] = useToggle(false);
+  const [showDialog, setShowDialog] = useState(false);
 
   return (
     <>
@@ -238,6 +239,58 @@ function Habit({ habit, currDate }) {
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
+              <button
+                className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400"
+                onClick={() => setShowDialog(true)}
+              >
+                why ?
+              </button>
+              {showDialog && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.6,
+                  }}
+                  onClick={() => setShowDialog(false)}
+                  className="fixed inset-0 z-40 flex items-center justify-center bg-gray-900 bg-opacity-50"
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 20,
+                    }}
+                    className="p-4 lg:p-8 space-y-4 scrollbar-hide lg:space-y-8 w-full overflow-scroll max-w-[450px] bg-white rounded-md z-50"
+                  >
+                    <div className="flex justify-between">
+                      <h1 className=" text-2xl ">Why?</h1>
+                      <X
+                        onClick={() => setShowDialog(false)}
+                        className=" cursor-pointer "
+                      />
+                    </div>
+                    <div className="space-y-4 ">
+                      <ul className="list-disc list-inside">
+                        <li>Will help you get new jobs if you get fired</li>
+                        <li>
+                          To purchase your first MacBook with your hard earned
+                          money
+                        </li>
+                        <li>
+                          To build a reputation of a chad level design engineer
+                        </li>
+                      </ul>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
               <p
                 className={`text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full  ${
                   currHabit.getDoneIn === "evening" &&
