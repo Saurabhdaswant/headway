@@ -15,13 +15,12 @@ import HabitStats from "./HabitStats";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
 import { AnimatePresence, motion } from "framer-motion";
-import { createPortal } from "react-dom";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip";
+} from "./ui/Tooltip";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
@@ -255,7 +254,7 @@ function Habit({ habit, currDate }) {
                   "bg-violet-100 text-violet-400"
                 }  `}
               >
-                2 min's
+                2 mins
               </p>
             </div>
             <div className="flex md:hidden   gap-4 w-24">

@@ -62,6 +62,8 @@ export default function Goal() {
     }
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     const token = localStorage && localStorage?.getItem("authToken");
 
