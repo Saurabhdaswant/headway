@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { X } from "react-feather";
 
-export default function HabitWhy({ why, setShowDialog }: any) {
+export default function HabitWhy({ why, name, setShowDialog }: any) {
   return (
     <div className=" fixed inset-0  z-30 flex h-full w-full items-center justify-center  ">
       <motion.div
@@ -23,7 +23,7 @@ export default function HabitWhy({ why, setShowDialog }: any) {
         className="p-4 lg:p-8 space-y-4 scrollbar-hide lg:space-y-6 w-[90%] md:w-full overflow-scroll max-w-[450px] bg-white rounded-xl z-50"
       >
         <div className="flex justify-between">
-          <h1 className=" font-medium text-2xl ">Why?</h1>
+          <h1 className=" font-medium text-2xl "> {name} - but why?</h1>
           <X
             onClick={() => setShowDialog(false)}
             className=" cursor-pointer "

@@ -208,7 +208,11 @@ function Habit({ habit, currDate }) {
                 </button>
               )}
               {showDialog && (
-                <HabitWhy why={habit.why} setShowDialog={setShowDialog} />
+                <HabitWhy
+                  why={habit.why}
+                  name={habit.name}
+                  setShowDialog={setShowDialog}
+                />
               )}
             </div>
           </div>
