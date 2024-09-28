@@ -244,7 +244,7 @@ function Habit({ habit, currDate }) {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
-                    className="p-4 lg:p-8 space-y-4 scrollbar-hide lg:space-y-6 w-full overflow-scroll max-w-[450px] bg-white rounded-xl z-50"
+                    className="p-4 lg:p-8 space-y-4 scrollbar-hide lg:space-y-6 w-[90%] md:w-full overflow-scroll max-w-[450px] bg-white rounded-xl z-50"
                   >
                     <div className="flex justify-between">
                       <h1 className=" font-medium text-2xl ">Why?</h1>
