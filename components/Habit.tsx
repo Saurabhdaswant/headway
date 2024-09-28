@@ -1,6 +1,7 @@
 import {
   ChartSquareBarIcon,
   PencilAltIcon,
+  QuestionMarkCircleIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
 import { format } from "date-fns";
@@ -22,7 +23,6 @@ import {
   TooltipTrigger,
 } from "./ui/Tooltip";
 import HabitWhy from "./HabitWhy";
-import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
@@ -199,21 +199,6 @@ function Habit({ habit, currDate }) {
               >
                 <Check className="  w-4 h-4  stroke-3" />
               </div>
-              {habit?.why && (
-                <button
-                  className="text-xs w-8 -mt-2 h-8 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400"
-                  onClick={() => setShowDialog(true)}
-                >
-                  <QuestionMarkCircleIcon />
-                </button>
-              )}
-              {showDialog && (
-                <HabitWhy
-                  why={habit.why}
-                  name={habit.name}
-                  setShowDialog={setShowDialog}
-                />
-              )}
             </div>
           </div>
 
@@ -242,7 +227,7 @@ function Habit({ habit, currDate }) {
                 2 mins
               </p> */}
             </div>
-            <div className="flex md:hidden   gap-4 w-24">
+            <div className="flex md:hidden   gap-4 w-32">
               <PencilAltIcon
                 className="w-6 h-6"
                 onClick={() => setShowHabitForm(true)}
@@ -252,19 +237,27 @@ function Habit({ habit, currDate }) {
                 className="w-6 h-6"
                 onClick={toggleDeleteDialog}
               />{" "}
+              <QuestionMarkCircleIcon
+                className="cursor-pointer text-blue-500 w-6 h-6"
+                onClick={() => setShowDialog(true)}
+              />
             </div>
-            <div className=" hidden md:flex opacity-0 md:group-hover:opacity-100  gap-4 w-24">
+            <div className=" hidden md:flex opacity-0 md:group-hover:opacity-100  gap-4 w-32">
               <PencilAltIcon
                 onClick={() => setShowHabitForm(true)}
-                className="hover:cursor-pointer "
+                className="cursor-pointer "
               />
               <ChartSquareBarIcon
                 onClick={toggleStats}
-                className="hover:cursor-pointer "
+                className="cursor-pointer "
               />
               <TrashIcon
                 onClick={toggleDeleteDialog}
-                className="hover:cursor-pointer "
+                className="cursor-pointer "
+              />
+              <QuestionMarkCircleIcon
+                className="cursor-pointer text-blue-500"
+                onClick={() => setShowDialog(true)}
               />
             </div>
           </div>
@@ -295,6 +288,14 @@ function Habit({ habit, currDate }) {
           <HabitStats habit={currHabit} toggleStats={toggleStats} />
         )}
       </AnimatePresence>
+
+      {showDialog && (
+        <HabitWhy
+          why={habit.why}
+          name={habit.name}
+          setShowDialog={setShowDialog}
+        />
+      )}
     </>
   );
 }
