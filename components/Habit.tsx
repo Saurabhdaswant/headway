@@ -22,6 +22,7 @@ import {
   TooltipTrigger,
 } from "./ui/Tooltip";
 import HabitWhy from "./HabitWhy";
+import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
@@ -178,24 +179,37 @@ function Habit({ habit, currDate }) {
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">
             <p className=" font-semibold  pb-3   "> {currHabit.name}</p>
-            <div
-              onMouseDown={() => press()}
-              onMouseUp={() => press()}
-              onClick={() => toggleHabitCompletion()}
-              onTouchStart={() => {
-                press();
-                toggleHabitCompletion();
-              }}
-              onTouchEnd={() => {
-                press();
-              }}
-              className={` cursor-pointer border-2  grid place-items-center bg-white ${
-                isCompleted
-                  ? " border-[#27b562ef]  text-[#27b562ef]"
-                  : " text-gray-200"
-              } w-8 h-8 rounded-full shadow-lg -mt-2 transition-colors `}
-            >
-              <Check className="  w-4 h-4  stroke-3" />
+            <div className="flex items-center gap-2">
+              <div
+                onMouseDown={() => press()}
+                onMouseUp={() => press()}
+                onClick={() => toggleHabitCompletion()}
+                onTouchStart={() => {
+                  press();
+                  toggleHabitCompletion();
+                }}
+                onTouchEnd={() => {
+                  press();
+                }}
+                className={` cursor-pointer border-2  grid place-items-center bg-white ${
+                  isCompleted
+                    ? " border-[#27b562ef]  text-[#27b562ef]"
+                    : " text-gray-200"
+                } w-8 h-8 rounded-full shadow-lg -mt-2 transition-colors `}
+              >
+                <Check className="  w-4 h-4  stroke-3" />
+              </div>
+              {habit?.why && (
+                <button
+                  className="text-xs w-8 -mt-2 h-8 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400"
+                  onClick={() => setShowDialog(true)}
+                >
+                  <QuestionMarkCircleIcon />
+                </button>
+              )}
+              {showDialog && (
+                <HabitWhy why={habit.why} setShowDialog={setShowDialog} />
+              )}
             </div>
           </div>
 
@@ -220,17 +234,6 @@ function Habit({ habit, currDate }) {
                 {currHabit.getDoneIn}
               </p>
 
-              {habit?.why && (
-                <button
-                  className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400"
-                  onClick={() => setShowDialog(true)}
-                >
-                  why ?
-                </button>
-              )}
-              {showDialog && (
-                <HabitWhy why={habit.why} setShowDialog={setShowDialog} />
-              )}
               {/* <p className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-green-100 text-green-400">
                 2 mins
               </p> */}
