@@ -23,10 +23,13 @@ export default function HabitWhy({ why, name, setShowDialog }: any) {
         className="p-4 lg:p-8 space-y-4 scrollbar-hide lg:space-y-6 w-[90%] md:w-full overflow-scroll max-w-[450px] bg-white rounded-xl z-50"
       >
         <div className="flex justify-between">
-          <h1 className=" font-medium text-2xl "> {name} - but why?</h1>
+          <h1 className=" font-medium text-xl md:text-2xl ">
+            {" "}
+            {name} - but why?
+          </h1>
           <X
             onClick={() => setShowDialog(false)}
-            className=" cursor-pointer "
+            className=" cursor-pointer w-4 h-5 "
           />
         </div>
         <div className="space-y-4 font-medium  md:font-normal text-lg text-gray-500 ">
