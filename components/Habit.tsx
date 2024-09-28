@@ -4,12 +4,16 @@ import {
   QuestionMarkCircleIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import { format } from "date-fns";
+import { format, startOfToday, sub } from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
 import { Check, X } from "react-feather";
 import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
-import { getFormattedDates } from "../utils/utils";
+import {
+  getAllStreaks,
+  getFormattedDates,
+  getTheCurrentStreakCount,
+} from "../utils/utils";
 import DeleteHabit from "./DeleteHabit";
 import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
@@ -154,6 +158,18 @@ function Habit({ habit, currDate }) {
   const [isPressing, press] = useToggle(false);
   const [showDialog, setShowDialog] = useState(false);
 
+  const consecutiveDates = getAllStreaks(
+    habit.completedOnDates.map((d) => new Date(d))
+  );
+
+  const currentStreakCount = getTheCurrentStreakCount(
+    consecutiveDates,
+    startOfToday(),
+    sub(startOfToday(), {
+      days: 1,
+    })
+  );
+
   return (
     <>
       <motion.div
@@ -223,9 +239,12 @@ function Habit({ habit, currDate }) {
                 {currHabit.getDoneIn}
               </p>
 
-              {/* <p className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-green-100 text-green-400">
-                2 mins
-              </p> */}
+              {currentStreakCount > 0 && (
+                <p className=" px-2.5 py-1 font-bold space-x-1 text-md capitalize inline-block rounded-full bg-gray-50 text-orange-600">
+                  <span>🔥</span>
+                  <span>{currentStreakCount}</span>
+                </p>
+              )}
             </div>
             <div className="flex md:hidden   gap-4 w-32">
               <PencilAltIcon

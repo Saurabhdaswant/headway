@@ -178,6 +178,7 @@ function App() {
   const newHabit = {
     name: "",
     why: "",
+    hide: false,
     getDoneIn: "anytime",
     color: "",
     completedOnDates: [],

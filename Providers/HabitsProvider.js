@@ -46,10 +46,6 @@ export default function HabitsProvider({ children }) {
 
   const updateHabits = (newHabits) => {
     setHabits(newHabits);
-
-    if (typeof window !== "undefined") {
-      localStorage.setItem("Habits", JSON.stringify([...newHabits]));
-    }
   };
 
   return (

@@ -224,6 +224,23 @@ function HabitForm({
                 })}
               </div>
             </div>
+            <div className="flex flex-col space-y-2 ">
+              <p className="font-semibold">Hide</p>
+              <div className=" grid grid-cols-2 gap-x-6 gap-y-4 ">
+                <div
+                  onClick={() =>
+                    setCurrHabit({ ...currHabit, hide: !currHabit.hide })
+                  }
+                  className={` ${
+                    currHabit.hide
+                      ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+                      : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+                  } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors `}
+                >
+                  {currHabit.hide ? "true" : "false"}
+                </div>
+              </div>
+            </div>
             {/* <div className="flex flex-col space-y-2 ">
               <p className="font-semibold">Color</p>
               <div className=" grid grid-cols-6 gap-2 ">
