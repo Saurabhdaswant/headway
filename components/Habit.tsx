@@ -231,24 +231,9 @@ function Habit({ habit, currDate }) {
               {showDialog && (
                 <HabitWhy why={habit.why} setShowDialog={setShowDialog} />
               )}
-              <p
-                className={`text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full  ${
-                  currHabit.getDoneIn === "evening" &&
-                  " bg-pink-100 text-pink-400"
-                } ${
-                  currHabit.getDoneIn === "anytime" &&
-                  "bg-gray-100  text-gray-400"
-                } 
-              ${
-                currHabit.getDoneIn === "morning" &&
-                "bg-orange-100 text-orange-400"
-              } ${
-                  currHabit.getDoneIn === "afternoon" &&
-                  "bg-violet-100 text-violet-400"
-                }  `}
-              >
+              {/* <p className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-green-100 text-green-400">
                 2 mins
-              </p>
+              </p> */}
             </div>
             <div className="flex md:hidden   gap-4 w-24">
               <PencilAltIcon
