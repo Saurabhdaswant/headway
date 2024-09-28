@@ -253,7 +253,7 @@ function Habit({ habit, currDate }) {
                         className=" cursor-pointer "
                       />
                     </div>
-                    <div className="space-y-4 text-lg text-gray-500 ">
+                    <div className="space-y-4 font-medium  md:font-normal text-lg text-gray-500 ">
                       {habit.why}
                       {/* <ul className="list-disc list-inside">
                         {habit.why.map((reason, index) => (
