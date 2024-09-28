@@ -15,10 +15,17 @@ import HabitStats from "./HabitStats";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
 import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
-  const { token } = useContext(TokenContext);
+  const { token }: any = useContext(TokenContext);
 
   const [currHabit, setCurrHabit] = useState({ ...habit });
   const [isCompleted, setIsCompleted] = useState(false);
@@ -192,24 +199,65 @@ function Habit({ habit, currDate }) {
           </div>
 
           <div className="flex justify-between items-center pr-3">
-            <p
-              className={`text-xs px-2.5 py-1 mx-3 font-medium  capitalize inline-block   rounded-full  ${
-                currHabit.getDoneIn === "evening" &&
-                " bg-pink-100 text-pink-400"
-              } ${
-                currHabit.getDoneIn === "anytime" &&
-                "bg-gray-100  text-gray-400"
-              } 
+            <div className="flex items-center ml-3 gap-2">
+              <p
+                className={`text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full  ${
+                  currHabit.getDoneIn === "evening" &&
+                  " bg-pink-100 text-pink-400"
+                } ${
+                  currHabit.getDoneIn === "anytime" &&
+                  "bg-gray-100  text-gray-400"
+                } 
               ${
                 currHabit.getDoneIn === "morning" &&
                 "bg-orange-100 text-orange-400"
               } ${
-                currHabit.getDoneIn === "afternoon" &&
-                "bg-violet-100 text-violet-400"
-              }  `}
-            >
-              {currHabit.getDoneIn}
-            </p>
+                  currHabit.getDoneIn === "afternoon" &&
+                  "bg-violet-100 text-violet-400"
+                }  `}
+              >
+                {currHabit.getDoneIn}
+              </p>
+              <TooltipProvider delayDuration={0.1}>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <button className="text-xs px-2.5 py-1 font-medium capitalize inline-block rounded-full bg-blue-100 text-blue-400">
+                      why ?
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent className="text-sm text-gray-700 bg-white p-2 rounded-md shadow-lg">
+                    <ul>
+                      <li>Will help you get new jobs if you get fired</li>
+                      <li>
+                        To purchase your first MacBook with your hard earned
+                        money
+                      </li>
+                      <li>
+                        To build a reputation of a chad level design engineer
+                      </li>
+                    </ul>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              <p
+                className={`text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full  ${
+                  currHabit.getDoneIn === "evening" &&
+                  " bg-pink-100 text-pink-400"
+                } ${
+                  currHabit.getDoneIn === "anytime" &&
+                  "bg-gray-100  text-gray-400"
+                } 
+              ${
+                currHabit.getDoneIn === "morning" &&
+                "bg-orange-100 text-orange-400"
+              } ${
+                  currHabit.getDoneIn === "afternoon" &&
+                  "bg-violet-100 text-violet-400"
+                }  `}
+              >
+                2 min's
+              </p>
+            </div>
             <div className="flex md:hidden   gap-4 w-24">
               <PencilAltIcon
                 className="w-6 h-6"
