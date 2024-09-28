@@ -124,7 +124,7 @@ function HabitForm({
               <label htmlFor="why" className="font-semibold pb-2">
                 Why ?
               </label>
-              <input
+              <textarea
                 onChange={(e) =>
                   setCurrHabit({
                     ...currHabit,
@@ -136,7 +136,7 @@ function HabitForm({
                 id="why"
                 className={`
 							outline-none focus:border-[#0F85F2]  font-medium 
-							border-2    px-4 py-2 rounded ${
+							border-2 h-32  px-4 py-2 rounded ${
                 currHabit.why?.length > 0 && error
                   ? "border-zinc-200"
                   : error
