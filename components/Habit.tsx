@@ -21,6 +21,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/Tooltip";
+import HabitWhy from "./HabitWhy";
 
 function Habit({ habit, currDate }) {
   const { habits, updateHabits } = useContext(HabitsContext);
@@ -228,41 +229,7 @@ function Habit({ habit, currDate }) {
                 </button>
               )}
               {showDialog && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{
-                    type: "spring",
-                    bounce: 0,
-                    duration: 0.6,
-                  }}
-                  onClick={() => setShowDialog(false)}
-                  className="fixed inset-0 z-40 flex items-center justify-center bg-gray-900 bg-opacity-50"
-                >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    className="p-4 lg:p-8 space-y-4 scrollbar-hide lg:space-y-6 w-[90%] md:w-full overflow-scroll max-w-[450px] bg-white rounded-xl z-50"
-                  >
-                    <div className="flex justify-between">
-                      <h1 className=" font-medium text-2xl ">Why?</h1>
-                      <X
-                        onClick={() => setShowDialog(false)}
-                        className=" cursor-pointer "
-                      />
-                    </div>
-                    <div className="space-y-4 font-medium  md:font-normal text-lg text-gray-500 ">
-                      {habit.why}
-                      {/* <ul className="list-disc list-inside">
-                        {habit.why.map((reason, index) => (
-                          <li key={index}>{reason}</li>
-                        ))}
-                      </ul> */}
-                    </div>
-                  </motion.div>
-                </motion.div>
+                <HabitWhy why={habit.why} setShowDialog={setShowDialog} />
               )}
               <p
                 className={`text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full  ${
