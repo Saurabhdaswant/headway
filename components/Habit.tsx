@@ -190,7 +190,7 @@ function Habit({ habit, currDate }) {
             scale: 0.91,
           },
         }}
-        className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]   my-2 text-[#2e2e2e]  bg-white  border border-slate-100`}
+        className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]  text-[#2e2e2e]  bg-white  border border-slate-100`}
       >
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">

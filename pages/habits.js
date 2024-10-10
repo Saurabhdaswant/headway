@@ -259,7 +259,7 @@ function App() {
               );
             })}
           </div> */}
-            <div className=" flex flex-col justify-between mx-auto  max-w-[400px]  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
+            <div className=" flex flex-col gap-2 mx-auto  max-w-[400px]  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
               <HabitsRenderer
                 habits={habits}
                 selectedDay={selectedDay}
