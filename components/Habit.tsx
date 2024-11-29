@@ -147,11 +147,13 @@ function Habit({ habit, currDate }) {
 
     const json = await res.json();
 
+    setCurrHabit(updatedHabit);
     if (json.acknowledged) {
       newHabits[habitIndex] = updatedHabit;
 
-      setCurrHabit(updatedHabit);
       updateHabits(newHabits);
+    } else {
+      setCurrHabit(currHabit);
     }
   };
 
@@ -172,23 +174,11 @@ function Habit({ habit, currDate }) {
 
   return (
     <>
+      {/* Animation 0 */}
       <motion.div
-        // initial={{
-        //   y: 100,
-        //   opacity: 0,
-        // }}
-        // animate={{
-        //   y: 0,
-        //   opacity: 1,
-        // }}
-        whileTap={isPressing ? "onPress" : "_"}
+        whileTap={{ scale: 0.95 }}
         transition={{
           type: "spring",
-        }}
-        variants={{
-          onPress: {
-            scale: 0.91,
-          },
         }}
         className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]  text-[#2e2e2e]  bg-white  border border-slate-100`}
       >

@@ -152,3 +152,7 @@
 // - find the goal
 // - inside that goal find the milstone
 // - update the milstone
+
+// add coming soon pages
+
+// 0 : habit tap animation
