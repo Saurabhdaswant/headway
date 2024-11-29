@@ -180,12 +180,12 @@ function Habit({ habit, currDate }) {
         key={habit.name}
         whileTap={{ scale: 0.95 }}
         transition={{
-          type: "spring",
-          duration: 0.3,
+          type: "ease-out",
+          duration: 0.2,
         }}
         initial={{
           opacity: 0,
-          y: -100,
+          y: -20,
         }}
         animate={{
           opacity: 1,
@@ -193,7 +193,7 @@ function Habit({ habit, currDate }) {
         }}
         exit={{
           opacity: 0,
-          y: -100,
+          y: -20,
         }}
         className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]  text-[#2e2e2e]  bg-white  border border-slate-100`}
       >

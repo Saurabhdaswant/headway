@@ -279,13 +279,8 @@ function HabitForm({
             </div> */}
           </div>
           <motion.button
-            initial={{ boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)" }}
-            whileHover={{ boxShadow: "5px 5px 5px rgba(0, 0, 0, 10)" }}
-            // transition={{
-            //   type: "spring",
-            // }}
             whileTap={{
-              scale: 0.9,
+              scale: 0.85,
             }}
             onClick={() => handleSubmit(currHabit)}
             type="submit"
