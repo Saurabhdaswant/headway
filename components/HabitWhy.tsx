@@ -17,24 +17,48 @@ export default function HabitWhy({ why, name, setShowDialog }: any) {
         className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-black bg-opacity-20"
       />{" "}
       <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        exit={{ scale: 0 }}
-        className="p-6 lg:p-8 space-y-4 scrollbar-hide lg:space-y-6 w-[90%] md:w-full overflow-scroll max-w-[450px] bg-white rounded-xl z-50"
+        layoutId={name}
+        className="p-6 ml-[18rem] mt-[10rem]  scrollbar-hide  w-[90%] md:w-full overflow-scroll max-w-[450px] bg-white rounded-xl z-50"
       >
         <div className="flex justify-between">
-          <h1 className=" font-medium text-xl md:text-2xl ">
-            {" "}
-            {name} - but why?
-          </h1>
-          <X
+          <div className="flex items-center gap-2">
+            <motion.p
+              layout
+              layoutId={`${name}_name`}
+              className=" font-semibold  pb-3 text-lg  "
+            >
+              {" "}
+              {name}!
+            </motion.p>
+            <motion.p
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.01 } }}
+              transition={{
+                type: "spring",
+                bounce: 0,
+                duration: 0.3,
+              }}
+              className=" font-semibold  pb-3 text-lg  "
+            >
+              But why should i ?
+            </motion.p>
+          </div>
+          {/* <X
             onClick={() => setShowDialog(false)}
             className=" cursor-pointer w-7 h-7 "
-          />
+          /> */}
         </div>
-        <div className="space-y-4 font-medium  md:font-normal text-lg text-gray-500 ">
+        <motion.p
+          layout
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.05 } }}
+          className=" font-medium  md:font-normal text-lg text-gray-500 "
+        >
           {why}
-        </div>
+        </motion.p>
       </motion.div>
     </div>
   );

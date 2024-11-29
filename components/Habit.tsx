@@ -176,7 +176,7 @@ function Habit({ habit, currDate }) {
     <>
       {/* Animation Zero */}
       <motion.div
-        layout
+        layoutId={habit.name}
         key={habit.name}
         whileTap={{ scale: 0.95 }}
         transition={{
@@ -186,10 +186,12 @@ function Habit({ habit, currDate }) {
         initial={{
           opacity: 0,
           y: -20,
+          // height: "auto",
         }}
         animate={{
           opacity: 1,
           y: 0,
+          // height: showDialog ? "400px" : "auto",
         }}
         exit={{
           opacity: 0,
@@ -199,7 +201,13 @@ function Habit({ habit, currDate }) {
       >
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">
-            <p className=" font-semibold  pb-3   "> {currHabit.name}</p>
+            <motion.p
+              layout
+              layoutId={`${currHabit.name}_name`}
+              className=" font-semibold  pb-3   "
+            >
+              {currHabit.name}
+            </motion.p>
             <div className="flex items-center gap-2">
               <div
                 onMouseDown={() => press()}
@@ -315,13 +323,15 @@ function Habit({ habit, currDate }) {
         )}
       </AnimatePresence>
 
-      {showDialog && (
-        <HabitWhy
-          why={habit.why}
-          name={habit.name}
-          setShowDialog={setShowDialog}
-        />
-      )}
+      <AnimatePresence>
+        {showDialog && (
+          <HabitWhy
+            why={habit.why}
+            name={habit.name}
+            setShowDialog={setShowDialog}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
