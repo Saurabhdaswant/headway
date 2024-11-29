@@ -64,7 +64,7 @@ export default function DeleteHabit({ habitId, toggleDeleteDialog }) {
       <motion.div
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -100 }}
+        exit={{ opacity: 0, y: -50 }}
         transition={{
           type: "spring",
           bounce: 0,
