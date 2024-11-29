@@ -57,6 +57,7 @@ function HabitForm({
 
   return (
     <>
+      {/* Background */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -69,6 +70,7 @@ function HabitForm({
         onClick={() => setShowHabitForm(false)}
         className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 "
       />
+      {/* Sheet  */}
       <motion.div
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
