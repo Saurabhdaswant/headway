@@ -28,9 +28,9 @@ export default function HabitWhy({ why, name, setShowDialog }: any) {
               className=" font-semibold  pb-3 text-lg  "
             >
               {" "}
-              {name}!
+              {name}
             </motion.p>
-            <motion.p
+            {/* <motion.p
               layout
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -43,7 +43,7 @@ export default function HabitWhy({ why, name, setShowDialog }: any) {
               className=" font-semibold  pb-3 text-lg  "
             >
               But why should i ?
-            </motion.p>
+            </motion.p> */}
           </div>
           {/* <X
             onClick={() => setShowDialog(false)}
