@@ -17,38 +17,35 @@ const sidebarItems = [
 const Item = ({ item }) => {
   const router = useRouter();
   const { pathname } = router;
-  const isActive = pathname.startsWith(item.path);
-  const [isActiveBg, setIsActive] = useState(false);
+  const isPathMatching = pathname.startsWith(item.path);
+  const [currentHoveredItem, setCurrentHoveredItem] = useState(false);
 
   const Icon = item.icon;
 
-  // useEffect(() => {
-  //   setIsActive(isActive);
-  // }, [item]);
-
+  // Animation One
   return (
     <motion.li
       layout
       key={item.name}
       onMouseOver={() => {
-        setIsActive(true);
+        setCurrentHoveredItem(true);
       }}
-      onMouseLeave={() => setIsActive(false)}
+      onMouseLeave={() => setCurrentHoveredItem(false)}
       onClick={() => router.push(item.path)}
       className={`py-4 px-4 flex items-center transition-colors relative   cursor-pointer rounded-xl font-medium ${
-        isActive ? " text-white" : "text-black"
+        isPathMatching ? " text-white" : "text-black"
       }`}
     >
       <span className="z-50 flex items-center gap-2">
         <Icon className="w-5 h-5" /> {item.name}
       </span>
-      {isActive === true && (
+      {isPathMatching === true && (
         <motion.div
           layoutId="black"
           className="bg-[#2e2e2e] z-40 -left-[0.1px] absolute rounded-xl h-full w-full"
         />
       )}
-      {isActiveBg === true && (
+      {currentHoveredItem === true && (
         <motion.div
           layoutId="gray"
           className={`-left-[0.1px] bg-[#cfcfcf57] absolute transition-colors rounded-xl h-full w-full  

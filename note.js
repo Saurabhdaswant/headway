@@ -156,3 +156,4 @@
 // add coming soon pages
 
 // 0 : habit tap animation
+// 1 : sidebar animation

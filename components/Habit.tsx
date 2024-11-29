@@ -174,7 +174,7 @@ function Habit({ habit, currDate }) {
 
   return (
     <>
-      {/* Animation 0 */}
+      {/* Animation Zero */}
       <motion.div
         whileTap={{ scale: 0.95 }}
         transition={{
