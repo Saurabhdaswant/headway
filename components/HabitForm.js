@@ -95,7 +95,7 @@ function HabitForm({
             />
           </motion.div>
         </div>
-        <div className=" flex flex-col">
+        <div className=" flex flex-col  h-full pb-6 justify-between">
           <div className=" space-y-4  lg:space-y-8 overflow-scroll scrollbar-hide h-[70vh] ">
             <div className="flex flex-col  lg:space-y-2">
               <label htmlFor="habitName" className="font-semibold pb-2">
@@ -243,40 +243,6 @@ function HabitForm({
                 </div>
               </div>
             </div>
-            {/* <div className="flex flex-col space-y-2 ">
-              <p className="font-semibold">Color</p>
-              <div className=" grid grid-cols-6 gap-2 ">
-                {colors.map((color, idx) => {
-                  return (
-                    <div
-                      onClick={() => setCurrHabit({ ...currHabit, color })}
-                      key={idx}
-                      className={` cursor-pointer capitalize text-center h-12  rounded  bg-${color}  ${
-                        color === currHabit.color
-                          ? `outline outline-offset-2 outline-[#0F85F2] `
-                          : null
-                      }`}
-                    ></div>
-                  );
-                })}
-              </div>
-            </div> */}
-            {/* <div className="flex flex-col space-y-2 ">
-              <p className="font-semibold">End Date</p>
-              <DialogComponent
-                showDialog={showDialog}
-                toggleDialog={toggleDialog}
-              >
-                {showDialog && (
-                  <Calendar
-                    currDate={startOfToday()}
-                    setCurrDate={updateEndDate}
-                    toggleCalendar={toggleDialog}
-                    canSelectDaysAfterToday={true}
-                  />
-                )}
-              </DialogComponent>
-            </div> */}
           </div>
           <motion.button
             whileTap={{
