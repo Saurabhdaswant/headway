@@ -23,33 +23,39 @@ const Item = ({ item }) => {
   const Icon = item.icon;
 
   // Animation One
+  // When two elements share the same layoutId, Framer Motion knows they're connected.
+  // So, when one element is replaced by another with the same layoutId,
+  // it animates the change, making the transition smooth and visually appealing.
+
   return (
     <motion.li
       layout
       key={item.name}
+      style={{
+        color: isPathMatching ? "#fff" : "#000",
+      }}
+      transition={{ duration: 0.5 }}
       onMouseOver={() => {
         setCurrentHoveredItem(true);
       }}
       onMouseLeave={() => setCurrentHoveredItem(false)}
       onClick={() => router.push(item.path)}
-      className={`py-4 px-4 flex items-center transition-colors relative   cursor-pointer rounded-xl font-medium ${
-        isPathMatching ? " text-white" : "text-black"
-      }`}
+      className={`py-4 px-4 flex items-center transition-colors relative   cursor-pointer rounded-xl font-medium`}
     >
       <span className="z-50 flex items-center gap-2">
         <Icon className="w-5 h-5" /> {item.name}
       </span>
-      {isPathMatching === true && (
+      {currentHoveredItem && (
         <motion.div
-          layoutId="black"
-          className="bg-[#2e2e2e] z-40 -left-[0.1px] absolute rounded-xl h-full w-full"
-        />
-      )}
-      {currentHoveredItem === true && (
-        <motion.div
-          layoutId="gray"
+          layoutId="hoveredBg"
           className={`-left-[0.1px] bg-[#cfcfcf57] absolute transition-colors rounded-xl h-full w-full  
           `}
+        />
+      )}
+      {isPathMatching && (
+        <motion.div
+          layoutId="matchingPathBg"
+          className="bg-[#2e2e2e] z-40 -left-[0.1px] absolute rounded-xl h-full w-full"
         />
       )}
     </motion.li>
@@ -65,7 +71,7 @@ function Sidebar() {
             return <Item key={idx} item={item} />;
           })}
         </ul>
-        {/* <div className="flex items-center justify-center gap-2 border-t py-4 border-gray-200">
+        {/* <div className="flex items-center justify-center gap-2 border-t py-4 border-hoveredBg-200">
           <div className="w-12 h-12 bg-slate-300 rounded-full"></div>
           <p className="font-medium">Saurabh</p>
         </div> */}
