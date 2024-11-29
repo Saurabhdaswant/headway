@@ -176,9 +176,23 @@ function Habit({ habit, currDate }) {
     <>
       {/* Animation Zero */}
       <motion.div
+        layout
+        key={habit.name}
         whileTap={{ scale: 0.95 }}
         transition={{
           type: "spring",
+          duration: 0.3,
+        }}
+        initial={{
+          opacity: 0,
+          y: -100,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        exit={{
+          opacity: 0,
         }}
         className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]  text-[#2e2e2e]  bg-white  border border-slate-100`}
       >
@@ -272,6 +286,8 @@ function Habit({ habit, currDate }) {
           </div>
         </div>
       </motion.div>
+
+      {/* Animation Two */}
       <AnimatePresence>
         {showHabitForm && (
           <HabitForm

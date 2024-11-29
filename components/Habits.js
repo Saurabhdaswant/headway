@@ -11,6 +11,7 @@ import {
 } from "date-fns";
 import days from "../Data/Days";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import { AnimatePresence } from "framer-motion";
 
 const NoHabits = ({ children }) => {
   return (
@@ -56,10 +57,10 @@ export function Habits({ habits, selectedDay, selectedTimeOfDay = "anytime" }) {
   }
 
   return (
-    <>
+    <AnimatePresence initial={false}>
       {filteredHabits?.map((habit, _) => {
         return <Habit key={habit._id} habit={habit} currDate={selectedDay} />;
       })}
-    </>
+    </AnimatePresence>
   );
 }
