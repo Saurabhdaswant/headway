@@ -159,3 +159,7 @@
 // 1 : habits animation
 // 2 : sidebar animation
 // 3 : sheet animation
+// 4 : transaction animation
+// 5 : Button , Expand
+// 6 : workflow / process of making animations
+// 7 : design / animation inspiration : follow design engineer's on twitter

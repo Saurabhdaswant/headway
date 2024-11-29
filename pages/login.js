@@ -122,7 +122,7 @@ export default function Signin() {
             <div className="flex items-center gap-1  justify-center ">
               <p className=" text-zinc-400"> Dont have account? </p>
               <Link href="/signup" className="  text-blue-500 underline">
-                Join Waitlist
+                Create one for yourself 🫵🏽
               </Link>
             </div>
           </div>
