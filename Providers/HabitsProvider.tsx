@@ -3,24 +3,32 @@ import { API_ENDPOINTS } from "../constants";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
 
-export const HabitsContext = createContext();
+export const HabitsContext: any = createContext({});
 
 export default function HabitsProvider({ children }) {
   const [habits, setHabits] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage && localStorage?.getItem("authToken");
-    async function gethabits() {
-      const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const habits = await res.json();
 
-      setHabits(habits);
+    async function getHabits() {
+      try {
+        setLoading(true); // Start loading
+        const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const habits = await res.json();
+        setHabits(habits);
+      } catch (error) {
+        console.error("Error fetching habits:", error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
     }
 
     if (
@@ -39,17 +47,19 @@ export default function HabitsProvider({ children }) {
         localStorage.removeItem("authToken");
         router.push("/login");
       } else {
-        gethabits();
+        getHabits();
       }
+    } else {
+      setLoading(false); // No token, stop loading
     }
-  }, []);
+  }, [router]);
 
   const updateHabits = (newHabits) => {
     setHabits(newHabits);
   };
 
   return (
-    <HabitsContext.Provider value={{ habits, updateHabits }}>
+    <HabitsContext.Provider value={{ habits, updateHabits, loading }}>
       {children}
     </HabitsContext.Provider>
   );

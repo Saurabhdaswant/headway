@@ -1,18 +1,18 @@
 import React from "react";
 import { useContext } from "react";
-import { HabitsContext } from "../Providers/HabitsProvider";
 import { API_ENDPOINTS } from "../constants";
 import { TokenContext } from "../Providers/TokenProvider";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { GoalContext } from "../Providers/GoalProvider";
+import { HabitsContext } from "../Providers/HabitsProvider";
 
 export default function DeleteHabit({ habitId, toggleDeleteDialog }) {
-  const { habits, updateHabits } = useContext(HabitsContext);
   const { goal, updateGoal } = useContext(GoalContext);
   const { token }: any = useContext(TokenContext);
   const { pathname } = useRouter();
   const isInsideGoalsPage = pathname.startsWith("/goals");
+  const { habits, updateHabits }: any = useContext(HabitsContext);
 
   const handleDelete = async () => {
     const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits/${habitId}`, {

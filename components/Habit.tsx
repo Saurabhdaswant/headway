@@ -193,6 +193,7 @@ function Habit({ habit, currDate }) {
         }}
         exit={{
           opacity: 0,
+          y: -100,
         }}
         className={` group   rounded-2xl   flex justify-between items-center w-full max-w-[400px]  text-[#2e2e2e]  bg-white  border border-slate-100`}
       >
