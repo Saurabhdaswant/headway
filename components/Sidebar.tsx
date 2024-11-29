@@ -9,7 +9,7 @@ const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/stats" },
   { name: "Goals", icon: Target, path: "/goals" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
-  { name: "Tribe", icon: Users, path: "/tribe" },
+  { name: "Gang", icon: Users, path: "/gang" },
   { name: "Workouts", icon: Zap, path: "/workouts" },
   { name: "Meditations", icon: Headphones, path: "/meditations" },
 ];

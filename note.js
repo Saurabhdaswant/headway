@@ -152,7 +152,3 @@
 // - find the goal
 // - inside that goal find the milstone
 // - update the milstone
-
-// habit why
-// - input
-// - button on hover should show a tooltip
