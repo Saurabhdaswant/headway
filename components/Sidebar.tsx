@@ -6,12 +6,12 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
 const sidebarItems = [
-  { name: "Dashboard", icon: ChartBarIcon, path: "/stats" },
-  { name: "Goals", icon: Target, path: "/goals" },
+  { name: "Dashboard", icon: ChartBarIcon, path: "/stats", soon: true },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
-  { name: "Gang", icon: Users, path: "/gang" },
-  { name: "Workouts", icon: Zap, path: "/workouts" },
-  { name: "Meditations", icon: Headphones, path: "/meditations" },
+  { name: "Gang", icon: Users, path: "/gang", soon: true },
+  { name: "Goals", icon: Target, path: "/goals" },
+  { name: "Workouts", icon: Zap, path: "/workouts", soon: true },
+  { name: "Meditations", icon: Headphones, path: "/meditations", soon: true },
 ];
 
 const Item = ({ item }) => {
@@ -27,20 +27,27 @@ const Item = ({ item }) => {
   // So, when one element is replaced by another with the same layoutId,
   // it animates the change, making the transition smooth and visually appealing.
 
+  const textStyle = {
+    color: isPathMatching ? "#fff" : item.soon ? "#808080" : "#000",
+  };
+
   return (
     <motion.li
       layout
       key={item.name}
-      style={{
-        color: isPathMatching ? "#fff" : "#000",
-      }}
-      transition={{ duration: 0.5 }}
+      style={textStyle}
       onMouseOver={() => {
         setCurrentHoveredItem(true);
       }}
       onMouseLeave={() => setCurrentHoveredItem(false)}
-      onClick={() => router.push(item.path)}
-      className={`py-4 px-4 flex items-center transition-colors relative   cursor-pointer rounded-xl font-medium`}
+      onClick={() => {
+        if (!item.soon) {
+          router.push(item.path);
+        }
+      }}
+      className={`py-4 px-4 flex items-center transition-colors relative ${
+        item.soon ? "cursor-not-allowed" : "cursor-pointer"
+      } rounded-xl font-medium`}
     >
       <span className="z-50 flex items-center gap-2">
         <Icon className="w-5 h-5" /> {item.name}

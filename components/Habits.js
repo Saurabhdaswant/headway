@@ -72,12 +72,12 @@ export function Habits({ habits, selectedDay, selectedTimeOfDay = "anytime" }) {
 
   return (
     <AnimatePresence initial={false}>
-      {filteredHabits.length > 0 ? (
+      {filteredHabits?.length > 0 ? (
         filteredHabits?.map((habit, _) => {
           return <Habit key={habit._id} habit={habit} currDate={selectedDay} />;
         })
       ) : !filteredHabits ||
-        filteredHabits.length === 0 ||
+        filteredHabits?.length === 0 ||
         isAfter(selectedDay, startOfToday()) ? (
         <NoHabits>No Habits Found!</NoHabits>
       ) : null}

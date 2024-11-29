@@ -29,7 +29,7 @@ import {
 import HabitWhy from "./HabitWhy";
 
 function Habit({ habit, currDate }) {
-  const { habits, updateHabits } = useContext(HabitsContext);
+  const { habits, updateHabits }: any = useContext(HabitsContext);
   const { token }: any = useContext(TokenContext);
 
   const [currHabit, setCurrHabit] = useState({ ...habit });

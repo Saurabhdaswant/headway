@@ -153,7 +153,9 @@
 // - inside that goal find the milstone
 // - update the milstone
 
-// add coming soon pages
+// - demo goals
+// - demo habits
+// - learn about animations from crafts
 
 // 0 : habit tap animation
 // 1 : habits animation
