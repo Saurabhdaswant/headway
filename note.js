@@ -153,15 +153,25 @@
 // - inside that goal find the milstone
 // - update the milstone
 
-// - demo goals
-// - demo habits
-// - learn about animations from crafts
-
 // 0 : habit tap animation
 // 1 : habits animation
 // 2 : sidebar animation
 // 3 : sheet animation
-// 4 : transaction animation
+// 4 : shared layout animationx
 // 5 : Button , Expand
 // 6 : workflow / process of making animations
 // 7 : design / animation inspiration : follow design engineer's on twitter
+// 8 : peerlist : saurabh daswant
+// 9 :  twitter : @daswantsaurabh
+
+// two main things
+
+// motion
+// - layout
+// - layoutId
+// - animate
+// - exit
+// - initial
+// - transition
+
+// AnimatePresence
