@@ -28,7 +28,7 @@ export default function Goal() {
   const [error, setError] = useState(false);
   const [token, setToken] = useState(null);
   const [showHabitForm, setShowHabitForm] = useState(false);
-  const { habits, updateHabits } = useContext(HabitsContext);
+  // const { habits, updateHabits } = useContext(HabitsContext);
 
   const [showHabits, setShowHabits] = useState(true);
 
@@ -110,7 +110,7 @@ export default function Goal() {
       const data = await res.json();
 
       const newHabits = [...(goal.habits || []), data.habit];
-      updateHabits([...habits, data.habit]);
+      // updateHabits([...habits, data.habit]);
 
       updateGoal({ ...goal, habits: newHabits });
       setShowHabitForm(false);
