@@ -2,11 +2,12 @@ import React, { createContext, useEffect, useState } from "react";
 import { API_ENDPOINTS } from "../constants";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
+import { Spin } from "antd";
 
 export const HabitsContext: any = createContext({});
 
 export default function HabitsProvider({ children }) {
-  const [habits, setHabits] = useState([]);
+  const [habits, setHabits] = useState<any>([]);
   const [loading, setLoading] = useState(true); // Loading state
   const router = useRouter();
 

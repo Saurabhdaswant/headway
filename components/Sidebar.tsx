@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
 const sidebarItems = [
-  { name: "Dashboard", icon: ChartBarIcon, path: "/stats", soon: true },
+  { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
   { name: "Gang", icon: Users, path: "/gang", soon: true },
   { name: "Goals", icon: Target, path: "/goals" },
