@@ -175,3 +175,9 @@
 // - transition
 
 // AnimatePresence
+
+// you already have the new ui ready for the weekly layout
+// redesign the ui for your case
+// add joy using motion
+// figure out , how things are working on FE
+// figure out , how to build backend

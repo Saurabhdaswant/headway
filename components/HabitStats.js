@@ -113,11 +113,11 @@ function HabitStats({ habit, toggleStats }) {
         className="p-4 lg:p-8 absolute space-y-4 scrollbar-hide lg:space-y-8 top-0 right-0 w-full overflow-scroll max-w-[450px] bg-white rounded-md rounded-r-none z-50 h-full"
       >
         <div className="flex justify-between">
-          <h1 className=" text-2xl ">Statistics</h1>
-          <X onClick={toggleStats} className=" cursor-pointer " />
+          <h1 className=" text-xl font-bold text-[#2e2e2e] ">{habit?.name} </h1>
+          <X onClick={toggleStats} className=" cursor-pointer text-[#2e2e2e]" />
         </div>
         <div className="space-y-4 ">
-          <p className="  font-semibold   ">Habit Score</p>
+          <p className="  font-semibold  text-[#2e2e2e] ">Habit Score</p>
           <PieChart
             width={400}
             height={170}
@@ -145,7 +145,7 @@ function HabitStats({ habit, toggleStats }) {
           </PieChart>
         </div>
         <div className="space-y-4  ">
-          <p className="  font-semibold   ">Streak</p>
+          <p className="  font-semibold  text-[#2e2e2e] ">Streak</p>
           <div className="flex  justify-between   bg-white rounded-md ">
             <div className="flex items-center gap-4 ">
               <div className=" grid place-items-center bg-[#D6FCD8]  text-[#242424] w-12 h-12 rounded-lg ">
@@ -170,7 +170,7 @@ function HabitStats({ habit, toggleStats }) {
                 </svg>
               </div>
               <div>
-                <p className="text-2xl font-medium ">
+                <p className="text-2xl font-medium text-[#2e2e2e]">
                   {currentStreakCount} Days
                 </p>
                 <p className="text-gray-400 text-sm ">Current Streak </p>
@@ -194,14 +194,16 @@ function HabitStats({ habit, toggleStats }) {
                 </svg>
               </div>
               <div>
-                <p className="text-2xl font-medium ">{bestStreakCount} Days</p>
+                <p className="text-2xl font-medium text-[#2e2e2e]">
+                  {bestStreakCount} Days
+                </p>
                 <p className="text-gray-400 text-sm ">Best Strike</p>
               </div>
             </div>
           </div>
         </div>
         <div className="space-y-4 my-4  ">
-          <p className="  font-semibold   ">Times Completed</p>
+          <p className="  font-semibold  text-[#2e2e2e] ">Times Completed</p>
           <div className="  space-y-4 ">
             <div className="flex justify-between items-center  px-4 ">
               <p className="  text-gray-400 ">This Week</p>
@@ -225,7 +227,7 @@ function HabitStats({ habit, toggleStats }) {
         </div>
 
         <div className="space-y-4 my-4  ">
-          <p className="  font-semibold   ">Calendar Progrees</p>
+          <p className="  font-semibold  text-[#2e2e2e] ">Calendar Progrees</p>
           <Calendar
             currDate={startOfToday()}
             completedHabitDates={completedHabitDatesISO}

@@ -100,6 +100,8 @@ function Habit({ habit, currDate }) {
   };
 
   const toggleHabitCompletion = async () => {
+    // we are doing this updating logic on frontend , i think instead this should happen on backend , we should just send the id and then update the habit from backend and reload it right ?
+
     const habitIndex = habits?.findIndex(
       (habit) => habit._id === currHabit._id
     );
@@ -186,12 +188,10 @@ function Habit({ habit, currDate }) {
         initial={{
           opacity: 0,
           y: -20,
-          // height: "auto",
         }}
         animate={{
           opacity: 1,
           y: 0,
-          // height: showDialog ? "400px" : "auto",
         }}
         exit={{
           opacity: 0,
