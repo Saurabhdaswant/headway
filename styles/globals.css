@@ -49,3 +49,30 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
+rect.color-filled {
+  fill: #27b562e2;
+  rx: 2.5px;
+  ry: 2.5px;
+  stroke: white;
+  stroke-width: 1;
+
+}
+
+rect.color-empty {
+  fill: rgba(229, 231, 235, 0.6);
+  rx: 2.5px;
+  ry: 2.5px;
+  stroke: white;
+  stroke-width: 1;
+
+}
+
+
+.react-calendar-heatmap-month-label {
+  font-size: 0.55rem;
+  font-weight: 500;
+  fill: oklch(0.707 0.022 261.325);
+}
+
