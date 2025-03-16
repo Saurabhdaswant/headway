@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState } from "react";
 import { API_ENDPOINTS } from "../constants";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
-import { Spin } from "antd";
 
 export const HabitsContext: any = createContext({});
 
