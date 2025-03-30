@@ -9,7 +9,7 @@ import {
   parseISO,
 } from "date-fns";
 import { Calendar, Check, Plus } from "react-feather";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import HabitForm from "../../components/HabitForm";
 import { weekDays } from "../../components/constants";
 import { Habits as HabitsRenderer } from "../../components/Habits";
@@ -157,25 +157,44 @@ export default function Goal() {
     return number;
   }
 
+  const imgLookup = {
+    "6692142d0cb77b89a9a2c441":
+      "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "669211210cb77b89a9a2c440":
+      "https://images.unsplash.com/photo-1601141256817-c60897f2776a?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    2: "https://images.unsplash.com/photo-1614152412509-7a5afc18c75b?q=80&w=3027&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    3: "https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?q=80&w=2920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  };
+
   return (
     <Layout>
-      <div className=" w-full md:w-[80%] h-[100vh] bg-[#F5F5F5]  overflow-auto pt-10">
-        <div className="mx-auto  max-w-[800px]">
-          <div
+      <div className=" w-full md:w-[80%] h-[100vh]  bg-[#F5F5F5]   overflow-auto pt-10">
+        <div className="mx-auto overflow-hidden  max-w-[800px]">
+          <motion.div
+            layoutId={`${goal?._id}_image`}
+            layout="position"
             style={{
-              backgroundImage: `url("https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
+              backgroundImage: `url(${imgLookup[goal?._id]})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
-            className="  h-[300px] w-full rounded-lg mb-8  overflow-hidden  gap-2"
-          ></div>
+            className="h-[300px] w-full rounded-lg mb-8 overflow-hidden gap-2"
+          ></motion.div>
           <div className="z-10">
-            <p className=" font-bold text-4xl  text-[#272727] capitalize   ">
+            <motion.p
+              layoutId={`${goal?.name}_name`}
+              layout="position"
+              className=" font-semibold text-2xl   text-[#272727] capitalize   "
+            >
               {goal?.name}
-            </p>
-            <p className=" font-normal text-gray-600  mt-6    ">
+            </motion.p>
+            <motion.p
+              layoutId={`${goal?.description}_description`}
+              layout="position"
+              className=" font-normal text-gray-600  mt-6    "
+            >
               {goal?.description}
-            </p>
+            </motion.p>
           </div>
           <div className="flex mt-8 items-center gap-1">
             <Calendar strokeWidth="2" size="20" />
@@ -186,7 +205,7 @@ export default function Goal() {
             </p>
 
             <p
-              className={`text-sm py-1    capitalize  font-bold    rounded-full    text-gray-900 `}
+              className={`text-sm py-1    capitalize  font-normal    rounded-full    text-gray-900 `}
             >
               {goal && goal?.createdDate
                 ? format(new Date(goal?.createdDate), "PP")
@@ -194,6 +213,42 @@ export default function Goal() {
             </p>
           </div>
           <div className="grid grid-cols-3 gap-4 mt-10">
+            <div className="p-4 bg-white rounded-lg">
+              <motion.p
+                layout="position"
+                layoutId={`${goal.name}_deadline_title`}
+                className={`    capitalize    rounded-full    text-gray-600 `}
+              >
+                Deadline
+              </motion.p>
+              <motion.p
+                layout="position"
+                layoutId={`${goal?.deadlineDate}_deadline_value`}
+                className={` text-2xl font-black py-1    capitalize     rounded-full    text-gray-900 `}
+              >
+                {goal && goal?.deadlineDate
+                  ? format(new Date(goal?.deadlineDate), "PP")
+                  : null}
+              </motion.p>
+            </div>
+            <div className="p-4 bg-white rounded-lg">
+              <motion.p
+                layout="position"
+                layoutId={`${goal.name}_remaining_title`}
+                className={`    capitalize    rounded-full    text-gray-600 `}
+              >
+                Remaining
+              </motion.p>
+              <motion.p
+                layout="position"
+                layoutId={`${goal.name}_remaining_value`}
+                className={` text-2xl font-black py-1    capitalize    rounded-full    text-gray-900 `}
+              >
+                {goal && goal?.deadlineDate
+                  ? formatDistance(today, new Date(goal?.deadlineDate))
+                  : null}
+              </motion.p>
+            </div>
             <div className="p-4  bg-white rounded-lg">
               <p className={`    capitalize    rounded-full    text-gray-600 `}>
                 Time Indicator
@@ -208,30 +263,6 @@ export default function Goal() {
               </div>
               {/* <span className="text-sm text-gray-600">40%</span> */}
             </div>{" "}
-            <div className="p-4 bg-white rounded-lg">
-              <p className={`    capitalize    rounded-full    text-gray-600 `}>
-                Deadline
-              </p>
-              <p
-                className={` text-2xl font-black py-1    capitalize     rounded-full    text-gray-900 `}
-              >
-                {goal && goal?.deadlineDate
-                  ? format(new Date(goal?.deadlineDate), "PP")
-                  : null}
-              </p>
-            </div>
-            <div className="p-4 bg-white rounded-lg">
-              <p className={`    capitalize    rounded-full    text-gray-600 `}>
-                Remaining
-              </p>
-              <p
-                className={` text-2xl font-black py-1    capitalize    rounded-full    text-gray-900 `}
-              >
-                {goal && goal?.deadlineDate
-                  ? formatDistance(today, new Date(goal?.deadlineDate))
-                  : null}
-              </p>
-            </div>
           </div>
           <div className=" w-full max-w-fit p-1 rounded-md bg-gray-200   mt-8 flex justify-center">
             <button

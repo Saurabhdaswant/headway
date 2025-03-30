@@ -23,7 +23,6 @@ export default function HabitWhy({ why, name, setShowDialog }: any) {
         <div className="flex justify-between">
           <div className="flex items-center gap-2">
             <motion.p
-              layout
               layoutId={`${name}_name`}
               className=" font-semibold  pb-3 text-lg  "
             >

@@ -202,7 +202,6 @@ function Habit({ habit, currDate }) {
         <div className="space-y-3  py-3  w-full ">
           <div className=" flex items-center justify-between border-b px-3 border-gray-100">
             <motion.p
-              layout
               layoutId={`${currHabit.name}_name`}
               className=" font-semibold  pb-3   "
             >
