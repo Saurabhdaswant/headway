@@ -107,24 +107,22 @@ const Switcher = ({ viewMode, toggleViewMode }) => {
         <ChevronDownIcon className=" w-6" />
       </motion.button>
       {showViewModeDropdown && (
-        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            {[
-              { title: "Calendar View", option: "calendar" },
-              { title: "List View", option: "list" },
-            ].map((option) => (
-              <div
-                key={option.option}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                onClick={() => {
-                  toggleViewMode(option.option);
-                  setShowViewModeDropdown(false);
-                }}
-              >
-                {option.title}
-              </div>
-            ))}
-          </div>
+        <div className="absolute right-0 mt-2 w-48 p-1 cursor-pointer rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          {[
+            { title: "Calendar View", option: "calendar" },
+            { title: "List View", option: "list" },
+          ].map((option) => (
+            <div
+              key={option.option}
+              className="block px-4 py-2 rounded-lg  text-gray-700 hover:bg-gray-100/70 hover:text-gray-900"
+              onClick={() => {
+                toggleViewMode(option.option);
+                setShowViewModeDropdown(false);
+              }}
+            >
+              {option.title}
+            </div>
+          ))}
         </div>
       )}
     </div>
