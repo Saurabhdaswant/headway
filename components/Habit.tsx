@@ -5,10 +5,13 @@ import {
   TrashIcon,
 } from "@heroicons/react/outline";
 import { format, startOfToday, sub } from "date-fns";
-import React, { useContext, useEffect, useState } from "react";
-import { Check, X } from "react-feather";
+import { AnimatePresence, motion } from "framer-motion";
+import { useContext, useEffect, useState } from "react";
+import { Check } from "react-feather";
+import { API_ENDPOINTS } from "../constants";
 import useToggle from "../hooks/useToggle";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import { TokenContext } from "../Providers/TokenProvider";
 import {
   getAllStreaks,
   getFormattedDates,
@@ -17,15 +20,6 @@ import {
 import DeleteHabit from "./DeleteHabit";
 import HabitForm from "./HabitForm";
 import HabitStats from "./HabitStats";
-import { API_ENDPOINTS } from "../constants";
-import { TokenContext } from "../Providers/TokenProvider";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/Tooltip";
 import HabitWhy from "./HabitWhy";
 
 function Habit({ habit, currDate }) {
@@ -127,11 +121,6 @@ function Habit({ habit, currDate }) {
       ...currentHabit,
       completedOnDates,
     };
-
-    // newHabits[habitIndex] = updatedHabit;
-
-    // setCurrHabit(updatedHabit);
-    // updateHabits(newHabits);
 
     const res = await fetch(
       `${API_ENDPOINTS.BASE_URL}/habits/${updatedHabit._id}`,
