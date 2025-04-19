@@ -4,6 +4,7 @@ import { CheckCircle, Headphones, Target, Users, Zap } from "react-feather";
 import { useRouter } from "next/router";
 
 import { motion } from "framer-motion";
+import { LogoutIcon } from "@heroicons/react/solid";
 
 const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
@@ -70,6 +71,8 @@ const Item = ({ item }) => {
 };
 
 function Sidebar() {
+  const router = useRouter();
+
   return (
     <div className=" hidden md:block z-50 w-[20%] bg-white">
       <div className="flex flex-col mt-10 justify-between h-[90%]">
@@ -78,11 +81,20 @@ function Sidebar() {
             return <Item key={idx} item={item} />;
           })}
         </ul>
-        {/* <div className="flex items-center justify-center gap-2 border-t py-4 border-hoveredBg-200">
-          <div className="w-12 h-12 bg-slate-300 rounded-full"></div>
-          <p className="font-medium">Saurabh</p>
-        </div> */}
       </div>
+      <motion.button
+        whileTap={{
+          scale: 0.9,
+        }}
+        className={`flex justify-center w-full items-center gap-2 font-medium    px-4 py-2.5   text-gray-600   `}
+        onClick={() => {
+          localStorage.removeItem("authToken");
+          router.push("/");
+        }}
+      >
+        Logout
+        <LogoutIcon className=" w-6" />
+      </motion.button>
     </div>
   );
 }

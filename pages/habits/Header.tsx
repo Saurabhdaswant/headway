@@ -1,10 +1,10 @@
-import { CalendarIcon, LogoutIcon } from "@heroicons/react/outline";
+import { CalendarIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 import { format, isEqual } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
-import Calendar from "../../components/Calendar";
 import { useState } from "react";
+import Calendar from "../../components/Calendar";
 import useClickOutSide from "../../hooks/useClickOutSide";
-import { useRouter } from "next/router";
 
 export default function Header({
   selectedDay,
@@ -13,11 +13,17 @@ export default function Header({
   today,
 }) {
   const [showDialog, setShowDialog] = useState(false);
+  const [viewMode, setViewMode] = useState("calendar");
   let domNode = useClickOutSide(() => setShowDialog(false));
-  const router = useRouter();
+
+  const toggleViewMode = (newViewMode) => {
+    setViewMode(newViewMode);
+  };
+
+  const [showViewModeDropdown, setShowViewModeDropdown] = useState(false);
 
   return (
-    <div className="flex flex-col md:flex-row gap-y-4 justify-between md:items-end">
+    <div className="flex flex-col group md:flex-row gap-y-4 justify-between md:items-end">
       <div className="  ">
         {isEqual(selectedDay, today) ? (
           <>
@@ -37,36 +43,40 @@ export default function Header({
           </>
         )}
       </div>
-      <div className="flex justify-between md:justify-normal   items-end gap-3">
-        <div
-          ref={domNode as React.RefObject<HTMLDivElement>}
-          className="relative"
-        >
-          <motion.button
-            whileTap={{
-              scale: 0.9,
-            }}
-            className="p-3 bg-white rounded-full   text-gray-600 "
-            onClick={() => setShowDialog(true)}
+      <div className="flex  justify-between md:justify-normal   items-end gap-3">
+        {viewMode !== "calendar" && (
+          <div
+            ref={domNode as React.RefObject<HTMLDivElement>}
+            className="relative"
           >
-            <CalendarIcon className=" w-6" />
-          </motion.button>
-          <div className=" absolute  mt-3  ">
-            <AnimatePresence>
-              {showDialog && (
-                <Calendar
-                  currDate={selectedDay}
-                  setCurrDate={setSelectedDay}
-                  toggleCalendar={() => setShowDialog(false)}
-                  canSelectDaysAfterToday={false}
-                />
-              )}
-            </AnimatePresence>
+            <motion.button
+              whileTap={{
+                scale: 0.9,
+              }}
+              className="p-2.5 bg-white rounded-full   text-gray-600 "
+              onClick={() => setShowDialog(true)}
+            >
+              <CalendarIcon className=" w-6" />
+            </motion.button>
+            <div className=" absolute  mt-3  ">
+              <AnimatePresence>
+                {showDialog && (
+                  <Calendar
+                    currDate={selectedDay}
+                    setCurrDate={setSelectedDay}
+                    toggleCalendar={() => setShowDialog(false)}
+                    canSelectDaysAfterToday={false}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
           </div>
-        </div>
-        <div className="flex gap-3">
+        )}
+        <div className="flex gap-3 ">
+          <div className="">
+            <Switcher toggleViewMode={toggleViewMode} viewMode={viewMode} />
+          </div>
           <motion.button
-            // disabled={habitsLength >= 5}
             onClick={() => setShowHabitForm(true)}
             whileTap={{
               scale: 0.9,
@@ -75,22 +85,48 @@ export default function Header({
           >
             <p>Create Habit</p>
           </motion.button>
-          <div>
-            <motion.button
-              whileTap={{
-                scale: 0.9,
-              }}
-              className="p-3 bg-white rounded-full text-gray-600 "
-              onClick={() => {
-                localStorage.removeItem("authToken");
-                router.push("/");
-              }}
-            >
-              <LogoutIcon className=" w-6" />
-            </motion.button>
-          </div>
         </div>
       </div>
     </div>
   );
 }
+
+const Switcher = ({ viewMode, toggleViewMode }) => {
+  const [showViewModeDropdown, setShowViewModeDropdown] = useState(false);
+
+  return (
+    <div className="relative ">
+      <motion.button
+        // whileTap={{
+        //   scale: 0.9,
+        // }}
+        onClick={() => setShowViewModeDropdown(!showViewModeDropdown)}
+        className={`flex justify-between items-center gap-2 font-medium    px-4 py-2.5 rounded-full bg-white text-gray-600 disabled:cursor-not-allowed  `}
+      >
+        <p>{viewMode === "calendar" ? "Calendar View" : "List View"}</p>
+        <ChevronDownIcon className=" w-6" />
+      </motion.button>
+      {showViewModeDropdown && (
+        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            {[
+              { title: "Calendar View", option: "calendar" },
+              { title: "List View", option: "list" },
+            ].map((option) => (
+              <div
+                key={option.option}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                onClick={() => {
+                  toggleViewMode(option.option);
+                  setShowViewModeDropdown(false);
+                }}
+              >
+                {option.title}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
