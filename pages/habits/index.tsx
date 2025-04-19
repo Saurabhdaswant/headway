@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Layout from "../components/Layout";
-import { HabitsContext } from "../Providers/HabitsProvider";
+import Layout from "../../components/Layout";
+import { HabitsContext } from "../../Providers/HabitsProvider";
 
 import {
   eachDayOfInterval,
@@ -14,11 +14,11 @@ import {
 } from "date-fns";
 import { AnimatePresence } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { colors, weekDays } from "../components/constants";
-import HabitForm from "../components/HabitForm";
-import { Habits as HabitsRenderer } from "../components/Habits";
-import { API_ENDPOINTS } from "../constants";
-import Header from "./habits/Header";
+import { colors, weekDays } from "../../components/constants";
+import HabitForm from "../../components/HabitForm";
+import { Habits as HabitsRenderer } from "../../components/Habits";
+import { API_ENDPOINTS } from "../../constants";
+import Header from "./Header";
 
 const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
   const week = eachDayOfInterval({
