@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 
 const useClickOutSide = (handler) => {
-  let domNode = useRef();
+  let domNode = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    let maybeHandler = (event) => {
-      if (!domNode?.current?.contains(event.target)) {
+    let maybeHandler = (event: MouseEvent) => {
+      if (domNode?.current && !domNode.current.contains(event.target as Node)) {
         handler();
       }
     };
@@ -15,7 +15,7 @@ const useClickOutSide = (handler) => {
     return () => {
       document.removeEventListener("mousedown", maybeHandler);
     };
-  });
+  }, [handler]);
 
   return domNode;
 };

@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { HabitsContext } from "../Providers/HabitsProvider";
 import Layout from "../components/Layout";
+import { HabitsContext } from "../Providers/HabitsProvider";
 
 import {
   eachDayOfInterval,
@@ -12,104 +12,13 @@ import {
   startOfWeek,
   sub,
 } from "date-fns";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { useContext, useEffect, useState } from "react";
 import { colors, weekDays } from "../components/constants";
 import HabitForm from "../components/HabitForm";
-import { CalendarIcon, LogoutIcon } from "@heroicons/react/outline";
 import { Habits as HabitsRenderer } from "../components/Habits";
-import Calendar from "../components/Calendar";
-import useClickOutSide from "../hooks/useClickOutSide";
 import { API_ENDPOINTS } from "../constants";
-import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/router";
-
-const Header = ({
-  selectedDay,
-  today,
-  setShowHabitForm,
-  setSelectedDay,
-  habitsLength,
-}) => {
-  const [showDialog, setShowDialog] = useState(false);
-  let domNode = useClickOutSide(() => setShowDialog(false));
-
-  const router = useRouter();
-
-  return (
-    <div className="flex flex-col md:flex-row gap-y-4 justify-between md:items-end">
-      <div className="  ">
-        {isEqual(selectedDay, today) ? (
-          <>
-            <p className="text-3xl font-bold text-[#2e2e2e]">Today</p>
-            {/* <p className="text-gray-400 text-xl">
-              {format(selectedDay, "eeee")} {format(selectedDay, "MMMM dd")}
-            </p> */}
-          </>
-        ) : (
-          <>
-            <p className="text-3xl font-bold text-[#2e2e2e]">
-              {format(selectedDay, "MMMM dd")}
-            </p>
-            {/* <p className="text-gray-400 text-xl">
-              {format(selectedDay, "eeee")}
-            </p> */}
-          </>
-        )}
-      </div>
-      <div className="flex justify-between md:justify-normal   items-end gap-3">
-        <div ref={domNode} className="relative">
-          <motion.button
-            whileTap={{
-              scale: 0.9,
-            }}
-            className="p-3 bg-white rounded-full   text-gray-600 "
-            onClick={() => setShowDialog(true)}
-          >
-            <CalendarIcon className=" w-6" />
-          </motion.button>
-          <div className=" absolute  mt-3  ">
-            <AnimatePresence>
-              {showDialog && (
-                <Calendar
-                  currDate={selectedDay}
-                  setCurrDate={setSelectedDay}
-                  toggleCalendar={() => setShowDialog(false)}
-                  canSelectDaysAfterToday={false}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-        <div className="flex gap-3">
-          <motion.button
-            // disabled={habitsLength >= 5}
-            onClick={() => setShowHabitForm(true)}
-            whileTap={{
-              scale: 0.9,
-            }}
-            className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
-          >
-            <p>Create Habit</p>
-          </motion.button>
-          <div>
-            <motion.button
-              whileTap={{
-                scale: 0.9,
-              }}
-              className="p-3 bg-white rounded-full text-gray-600 "
-              onClick={() => {
-                localStorage.removeItem("authToken");
-                router.push("/");
-              }}
-            >
-              <LogoutIcon className=" w-6" />
-            </motion.button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import Header from "./habits/Header";
 
 const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
   const week = eachDayOfInterval({
@@ -149,7 +58,7 @@ const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
 };
 
 function App() {
-  const { habits, updateHabits } = useContext(HabitsContext);
+  const { habits, updateHabits }: any = useContext(HabitsContext);
   const [showHabitForm, setShowHabitForm] = useState(false);
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
@@ -236,7 +145,6 @@ function App() {
               today={today}
               setShowHabitForm={setShowHabitForm}
               setSelectedDay={setSelectedDay}
-              habitsLength={habits?.length}
             />
             <WeekDatePicker
               selectedDay={selectedDay}
