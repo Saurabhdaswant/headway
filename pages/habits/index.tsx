@@ -33,10 +33,10 @@ function App() {
     }
   }, []);
 
-  const dateWhichIsBeforeCurrDate = sub(today, {
+  const dateWhichIsBeforeCurrDateForTesting = sub(today, {
     days: 5,
   });
-  // use this if needed instead of today! 👆🏽
+  // use this if needed instead of today! while creating a new habit , so its easy to test features / habits in the future 👆🏽
 
   const newHabit = {
     name: "",
@@ -102,23 +102,6 @@ function App() {
               selectedDay={selectedDay}
               setSelectedDay={setSelectedDay}
             />
-            {/* <div className=" flex items-center gap-4 my-4 lg:my-8 overflow-scroll scrollbar-hide   ">
-            {doitat.map((time, idx) => {
-              return (
-                <div
-                  onClick={() => setSelectedTimeOfDay(time)}
-                  key={idx}
-                  className={` cursor-pointer font-bold capitalize px-4 py-2  rounded-md ${
-                    selectedTimeOfDay === time
-                      ? "bg-[#BFE1FF]   text-[#02518B]"
-                      : "bg-[#EDEDED]    text-gray-400"
-                  }`}
-                >
-                  {time === "anytime" ? "All" : time}
-                </div>
-              );
-            })}
-          </div> */}
             <div className=" flex flex-col gap-2 mx-auto  max-w-[400px]  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
               <HabitsRenderer
                 habits={habits}

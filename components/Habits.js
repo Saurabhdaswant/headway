@@ -54,9 +54,9 @@ export function Habits({ habits, selectedDay, selectedTimeOfDay = "anytime" }) {
       ?.filter(isAfterCreation)
       ?.filter(isRepeatDay);
 
-  if (!anyTimeOfDay) {
-    filteredHabits = filteredHabits?.filter(matchesSelectedTimeOfDay);
-  }
+  // if (!anyTimeOfDay) {
+  //   filteredHabits = filteredHabits?.filter(matchesSelectedTimeOfDay);
+  // }
 
   // if (
   //   !filteredHabits ||
