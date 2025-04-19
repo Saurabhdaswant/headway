@@ -58,7 +58,7 @@ export default function Signin() {
             Do the Hard work especially when you dont feel like it!{" "}
           </h1>
           <h1 className=" font-semibold text-white text-lg  ">
-            - Hamza Ahmed{" "}
+            {/* - Hamza Ahmed{" "} */}
           </h1>
         </div>
       </div>
