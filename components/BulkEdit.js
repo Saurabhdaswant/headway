@@ -1,5 +1,4 @@
 import React from "react";
-import { API_ENDPOINTS } from "../constants";
 
 export default function BulkEdit() {
   const { habits } = useContext(HabitsContext);
