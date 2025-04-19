@@ -11,9 +11,10 @@ export default function Header({
   setSelectedDay,
   setShowHabitForm,
   today,
+  viewMode,
+  setViewMode,
 }) {
   const [showDialog, setShowDialog] = useState(false);
-  const [viewMode, setViewMode] = useState("calendar");
   let domNode = useClickOutSide(() => setShowDialog(false));
 
   const toggleViewMode = (newViewMode) => {

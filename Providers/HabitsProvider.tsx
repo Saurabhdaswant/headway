@@ -58,8 +58,72 @@ export default function HabitsProvider({ children }) {
     setHabits(newHabits);
   };
 
+  const toggleHabitCompletion = async (
+    currHabit,
+    currDate,
+    isCompleted,
+    setCurrHabit
+  ) => {
+    const token = localStorage && localStorage?.getItem("authToken");
+
+    // we are doing this updating logic on frontend , i think instead this should happen on backend , we should just send the id and then update the habit from backend and reload it right ?
+
+    const habitIndex = habits?.findIndex(
+      (habit) => habit._id === currHabit._id
+    );
+
+    if (habitIndex === -1) {
+      return;
+    }
+
+    const newHabits = [...habits];
+    const currentHabit = newHabits[habitIndex];
+    const completedOnDates = [...currHabit.completedOnDates];
+    const dateIndex = completedOnDates.findIndex(
+      (dateStr) => new Date(dateStr).getTime() === currDate.getTime()
+    );
+
+    if (isCompleted && dateIndex !== -1) {
+      completedOnDates.splice(dateIndex, 1);
+    } else {
+      completedOnDates.push(currDate.toISOString());
+    }
+
+    const updatedHabit = {
+      ...currentHabit,
+      completedOnDates,
+    };
+
+    const res = await fetch(
+      `${API_ENDPOINTS.BASE_URL}/habits/${updatedHabit._id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          updatedHabit,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const json = await res.json();
+
+    setCurrHabit(updatedHabit);
+    if (json.acknowledged) {
+      newHabits[habitIndex] = updatedHabit;
+
+      updateHabits(newHabits);
+    } else {
+      setCurrHabit(currHabit);
+    }
+  };
+
   return (
-    <HabitsContext.Provider value={{ habits, updateHabits, loading }}>
+    <HabitsContext.Provider
+      value={{ habits, updateHabits, loading, toggleHabitCompletion }}
+    >
       {children}
     </HabitsContext.Provider>
   );

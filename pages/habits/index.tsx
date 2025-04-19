@@ -7,10 +7,11 @@ import { AnimatePresence } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { colors, weekDays } from "../../components/constants";
 import HabitForm from "../../components/HabitForm";
-import { Habits as HabitsRenderer } from "../../components/Habits";
+import { HabitsRenderer } from "../../components/HabitsRenderer";
 import { API_ENDPOINTS } from "../../constants";
 import Header from "./Header";
 import WeekDatePicker from "./WeekDatePicker";
+import { Week } from "./Week";
 
 function App() {
   const { habits, updateHabits }: any = useContext(HabitsContext);
@@ -20,6 +21,7 @@ function App() {
   const [error, setError] = useState(false);
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
   const [token, setToken] = useState(null);
+  const [viewMode, setViewMode] = useState("calendar");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -97,18 +99,26 @@ function App() {
               today={today}
               setShowHabitForm={setShowHabitForm}
               setSelectedDay={setSelectedDay}
+              setViewMode={setViewMode}
+              viewMode={viewMode}
             />
-            <WeekDatePicker
-              selectedDay={selectedDay}
-              setSelectedDay={setSelectedDay}
-            />
-            <div className=" flex flex-col gap-2 mx-auto  max-w-[400px]  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
-              <HabitsRenderer
-                habits={habits}
-                selectedDay={selectedDay}
-                selectedTimeOfDay={selectedTimeOfDay}
-              />
-            </div>
+            {viewMode === "calendar" ? (
+              <Week />
+            ) : (
+              <>
+                <WeekDatePicker
+                  selectedDay={selectedDay}
+                  setSelectedDay={setSelectedDay}
+                />
+                <div className=" flex flex-col gap-2 mx-auto  max-w-[400px]  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
+                  <HabitsRenderer
+                    habits={habits}
+                    selectedDay={selectedDay}
+                    selectedTimeOfDay={selectedTimeOfDay}
+                  />
+                </div>{" "}
+              </>
+            )}
           </main>
           <AnimatePresence>
             {showHabitForm ? (

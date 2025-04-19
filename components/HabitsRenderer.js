@@ -2,14 +2,7 @@ import React, { useContext } from "react";
 import { Clipboard } from "react-feather";
 import Habit from "./Habit";
 
-import {
-  getDay,
-  isAfter,
-  isBefore,
-  isSameDay,
-  isToday,
-  startOfToday,
-} from "date-fns";
+import { getDay, isAfter, isSameDay, isToday, startOfToday } from "date-fns";
 import days from "../Data/Days";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import { AnimatePresence, motion } from "framer-motion";
@@ -31,7 +24,11 @@ const NoHabits = ({ children }) => {
   );
 };
 
-export function Habits({ habits, selectedDay, selectedTimeOfDay = "anytime" }) {
+export function HabitsRenderer({
+  habits,
+  selectedDay,
+  selectedTimeOfDay = "anytime",
+}) {
   const currentDay = days[getDay(selectedDay)];
   const anyTimeOfDay = selectedTimeOfDay === "anytime";
   const { loading } = useContext(HabitsContext);
@@ -50,7 +47,7 @@ export function Habits({ habits, selectedDay, selectedTimeOfDay = "anytime" }) {
     habits &&
     habits.length > 0 &&
     habits
-      ?.filter((habit) => !habit.hide)
+      // ?.filter((habit) => !habit.hide)
       ?.filter(isAfterCreation)
       ?.filter(isRepeatDay);
 
@@ -69,6 +66,9 @@ export function Habits({ habits, selectedDay, selectedTimeOfDay = "anytime" }) {
   if (loading) {
     return;
   }
+
+  console.log(filteredHabits, "filteredHabits");
+  console.log(habits, "habits");
 
   return (
     <AnimatePresence initial={false}>

@@ -12,7 +12,7 @@ import { Calendar, Check, Plus } from "react-feather";
 import { AnimatePresence, motion } from "framer-motion";
 import HabitForm from "../../components/HabitForm";
 import { weekDays } from "../../components/constants";
-import { Habits as HabitsRenderer } from "../../components/Habits";
+import { HabitsRenderer } from "../../components/HabitsRenderer";
 import Layout from "../../components/Layout";
 import { HabitsContext } from "../../Providers/HabitsProvider";
 import { GoalContext } from "../../Providers/GoalProvider";
