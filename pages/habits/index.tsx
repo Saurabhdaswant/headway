@@ -2,16 +2,7 @@ import Head from "next/head";
 import Layout from "../../components/Layout";
 import { HabitsContext } from "../../Providers/HabitsProvider";
 
-import {
-  eachDayOfInterval,
-  endOfWeek,
-  format,
-  isAfter,
-  isEqual,
-  startOfToday,
-  startOfWeek,
-  sub,
-} from "date-fns";
+import { startOfToday, sub } from "date-fns";
 import { AnimatePresence } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { colors, weekDays } from "../../components/constants";
@@ -19,43 +10,7 @@ import HabitForm from "../../components/HabitForm";
 import { Habits as HabitsRenderer } from "../../components/Habits";
 import { API_ENDPOINTS } from "../../constants";
 import Header from "./Header";
-
-const WeekDatePicker = ({ selectedDay, setSelectedDay }) => {
-  const week = eachDayOfInterval({
-    start: startOfWeek(selectedDay),
-    end: endOfWeek(selectedDay),
-  });
-
-  return (
-    <div className=" flex items-center justify-evenly h-20 rounded-md  my-4 lg:my-8 ">
-      {week.map((day) => {
-        return (
-          <div
-            onClick={() => {
-              if (isAfter(day, startOfToday())) {
-                return;
-              }
-              setSelectedDay(day);
-            }}
-            key={day.toString()}
-            className="text-center space-y-2 cursor-pointer "
-          >
-            <p className=" text-xs capitalize text-gray-400 ">
-              {format(day, "eee")}
-            </p>
-            <p
-              className={` font-bold text-lg ${
-                isEqual(selectedDay, day) ? "text-[#007BFF]" : "text-gray-600"
-              }  `}
-            >
-              {format(day, "d")}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+import WeekDatePicker from "./WeekDatePicker";
 
 function App() {
   const { habits, updateHabits }: any = useContext(HabitsContext);
@@ -81,7 +36,6 @@ function App() {
   const dateWhichIsBeforeCurrDate = sub(today, {
     days: 5,
   });
-
   // use this if needed instead of today! 👆🏽
 
   const newHabit = {
@@ -127,8 +81,6 @@ function App() {
       setShowHabitForm(false);
     }
   };
-
-  console.log(habits, "habits are here ? ");
 
   return (
     <Layout>
