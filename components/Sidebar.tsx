@@ -10,9 +10,9 @@ const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
   { name: "Goals", icon: Target, path: "/goals" },
-  { name: "Gang", icon: Users, path: "/gang", soon: true },
-  { name: "Workouts", icon: Zap, path: "/workouts", soon: true },
-  { name: "Meditations", icon: Headphones, path: "/meditations", soon: true },
+  // { name: "Gang", icon: Users, path: "/gang", soon: true },
+  // { name: "Workouts", icon: Zap, path: "/workouts", soon: true },
+  // { name: "Meditations", icon: Headphones, path: "/meditations", soon: true },
 ];
 
 const Item = ({ item }) => {

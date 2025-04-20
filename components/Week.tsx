@@ -29,7 +29,7 @@ const WeekButton = ({ date, habit, setCurrHabit }) => {
         toggleHabitCompletion(habit, date, isCompleted, setCurrHabit);
       }}
       className={cn(
-        "w-10 h-10 rounded-lg mx-auto transition-colors",
+        "w-10 h-10 my-2 rounded-lg mx-auto transition-colors",
         isCompleted ? "bg-[#27b562ef]" : "bg-gray-200",
         "hover:opacity-90"
       )}
@@ -58,52 +58,15 @@ const HabitDays = ({ habit, weekDays }) => {
   );
 };
 
-export default function Week() {
+export default function Week({ currentWeekStart }) {
   const { habits }: any = useContext(HabitsContext);
-
-  const [currentWeekStart, setCurrentWeekStart] = useState(() => {
-    return startOfWeek(new Date(), { weekStartsOn: 1 });
-  });
 
   const weekDays = Array.from({ length: 7 }, (_, i) =>
     addDays(currentWeekStart, i)
   );
 
-  const goToPreviousWeek = () => {
-    setCurrentWeekStart((prev) => subWeeks(prev, 1));
-  };
-
-  const goToNextWeek = () => {
-    setCurrentWeekStart((prev) => addWeeks(prev, 1));
-  };
-
-  const goToCurrentWeek = () => {
-    setCurrentWeekStart(startOfWeek(new Date(), { weekStartsOn: 1 }));
-  };
-
   return (
     <div className="bg-white mt-8 rounded-xl  p-8">
-      <div className="flex justify-between items-center mb-8">
-        <div className="flex items-center gap-3">
-          <button onClick={goToPreviousWeek}>
-            <ChevronLeftIcon className="h-5 w-5 text-gray-700" />
-          </button>
-          <button onClick={goToNextWeek}>
-            <ChevronRightIcon className="h-5 w-5 text-gray-700" />
-          </button>
-          <button
-            className="text-blue-600 font-medium"
-            onClick={goToCurrentWeek}
-          >
-            Today
-          </button>
-        </div>
-        <div className="font-semibold text-lg text-gray-900">
-          {format(currentWeekStart, "MMM d")} -{" "}
-          {format(addDays(currentWeekStart, 6), "MMM d, yyyy")}
-        </div>
-      </div>
-
       <div className="grid grid-cols-[auto_repeat(7,1fr)] gap-5 items-center">
         <div className="font-semibold text-gray-900"></div>
         {weekDays.map((date) => (
