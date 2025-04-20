@@ -4,9 +4,9 @@ import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { format, addDays, startOfWeek, subWeeks, addWeeks } from "date-fns";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { HabitsContext } from "../../Providers/HabitsProvider";
-import { cn } from "../../utils/cn";
-import { getFormattedDates } from "../../utils/utils";
+import { HabitsContext } from "../Providers/HabitsProvider";
+import { cn } from "../utils/cn";
+import { getFormattedDates } from "../utils/utils";
 
 const WeekButton = ({ date, habit, setCurrHabit }) => {
   const { toggleHabitCompletion }: any = useContext(HabitsContext);
@@ -58,7 +58,7 @@ const HabitDays = ({ habit, weekDays }) => {
   );
 };
 
-export function Week() {
+export default function Week() {
   const { habits }: any = useContext(HabitsContext);
 
   const [currentWeekStart, setCurrentWeekStart] = useState(() => {

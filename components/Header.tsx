@@ -3,8 +3,8 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import { format, isEqual } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import Calendar from "../../components/Calendar";
-import useClickOutSide from "../../hooks/useClickOutSide";
+import Calendar from "./Calendar";
+import useClickOutSide from "../hooks/useClickOutSide";
 
 export default function Header({
   selectedDay,

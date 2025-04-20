@@ -1,22 +1,21 @@
-import { useRouter } from "next/router";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { API_ENDPOINTS } from "../../constants";
+import { TrashIcon } from "@heroicons/react/outline";
 import {
-  format,
-  startOfToday,
-  formatDistance,
   differenceInDays,
+  format,
+  formatDistance,
   parseISO,
+  startOfToday,
 } from "date-fns";
-import { Calendar, Check, Plus } from "react-feather";
 import { AnimatePresence, motion } from "framer-motion";
-import HabitForm from "../../components/HabitForm";
+import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+import { Calendar, Check, Plus } from "react-feather";
 import { weekDays } from "../../components/constants";
+import HabitForm from "../../components/HabitForm";
 import { HabitsRenderer } from "../../components/HabitsRenderer";
 import Layout from "../../components/Layout";
-import { HabitsContext } from "../../Providers/HabitsProvider";
+import { API_ENDPOINTS } from "../../constants";
 import { GoalContext } from "../../Providers/GoalProvider";
-import { TrashIcon } from "@heroicons/react/outline";
 
 export default function Goal() {
   const { goal, updateGoal } = useContext(GoalContext);
@@ -83,7 +82,7 @@ export default function Goal() {
         getGoal();
       }
     }
-  }, [id]);
+  }, [id, updateGoal]);
 
   const handleCreateHabit = async (habit) => {
     if (habit.name.trim().length === 0) {

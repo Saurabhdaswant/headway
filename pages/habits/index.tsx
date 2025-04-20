@@ -9,9 +9,9 @@ import { colors, weekDays } from "../../components/constants";
 import HabitForm from "../../components/HabitForm";
 import { HabitsRenderer } from "../../components/HabitsRenderer";
 import { API_ENDPOINTS } from "../../constants";
-import Header from "./Header";
-import WeekDatePicker from "./WeekDatePicker";
-import { Week } from "./Week";
+import Header from "../../components/Header";
+import WeekDatePicker from "../../components/WeekDatePicker";
+import Week from "../../components/Week";
 
 function App() {
   const { habits, updateHabits }: any = useContext(HabitsContext);
