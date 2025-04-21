@@ -66,7 +66,7 @@ export default function Week({ currentWeekStart }) {
   );
 
   return (
-    <div className="bg-white mt-8 rounded-xl  p-8">
+    <div className="bg-white mt-8 rounded-xl shadow-sm  p-8">
       <div className="grid grid-cols-[auto_repeat(7,1fr)] gap-5 items-center">
         <div className="font-semibold text-gray-900"></div>
         {weekDays.map((date) => (
