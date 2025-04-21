@@ -101,13 +101,11 @@ export default function Header({
 
 const Switcher = ({ viewMode, toggleViewMode }) => {
   const [showViewModeDropdown, setShowViewModeDropdown] = useState(false);
+  let domNode = useClickOutSide(() => setShowViewModeDropdown(false));
 
   return (
-    <div className="relative ">
+    <div ref={domNode as React.RefObject<HTMLDivElement>} className="relative ">
       <motion.button
-        // whileTap={{
-        //   scale: 0.9,
-        // }}
         onClick={() => setShowViewModeDropdown(!showViewModeDropdown)}
         className={`flex justify-between items-center gap-2 font-medium    px-4 py-2.5 rounded-full hover:bg-white transition-colors text-gray-600 disabled:cursor-not-allowed  `}
       >
