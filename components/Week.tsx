@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useContext } from "react";
-import { useState, useEffect } from "react";
-import { format, addDays, startOfWeek, subWeeks, addWeeks } from "date-fns";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { addDays, format } from "date-fns";
+import React, { useContext, useEffect, useState } from "react";
 import { HabitsContext } from "../Providers/HabitsProvider";
 import { cn } from "../utils/cn";
 import { getFormattedDates } from "../utils/utils";
+
+import { motion } from "framer-motion";
 
 const WeekButton = ({ date, habit, setCurrHabit }) => {
   const { toggleHabitCompletion }: any = useContext(HabitsContext);
@@ -23,13 +23,15 @@ const WeekButton = ({ date, habit, setCurrHabit }) => {
     }
   }, [formattedCompletedOnDates, formattedDate]);
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.9, transition: { duration: 0.1, bounce: 0 } }}
+      whileHover={{ scale: 1.1, transition: { duration: 0.1, bounce: 0 } }}
       key={date.toISOString()}
       onClick={() => {
         toggleHabitCompletion(habit, date, isCompleted, setCurrHabit);
       }}
       className={cn(
-        "w-10 h-10 my-2 rounded-lg mx-auto transition-colors",
+        "w-10 h-10  my-2 rounded-lg mx-auto ",
         isCompleted ? "bg-[#27b562ef]" : "bg-gray-200",
         "hover:opacity-90"
       )}

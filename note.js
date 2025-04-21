@@ -181,3 +181,12 @@
 // add joy using motion
 // figure out , how things are working on FE
 // figure out , how to build backend
+
+// ideas :
+// habits weekly flip book animation
+// toats : “All done for Thursday 🥳” + confetti animation
+// Drag-to-reorder habits
+// Animate week transitions (slide left/right)
+// Add a 🔥 streak indicator next to habit names. Visualise 🔥 x4
+// Progress Indicators Show daily or weekly progress on top:
+// “You’ve completed 9/16 habits this week 🎉”
