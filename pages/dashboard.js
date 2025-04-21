@@ -18,7 +18,7 @@ function Dashboard() {
           />
           <link rel="icon" href="/habstrack.svg" />
         </Head>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-8">
+        <div className="container mx-auto w-full lg:max-w-[70%]  lg:gap-8  max-w-[90%]    py-4 lg:py-8">
           <h1 className="text-3xl font-bold text-[#2e2e2e] mb-6">
             Your Habits Progress Snapshot
           </h1>
