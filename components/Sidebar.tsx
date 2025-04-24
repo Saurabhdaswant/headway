@@ -20,15 +20,18 @@ const sidebarItems = [
 function Sidebar() {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState(() => {
+    // Initialize activeTab from localStorage
+    if (typeof window !== "undefined") {
+      return localStorage?.getItem("activeTab") || sidebarItems[0].name;
+    }
+    return sidebarItems[0].name;
+  });
 
   useEffect(() => {
-    const currentPath = router.pathname;
-    const activeItem = sidebarItems.find((item) => item.path === currentPath);
-    if (activeItem) {
-      setActiveTab(activeItem.name);
-    }
-  }, [router.pathname]);
+    // Update localStorage whenever activeTab changes
+    localStorage.setItem("activeTab", activeTab);
+  }, [activeTab]);
 
   const containerRef = useRef(null);
   const activeTabElementRef = useRef(null);
@@ -68,6 +71,7 @@ function Sidebar() {
                 key={item.name}
                 onClick={() => {
                   if (!item.soon) {
+                    setActiveTab(item.name);
                     setTimeout(() => {
                       router.push(item.path);
                     }, 150);
@@ -95,6 +99,7 @@ function Sidebar() {
                 ref={isActive ? activeTabElementRef : null}
                 onClick={() => {
                   if (!item.soon) {
+                    setActiveTab(item.name);
                     setTimeout(() => {
                       router.push(item.path);
                     }, 100);
