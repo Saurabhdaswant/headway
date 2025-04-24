@@ -1,91 +1,136 @@
-import React, { useEffect, useState } from "react";
 import { ChartBarIcon } from "@heroicons/react/outline";
-import { CheckCircle, Headphones, Target, Users, Zap } from "react-feather";
+import {
+  motion,
+  useTransform,
+  useMotionValue,
+  AnimatePresence,
+} from "framer-motion";
 import { useRouter } from "next/router";
+import React, { useRef, useState, useEffect } from "react";
+import { CheckCircle, Target } from "react-feather";
 
-import { motion } from "framer-motion";
 import { LogoutIcon } from "@heroicons/react/solid";
 
 const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
   { name: "Goals", icon: Target, path: "/goals" },
-  // { name: "Gang", icon: Users, path: "/gang", soon: true },
-  // { name: "Workouts", icon: Zap, path: "/workouts", soon: true },
-  // { name: "Meditations", icon: Headphones, path: "/meditations", soon: true },
 ];
-
-const Item = ({ item }) => {
-  const router = useRouter();
-  const { pathname } = router;
-  const isPathMatching = pathname.startsWith(item.path);
-  const [currentHoveredItem, setCurrentHoveredItem] = useState(false);
-
-  const Icon = item.icon;
-
-  // Animation One
-  // When two elements share the same layoutId, Framer Motion knows they're connected.
-  // So, when one element is replaced by another with the same layoutId,
-  // it animates the change, making the transition smooth and visually appealing.
-
-  const textStyle = {
-    color: isPathMatching ? "#fff" : item.soon ? "#808080" : "#000",
-  };
-
-  return (
-    <motion.li
-      layout
-      key={item.name}
-      style={textStyle}
-      onMouseOver={() => {
-        setCurrentHoveredItem(true);
-      }}
-      onMouseLeave={() => setCurrentHoveredItem(false)}
-      onClick={() => {
-        if (!item.soon) {
-          router.push(item.path);
-        }
-      }}
-      className={`py-4 px-4 flex items-center transition-colors relative ${
-        item.soon ? "cursor-not-allowed" : "cursor-pointer"
-      } rounded-xl font-medium`}
-    >
-      <span className="z-50 flex items-center gap-2">
-        <Icon className="w-5 h-5" /> {item.name}
-      </span>
-      {currentHoveredItem && (
-        <motion.div
-          layoutId="hoveredBg"
-          className={`-left-[0.1px] bg-[#cfcfcf57] absolute transition-colors rounded-xl h-full w-full  
-          `}
-        />
-      )}
-      {isPathMatching && (
-        <motion.div
-          layoutId="matchingPathBg"
-          className="bg-[#2e2e2e] z-40 -left-[0.1px] absolute rounded-xl h-full w-full"
-        />
-      )}
-    </motion.li>
-  );
-};
 
 function Sidebar() {
   const router = useRouter();
 
+  const [activeTab, setActiveTab] = useState("");
+
+  useEffect(() => {
+    const currentPath = router.pathname;
+    const activeItem = sidebarItems.find((item) => item.path === currentPath);
+    if (activeItem) {
+      setActiveTab(activeItem.name);
+    }
+  }, [router.pathname]);
+
+  const containerRef = useRef(null);
+  const activeTabElementRef = useRef(null);
+
+  const clipTop = useMotionValue(0);
+  const clipBottom = useMotionValue(100);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+
+    if (activeTab && container) {
+      const activeTabElement = activeTabElementRef.current;
+
+      if (activeTabElement) {
+        const { offsetTop, offsetHeight } = activeTabElement;
+
+        const newClipTop = (offsetTop / container.offsetHeight) * 100;
+        const newClipBottom =
+          100 - ((offsetTop + offsetHeight) / container.offsetHeight) * 100;
+
+        clipTop.set(newClipTop);
+        clipBottom.set(newClipBottom);
+      }
+    }
+  }, [activeTab, activeTabElementRef, containerRef, clipTop, clipBottom]);
+
   return (
     <div className=" hidden md:block z-50 w-[20%] bg-white">
-      <div className="flex flex-col mt-10 justify-between h-[90%]">
-        <ul className="px-4">
-          {sidebarItems.map((item, idx) => {
-            return <Item key={idx} item={item} />;
+      <div className="flex flex-col relative mt-10 justify-between h-[90%]">
+        <ul className="px-4 absolute w-full  ">
+          {sidebarItems.map((item: any, idx) => {
+            const Icon = item.icon;
+
+            return (
+              <li
+                ref={activeTab === item.name ? activeTabElementRef : null}
+                key={item.name}
+                onClick={() => {
+                  if (!item.soon) {
+                    setTimeout(() => {
+                      router.push(item.path);
+                    }, 150);
+                  }
+                }}
+                className={`py-4 z-0 px-4 flex items-center transition-colors relative ${
+                  item.soon ? "cursor-not-allowed" : "cursor-pointer"
+                } rounded-xl font-medium`}
+              >
+                <span className="z-50 flex items-center gap-2">
+                  <Icon className="w-5 h-5" /> {item.name}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+        <ul className="px-4 absolute w-full" ref={containerRef}>
+          {sidebarItems.map((item: any) => {
+            const Icon = item.icon;
+            const isActive = item.name === activeTab;
+
+            return (
+              <li
+                key={item.name}
+                ref={isActive ? activeTabElementRef : null}
+                onClick={() => {
+                  if (!item.soon) {
+                    setTimeout(() => {
+                      router.push(item.path);
+                    }, 100);
+                  }
+                }}
+                className={`relative py-4 px-4 flex items-center rounded-xl font-medium transition-colors z-10 ${
+                  item.soon ? "cursor-not-allowed" : "cursor-pointer"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="highlight"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30,
+                      mass: 0.5,
+                    }}
+                    className="absolute inset-0 bg-[#202020] rounded-xl z-0"
+                  />
+                )}
+
+                <span
+                  className={`flex items-center gap-2 relative z-10 ${
+                    isActive ? "text-white" : "text-black"
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  {item.name}
+                </span>
+              </li>
+            );
           })}
         </ul>
       </div>
-      <motion.button
-        whileTap={{
-          scale: 0.9,
-        }}
+      <button
         className={`flex justify-center w-full items-center gap-2 font-medium    px-4 py-2.5   text-gray-600   `}
         onClick={() => {
           localStorage.removeItem("authToken");
@@ -94,7 +139,7 @@ function Sidebar() {
       >
         Logout
         <LogoutIcon className=" w-6" />
-      </motion.button>
+      </button>
     </div>
   );
 }
