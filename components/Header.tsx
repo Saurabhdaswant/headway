@@ -2,10 +2,11 @@ import { CalendarIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { format, isEqual } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Calendar from "./Calendar";
 import useClickOutSide from "../hooks/useClickOutSide";
 import WeekChanger from "./WeekChanger";
+import { useRouter } from "next/router";
 
 export default function Header({
   selectedDay,
@@ -102,11 +103,27 @@ export default function Header({
 const Switcher = ({ viewMode, toggleViewMode }) => {
   const [showViewModeDropdown, setShowViewModeDropdown] = useState(false);
   let domNode = useClickOutSide(() => setShowViewModeDropdown(false));
+  const router = useRouter();
+
+  // The useCallback hook is used here to memoize the createQueryString function.
+  // This means that the function will only be recreated if the dependencies in the dependency array change.
+  // In this case, the dependency array is empty, so the function will be created once and reused on subsequent renders.
+  // This can help improve performance by preventing unnecessary re-creations of the function.
+
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set(name, value);
+
+    return params.toString();
+  }, []);
 
   return (
     <div ref={domNode as React.RefObject<HTMLDivElement>} className="relative ">
       <motion.button
-        onClick={() => setShowViewModeDropdown(!showViewModeDropdown)}
+        id="viewModeSwitcher"
+        onClick={() => {
+          setShowViewModeDropdown(!showViewModeDropdown);
+        }}
         className={`flex justify-between items-center gap-2 font-medium    px-4 py-2.5 rounded-full hover:bg-white transition-colors text-gray-600 disabled:cursor-not-allowed  `}
       >
         <p>{viewMode === "calendar" ? "Calendar View" : "List View"}</p>
@@ -124,6 +141,11 @@ const Switcher = ({ viewMode, toggleViewMode }) => {
               onClick={() => {
                 toggleViewMode(option.option);
                 setShowViewModeDropdown(false);
+                router.push(
+                  window.location.pathname +
+                    "?" +
+                    createQueryString("mode", option.option)
+                );
               }}
             >
               {option.title}

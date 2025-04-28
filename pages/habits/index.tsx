@@ -33,6 +33,13 @@ function App() {
       }
 
       setToken(token);
+
+      // Sync viewMode with URL parameter
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get("mode");
+      if (mode) {
+        setViewMode(mode);
+      }
     }
   }, []);
 
