@@ -22,9 +22,11 @@ function App() {
   const [error, setError] = useState(false);
   const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
   const [token, setToken] = useState(null);
-  const [viewMode, setViewMode] = useState("calendar");
+  const [viewMode, setViewMode] = useState("list");
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     if (typeof window !== "undefined") {
       const token = window.localStorage.getItem("authToken");
 
@@ -95,6 +97,10 @@ function App() {
   const [currentWeekStart, setCurrentWeekStart] = useState(() => {
     return startOfWeek(new Date(), { weekStartsOn: 1 });
   });
+
+  if (!isMounted) {
+    return null; // Prevent rendering until the component is mounted
+  }
 
   return (
     <Layout>
