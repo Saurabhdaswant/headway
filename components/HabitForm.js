@@ -55,6 +55,18 @@ function HabitForm({
     });
   };
 
+  const closeDialog = () => {
+    setShowHabitForm(false);
+
+    const params = new URLSearchParams(window.location.search);
+    params.set("showAddNewHabitForm", "false");
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${params}`
+    );
+  };
+
   return (
     <>
       {/* Background */}
@@ -67,7 +79,7 @@ function HabitForm({
           bounce: 0,
           duration: 0.6,
         }}
-        onClick={() => setShowHabitForm(false)}
+        onClick={() => closeDialog()}
         className=" fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 "
       />
       {/* Sheet  */}
@@ -89,10 +101,7 @@ function HabitForm({
               scale: 0.8,
             }}
           >
-            <X
-              onClick={() => setShowHabitForm(false)}
-              className=" cursor-pointer "
-            />
+            <X onClick={() => closeDialog()} className=" cursor-pointer " />
           </motion.div>
         </div>
         <div className=" flex flex-col  h-full pb-6 justify-between">
