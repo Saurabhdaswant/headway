@@ -22,7 +22,7 @@ export function HabitsRenderer({ setShowHabitForm }: any) {
     isAfter(selectedDay, startOfToday())
   ) {
     return (
-      <div className="flex -mt-16 flex-col h-full items-center justify-center  text-center">
+      <div className="flex -mt-12 flex-col h-full items-center justify-center  text-center">
         <div className="w-16 h-16 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
           <CalendarIcon className="w-8 h-8 text-gray-500" />
         </div>
