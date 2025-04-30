@@ -55,8 +55,10 @@ export default function Header({
       )}
 
       <div className="flex   justify-between md:justify-normal   items-end gap-3">
-        <Switcher toggleViewMode={toggleViewMode} viewMode={viewMode} />
-        {viewMode !== "calendar" && (
+        {filteredHabits.length > 0 && (
+          <Switcher toggleViewMode={toggleViewMode} viewMode={viewMode} />
+        )}{" "}
+        {viewMode !== "calendar" && filteredHabits.length > 0 && (
           <div
             ref={domNode as React.RefObject<HTMLDivElement>}
             className="relative"
