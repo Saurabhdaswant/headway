@@ -59,7 +59,7 @@ function HabitForm({
     setShowHabitForm(false);
 
     const params = new URLSearchParams(window.location.search);
-    params.set("showAddNewHabitForm", "false");
+    params.set("showHabitForm", "false");
     window.history.replaceState(
       {},
       "",

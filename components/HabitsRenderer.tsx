@@ -34,7 +34,7 @@ export function HabitsRenderer({ setShowHabitForm }: any) {
           onClick={() => {
             setShowHabitForm(true);
             const params = new URLSearchParams(window.location.search);
-            params.set("showAddNewHabitForm", "true");
+            params.set("showHabitForm", "true");
             window.history.replaceState(
               {},
               "",

@@ -67,7 +67,7 @@ function Dashboard() {
               </p>
 
               <motion.button
-                onClick={() => router.push("/habits?showAddNewHabitForm=true")}
+                onClick={() => router.push("/habits?showHabitForm=true")}
                 whileTap={{
                   scale: 0.9,
                 }}

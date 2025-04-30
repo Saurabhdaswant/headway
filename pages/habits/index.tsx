@@ -40,7 +40,7 @@ function App() {
       if (mode) {
         setViewMode(mode);
       }
-      const showForm = params.get("showAddNewHabitForm");
+      const showForm = params.get("showHabitForm");
       if (showForm === "true") {
         setShowHabitForm(true);
       }
