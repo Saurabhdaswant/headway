@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
 function Dashboard() {
-  const { habits } = useContext(HabitsContext);
+  const { habits }: any = useContext(HabitsContext);
   const router = useRouter();
 
   return (
