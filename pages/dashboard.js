@@ -3,9 +3,13 @@ import CalendarHeatmap from "react-calendar-heatmap";
 import Layout from "../components/Layout";
 import Head from "next/head";
 import { HabitsContext } from "../Providers/HabitsProvider";
+import { CalendarIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 function Dashboard() {
   const { habits } = useContext(HabitsContext);
+  const router = useRouter();
 
   return (
     <Layout>
@@ -18,14 +22,13 @@ function Dashboard() {
           />
           <link rel="icon" href="/habstrack.svg" />
         </Head>
-        <div className="container mx-auto w-full lg:max-w-[70%]  lg:gap-8  max-w-[90%]    py-4 lg:py-8">
-          <h1 className="text-3xl font-bold  text-[#2e2e2e] mb-8 mt-3">
+        <div className="container mx-auto w-full lg:max-w-[70%]    max-w-[90%]    py-4 lg:py-8">
+          <h1 className="text-3xl font-bold  text-[#2e2e2e]  mt-3">
             Your Habits Progress Snapshot
           </h1>
-          <div className="grid gap-4 max-h-[95%] overflow-auto hide-scrollbar">
-            {habits
-              ?.filter((habit) => !habit.hide)
-              ?.map((habit) => {
+          {habits && habits.length > 0 ? (
+            <div className="grid gap-4 max-h-[90%] mt-8  overflow-auto hide-scrollbar">
+              {habits.map((habit) => {
                 const values = habit?.completedOnDates?.map((date) => {
                   return {
                     date: new Date(date).toISOString().split("T")[0],
@@ -53,7 +56,27 @@ function Dashboard() {
                   </div>
                 );
               })}
-          </div>
+            </div>
+          ) : (
+            <div className="flex -mt-10 flex-col h-full items-center justify-center  text-center">
+              <div className="w-16 h-16 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
+                <CalendarIcon className="w-8 h-8 text-gray-500" />
+              </div>
+              <p className="text-xl text-gray-500 max-w-[400px] mb-4">
+                No habits to display. Start tracking your habits today!
+              </p>
+
+              <motion.button
+                onClick={() => router.push("/habits?showAddNewHabitForm=true")}
+                whileTap={{
+                  scale: 0.9,
+                }}
+                className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
+              >
+                <p>Create Habit</p>
+              </motion.button>
+            </div>
+          )}
         </div>
       </div>
     </Layout>
