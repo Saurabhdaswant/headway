@@ -7,20 +7,18 @@ import { AnimatePresence } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { colors, weekDays } from "../../components/constants";
 import HabitForm from "../../components/HabitForm";
-import { HabitsRenderer } from "../../components/HabitsRenderer";
 import { API_ENDPOINTS } from "../../constants";
 import Header from "../../components/Header";
 import WeekDatePicker from "../../components/WeekDatePicker";
 import Week from "../../components/Week";
 import { cn } from "../../utils/cn";
+import { HabitsRenderer } from "../../components/HabitsRenderer";
 
 function App() {
-  const { habits, updateHabits }: any = useContext(HabitsContext);
+  const { habits, updateHabits, today }: any = useContext(HabitsContext);
   const [showHabitForm, setShowHabitForm] = useState(false);
-  const today = startOfToday();
-  const [selectedDay, setSelectedDay] = useState(today);
+
   const [error, setError] = useState(false);
-  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState("anytime");
   const [token, setToken] = useState(null);
   const [viewMode, setViewMode] = useState("list");
   const [isMounted, setIsMounted] = useState(false);
@@ -36,11 +34,15 @@ function App() {
 
       setToken(token);
 
-      // Sync viewMode with URL parameter
+      // Sync viewMode and showHabitForm with URL parameters
       const params = new URLSearchParams(window.location.search);
       const mode = params.get("mode");
       if (mode) {
         setViewMode(mode);
+      }
+      const showForm = params.get("showAddNewHabitForm");
+      if (showForm === "true") {
+        setShowHabitForm(true);
       }
     }
   }, []);
@@ -123,10 +125,7 @@ function App() {
             )}
           >
             <Header
-              selectedDay={selectedDay}
-              today={today}
               setShowHabitForm={setShowHabitForm}
-              setSelectedDay={setSelectedDay}
               setViewMode={setViewMode}
               viewMode={viewMode}
               currentWeekStart={currentWeekStart}
@@ -136,16 +135,9 @@ function App() {
               <Week currentWeekStart={currentWeekStart} />
             ) : (
               <>
-                <WeekDatePicker
-                  selectedDay={selectedDay}
-                  setSelectedDay={setSelectedDay}
-                />
+                <WeekDatePicker />
                 <div className=" flex flex-col gap-2 mx-auto  max-w-[400px]  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
-                  <HabitsRenderer
-                    habits={habits}
-                    selectedDay={selectedDay}
-                    selectedTimeOfDay={selectedTimeOfDay}
-                  />
+                  <HabitsRenderer />
                 </div>{" "}
               </>
             )}

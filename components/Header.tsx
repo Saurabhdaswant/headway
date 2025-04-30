@@ -2,22 +2,22 @@ import { CalendarIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { format, isEqual } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useState } from "react";
+import { use, useCallback, useContext, useState } from "react";
 import Calendar from "./Calendar";
 import useClickOutSide from "../hooks/useClickOutSide";
 import WeekChanger from "./WeekChanger";
 import { useRouter } from "next/router";
+import { HabitsContext } from "../Providers/HabitsProvider";
 
 export default function Header({
-  selectedDay,
-  setSelectedDay,
   setShowHabitForm,
-  today,
   viewMode,
   setViewMode,
   currentWeekStart,
   setCurrentWeekStart,
 }) {
+  const { filteredHabits, selectedDay, setSelectedDay, today }: any =
+    useContext(HabitsContext);
   const [showDialog, setShowDialog] = useState(false);
   let domNode = useClickOutSide(() => setShowDialog(false));
 
@@ -84,17 +84,19 @@ export default function Header({
             </div>
           </div>
         )}
-        <div className="flex gap-3 ">
-          <motion.button
-            onClick={() => setShowHabitForm(true)}
-            whileTap={{
-              scale: 0.9,
-            }}
-            className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
-          >
-            <p>Create Habit</p>
-          </motion.button>
-        </div>
+        {filteredHabits.length > 0 && (
+          <div className="flex gap-3 ">
+            <motion.button
+              onClick={() => setShowHabitForm(true)}
+              whileTap={{
+                scale: 0.9,
+              }}
+              className={`flex justify-between items-center gap-2 font-medium   bg-[#0F85F2] px-4 py-2.5 rounded-full text-white disabled:cursor-not-allowed`}
+            >
+              <p>Create Habit</p>
+            </motion.button>
+          </div>
+        )}
       </div>
     </div>
   );

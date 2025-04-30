@@ -8,9 +8,12 @@ import {
   startOfWeek,
 } from "date-fns";
 
-import React from "react";
+import { useContext } from "react";
+import { HabitsContext } from "../Providers/HabitsProvider";
 
-export default function WeekDatePicker({ selectedDay, setSelectedDay }) {
+export default function WeekDatePicker() {
+  const { selectedDay, setSelectedDay }: any = useContext(HabitsContext);
+
   const week = eachDayOfInterval({
     start: startOfWeek(selectedDay),
     end: endOfWeek(selectedDay),

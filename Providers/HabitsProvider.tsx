@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import { API_ENDPOINTS } from "../constants";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
+import { getDay, isAfter, isSameDay, isToday, startOfToday } from "date-fns";
+import days from "../Data/Days";
 
 export const HabitsContext: any = createContext({});
 
@@ -120,9 +122,38 @@ export default function HabitsProvider({ children }) {
     }
   };
 
+  const today = startOfToday();
+  const [selectedDay, setSelectedDay] = useState(today);
+
+  const isAfterCreation = (habit) =>
+    isSameDay(selectedDay, new Date(habit.createdDate)) ||
+    isToday(selectedDay) ||
+    isAfter(selectedDay, new Date(habit.createdDate));
+  const currentDay = days[getDay(selectedDay)];
+
+  const isRepeatDay = (habit) => habit.repeatHabitDays?.includes(currentDay);
+
+  let filteredHabits =
+    habits &&
+    habits.length > 0 &&
+    habits
+      // ?.filter((habit) => !habit.hide)
+      ?.filter(isAfterCreation)
+      ?.filter(isRepeatDay);
+
   return (
     <HabitsContext.Provider
-      value={{ habits, updateHabits, loading, toggleHabitCompletion }}
+      value={{
+        habits,
+        updateHabits,
+        loading,
+        toggleHabitCompletion,
+        selectedDay,
+        setSelectedDay,
+        filteredHabits,
+        today,
+        currentDay,
+      }}
     >
       {children}
     </HabitsContext.Provider>
