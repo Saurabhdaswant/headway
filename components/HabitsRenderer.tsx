@@ -4,13 +4,11 @@ import Habit from "./Habit";
 import { CalendarIcon } from "@heroicons/react/solid";
 import { isAfter, startOfToday } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/router";
 import { HabitsContext } from "../Providers/HabitsProvider";
 
 export function HabitsRenderer({ setShowHabitForm }: any) {
   const { loading, selectedDay, filteredHabits }: any =
     useContext(HabitsContext);
-  const router = useRouter();
 
   if (loading) {
     return;
