@@ -226,7 +226,7 @@ function HabitForm({
                 })}
               </div>
             </div>
-            <div className="flex flex-col space-y-2 ">
+            {/* <div className="flex flex-col space-y-2 ">
               <p className="font-semibold">Hide</p>
               <div className=" grid grid-cols-2 gap-x-6 gap-y-4 ">
                 <div
@@ -242,7 +242,7 @@ function HabitForm({
                   {currHabit.hide ? "true" : "false"}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <motion.button
             whileTap={{
