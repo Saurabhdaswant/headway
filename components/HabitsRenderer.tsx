@@ -7,8 +7,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { HabitsContext } from "../Providers/HabitsProvider";
 
-export function HabitsRenderer() {
-  const { loading, selectedDay, filteredHabits } = useContext(HabitsContext);
+export function HabitsRenderer({ setShowHabitForm }: any) {
+  const { loading, selectedDay, filteredHabits }: any =
+    useContext(HabitsContext);
   const router = useRouter();
 
   if (loading) {
@@ -30,7 +31,16 @@ export function HabitsRenderer() {
         </p>
 
         <motion.button
-          onClick={() => router.push("/habits?showAddNewHabitForm=true")}
+          onClick={() => {
+            setShowHabitForm(true);
+            const params = new URLSearchParams(window.location.search);
+            params.set("showAddNewHabitForm", "true");
+            window.history.replaceState(
+              {},
+              "",
+              `${window.location.pathname}?${params}`
+            );
+          }}
           whileTap={{
             scale: 0.9,
           }}
