@@ -20,26 +20,30 @@ const sidebarItems = [
 function Sidebar() {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState(() => {
-    // Initialize activeTab from localStorage
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Initialize activeTab from localStorage after component mounts
     if (typeof window !== "undefined") {
-      return localStorage?.getItem("activeTab") || sidebarItems[0].name;
+      const storedTab = localStorage?.getItem("activeTab");
+      setActiveTab(storedTab || sidebarItems[0].name);
     }
-    return sidebarItems[0].name;
-  });
+  }, []);
 
   useEffect(() => {
     // Update localStorage whenever activeTab changes
-    localStorage.setItem("activeTab", activeTab);
+    if (activeTab !== null) {
+      localStorage.setItem("activeTab", activeTab);
+    }
   }, [activeTab]);
 
-  const containerRef = useRef(null);
-  const activeTabElementRef = useRef(null);
+  const containerRef = useRef<HTMLUListElement | null>(null);
+  const activeTabElementRef = useRef<HTMLLIElement | null>(null);
 
   const clipTop = useMotionValue(0);
   const clipBottom = useMotionValue(100);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const container = containerRef.current;
 
     if (activeTab && container) {
