@@ -169,7 +169,6 @@ function Habit({ habit, currDate }) {
       <motion.div
         layoutId={habit.name}
         key={habit.name}
-        whileTap={{ scale: 0.95 }}
         transition={{
           type: "ease-out",
           duration: 0.2,
@@ -240,12 +239,15 @@ function Habit({ habit, currDate }) {
                 {currHabit.getDoneIn}
               </p>
 
-              {currentStreakCount > 0 && (
-                <p className=" px-2.5 py-1 font-bold space-x-1 text-md capitalize inline-block rounded-full bg-gray-50 text-orange-600">
-                  <span>🔥</span>
-                  <span>{currentStreakCount}</span>
-                </p>
-              )}
+              <p
+                className={`px-2.5 py-1 font-bold space-x-1 text-md capitalize inline-block rounded-full bg-gray-50 text-orange-600
+                   ${currentStreakCount === 0 ? "opacity-0" : ""}
+                
+                `}
+              >
+                <span>🔥</span>
+                <span>{currentStreakCount}</span>
+              </p>
             </div>
             <div className="flex md:hidden   gap-4 w-32">
               <PencilAltIcon

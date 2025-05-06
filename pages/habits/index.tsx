@@ -114,16 +114,10 @@ function App() {
         </Head>
         <div
           className={cn(
-            " mx-auto w-full  flex justify-between py-4 lg:py-8 lg:gap-8   ",
-            viewMode === "calendar" ? "" : "max-w-[90%]  md:max-w-[95%]"
+            " mx-auto w-full  flex justify-between py-4 lg:py-8 lg:gap-8   "
           )}
         >
-          <main
-            className={cn(
-              "mx-auto w-full  max-w-xl ",
-              viewMode === "calendar" ? "lg:max-w-[70%]" : "lg:max-w-[60%]"
-            )}
-          >
+          <main className={cn("mx-auto w-full  max-w-xl lg:max-w-[70%]")}>
             <Header
               setShowHabitForm={setShowHabitForm}
               setViewMode={setViewMode}
