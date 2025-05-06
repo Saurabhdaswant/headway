@@ -14,7 +14,7 @@ import { LogoutIcon } from "@heroicons/react/solid";
 const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
-  { name: "Goals", icon: Target, path: "/goals" },
+  // { name: "Goals", icon: Target, path: "/goals" },
 ];
 
 function Sidebar() {
