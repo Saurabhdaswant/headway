@@ -23,19 +23,11 @@ function Sidebar() {
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
   useEffect(() => {
-    // Initialize activeTab from localStorage after component mounts
-    if (typeof window !== "undefined") {
-      const storedTab = localStorage?.getItem("activeTab");
-      setActiveTab(storedTab || sidebarItems[0].name);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Update localStorage whenever activeTab changes
-    if (activeTab !== null) {
-      localStorage.setItem("activeTab", activeTab);
-    }
-  }, [activeTab]);
+    // Set activeTab based on the current router pathname
+    const currentPath = router.pathname;
+    const activeItem = sidebarItems.find((item) => item.path === currentPath);
+    setActiveTab(activeItem ? activeItem.name : sidebarItems[0].name);
+  }, [router.pathname]);
 
   const containerRef = useRef<HTMLUListElement | null>(null);
   const activeTabElementRef = useRef<HTMLLIElement | null>(null);
