@@ -6,7 +6,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useRouter } from "next/router";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { CheckCircle, Target } from "react-feather";
 
 import { LogoutIcon } from "@heroicons/react/solid";
@@ -20,13 +20,10 @@ const sidebarItems = [
 function Sidebar() {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Set activeTab based on the current router pathname
+  const activeTab = useMemo(() => {
     const currentPath = router.pathname;
     const activeItem = sidebarItems.find((item) => item.path === currentPath);
-    setActiveTab(activeItem ? activeItem.name : sidebarItems[0].name);
+    return activeItem ? activeItem.name : sidebarItems[0].name;
   }, [router.pathname]);
 
   const containerRef = useRef<HTMLUListElement | null>(null);
@@ -67,7 +64,6 @@ function Sidebar() {
                 key={item.name}
                 onClick={() => {
                   if (!item.soon) {
-                    setActiveTab(item.name);
                     setTimeout(() => {
                       router.push(item.path);
                     }, 150);
@@ -95,7 +91,6 @@ function Sidebar() {
                 ref={isActive ? activeTabElementRef : null}
                 onClick={() => {
                   if (!item.soon) {
-                    setActiveTab(item.name);
                     setTimeout(() => {
                       router.push(item.path);
                     }, 100);
