@@ -105,9 +105,8 @@ function Sidebar() {
                     layoutId="highlight"
                     transition={{
                       type: "spring",
-                      stiffness: 500,
-                      damping: 30,
-                      mass: 0.5,
+                      stiffness: 300,
+                      damping: 23,
                     }}
                     className="absolute inset-0 bg-[#202020] rounded-xl z-0"
                   />
