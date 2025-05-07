@@ -7,6 +7,8 @@ import {
   startOfToday,
 } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
+import Cookies from "js-cookie";
+
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Calendar, Check, Plus } from "react-feather";
@@ -51,10 +53,11 @@ export default function Goal() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const token = window.localStorage.getItem("authToken");
+      // const token = window.localStorage.getItem("authToken");
+      const token = Cookies.get("token");
 
       if (!token) {
-        window.location.href = "/login";
+        // window.location.href = "/login";
       }
 
       setToken(token);
@@ -64,7 +67,8 @@ export default function Goal() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    const token = localStorage && localStorage?.getItem("authToken");
+    // const token = localStorage && localStorage?.getItem("authToken");
+    const token = Cookies.get("token");
 
     async function getGoal() {
       const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goals/${id}`, {

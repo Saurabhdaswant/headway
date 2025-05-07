@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { getDay, isAfter, isSameDay, isToday, startOfToday } from "date-fns";
 import days from "../Data/Days";
 
+import Cookies from "js-cookie";
+
 export const HabitsContext: any = createContext({});
 
 export default function HabitsProvider({ children }) {
@@ -13,17 +15,21 @@ export default function HabitsProvider({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage && localStorage?.getItem("authToken");
-
     async function getHabits() {
       try {
         setLoading(true); // Start loading
         const res = await fetch(`${API_ENDPOINTS.BASE_URL}/habits`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: "include",
         });
+
+        if (
+          res.status === 401 &&
+          !["/login", "/signup", "/waitlist", "/"].includes(router.pathname)
+        ) {
+          router.push("/login");
+          return;
+        }
+
         const habits = await res.json();
         setHabits(habits);
       } catch (error) {
@@ -33,27 +39,7 @@ export default function HabitsProvider({ children }) {
       }
     }
 
-    if (
-      !token &&
-      router.pathname !== "/login" &&
-      router.pathname !== "/signup" &&
-      router.pathname !== "/waitlist" &&
-      router.pathname !== "/"
-    ) {
-      router.push("/login");
-    }
-
-    if (token) {
-      const user = jwt.decode(token);
-      if (!user) {
-        localStorage.removeItem("authToken");
-        router.push("/login");
-      } else {
-        getHabits();
-      }
-    } else {
-      setLoading(false); // No token, stop loading
-    }
+    getHabits();
   }, [router]);
 
   const updateHabits = (newHabits) => {
@@ -66,8 +52,6 @@ export default function HabitsProvider({ children }) {
     isCompleted,
     setCurrHabit
   ) => {
-    const token = localStorage && localStorage?.getItem("authToken");
-
     // we are doing this updating logic on frontend , i think instead this should happen on backend , we should just send the id and then update the habit from backend and reload it right ?
 
     const habitIndex = habits?.findIndex(
@@ -99,14 +83,11 @@ export default function HabitsProvider({ children }) {
     const res = await fetch(
       `${API_ENDPOINTS.BASE_URL}/habits/${updatedHabit._id}`,
       {
+        credentials: "include",
         method: "PUT",
         body: JSON.stringify({
           updatedHabit,
         }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
       }
     );
 

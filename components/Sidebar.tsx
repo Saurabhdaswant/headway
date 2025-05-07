@@ -128,7 +128,7 @@ function Sidebar() {
       <button
         className={`flex justify-center w-full items-center gap-2 font-medium    px-4 py-2.5   text-gray-600   `}
         onClick={() => {
-          localStorage.removeItem("authToken");
+          // localStorage.removeItem("authToken");
           router.push("/");
         }}
       >

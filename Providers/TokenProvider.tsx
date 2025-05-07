@@ -1,5 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 
+import Cookies from "js-cookie";
+
 export const TokenContext = createContext({});
 
 export default function TokenProvider({ children }) {
@@ -7,7 +9,9 @@ export default function TokenProvider({ children }) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const token = window.localStorage.getItem("authToken");
+      // const token = window.localStorage.getItem("authToken");
+      const token = Cookies.get("token");
+
       setToken(token as string);
     }
   }, []);

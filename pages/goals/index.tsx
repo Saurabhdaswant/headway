@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import { format, startOfToday, sub } from "date-fns";
 const { formatDistance } = require("date-fns");
+import Cookies from "js-cookie";
 
 import React, { useEffect, useState } from "react";
 import { LogoutIcon } from "@heroicons/react/outline";
@@ -106,7 +107,9 @@ function Goals() {
   const [goals, setGoals] = useState([]);
 
   useEffect(() => {
-    const token = localStorage && localStorage?.getItem("authToken");
+    // const token = localStorage && localStorage?.getItem("authToken");
+    const token = Cookies.get("token");
+
     async function getGoals() {
       const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goals`, {
         headers: {
@@ -126,10 +129,11 @@ function Goals() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const token = window.localStorage.getItem("authToken");
+      // const token = window.localStorage.getItem("authToken");
+      const token = Cookies.get("token");
 
       if (!token) {
-        window.location.href = "/login";
+        // window.location.href = "/login";
       }
 
       setToken(token);
@@ -305,7 +309,8 @@ const Header = ({ setShowHabitForm }) => {
             <button
               className="p-3 bg-white rounded-full text-gray-600 "
               onClick={() => {
-                localStorage.removeItem("authToken");
+                // localStorage.removeItem("authToken");
+
                 window.location.href = "/";
               }}
             >

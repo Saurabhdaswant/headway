@@ -13,6 +13,7 @@ import WeekDatePicker from "../../components/WeekDatePicker";
 import Week from "../../components/Week";
 import { cn } from "../../utils/cn";
 import { HabitsRenderer } from "../../components/HabitsRenderer";
+import Cookies from "js-cookie";
 
 function App() {
   const { habits, updateHabits, today }: any = useContext(HabitsContext);
@@ -26,10 +27,11 @@ function App() {
   useEffect(() => {
     setIsMounted(true);
     if (typeof window !== "undefined") {
-      const token = window.localStorage.getItem("authToken");
+      // const token = window.localStorage.getItem("authToken");
+      const token = Cookies.get("token");
 
       if (!token) {
-        window.location.href = "/login";
+        // window.location.href = "/login";
       }
 
       setToken(token);

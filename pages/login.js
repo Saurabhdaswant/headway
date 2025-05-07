@@ -24,6 +24,7 @@ export default function Signin() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // ✅ KEY LINE
       });
 
       if (!res.ok) {
