@@ -22,6 +22,7 @@ export default function Header({
   let domNode = useClickOutSide(() => setShowDialog(false));
 
   const toggleViewMode = (newViewMode) => {
+    window.localStorage.setItem("viewMode", newViewMode);
     setViewMode(newViewMode);
   };
 

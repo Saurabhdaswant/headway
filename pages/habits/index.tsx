@@ -20,7 +20,7 @@ function App() {
 
   const [error, setError] = useState(false);
   const [token, setToken] = useState(null);
-  const [viewMode, setViewMode] = useState("list");
+  const [viewMode, setViewMode] = useState("");
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -39,7 +39,22 @@ function App() {
       const mode = params.get("mode");
       if (mode) {
         setViewMode(mode);
+        window.localStorage.setItem("viewMode", mode);
+      } else {
+        const storedMode = window.localStorage.getItem("viewMode");
+        if (storedMode) {
+          setViewMode(storedMode);
+
+          const params = new URLSearchParams(window.location.search);
+          params.set("mode", storedMode);
+          window.history.replaceState(
+            {},
+            "",
+            `${window.location.pathname}?${params}`
+          );
+        }
       }
+
       const showForm = params.get("showHabitForm");
       if (showForm === "true") {
         setShowHabitForm(true);
