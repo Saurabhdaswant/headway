@@ -14,7 +14,7 @@ import { LogoutIcon } from "@heroicons/react/solid";
 const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
-  // { name: "Goals", icon: Target, path: "/goals" },
+  { name: "Goals", icon: Target, path: "/goals" },
 ];
 
 function Sidebar() {
@@ -125,7 +125,7 @@ function Sidebar() {
           })}
         </ul>
       </div>
-      <button
+      {/* <button
         className={`flex justify-center w-full items-center gap-2 font-medium    px-4 py-2.5   text-gray-600   `}
         onClick={() => {
           localStorage.removeItem("authToken");
@@ -134,7 +134,7 @@ function Sidebar() {
       >
         Logout
         <LogoutIcon className=" w-6" />
-      </button>
+      </button> */}
     </div>
   );
 }
