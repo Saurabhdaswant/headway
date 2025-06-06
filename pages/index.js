@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
-import habstrack from "../public/habstrack.png";
+import headway from "../public/headway.png";
 import HabitScheduler from "../public/Schedulers.svg";
 import HabitStats from "../public/Stats.svg";
 import { Check } from "react-feather";
@@ -34,12 +34,12 @@ export default function Home() {
         <link rel="icon" href="/habstrack.svg" />
       </Head>
       <main
-        className="flex md:items-center justify-center md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
+        className="flex md:items-start md:p-40 justify-center md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
 via-white  via-opacity-5 relative  "
       >
-        <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 space-y-6 lg:space-y-10 xl:space-y-16  my-10 mx-auto ">
-          <div className="space-y-4 lg:space-y-6 xl:space-y-8">
-            <h1 className=" font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center text-[#212121]  ">
+        <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 gap-y-6   my-10 md:my-0 mx-auto ">
+          <div className="">
+            <h1 className=" font-bold mb-6 text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center text-[#212121]  ">
               Build Better Habits with
               <em className="underline decoration-blue-400  inline mx-2 sm:mx-3 xl:mx-5 ">
                 Habstrack
@@ -53,7 +53,7 @@ via-white  via-opacity-5 relative  "
           </div>
 
           <Link
-            className=" font-medium  bg-gradient-to-bl from-[#0FC9F2] to-[#0F85F2] px-8 lg:px-11 lg:py-4 py-3 xl:px-14   lg:shadow-2xl lg:shadow-blue-400  rounded-lg text-lg text-white"
+            className=" font-medium  bg-gradient-to-bl  from-[#0FC9F2] to-[#0F85F2] px-8 lg:px-11 lg:py-4 py-3 xl:px-14   lg:shadow-2xl lg:shadow-blue-400  rounded-lg text-lg text-white"
             href="/login"
           >
             Start tracking!
@@ -63,11 +63,11 @@ via-white  via-opacity-5 relative  "
         <div className=" hidden lg:block  absolute w-[400px]  h-[400px] left-[800px] 2xl:left-[1100px] xl:top-[100px] bg-[#0C38AA] opacity-[0.2] filter blur-[149.306px]   "></div>
       </main>
 
-      <section className="md:h-[100vh]">
+      <section className="md:h-[50vh] bg-[#F0F1F5] ">
         <Image
-          src={habstrack}
+          src={headway}
           width="1184"
-          className=" md:absolute md:left-1/2 md:transform md:-translate-x-1/2 top-[600px] border-[1rem] rounded-lg border-white  "
+          className=" md:absolute md:top-[500px] md:left-1/2  md:transform md:-translate-x-1/2 top-[600px] border-[1rem] rounded-lg border-white  "
           alt="headay's habit tracker img"
         />
       </section>
