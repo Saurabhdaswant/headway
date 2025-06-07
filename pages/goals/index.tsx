@@ -238,13 +238,13 @@ function Goals() {
                           {result}
                         </motion.p>
                       </div>
-                      {/* <TrashIcon
+                      <TrashIcon
                         className="w-6 h-6"
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleDeleteDialog();
                         }}
-                      />{" "} */}
+                      />{" "}
                     </div>
                     <motion.div
                       layoutId={`${goal._id}_image`}

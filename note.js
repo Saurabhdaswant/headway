@@ -90,8 +90,10 @@
 // - cant choose date after today's date - done ✅
 // - the goal habit card does not go away after i delete - done ✅
 // - fix habit width issue on mobile - done ✅
+// after habit creation inside goal the habit is not immediately rendered - done ✅
+// even after deleting the habit from goal the habit is not removed from the goal - done ✅
 // - add img to goal
-// - delete goal - done
+// - delete goal
 // - update goal
 
 // - figure out how habits and goals will be connected - done ✅

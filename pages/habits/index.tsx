@@ -15,7 +15,8 @@ import { cn } from "../../utils/cn";
 import { HabitsRenderer } from "../../components/HabitsRenderer";
 
 function App() {
-  const { habits, updateHabits, today }: any = useContext(HabitsContext);
+  const { habits, updateHabits, today, filteredHabits }: any =
+    useContext(HabitsContext);
   const [showHabitForm, setShowHabitForm] = useState(false);
 
   const [error, setError] = useState(false);
@@ -146,7 +147,10 @@ function App() {
               <>
                 <WeekDatePicker />
                 <div className=" flex flex-col gap-2 mx-auto  max-w-[400px]  scrollbar-hide h-[70vh]  pb-10   overflow-auto ">
-                  <HabitsRenderer setShowHabitForm={setShowHabitForm} />
+                  <HabitsRenderer
+                    setShowHabitForm={setShowHabitForm}
+                    habits={filteredHabits}
+                  />
                 </div>{" "}
               </>
             )}

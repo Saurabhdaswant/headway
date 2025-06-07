@@ -6,19 +6,14 @@ import { isAfter, startOfToday } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import { HabitsContext } from "../Providers/HabitsProvider";
 
-export function HabitsRenderer({ setShowHabitForm }: any) {
-  const { loading, selectedDay, filteredHabits }: any =
-    useContext(HabitsContext);
+export function HabitsRenderer({ setShowHabitForm, habits }: any) {
+  const { loading, selectedDay }: any = useContext(HabitsContext);
 
   if (loading) {
     return;
   }
 
-  if (
-    !filteredHabits ||
-    filteredHabits?.length === 0 ||
-    isAfter(selectedDay, startOfToday())
-  ) {
+  if (!habits || habits?.length === 0 || isAfter(selectedDay, startOfToday())) {
     return (
       <div className="flex -mt-12 flex-col h-full items-center justify-center  text-center">
         <div className="w-16 h-16 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
@@ -51,8 +46,8 @@ export function HabitsRenderer({ setShowHabitForm }: any) {
   }
   return (
     <AnimatePresence initial={false}>
-      {filteredHabits?.length > 0 &&
-        filteredHabits?.map((habit, _) => {
+      {habits?.length > 0 &&
+        habits?.map((habit, _) => {
           return <Habit key={habit._id} habit={habit} currDate={selectedDay} />;
         })}
     </AnimatePresence>

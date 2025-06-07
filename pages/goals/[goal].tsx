@@ -63,26 +63,26 @@ export default function Goal() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
+  async function getGoal(token) {
+    const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goals/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const goal = await res.json();
+    updateGoal(goal);
+  }
+
   useEffect(() => {
     const token = localStorage && localStorage?.getItem("authToken");
 
-    async function getGoal() {
-      const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goals/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const goal = await res.json();
-      updateGoal(goal);
-    }
-
     if (id) {
       if (token && id) {
-        getGoal();
+        getGoal(token as any);
       }
     }
-  }, [id, updateGoal]);
+  }, [id]);
 
   const handleCreateHabit = async (habit) => {
     if (habit.name.trim().length === 0) {
@@ -113,6 +113,7 @@ export default function Goal() {
 
       updateGoal({ ...goal, habits: newHabits });
       setShowHabitForm(false);
+      await getGoal(token as any);
     }
   };
 
