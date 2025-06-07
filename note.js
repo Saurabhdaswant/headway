@@ -90,14 +90,23 @@
 // - cant choose date after today's date - done ✅
 // - the goal habit card does not go away after i delete - done ✅
 // - fix habit width issue on mobile - done ✅
+// delete goal - done ✅
 // after habit creation inside goal the habit is not immediately rendered - done ✅
 // even after deleting the habit from goal the habit is not removed from the goal - done ✅
 // - add img to goal
-// - delete goal
 // - update goal
+// show a empty screen when there are no goals - done ✅
+//
+// show a loading state while creating goal and habits
+// - show a loading state while fetching goals
+// - show a loading state while fetching habits
+// - show a loading state while updating goal
+// - show a loading state while deleting goal
+// - show a loading state while deleting habit
+// - show a loading state while updating habit
 
 // - figure out how habits and goals will be connected - done ✅
-// - here is how you do it :
+// - here is how you are doing it :
 // create goal and get the goal
 // each habit should have the goal id
 // now create habits in bulk and get them back
