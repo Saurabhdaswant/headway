@@ -98,6 +98,24 @@ function GoalForm({ formTitle, goal, setShowHabitForm, handleSubmit, error }) {
               />
             </div>
 
+            <div className="flex flex-col lg:space-y-2">
+              <label htmlFor="goalImage" className="font-semibold pb-2">
+                Upload Image
+              </label>
+              <input
+                type="file"
+                onChange={(e) =>
+                  setCurrGoal({
+                    ...currGoal,
+                    imageUrl: URL.createObjectURL(e.target.files[0]),
+                  })
+                }
+                name="goalImage"
+                id="goalImage"
+                className="outline-none focus:border-[#0F85F2] font-medium border-2 px-4 py-2 rounded"
+              />
+            </div>
+
             <div className="relative">
               <button
                 className="p-3 bg-white rounded-full   text-gray-600 "

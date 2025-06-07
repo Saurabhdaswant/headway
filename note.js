@@ -93,7 +93,7 @@
 // delete goal - done ✅
 // after habit creation inside goal the habit is not immediately rendered - done ✅
 // even after deleting the habit from goal the habit is not removed from the goal - done ✅
-// - add img to goal
+// add img to goal - done ✅
 // - update goal
 // show a empty screen when there are no goals - done ✅
 //

@@ -157,15 +157,6 @@ export default function Goal() {
     return number;
   }
 
-  const imgLookup = {
-    "6692142d0cb77b89a9a2c441":
-      "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "669211210cb77b89a9a2c440":
-      "https://images.unsplash.com/photo-1601141256817-c60897f2776a?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    2: "https://images.unsplash.com/photo-1614152412509-7a5afc18c75b?q=80&w=3027&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    3: "https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?q=80&w=2920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  };
-
   return (
     <Layout>
       <div className=" w-full md:w-[80%] h-[100vh]  bg-[#F5F5F5]   overflow-auto pt-10">
@@ -174,7 +165,7 @@ export default function Goal() {
             layoutId={`${goal?._id}_image`}
             layout="position"
             style={{
-              backgroundImage: `url(${imgLookup[goal?._id]})`,
+              backgroundImage: `url(${goal?.imageUrl})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

@@ -15,15 +15,6 @@ import DeleteGoal from "../../components/DeleteGoal";
 import { TrashIcon } from "@heroicons/react/solid";
 import { Target } from "react-feather";
 
-const imgLookup = {
-  "6692142d0cb77b89a9a2c441":
-    "https://images.unsplash.com/photo-1579880251397-2c3ed174a774?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "669211210cb77b89a9a2c440":
-    "https://images.unsplash.com/photo-1601141256817-c60897f2776a?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  2: "https://images.unsplash.com/photo-1614152412509-7a5afc18c75b?q=80&w=3027&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  3: "https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?q=80&w=2920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-};
-
 function Goals() {
   const [showDeleteDialog, toggleDeleteDialog] = useToggle(false);
 
@@ -77,25 +68,43 @@ function Goals() {
     description: "",
     createdDate: today,
     deadlineDate: today,
+    imageUrl: "",
   };
 
   const router = useRouter();
 
   const handleCreateGoal = async (goal) => {
-    const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goal`, {
-      method: "POST",
-      body: JSON.stringify({
-        goal,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const newgoal = await res.json();
+    try {
+      const formData = new FormData();
+      formData.append("goal", JSON.stringify(goal)); // Send goal object as JSON string
+      if (goal.imageUrl && goal.imageUrl.startsWith("blob:")) {
+        const response = await fetch(goal.imageUrl);
+        const blob = await response.blob();
+        const fileName = `${goal.name
+          .replace(/\s+/g, "_")
+          .toLowerCase()}_image.png`;
+        formData.append("image", blob, fileName);
+      }
 
-    setGoals([...goals, newgoal]);
-    setShowHabitForm(false);
+      const res = await fetch(`${API_ENDPOINTS.BASE_URL}/goal`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to upload goal.");
+      }
+
+      const newGoal = await res.json();
+      setGoals([...goals, newGoal]);
+      setShowHabitForm(false);
+    } catch (error) {
+      console.error("Error uploading goal:", error);
+      // Optionally, set error state to show an error message
+    }
   };
 
   const GoalsEmptyState = () => {
@@ -213,7 +222,7 @@ function Goals() {
                       <motion.div
                         layoutId={`${goal._id}_image`}
                         style={{
-                          backgroundImage: `url(${imgLookup[goal._id]})`,
+                          backgroundImage: `url(${goal.imageUrl})`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}
