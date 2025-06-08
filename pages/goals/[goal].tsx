@@ -16,6 +16,7 @@ import { HabitsRenderer } from "../../components/HabitsRenderer";
 import Layout from "../../components/Layout";
 import { API_ENDPOINTS } from "../../constants";
 import { GoalContext } from "../../Providers/GoalProvider";
+import Head from "next/head";
 
 export default function Goal() {
   const { goal, updateGoal } = useContext(GoalContext);
@@ -159,6 +160,14 @@ export default function Goal() {
 
   return (
     <Layout>
+      <Head>
+        <title>Goal | Habstrack</title>
+        <meta
+          name="description"
+          content="Goal details and progress tracking on Habstrack"
+        />
+        <link rel="icon" href="/habstrack.svg" />
+      </Head>
       <div className=" w-full md:w-[80%] h-[100vh]  bg-[#F5F5F5]   overflow-auto pt-10">
         <div className="mx-auto overflow-hidden  max-w-[800px]">
           <motion.div
