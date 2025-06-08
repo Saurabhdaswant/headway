@@ -22,7 +22,9 @@ function Sidebar() {
 
   const activeTab = useMemo(() => {
     const currentPath = router.pathname;
-    const activeItem = sidebarItems.find((item) => item.path === currentPath);
+    const activeItem = sidebarItems.find((item) =>
+      currentPath.startsWith(item.path)
+    );
     return activeItem ? activeItem.name : sidebarItems[0].name;
   }, [router.pathname]);
 
