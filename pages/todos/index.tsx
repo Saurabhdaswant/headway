@@ -58,12 +58,12 @@ function App() {
           }),
         });
         if (res.ok) {
-          const newTodoItem = await res.json();
+          const data = await res.json();
+
           setTodos([
             ...todos,
             {
-              ...newTodoItem,
-              _id: newTodoItem?.insertedId,
+              _id: data.todo?.insertedId,
               text: newTodo?.trim(),
             },
           ]);
