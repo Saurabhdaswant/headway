@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { useRouter } from "next/router";
 import React, { useRef, useEffect, useMemo } from "react";
-import { CheckCircle, Target } from "react-feather";
+import { Check, CheckCircle, Target } from "react-feather";
 
 import { LogoutIcon } from "@heroicons/react/solid";
 
@@ -15,6 +15,7 @@ const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
   { name: "Goals", icon: Target, path: "/goals" },
+  { name: "Todos", icon: Check, path: "/todos" },
 ];
 
 function Sidebar() {
