@@ -145,44 +145,55 @@ function App() {
           )}
         >
           <main className={cn("mx-auto w-full  max-w-xl lg:max-w-[70%]")}>
-            <div className="flex flex-col md:flex-row gap-y-4 justify-between md:items-end">
-              <div className="  ">
+            <div className="flex flex-col gap-4 mx-auto max-w-[600px] h-[70vh] pb-10 overflow-auto bg-[#fdfdfd] shadow-lg rounded-lg p-6 border border-gray-300">
+              <div className="flex flex-col md:flex-row gap-y-4 justify-between md:items-end">
                 <p className="text-3xl font-bold text-[#2e2e2e]">Todos</p>
               </div>
-            </div>
-            <div className="flex flex-col gap-2 mx-auto max-w-[400px] scrollbar-hide h-[70vh] pb-10 overflow-auto">
-              <input
-                type="text"
-                value={newTodo}
-                onChange={(e) => setNewTodo(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Add a new todo"
-                className="p-2 border rounded"
-              />
-              <ul>
-                {todos?.map((todo) => (
-                  <li
-                    key={todo?._id}
-                    className="flex justify-between items-center mt-2"
-                    onClick={() =>
-                      toggleTodoCompletion(todo?._id, todo?.completed)
-                    }
-                  >
-                    <span className={todo?.completed ? "line-through" : ""}>
-                      {todo?.text}
-                    </span>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeleteTodo(todo?._id);
-                      }}
-                      className="text-red-500"
+              <ul className="divide-y divide-gray-300">
+                {Array.from({ length: 9 }).map((_, index) => {
+                  const todo = todos[index];
+                  return (
+                    <li
+                      key={todo?._id || index}
+                      className="flex justify-between items-center py-2"
+                      onClick={() =>
+                        todo && toggleTodoCompletion(todo._id, todo.completed)
+                      }
                     >
-                      Delete
-                    </button>
-                  </li>
-                ))}
+                      <span
+                        className={`text-lg ${
+                          todo?.completed
+                            ? "line-through text-gray-500"
+                            : "text-black"
+                        } ${!todo?.text ? "opacity-0" : ""}`}
+                      >
+                        {todo?.text || "___"}
+                      </span>
+                      {todo && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteTodo(todo._id);
+                          }}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
+              {todos.length < 9 && (
+                <input
+                  type="text"
+                  value={newTodo}
+                  onChange={(e) => setNewTodo(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Add a new todo"
+                  className="p-3 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#f9f9f9] shadow-inner"
+                />
+              )}
             </div>
           </main>
         </div>
