@@ -15,7 +15,7 @@ const sidebarItems = [
   { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
   { name: "Habits", icon: CheckCircle, path: "/habits" },
   { name: "Goals", icon: Target, path: "/goals" },
-  { name: "Todos", icon: Check, path: "/todos" },
+  // { name: "Todos", icon: Check, path: "/todos" },
 ];
 
 function Sidebar() {
