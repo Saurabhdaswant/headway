@@ -6,20 +6,30 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useRouter } from "next/router";
-import React, { useRef, useEffect, useMemo } from "react";
+import React, { useRef, useEffect, useMemo, useContext } from "react";
 import { Check, CheckCircle, Target } from "react-feather";
 
 import { LogoutIcon } from "@heroicons/react/solid";
-
-const sidebarItems = [
-  { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
-  { name: "Habits", icon: CheckCircle, path: "/habits" },
-  { name: "Goals", icon: Target, path: "/goals" },
-  // { name: "Todos", icon: Check, path: "/todos" },
-];
+import { UserContext } from "../Providers/UserProvider";
 
 function Sidebar() {
   const router = useRouter();
+
+  const { user }: any = useContext(UserContext);
+
+  const sidebarItems = useMemo(() => {
+    const items = [
+      { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
+      { name: "Habits", icon: CheckCircle, path: "/habits" },
+      { name: "Goals", icon: Target, path: "/goals" },
+    ];
+
+    if (user?.type === "god") {
+      items.push({ name: "Todos", icon: Check, path: "/todos" });
+    }
+
+    return items;
+  }, [user]);
 
   const activeTab = useMemo(() => {
     const currentPath = router.pathname;
@@ -27,7 +37,7 @@ function Sidebar() {
       currentPath.startsWith(item.path)
     );
     return activeItem ? activeItem.name : sidebarItems[0].name;
-  }, [router.pathname]);
+  }, [router.pathname, sidebarItems]);
 
   const containerRef = useRef<HTMLUListElement | null>(null);
   const activeTabElementRef = useRef<HTMLLIElement | null>(null);
