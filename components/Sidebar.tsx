@@ -128,16 +128,16 @@ function Sidebar() {
           })}
         </ul>
       </div>
-      {/* <button
-        className={`flex justify-center w-full items-center gap-2 font-medium    px-4 py-2.5   text-gray-600   `}
+      <button
+        className={`flex  w-full items-center ml-3  gap-2 font-medium    px-4    text-gray-600   `}
         onClick={() => {
           localStorage.removeItem("authToken");
           router.push("/");
         }}
       >
-        Logout
         <LogoutIcon className=" w-6" />
-      </button> */}
+        Logout
+      </button>
     </div>
   );
 }
