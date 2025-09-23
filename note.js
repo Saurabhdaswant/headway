@@ -63,40 +63,8 @@
 // css : https://css-for-js.dev/
 
 // bugs :
-// - create , edit and stats popup enter and exit fucks up - fixed ✅
-// - overflowing of stats component is fucked up , should not be able to go round and round - fixed ✅
-// - more space in the bottom for habits  - fixed ✅
 
-// features :
-// find a way to add the "why" behind the habit
-
-// goals page
-
-// - API'S
-// -- create goal - done ✅
-// -- get goals - done ✅
-// -- update goals - done ✅
-// -- delete goals - done ✅
-
-// - UI
-// -- create goal form dialog - done ✅
-// -- handle ui for adding habits - done ✅
-// -- goal detail page - done ✅
-// - impliment sidebar - done ✅
-// - figure out img upload
-
-// bugs :
-
-// - cant choose date after today's date - done ✅
-// - the goal habit card does not go away after i delete - done ✅
-// - fix habit width issue on mobile - done ✅
-// delete goal - done ✅
-// after habit creation inside goal the habit is not immediately rendered - done ✅
-// even after deleting the habit from goal the habit is not removed from the goal - done ✅
-// add img to goal - done ✅
 // - update goal
-// show a empty screen when there are no goals - done ✅
-//
 // show a loading state while creating goal and habits
 // - show a loading state while fetching goals
 // - show a loading state while fetching habits
