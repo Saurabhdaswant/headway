@@ -10,12 +10,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Calendar, Check, Plus } from "react-feather";
-import { weekDays } from "../../components/constants";
-import HabitForm from "../../components/HabitForm";
-import { HabitsRenderer } from "../../components/HabitsRenderer";
-import Layout from "../../components/Layout";
-import { API_ENDPOINTS } from "../../constants";
-import { GoalContext } from "../../Providers/GoalProvider";
+import { weekDays } from "../../../components/constants";
+import HabitForm from "../../../components/HabitForm";
+import { HabitsRenderer } from "../../../components/HabitsRenderer";
+import Layout from "../../../components/Layout";
+import { API_ENDPOINTS } from "../../../constants";
+import { GoalContext } from "../../../Providers/GoalProvider";
 import Head from "next/head";
 
 export default function Goal() {

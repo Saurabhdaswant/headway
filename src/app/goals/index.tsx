@@ -7,11 +7,11 @@ import React, { useEffect, useState } from "react";
 import { LogoutIcon } from "@heroicons/react/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { API_ENDPOINTS } from "../../constants";
-import GoalForm from "../../components/GoalForm";
-import Layout from "../../components/Layout";
-import useToggle from "../../hooks/useToggle";
-import DeleteGoal from "../../components/DeleteGoal";
+import { API_ENDPOINTS } from "../../../constants";
+import GoalForm from "../../../components/GoalForm";
+import Layout from "../../../components/Layout";
+import useToggle from "../../../hooks/useToggle";
+import DeleteGoal from "../../../components/DeleteGoal";
 import { TrashIcon } from "@heroicons/react/solid";
 import { Target } from "react-feather";
 

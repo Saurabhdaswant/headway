@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
-import Layout from "../components/Layout";
+import Layout from "../../../components/Layout";
 import Head from "next/head";
-import { HabitsContext } from "../Providers/HabitsProvider";
+import { HabitsContext } from "../../../Providers/HabitsProvider";
 import { CalendarIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";

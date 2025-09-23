@@ -1,10 +1,11 @@
+"use client"
+
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
-import headway from "../public/headway.png";
-import HabitScheduler from "../public/Schedulers.svg";
-import HabitStats from "../public/Stats.svg";
 import { Check } from "react-feather";
+
+
 
 export default function Home() {
   const CirclCheckBox = () => {
@@ -34,18 +35,18 @@ export default function Home() {
         <link rel="icon" href="/habstrack.svg" />
       </Head>
       <main
-        className="flex md:items-start md:p-40 justify-center md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
+        className="flex md:items-start  md:p-40 justify-center md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
 via-white  via-opacity-5 relative  "
       >
         <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 gap-y-6   my-10 md:my-0 mx-auto ">
           <div className="">
-            <h1 className=" font-bold mb-6 text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center text-[#212121]  ">
+            <p className=" font-bold mb-6 text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center text-[#212121]  ">
               Build Better Habits with
               <em className="underline decoration-blue-400  inline mx-2 sm:mx-3 xl:mx-5 ">
                 Habstrack
               </em>
               Today!
-            </h1>
+            </p>
             <blockquote className=" font-medium tracking-wide  	 sm:text-lg lg:text-xl  text-slate-500 ">
               Take the First Step Towards a Better Life, Track Your Habits,
               Achieve Your Goals, and Build a Happier, Healthier You.
@@ -65,8 +66,9 @@ via-white  via-opacity-5 relative  "
 
       <section className="md:h-[50vh] bg-[#F0F1F5] ">
         <Image
-          src={headway}
+         src="/headway.png"
           width="1184"
+          height="600"
           className=" md:absolute md:top-[500px] md:left-1/2  md:transform md:-translate-x-1/2 top-[600px] border-[1rem] rounded-lg border-white  "
           alt="headay's habit tracker img"
         />
@@ -94,7 +96,9 @@ via-white  via-opacity-5 relative  "
             />
           </div>
           <Image
-            src={HabitStats}
+            src="/habstrack.svg"
+            width={500}
+            height={500}
             className=" relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  "
             alt="headay's habit tracker img"
           />
@@ -105,7 +109,8 @@ via-white  via-opacity-5 relative  "
         <div className="  py-20 grid md:grid-cols-2  max-w-xs md:max-w-6xl h-[100vh] mx-auto">
           <Image
             width={500}
-            src={HabitScheduler}
+            height={500}
+            src="/HabitScheduler.svg"
             className=" relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  "
             alt="headay's habit tracker img"
           />

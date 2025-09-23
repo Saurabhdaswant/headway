@@ -1,18 +1,18 @@
 import Head from "next/head";
-import Layout from "../../components/Layout";
-import { HabitsContext } from "../../Providers/HabitsProvider";
+import Layout from "../../../components/Layout";
+import { HabitsContext } from "../../../Providers/HabitsProvider";
 
 import { startOfToday, startOfWeek, sub } from "date-fns";
 import { AnimatePresence } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { colors, weekDays } from "../../components/constants";
-import HabitForm from "../../components/HabitForm";
-import { API_ENDPOINTS } from "../../constants";
-import Header from "../../components/Header";
-import WeekDatePicker from "../../components/WeekDatePicker";
-import Week from "../../components/Week";
-import { cn } from "../../utils/cn";
-import { HabitsRenderer } from "../../components/HabitsRenderer";
+import { colors, weekDays } from "../../../components/constants";
+import HabitForm from "../../../components/HabitForm";
+import { API_ENDPOINTS } from "../../../constants";
+import Header from "../../../components/Header";
+import WeekDatePicker from "../../../components/WeekDatePicker";
+import Week from "../../../components/Week";
+import { cn } from "../../../utils/cn";
+import { HabitsRenderer } from "../../../components/HabitsRenderer";
 
 function App() {
   const { habits, updateHabits, today, filteredHabits }: any =

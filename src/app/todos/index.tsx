@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Layout from "../../components/Layout";
+import Layout from "../../../components/Layout";
 import { useEffect, useState } from "react";
-import { cn } from "../../utils/cn";
-import { API_ENDPOINTS } from "../../constants";
+import { cn } from "../../../utils/cn";
+import { API_ENDPOINTS } from "../../../constants";
 import { text } from "stream/consumers";
 
 function App() {
@@ -66,7 +66,7 @@ function App() {
               _id: data.todo?.insertedId,
               text: newTodo?.trim(),
             },
-          ]);
+          ] as any);
           setNewTodo("");
         }
       } catch (error) {
@@ -87,7 +87,7 @@ function App() {
         },
       });
       if (response.ok) {
-        const updatedTodos = todos.filter((todo) => todo._id !== id);
+        const updatedTodos = todos.filter((todo : any) => todo._id !== id);
         setTodos(updatedTodos);
       }
     } catch (error) {
@@ -108,10 +108,10 @@ function App() {
         body: JSON.stringify({ completed: !currentStatus }),
       });
       if (response.ok) {
-        const updatedTodos = todos.map((todo) =>
+        const updatedTodos = todos.map((todo : any) =>
           todo._id === id ? { ...todo, completed: !currentStatus } : todo
         );
-        setTodos(updatedTodos);
+        setTodos(updatedTodos as any);
       }
     } catch (error) {
       console.error("Failed to toggle todo completion:", error);
@@ -151,7 +151,7 @@ function App() {
               </div>
               <ul className="divide-y divide-gray-300">
                 {Array.from({ length: 9 }).map((_, index) => {
-                  const todo = todos[index];
+                  const todo : any = todos[index];
                   return (
                     <li
                       key={todo?._id || index}
