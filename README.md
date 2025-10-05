@@ -1,44 +1,183 @@
-# Habstrack
+# Habstrack - (Open Source)
 
-Habstrack is a simple, yet powerful, habit tracker application that helps you keep track of your daily routines and make progress towards achieving your personal goals. Designed with user-friendliness in mind, Habstrack is the perfect tool to bring a little more organization and productivity to your life.
+A modern, open-source habit tracking application built with **Next.js** and **Tailwind CSS**, designed for clarity, motivation, and delightful user experience.
 
-Try it out: [Live Demo](https://habstracky.vercel.app/)
+---
 
-![Project Screenshot](https://github.com/Saurabhdaswant/habstrack/assets/77434364/4d6b3fe2-8b99-45a4-b42f-afaba0dc24c8)
-
-## Tech Stack
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-
-## Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
-Before you begin, ensure you have met the following requirements:
+* **Node.js**: Version 18 or higher
+* **Yarn**: Version 1.22 or higher (recommended)
+* **Backend API**: Node/Express or hosted service (DigitalOcean App Platform)
 
-- You have installed the latest version of [Node.js and npm](https://nodejs.org/en/download/)
+### Installation
 
-### Installing Habstrack
+1. **Clone the repository**
 
-To install Habstrack, follow these steps:
+   ```bash
+   git clone https://github.com/Saurabhdaswant/habstrack.git
+   cd habstrack
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   yarn install
+   ```
+
+3. **Set up environment variables**
+
+   ```bash
+   # Copy example env file
+   cp .env.local.example .env.local
+   ```
+
+   Edit `.env.local` with your configuration:
+
+   ```bash
+   NEXT_PUBLIC_ISLOCAL=true
+   NEXT_PUBLIC_API=http://localhost:5000/api
+   ```
+
+4. **Run the app**
+
+   ```bash
+   yarn dev
+   ```
+
+   Your app will be running at [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🛠️ Tech Stack
+
+### Core Framework
+
+* **Next.js 13+** – React framework using the App Router
+* **React 18+** – Component-based UI library
+* **TypeScript (optional)** – Type-safe development
+
+### UI & Styling
+
+* **Tailwind CSS** – Utility-first CSS for clean, responsive UI
+* **Framer Motion** – Smooth animations and transitions
+* **Lucide React** – Beautiful open-source icons
+
+### Data & API
+
+* **Axios / Fetch API** – Client-side API requests
+* **REST API** – Built with Node.js & Express
+* **Environment Variables** – Managed via `.env.local`
+
+### Utilities
+
+* **ESLint & Prettier** – Code quality and formatting
+* **Git Hooks (Husky)** – Pre-commit checks
+* **Date-fns** – Date formatting utilities
+
+---
+
+## 📁 Project Structure
 
 ```
-git clone https://github.com/yourusername/habstrack.git
-cd habstrack
-npm install
+HEADWAY/
+├── components/          # Reusable UI components
+├── Data/                # Local data and constants
+├── hooks/               # Custom React hooks
+├── Providers/           # Context providers (theme, auth, etc.)
+├── pages/               # Page routes
+├── public/              # Static assets
+├── styles/              # Tailwind and global CSS
+├── utils/               # Helper utilities and logic
+├── .env.local.example   # Environment variable example
+├── next.config.js       # Next.js configuration
+├── tailwind.config.js   # Tailwind configuration
+└── tsconfig.json        # TypeScript configuration
 ```
 
-### Running the app
+---
 
-After you've installed the project, you can run it with:
+## 🔧 Environment Variables
 
+Create a `.env.local` file with the following variables:
+
+```bash
+# Development / Production toggle
+NEXT_PUBLIC_ISLOCAL=true
+
+# API base URL
+NEXT_PUBLIC_API=http://localhost:5000/api
 ```
-npm run dev
+
+Restart the dev server after making any `.env` changes:
+
+```bash
+yarn dev
 ```
 
-The project should now be running on [localhost:3000](http://localhost:3000)
+---
 
-## Contact
+## 📜 Available Scripts
 
-If you want to contact me you can reach me at [Twitter](https://twitter.com/DaswantSaurabh) or [LinkedIn](https://www.linkedin.com/in/daswantsaurabh/).
+```bash
+yarn dev          # Start the Next.js development server
+yarn build        # Build for production
+yarn start        # Start the production server
+yarn lint         # Run ESLint checks
+yarn format       # Format code using Prettier
+```
+
+---
+
+## 🎯 Design Philosophy
+
+Habstrack is designed around three key principles:
+
+* **Simplicity** — Minimal interface, maximum focus.
+* **Consistency** — Encourages daily discipline and progress visualization.
+* **Delight** — Subtle animations, soft colors, and a smooth UX.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch: `feature/your-feature-name`.
+3. Commit your changes with clear messages.
+4. Open a pull request for review.
+
+<!-- > [!CAUTION]
+> Poorly structured or non-descriptive code may be rejected. Maintain readability and consistent style. -->
+
+---
+
+## 📚 Documentation
+
+### Core References
+
+* [Next.js Documentation](https://nextjs.org/docs)
+* [React Documentation](https://react.dev)
+* [Tailwind CSS Docs](https://tailwindcss.com/docs)
+* [Framer Motion Docs](https://www.framer.com/motion/)
+
+---
+
+<!-- ## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details. -->
+
+---
+<!-- 
+<div align="center">
+ <a href="https://www.star-history.com/#Saurabhdaswant/habstrack&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Saurabhdaswant/habstrack&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Saurabhdaswant/habstrack&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Saurabhdaswant/habstrack&type=Date" />
+ </picture>
+</a>
+</div> -->
