@@ -150,11 +150,6 @@ We welcome contributions! Please follow these steps:
 3. Commit your changes with clear messages.
 4. Open a pull request for review.
 
-<!-- > [!CAUTION]
-> Poorly structured or non-descriptive code may be rejected. Maintain readability and consistent style. -->
-
----
-
 ## 📚 Documentation
 
 ### Core References
@@ -164,20 +159,3 @@ We welcome contributions! Please follow these steps:
 * [Tailwind CSS Docs](https://tailwindcss.com/docs)
 * [Framer Motion Docs](https://www.framer.com/motion/)
 
----
-
-<!-- ## 📄 License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details. -->
-
----
-<!-- 
-<div align="center">
- <a href="https://www.star-history.com/#Saurabhdaswant/habstrack&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Saurabhdaswant/habstrack&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Saurabhdaswant/habstrack&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Saurabhdaswant/habstrack&type=Date" />
- </picture>
-</a>
-</div> -->
