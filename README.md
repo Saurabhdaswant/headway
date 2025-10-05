@@ -67,7 +67,6 @@ A modern, open-source habit tracking application built with **Next.js** and **Ta
 
 ### Data & API
 
-* **Axios / Fetch API** – Client-side API requests
 * **REST API** – Built with Node.js & Express
 * **Environment Variables** – Managed via `.env.local`
 
