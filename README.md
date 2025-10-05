@@ -70,13 +70,6 @@ A modern, open-source habit tracking application built with **Next.js** and **Ta
 * **REST API** – Built with Node.js & Express
 * **Environment Variables** – Managed via `.env.local`
 
-### Utilities
-
-* **ESLint & Prettier** – Code quality and formatting
-* **Git Hooks (Husky)** – Pre-commit checks
-* **Date-fns** – Date formatting utilities
-
----
 
 ## 📁 Project Structure
 
