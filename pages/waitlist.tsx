@@ -69,10 +69,10 @@ via-white  via-opacity-5 relative  "
                   y: 0,
                   opacity: 1,
                 }}
-                transition={{
-                  duration: 1.2,
-                  ...transitionMain,
-                }}
+                // transition={{
+                //   duration: 1.2,
+                //   ...transitionMain,
+                // }}
                 className=" font-bold text-3xl sm:text-4xl lg:text-6xl  text-center text-[#212121]  "
               >
                 Your ultimate
@@ -91,11 +91,11 @@ via-white  via-opacity-5 relative  "
                   opacity: 1,
                   y: 0,
                 }}
-                transition={{
-                  delay: 0.4,
-                  duration: 1.1,
-                  ...transitionMain,
-                }}
+                // transition={{
+                //   delay: 0.4,
+                //   duration: 1.1,
+                //   ...transitionMain,
+                // }}
                 className="  tracking-wide  	 sm:text-lg lg:text-xl  text-gray-600 "
               >
                 Your habits, meditations, workouts, and journals in one place.
