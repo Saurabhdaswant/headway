@@ -8,7 +8,7 @@ A modern, open-source habit tracking application built with **Next.js** and **Ta
 
 ### Prerequisites
 
-* **Node.js**: Version 18 or higher
+* **Node.js**: Version 22
 * **Yarn**: Version 1.22 or higher (recommended)
 * **Backend API**: Node/Express or hosted service (DigitalOcean App Platform)
 
