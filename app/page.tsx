@@ -1,7 +1,4 @@
-"use client"
-
 import Link from "next/link";
-import Head from "next/head";
 import Image from "next/image";
 import { Check } from "react-feather";
 
@@ -29,16 +26,11 @@ export default function Home() {
 
   return (
     <div>
-      <Head>
-        <title>Habstrack</title>
-        <meta name="description" content="A habit tracker app designed to boost productivity and personal growth." />
-        <link rel="icon" href="/habstrack.svg" />
-      </Head>
       <main
         className="flex md:items-start  md:p-40 justify-center md:h-[100vh]    bg-gradient-to-b from-transparent bg-opacity-[0.2] to-[#0c39aa0c]
 via-white  via-opacity-5 relative  "
       >
-        <main className=" z-50 flex flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 gap-y-6   my-10 md:my-0 mx-auto ">
+        <main className=" z-50 flex  flex-col text-center items-center max-w-md lg:max-w-xl xl:max-w-3xl px-6 gap-y-6   my-10 md:my-0 mx-auto ">
           <div className="">
             <p className=" font-bold mb-6 text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center text-[#212121]  ">
               Build Better Habits with
@@ -66,7 +58,7 @@ via-white  via-opacity-5 relative  "
 
       <section className="md:h-[50vh] bg-[#F0F1F5] ">
         <Image
-         src="/headway.png"
+          src="/headway.png"
           width="1184"
           height="600"
           className=" md:absolute md:top-[500px] md:left-1/2  md:transform md:-translate-x-1/2 top-[600px] border-[1rem] rounded-lg border-white  "

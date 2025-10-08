@@ -1,0 +1,136 @@
+"use client"
+
+
+import Head from "next/head";
+import Image from "next/image";
+import { API_ENDPOINTS } from "../constants";
+import { useContext, useState } from "react";
+import Link from "next/link";
+import { TokenContext } from "../Providers/TokenProvider";
+
+export default function LoginForm() {
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+    });
+    // const { token } = useContext(TokenContext);
+
+    // if (token) {
+    //   window.location.href = "/habits";
+    // }
+
+    const handleSubmit = async () => {
+        try {
+            const res = await fetch(`${API_ENDPOINTS.BASE_URL}/signin`, {
+                method: "POST",
+                body: JSON.stringify({ ...user }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("Error:", errorData.message);
+                return;
+            }
+
+            const data = await res.json();
+            console.log("Signin success:", data);
+            localStorage.setItem("authToken", data.token);
+            window.location.href = "/habits";
+        } catch (error) {
+            console.error("Fetch error:", error.message);
+        }
+    };
+
+    return (
+        <div className=" flex w-full justify-between h-screen  ">
+            <Head>
+                <title>Login | Habstrack</title>
+                <meta name="description" content="Login Page | A habit tracker app designed to boost productivity and personal growth." />
+                <link rel="icon" href="/habstrack.svg" />
+            </Head>
+            <div className=" hidden md:grid w-full bg-[url(/hero.png)] bg-no-repeat bg-cover  place-content-center ">
+                <div className=" max-w-sm space-y-8 ">
+                    <div className="flex gap-4 items-center ">
+                        <Image src="/logo.svg" alt="Vercel Logo" width={50} height={50} />
+                        <p className="font-bold text-white text-2xl">Habstrack</p>
+                    </div>
+                    <h1 className=" font-semibold text-white text-3xl ">
+                        Do the Hard work especially when you dont feel like it!{" "}
+                    </h1>
+                    <h1 className=" font-semibold text-white text-lg  ">
+                        {/* - Hamza Ahmed{" "} */}
+                    </h1>
+                </div>
+            </div>
+            <div className=" w-full mx-6 text-zinc-800 relative">
+                <div className=" flex flex-col  h-screen top-32 md:top-0 md:left-1/4  absolute md:place-content-center  max-w-sm m-auto space-y-8 w-full ">
+                    <div>
+                        <h1 className="text-3xl font-medium my-4  ">Sign in </h1>
+                        <h1 className=" text-zinc-400 ">
+                            Please enter you details below to sign in{" "}
+                        </h1>
+                    </div>
+                    <div>
+                        <div className="space-y-6">
+                            <div className="flex flex-col ">
+                                <label htmlFor="email" className="font-semibold">
+                                    Your email address
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    value={user.email}
+                                    onChange={(e) =>
+                                        setUser({
+                                            ...user,
+                                            email: e.target.value,
+                                        })
+                                    }
+                                    className="font-bold border-2 border-zinc-200  px-4 py-2 rounded "
+                                />
+                            </div>
+                            <div className="flex flex-col ">
+                                <div className="flex justify-between font-semibold ">
+                                    <label htmlFor="password" className="">
+                                        Your password
+                                    </label>
+                                    {/* <p className=" text-gray-400">Forgot password?</p> */}
+                                </div>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    value={user.password}
+                                    onChange={(e) =>
+                                        setUser({
+                                            ...user,
+                                            password: e.target.value,
+                                        })
+                                    }
+                                    className="font-bold border-2 border-zinc-200  px-4 py-2 rounded "
+                                />
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => handleSubmit()}
+                            className="block text-center  w-full my-8  font-semibold  bg-blue-500 text-white px-14 rounded-md py-2 "
+                        >
+                            Sign in
+                        </button>
+
+                        <div className="flex items-center gap-1  justify-center ">
+                            <p className=" text-zinc-400"> Dont have account? </p>
+                            <Link href="/signup" className="  text-blue-500 underline">
+                                Create one for yourself 🫵🏽
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

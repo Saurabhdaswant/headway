@@ -122,13 +122,12 @@ function HabitForm({
                 id="habitName"
                 className={`
 							outline-none focus:border-[#0F85F2]  font-medium 
-							border-2    px-4 py-2 rounded ${
-                currHabit.name?.length > 0 && error
-                  ? "border-zinc-200"
-                  : error
-                  ? "border-red-500"
-                  : null
-              }`}
+							border-2    px-4 py-2 rounded ${currHabit.name?.length > 0 && error
+                    ? "border-zinc-200"
+                    : error
+                      ? "border-red-500"
+                      : null
+                  }`}
               />
             </div>
             <div className="flex flex-col  lg:space-y-2">
@@ -147,13 +146,12 @@ function HabitForm({
                 id="why"
                 className={`
 							outline-none focus:border-[#0F85F2]  font-medium 
-							border-2 h-32  px-4 py-2 rounded ${
-                currHabit.why?.length > 0 && error
-                  ? "border-zinc-200"
-                  : error
-                  ? "border-red-500"
-                  : null
-              }`}
+							border-2 h-32  px-4 py-2 rounded ${currHabit.why?.length > 0 && error
+                    ? "border-zinc-200"
+                    : error
+                      ? "border-red-500"
+                      : null
+                  }`}
               />
             </div>
             <div className="flex flex-col space-y-2 ">
@@ -165,11 +163,10 @@ function HabitForm({
                       <div
                         onClick={() => addDayIntoRepeatHabitDaysList(day)}
                         key={day}
-                        className={` text-sm  ${
-                          currHabit.repeatHabitDays?.includes(day)
-                            ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
-                            : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                        } cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded transition-colors`}
+                        className={` text-sm  ${currHabit.repeatHabitDays?.includes(day)
+                          ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+                          : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+                          } cursor-pointer capitalize text-center  font-medium border-2  py-2 rounded transition-colors`}
                       >
                         {day.slice(0, 3)}
                       </div>
@@ -184,14 +181,13 @@ function HabitForm({
                         repeatHabitDays: [...weekDays].splice(0, 5),
                       })
                     }
-                    className={`  ${
-                      arraysHaveSameStrings(
-                        currHabit.repeatHabitDays,
-                        [...weekDays].splice(0, 5)
-                      )
-                        ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
-                        : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                    } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors`}
+                    className={`  ${arraysHaveSameStrings(
+                      currHabit.repeatHabitDays,
+                      [...weekDays].splice(0, 5)
+                    )
+                      ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+                      : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+                      } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors`}
                   >
                     Week days
                   </div>
@@ -202,11 +198,10 @@ function HabitForm({
                         repeatHabitDays: weekDays,
                       })
                     }
-                    className={`  ${
-                      currHabit.repeatHabitDays?.length === 7
-                        ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
-                        : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                    } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors`}
+                    className={`  ${currHabit.repeatHabitDays?.length === 7
+                      ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+                      : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+                      } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors`}
                   >
                     Every day
                   </div>
@@ -223,11 +218,10 @@ function HabitForm({
                         setCurrHabit({ ...currHabit, getDoneIn: time })
                       }
                       key={idx}
-                      className={` ${
-                        currHabit.getDoneIn === time
-                          ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
-                          : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
-                      } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors `}
+                      className={` ${currHabit.getDoneIn === time
+                        ? "bg-[#0F85F2] border-[#0F85F2]  text-white "
+                        : "  hover:bg-blue-100 hover:border-blue-300  border-zinc-200 "
+                        } cursor-pointer capitalize text-center  font-medium border-2  px-4 py-2 rounded transition-colors `}
                     >
                       {time}
                     </div>

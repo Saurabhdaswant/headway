@@ -1,16 +1,22 @@
+import type { Metadata } from "next";
 import "./globals.css";
+
+
 // import GoalProvider from "../../Providers/GoalProvider";
 // import HabitsProvider from "../../Providers/HabitsProvider";
 // import TokenProvider from "../../Providers/TokenProvider";
 // import UserProvider from "../../Providers/UserProvider";
 
 
+export const metadata: Metadata = {
+    title: "Habstrack",
+    description: "A all in one self improvement app",
+};
+
 export default function RootLayout({
     children,
-    pageProps,
 }: {
     children: React.ReactNode;
-    pageProps: any;
 }) {
     return (
         <html lang="en">
@@ -18,8 +24,8 @@ export default function RootLayout({
                 <HabitsProvider>
                     <GoalProvider>
                         <UserProvider> */}
-                            <body>{children}</body>
-                        {/* </UserProvider>
+            <body>{children}</body>
+            {/* </UserProvider>
                     </GoalProvider>
                 </HabitsProvider>
             </TokenProvider> */}

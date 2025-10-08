@@ -207,11 +207,10 @@ function Habit({ habit, currDate }) {
                 onTouchEnd={() => {
                   press();
                 }}
-                className={` cursor-pointer border-2  grid place-items-center bg-white ${
-                  isCompleted
-                    ? " border-[#27b562ef]  text-[#27b562ef]"
-                    : " text-gray-200"
-                } w-8 h-8 rounded-full shadow-lg -mt-2 transition-colors `}
+                className={` cursor-pointer border-2  grid place-items-center bg-white ${isCompleted
+                  ? " border-[#27b562ef]  text-[#27b562ef]"
+                  : " text-gray-200"
+                  } w-8 h-8 rounded-full shadow-lg -mt-2 transition-colors `}
               >
                 <Check className="  w-4 h-4  stroke-3" />
               </div>
@@ -221,20 +220,16 @@ function Habit({ habit, currDate }) {
           <div className="flex justify-between items-center pr-3">
             <div className="flex items-center ml-3 gap-2">
               <p
-                className={`text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full  ${
-                  currHabit.getDoneIn === "evening" &&
+                className={`text-xs px-2.5 py-1  font-medium  capitalize inline-block   rounded-full  ${currHabit.getDoneIn === "evening" &&
                   " bg-pink-100 text-pink-400"
-                } ${
-                  currHabit.getDoneIn === "anytime" &&
+                  } ${currHabit.getDoneIn === "anytime" &&
                   "bg-gray-100  text-gray-400"
-                } 
-              ${
-                currHabit.getDoneIn === "morning" &&
-                "bg-orange-100 text-orange-400"
-              } ${
-                  currHabit.getDoneIn === "afternoon" &&
+                  } 
+              ${currHabit.getDoneIn === "morning" &&
+                  "bg-orange-100 text-orange-400"
+                  } ${currHabit.getDoneIn === "afternoon" &&
                   "bg-violet-100 text-violet-400"
-                }  `}
+                  }  `}
               >
                 {currHabit.getDoneIn}
               </p>

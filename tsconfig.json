@@ -23,14 +23,20 @@
         "name": "next"
       }
     ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
     "strictNullChecks": true
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
-, "tailwind.config.js"  ],
+    ".next/types/**/*.ts",
+    "tailwind.config.js"
+  ],
   "exclude": [
     "node_modules"
   ]
