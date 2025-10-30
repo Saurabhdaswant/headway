@@ -1,4 +1,4 @@
-# Habstrack - (Open Source)
+# Habstrack 
 
 A modern, open-source habit tracking application built with **Next.js** and **Tailwind CSS**, designed for clarity, motivation, and delightful user experience.
 
