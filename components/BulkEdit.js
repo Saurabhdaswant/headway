@@ -17,7 +17,6 @@ export default function BulkEdit() {
       const response = await fetch(url, options);
       if (response.ok) {
         const result = await response.json();
-        console.log("Habits added successfully:", result);
         return result;
       } else {
         const error = await response.json();

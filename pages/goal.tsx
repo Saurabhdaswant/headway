@@ -237,10 +237,7 @@ const GoalDetailPage = ({ data }) => {
   );
 };
 
-const handleButtonClick = (action) => {
-  // Define the actions for the buttons
-  console.log(action);
-};
+const handleButtonClick = (action) => {};
 
 const App = () => {
   return (

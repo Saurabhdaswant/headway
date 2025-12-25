@@ -33,7 +33,6 @@ export default function Signin() {
       }
 
       const data = await res.json();
-      console.log("Signin success:", data);
       localStorage.setItem("authToken", data.token);
       window.location.href = "/habits";
     } catch (error) {

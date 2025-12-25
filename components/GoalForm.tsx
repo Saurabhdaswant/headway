@@ -10,8 +10,6 @@ function GoalForm({ formTitle, goal, setShowHabitForm, handleSubmit, error }) {
   const [currGoal, setCurrGoal] = useState(goal);
   const [showCalendar, toggleCalendar] = useToggle(false);
 
-  console.log(currGoal, "what the fuck ?");
-
   return (
     <>
       <motion.div
